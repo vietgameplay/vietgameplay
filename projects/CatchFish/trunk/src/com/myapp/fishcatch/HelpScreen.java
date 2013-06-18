@@ -28,7 +28,7 @@ public class HelpScreen extends Activity implements SurfaceHolder.Callback {
 	Runnable runnableDrawing;
 	
 	Bitmap background;
-	Bitmap help;
+	Bitmap helpBMP;
 	
 	Rect srcRectHelp;
 	Rect srcRectBackground;
@@ -55,10 +55,10 @@ public class HelpScreen extends Activity implements SurfaceHolder.Callback {
 		BitmapFactory.Options opts = new BitmapFactory.Options(); 
         opts.inPurgeable = true;
         background = BitmapFactory.decodeResource(getResources(), R.drawable.background, opts);
-        help = BitmapFactory.decodeResource(getResources(), R.drawable.help, opts);
+        helpBMP = BitmapFactory.decodeResource(getResources(), R.drawable.help, opts);
         
         // TODO Initialize source and destination rectangle
-        srcRectHelp = new Rect(0, 0, help.getWidth(), help.getHeight());
+        srcRectHelp = new Rect(0, 0, helpBMP.getWidth(), helpBMP.getHeight());
  		srcRectBackground = new Rect(0, 0, background.getWidth(), background.getHeight());
  		desRectBackground = new Rect(0, 0, SplashScreen.scrWidth, SplashScreen.scrHeight);
         
@@ -104,7 +104,7 @@ public class HelpScreen extends Activity implements SurfaceHolder.Callback {
 		        	// TODO Draw background
 		        	drawBackground(canvas);
 		        	
-		        	// TODO Draw help
+		        	// TODO Draw helpBMP
 		        	drawHelp(canvas);
 		        	
 		        	holder.unlockCanvasAndPost(canvas);
@@ -125,7 +125,7 @@ public class HelpScreen extends Activity implements SurfaceHolder.Callback {
 	private void drawHelp(Canvas canvas)
 	{
 		canvas.save();
-		canvas.drawBitmap(help, srcRectHelp, desRectBackground, null);
+		canvas.drawBitmap(helpBMP, srcRectHelp, desRectBackground, null);
 		canvas.restore();
 	}
 	

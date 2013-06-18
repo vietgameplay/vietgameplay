@@ -65,6 +65,8 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 	Rect desRectExit;
 	Rect srcRectPauseBg;
 	Rect desRectPauseBg;
+	Rect srcRectTimeBar;
+	Rect desRectTimeBar;
 	
 	Fish fish[][];
 	Coin coin[][];
@@ -79,6 +81,8 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 	Intent intentMainMenu;
 	
 	int FPS = 30;
+	int srcRightTimeBar;
+	int desRightTimeBar;
 	int nextMove;
 	int delay;
 	int left;
@@ -336,10 +340,20 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
         srcRectBtm = new Rect(0, 0, bottomSRC.getWidth(), 59*bottomSRC.getHeight()/100);
         desRectBtm = new Rect((int)(0.5f*SplashScreen.scrWidth/10f) ,(int)(7*SplashScreen.scrHeight/10),(int)(9*SplashScreen.scrWidth/10),SplashScreen.scrHeight+2);
 
-        // Soud btn
-        //srcRectSoundBtn = new Rect(0, 0, soundOnBMP.getWidth(), soundOnBMP.getHeight());
-        //desRectSoundBtn = new Rect(14*SplashScreen.scrWidth/15,(int)(13.5f*SplashScreen.scrHeight/15f),(int)(19.8f*SplashScreen.scrWidth/20f),(int)(19.8f*SplashScreen.scrHeight/20f));
+        // Sound button
+        srcRectSoundBtn = new Rect(0, 0, soundOnBMP.getWidth(), soundOnBMP.getHeight());
+        desRectSoundBtn = new Rect((int)(7*SplashScreen.scrWidth/15),(int)(3.25f*SplashScreen.scrHeight/6f),(int)(8*SplashScreen.scrWidth/15f),(int)(3.75f*SplashScreen.scrHeight/6f));
 		
+        // time bar
+        srcRightTimeBar = (int)(27.7f*bottomSRC.getWidth()/100f);
+        desRightTimeBar = (int)(98.7f*(8.5f*SplashScreen.scrWidth/10f)/100f) + (int)(0.5f*SplashScreen.scrWidth/10f);
+        
+        int leftTimeBar = (int)(71.1f*(8.5f*SplashScreen.scrWidth/10f)/100f) + (int)(0.5f*SplashScreen.scrWidth/10f);
+        int topTimeBar = (int)((63.4f*(3f*SplashScreen.scrHeight/10f+2)/100f) + (7f*SplashScreen.scrHeight/10f));
+        int bottomTimeBar = (int)((88f*(3f*SplashScreen.scrHeight/10f)/100f) + (7f*SplashScreen.scrHeight/10f)+4);
+        
+        srcRectTimeBar = new Rect(0,(int)(85.2f*bottomSRC.getHeight()/100f),srcRightTimeBar,bottomSRC.getHeight());
+        desRectTimeBar = new Rect(leftTimeBar,topTimeBar,desRightTimeBar,bottomTimeBar);
         
         //set Location Button UP
 		desRectUpBtn = new Rect((int)(11.7f*SplashScreen.scrWidth/20f),
@@ -728,8 +742,8 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 			        	// TODO Draw Cannon
 			        	drawCannon(canvas);
 			        	
-			        	// TODO Draw Sound
-			        	//drawSoundButton(canvas);
+			        	// TODO Draw Time Bar
+			        	drawTimeBar(canvas);
 			        	
 			        	//TODO Draw number black
 			        	drawNumBlack(canvas);
@@ -764,13 +778,18 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 			        	{
 			        		btnOptionSelected = false;
 			        		handlerDrawing.postDelayed(this, 500);
-			        		isOption = true;
+			        		isOption = !isOption;
 			        	}
 			        	if (btnExitSelected)
 			        	{
 			        		btnExitSelected = false;
 			        		handlerDrawing.postDelayed(this, 500);
 			        		exit();
+			        	}
+			        	
+			        	if (isOption)
+			        	{
+			        		drawSoundButton(canvas);
 			        	}
 		        	}
 		            holder.unlockCanvasAndPost(canvas);
@@ -1214,6 +1233,13 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 		   
 	}
    
+    private void drawTimeBar(Canvas canvas)
+    {
+    	canvas.save();
+    	canvas.drawBitmap(bottomSRC, srcRectTimeBar, desRectTimeBar, null);
+    	canvas.restore();
+    }
+    
 	public void drawPauseButton(Canvas canvas)
 	{
 		canvas.save();
@@ -1302,6 +1328,11 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 	
 	public void drawExitButton(Canvas canvas)
 	{
+		if (isOption)
+			desRectExit = new Rect((int)(2*SplashScreen.scrWidth/5),(int)(4*SplashScreen.scrHeight/6),(int)(3*SplashScreen.scrWidth/5),(int)(5*SplashScreen.scrHeight/6));
+		else
+			desRectExit = new Rect((int)(2*SplashScreen.scrWidth/5),(int)(3*SplashScreen.scrHeight/6),(int)(3*SplashScreen.scrWidth/5),(int)(4*SplashScreen.scrHeight/6));
+		
 		canvas.save();
 		if (btnExitSelected)
 			canvas.drawBitmap(exitSelectedBMP, srcRectExit, desRectExit, null);
@@ -1551,14 +1582,33 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 					btnExitSelected = true;
 					break;
 				}
+				case 7 : {
+					// TODO Touch on sound button
+					MainMenuScreen.soundOn = !MainMenuScreen.soundOn;
+					
+					if(mediaPlayer_background.isPlaying()){
+						mediaPlayer_background.stop();
+					}
+					else
+					{
+						try {
+							mediaPlayer_background.prepare();
+							mediaPlayer_background.start();
+							mediaPlayer_background.setLooping(true);
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+					break;
+				}
 				default : 
 					break;
 			}
 		}
 		return super.onTouchEvent(event);
 	}
-	
-	
+		
 	public int calculateDegree(Position pos, Position pos2, boolean fish)
 	{
 		int result = 0;
@@ -1647,23 +1697,6 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 				}
 				else if (((posX >= desRectPause.left) && (posX <= desRectPause.right)) && ((posY >= desRectPause.top)&&(posY <= desRectPause.bottom)))
 				{
-					// TODO Touch on sound button
-					
-	//				if(mediaPlayer_background.isPlaying()){
-	//					mediaPlayer_background.stop();
-	//					try {
-	//						mediaPlayer_background.prepare();
-	//					} catch (IOException e) {
-	//						// TODO Auto-generated catch block
-	//						e.printStackTrace();
-	//					}
-	//					mediaPlayer_background.seekTo(0);
-	//				}
-	//				else
-	//				{
-	//					mediaPlayer_background.start();
-	//					mediaPlayer_background.setLooping(true);
-	//				}
 					result = 3;
 				}
 			}
@@ -1685,6 +1718,10 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 			else if (((posX >= desRectExit.left) && (posX <= desRectExit.right)) && ((posY >= desRectExit.top)&&(posY <= desRectExit.bottom)))
 			{
 				result = 6;
+			}
+			else if (((posX >= desRectSoundBtn.left) && (posX <= desRectSoundBtn.right)) && ((posY >= desRectSoundBtn.top)&&(posY <= desRectSoundBtn.bottom)))
+			{
+				result = 7;
 			}
 		}
 		return result;

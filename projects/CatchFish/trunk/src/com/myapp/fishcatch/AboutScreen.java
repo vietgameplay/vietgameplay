@@ -28,6 +28,7 @@ public class AboutScreen extends Activity implements SurfaceHolder.Callback {
 	Runnable runnableDrawing;
 	
 	Bitmap background;
+	Bitmap aboutBMP;
 	
 	Rect srcRectBackground;
 	Rect desRectBackground;
@@ -52,7 +53,8 @@ public class AboutScreen extends Activity implements SurfaceHolder.Callback {
 		// TODO Initialize bitmap
 		BitmapFactory.Options opts = new BitmapFactory.Options(); 
         opts.inPurgeable = true;
-        background = BitmapFactory.decodeResource(getResources(), R.drawable.background, opts);
+        background = BitmapFactory.decodeResource(getResources(), R.drawable.aboutbg, opts);
+        aboutBMP = BitmapFactory.decodeResource(getResources(), R.drawable.about, opts);
 		
         // TODO Initialize source and destination rectangle
   		srcRectBackground = new Rect(0, 0, background.getWidth(), background.getHeight());
@@ -100,6 +102,9 @@ public class AboutScreen extends Activity implements SurfaceHolder.Callback {
 		        	// TODO Draw background
 		        	drawBackground(canvas);
 		        	
+		        	// TODO Draw about
+		        	drawAbout(canvas);
+		        	
 		        	holder.unlockCanvasAndPost(canvas);
 		        }
 			}
@@ -112,6 +117,13 @@ public class AboutScreen extends Activity implements SurfaceHolder.Callback {
 		// TODO Draw background
 		canvas.save();
 		canvas.drawBitmap(background, srcRectBackground, desRectBackground, null);
+		canvas.restore();
+	}
+	
+	private void drawAbout(Canvas canvas)
+	{
+		canvas.save();
+		canvas.drawBitmap(aboutBMP, srcRectBackground, desRectBackground, null);
 		canvas.restore();
 	}
 	

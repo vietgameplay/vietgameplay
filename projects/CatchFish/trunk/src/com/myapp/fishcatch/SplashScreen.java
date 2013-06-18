@@ -19,6 +19,8 @@ public class SplashScreen extends Activity {
 	static int scrWidth = 1;
 	static int scrHeight = 1;
 	Intent intent;
+	Handler handler;
+	Runnable runnable;
 	
 	// TODO Set screen to landscape when rotate screen
 	@Override
@@ -49,8 +51,8 @@ public class SplashScreen extends Activity {
 		
 		intent = new Intent(this, MainMenuScreen.class);
 		
-		final Handler handler = new Handler();
-		Runnable runnable = new Runnable()
+		handler = new Handler();
+		runnable = new Runnable()
 		{
 			int count = 1;
 			public void run()
@@ -71,4 +73,13 @@ public class SplashScreen extends Activity {
 		handler.postDelayed(runnable, 1);
 	}
 
+	@Override
+	public void onBackPressed() {}
+	
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		handler.removeCallbacks(runnable);
+		super.onPause();
+	}
 }

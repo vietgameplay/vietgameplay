@@ -94,6 +94,8 @@ public class MainMenuScreen extends Activity implements SurfaceHolder.Callback {
 	MediaPlayer mediaPlayer_soundbackground;
 	MediaPlayer mediaPlayer_soundbutton;
 	
+	/* ------------------------------------------------------------------------------- Create Instance */
+	
 	// TODO Set screen to landscape when rotate screen
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
@@ -200,6 +202,8 @@ public class MainMenuScreen extends Activity implements SurfaceHolder.Callback {
 
     }
 
+    /* ------------------------------------------------------------------------------- Running Areas */
+    
     private void tryDrawing(final SurfaceHolder holder) {
 		// TODO Drawing
     	handlerDrawingMain = new Handler();
@@ -263,6 +267,8 @@ public class MainMenuScreen extends Activity implements SurfaceHolder.Callback {
 		handlerDrawingMain.postDelayed(runnableDrawingMain, 100);
     }
 	
+    /* ------------------------------------------------------------------------------- Draw Areas */
+    
 	public void drawBackground(Canvas canvas)
 	{
 		// TODO Draw main menu background
@@ -320,12 +326,19 @@ public class MainMenuScreen extends Activity implements SurfaceHolder.Callback {
 		canvas.restore();
 	}
 	
+	/* ------------------------------------------------------------------------------- Functions */
+	
 	public void nextState(Intent intent)
 	{
 		handlerDrawingMain.removeCallbacks(runnableDrawingMain);
 		startActivity(intent);
 		clearBitmap();
 		finish();
+	}
+	
+	private void readScore()
+	{
+		
 	}
 	
 	public void clearBitmap()
@@ -339,6 +352,8 @@ public class MainMenuScreen extends Activity implements SurfaceHolder.Callback {
 		helpSelectedBMP.recycle();
 		
 	}
+	
+	/* ------------------------------------------------------------------------------- Input */
 	
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {

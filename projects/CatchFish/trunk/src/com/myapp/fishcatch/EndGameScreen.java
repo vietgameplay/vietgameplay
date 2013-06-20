@@ -1,5 +1,10 @@
 package com.myapp.fishcatch;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -18,7 +23,7 @@ import android.view.SurfaceView;
 import android.view.Window;
 import android.view.ViewGroup.LayoutParams;
 
-public class AboutScreen extends Activity implements SurfaceHolder.Callback {
+public class EndGameScreen extends Activity implements SurfaceHolder.Callback {
 
 	// TODO Declare variable
 	private static final String TAG = "DEBUG";
@@ -28,12 +33,22 @@ public class AboutScreen extends Activity implements SurfaceHolder.Callback {
 	Runnable runnableDrawing;
 	
 	Bitmap background;
-	Bitmap aboutBMP;
+	Bitmap endGameBMP;
+	Bitmap gameOverBMP;
+	Bitmap labelBML;
+	Bitmap virtualKeyboardBMP;
 	
 	Rect srcRectBackground;
 	Rect desRectBackground;
 	
 	Intent intentMainMenu;
+	
+	String data[];
+	
+	int pos = -1;
+	boolean getName;
+	boolean gameOver;
+	boolean isVirtualKeyboard;
 	
 	/* ------------------------------------------------------------------------------- Create Instance */
 	
@@ -51,12 +66,23 @@ public class AboutScreen extends Activity implements SurfaceHolder.Callback {
 		super.onCreate(savedInstanceState);
 		
 		intentMainMenu = new Intent(getApplicationContext(),MainMenuScreen.class);
+		Intent intent = getIntent();
+		String data = intent.getExtras().getString("ENDGAME");
+		if (data.substring(0, 4).equals("OVER"))
+			gameOver = true;
+		else
+			gameOver = false;
+		
+		int score = Integer.parseInt(data.substring(4, data.length()));
+		
+		getName = readScore(score);
+		
+		isVirtualKeyboard = false;
 		
 		// TODO Initialize bitmap
 		BitmapFactory.Options opts = new BitmapFactory.Options(); 
         opts.inPurgeable = true;
         background = BitmapFactory.decodeResource(getResources(), R.drawable.aboutbg, opts);
-        aboutBMP = BitmapFactory.decodeResource(getResources(), R.drawable.about, opts);
 		
         // TODO Initialize source and destination rectangle
   		srcRectBackground = new Rect(0, 0, background.getWidth(), background.getHeight());
@@ -106,8 +132,16 @@ public class AboutScreen extends Activity implements SurfaceHolder.Callback {
 		        	// TODO Draw background
 		        	drawBackground(canvas);
 		        	
-		        	// TODO Draw about
-		        	drawAbout(canvas);
+		        	if (gameOver)
+		        		drawGameOver(canvas);
+		        	else
+		        		drawEndGame(canvas);
+		        	
+		        	if (getName)
+		        	{
+		        		drawLabel(canvas);
+		        		drawVirtualKeyboard(canvas);
+		        	}
 		        	
 		        	holder.unlockCanvasAndPost(canvas);
 		        }
@@ -115,7 +149,7 @@ public class AboutScreen extends Activity implements SurfaceHolder.Callback {
     	};
     	handlerDrawing.postDelayed(runnableDrawing, 100);
 	}
-	
+
 	/* ------------------------------------------------------------------------------- Draw Areas */
 	
 	private void drawBackground(Canvas canvas)
@@ -125,17 +159,82 @@ public class AboutScreen extends Activity implements SurfaceHolder.Callback {
 		canvas.drawBitmap(background, srcRectBackground, desRectBackground, null);
 		canvas.restore();
 	}
-	
-	private void drawAbout(Canvas canvas)
+
+	private void drawGameOver(Canvas canvas)
 	{
 		canvas.save();
-		canvas.drawBitmap(aboutBMP, srcRectBackground, desRectBackground, null);
+		canvas.drawBitmap(background, srcRectBackground, desRectBackground, null);
 		canvas.restore();
+	}
+	
+	private void drawEndGame(Canvas canvas)
+	{
+		canvas.save();
+		canvas.drawBitmap(background, srcRectBackground, desRectBackground, null);
+		canvas.restore();
+	}
+	
+	private void drawLabel(Canvas canvas)
+	{
+		canvas.save();
+		canvas.drawBitmap(background, srcRectBackground, desRectBackground, null);
+		canvas.restore();
+	}
+	
+	private void drawVirtualKeyboard(Canvas canvas)
+	{
+		canvas.save();
+		canvas.drawBitmap(background, srcRectBackground, desRectBackground, null);
+		canvas.restore();
+	}
+	
+	/* ------------------------------------------------------------------------------- Functions */
+	
+	private boolean readScore(int score)
+	{
+		data = new String[5];
+		String lineData = null;
+		BufferedReader br;
+		boolean result = false;
+		try
+	    {
+	    	InputStream is = getApplicationContext().getResources().openRawResource(R.raw.highscore);
+			br = new BufferedReader(new InputStreamReader(is), 8192);
+			int i = 0;
+			while((lineData = br.readLine()) != null)
+			{
+				data[i] = "" + lineData + "\n";
+				if (pos == -1)
+				{
+					StringTokenizer lineToken = new StringTokenizer(lineData," ");
+					lineToken.nextToken();
+					String scoreStr = lineToken.nextToken();
+					if (score > Integer.parseInt(scoreStr))
+					{
+						pos = i;
+						result = true;
+					}
+				}
+				i++;
+			}
+	    }
+	    catch (Exception e) 
+	    {       
+	        e.printStackTrace();          
+	    }
+		if (result)
+			return true;
+		else
+			return false;
+	}
+	
+	private void writeScore(String name)
+	{
+		
 	}
 	
 	/* ------------------------------------------------------------------------------- Input */
 	
-	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		// TODO Get touch position
 		if (event.getAction() == MotionEvent.ACTION_DOWN)

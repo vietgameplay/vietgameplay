@@ -1,7 +1,12 @@
 package com.myapp.fishcatch;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Random;
+import java.util.StringTokenizer;
+
 
 import android.app.Activity;
 import android.content.Intent;
@@ -79,10 +84,19 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 	Position cannonCenterPosition;
 
 	Intent intentMainMenu;
+	Intent intentEndGame;
 	
+	int level;
+	int timeCount;
+	int remainingTime;
+	int pointToNextLevel;
+	int numFish;
+	int pointGot;
 	int FPS = 30;
 	int srcRightTimeBar;
 	int desRightTimeBar;
+	int srcRightTimeBarMax;
+	int desRightTimeBarMax;
 	int nextMove;
 	int delay;
 	int left;
@@ -127,10 +141,33 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 			R.drawable.cannon6,
 			R.drawable.cannon7
 	};
-	
+	int levelFilename[] = {
+			R.raw.level1,
+			R.raw.level2,
+			R.raw.level3,
+			R.raw.level4,
+			R.raw.level5,
+			R.raw.level6,
+			R.raw.level7,
+			R.raw.level8,
+			R.raw.level9
+			};
+	int levelBitmap[] = {
+		R.drawable.level1,
+		R.drawable.level2,
+		R.drawable.level3,
+		R.drawable.level4,
+		R.drawable.level5,
+		R.drawable.level6,
+		R.drawable.level7,
+		R.drawable.level8,
+		R.drawable.level9
+	};
+			
 	static float fishScale;
 	static float cannonScale;
 	boolean isPause = false;
+	boolean isNextLevel = false;
 	boolean isOption = false;
 	boolean getDegree = false;
 	boolean printLog = true;
@@ -146,6 +183,8 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 	long timeResetDelay;
 	long timeReleaseBtn;
 	long timeControlFPS;
+	long timeNextLevel;
+	long timeResetTimeCount;
 	float fishLeftReset;
 	float fishRightReset;
 	float nextFishDelay;																/* End of Dung's variable define */
@@ -190,12 +229,14 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 	Rect srcRectCoin[];
 	Rect desRectCoin[];
 	
-	private int money = 1000;
-	String strMoney;														/* End of Thinh's variable define */
+	int money;
+	String strMoney;														
 	
 	MediaPlayer mediaPlayer_cannon;
 	MediaPlayer mediaPlayer_fishdie;
-	MediaPlayer mediaPlayer_background;
+	MediaPlayer mediaPlayer_background;										/* End of Thinh's variable define */
+	
+	/* ------------------------------------------------------------------------------- Create Instance */
 	
 	// TODO Set screen to landscape when rotate screen
 	@Override
@@ -268,11 +309,14 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
     	
     }
     
-    public void load10percent()
+    /* ------------------------------------------------------------------------------- Loading Areas */
+    
+    private void load10percent()
     {
     	Log.e(TAG,"loading......10");
     	random = new Random();
 		intentMainMenu = new Intent(getApplicationContext(),MainMenuScreen.class);
+		intentEndGame = new Intent(getApplicationContext(),EndGameScreen.class);
 		desBulletPosition = new Position();
 		BitmapFactory.Options opts = new BitmapFactory.Options(); 
         opts.inPurgeable = true;
@@ -310,7 +354,7 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 		percent = 10;
     }
         
-    public void load40percent()
+    private void load40percent()
     {
     	Log.e(TAG,"loading......40");
     	
@@ -345,12 +389,15 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
         desRectSoundBtn = new Rect((int)(7*SplashScreen.scrWidth/15),(int)(3.25f*SplashScreen.scrHeight/6f),(int)(8*SplashScreen.scrWidth/15f),(int)(3.75f*SplashScreen.scrHeight/6f));
 		
         // time bar
-        srcRightTimeBar = (int)(27.7f*bottomSRC.getWidth()/100f);
-        desRightTimeBar = (int)(98.7f*(8.5f*SplashScreen.scrWidth/10f)/100f) + (int)(0.5f*SplashScreen.scrWidth/10f);
-        
         int leftTimeBar = (int)(71.1f*(8.5f*SplashScreen.scrWidth/10f)/100f) + (int)(0.5f*SplashScreen.scrWidth/10f);
         int topTimeBar = (int)((63.4f*(3f*SplashScreen.scrHeight/10f+2)/100f) + (7f*SplashScreen.scrHeight/10f));
         int bottomTimeBar = (int)((88f*(3f*SplashScreen.scrHeight/10f)/100f) + (7f*SplashScreen.scrHeight/10f)+4);
+        
+        srcRightTimeBar = 0;
+        desRightTimeBar = leftTimeBar;
+        
+        srcRightTimeBarMax = (int)(27.7f*bottomSRC.getWidth()/100f);
+        desRightTimeBarMax = (int)(98.7f*(8.5f*SplashScreen.scrWidth/10f)/100f) + (int)(0.5f*SplashScreen.scrWidth/10f) - leftTimeBar;
         
         srcRectTimeBar = new Rect(0,(int)(85.2f*bottomSRC.getHeight()/100f),srcRightTimeBar,bottomSRC.getHeight());
         desRectTimeBar = new Rect(leftTimeBar,topTimeBar,desRightTimeBar,bottomTimeBar);
@@ -418,7 +465,7 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
     	percent = 30;
     }   
 
-    public void load70percent()
+    private void load70percent()
     {
     	Log.e(TAG,"loading......70");
     	fishLeftReset =  0.5f*SplashScreen.scrWidth/10f;
@@ -537,7 +584,7 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
     	percent = 30;
     }
     
-    public boolean load100percent()
+    private boolean load100percent()
     {
     	Log.e(TAG,"loading......100");
     	
@@ -644,6 +691,8 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
     	return true;
     }
     
+    /* ------------------------------------------------------------------------------- Running Areas */
+    
     private void tryRunning(final SurfaceHolder holder) {
     	handlerDrawing = new Handler();
     	runnableDrawing = new Runnable() {
@@ -654,6 +703,8 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 				handlerDrawing.postDelayed(this, 10);
 				
 				count++;
+				if (count > 1000)
+					count = 5;
 				// TODO Load resource
 				if (count == 1)
 				{
@@ -693,7 +744,7 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 				}
 				
 				// TODO Update  
-					update();
+				update();
 				
 				// TODO Draw
 				Canvas canvas = holder.lockCanvas();
@@ -715,6 +766,8 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 			        	{
 			        		onLoad = false;
 			        		clearLoadingBitmap();
+			        		level = 0;
+							nextLevel();
 			        	}
 			        	handlerDrawing.postDelayed(this, 100);
 		        	}
@@ -736,9 +789,6 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 			        	//TODO draw button Cannon down
 			        	drawDownCannon(canvas);
 			        	
-			        	// TODO Draw bulletBMP
-			        	drawBullet(canvas);
-			        	
 			        	// TODO Draw Cannon
 			        	drawCannon(canvas);
 			        	
@@ -747,45 +797,36 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 			        	
 			        	//TODO Draw number black
 			        	drawNumBlack(canvas);
+			        	
 			        	if (!isPause)
 			        	{
+			        		// TODO Draw bulletBMP
+				        	drawBullet(canvas);
+				        	
 				        	// TODO Draw Pause button
 				        	drawPauseButton(canvas);
 			        	}
 			        	else
 			        	{
-			        		// TODO Draw pause background
-			        		drawPauseBackground(canvas);
-			        		
-			        		// TODO Draw Resume button
-			        		drawResumeButton(canvas);
-			        		
-			        		// TODO Draw Option button
-			        		drawOptionButton(canvas);
-			        		
-			        		// TODO Draw Exit button
-			        		drawExitButton(canvas);
-			        		
-			        	}
-			        	
-			        	if (btnResumeSelected)
-			        	{
-			        		btnResumeSelected = false;
-			        		handlerDrawing.postDelayed(this, 500);
-			        		isPause = false;
-			        	}
-			        	if (btnOptionSelected)
-			        	{
-			        		btnOptionSelected = false;
-			        		handlerDrawing.postDelayed(this, 500);
-			        		isOption = !isOption;
-			        	}
-			        	if (btnExitSelected)
-			        	{
-			        		btnExitSelected = false;
-			        		handlerDrawing.postDelayed(this, 500);
-			        		exit();
-			        	}
+			        		if (isNextLevel)
+				        	{
+				        		drawNextLevel(canvas);
+				        	}
+			        		else
+			        		{
+				        		// TODO Draw pause background
+				        		drawPauseBackground(canvas);
+				        		
+				        		// TODO Draw Resume button
+				        		drawResumeButton(canvas);
+				        		
+				        		// TODO Draw Option button
+				        		drawOptionButton(canvas);
+				        		
+				        		// TODO Draw Exit button
+				        		drawExitButton(canvas);
+			        		}
+			        	}	
 			        	
 			        	if (isOption)
 			        	{
@@ -793,6 +834,35 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 			        	}
 		        	}
 		            holder.unlockCanvasAndPost(canvas);
+		            
+		            if (isNextLevel && count > 4)
+		        	{
+		            	long timeTemp = System.currentTimeMillis();
+		        		if (timeTemp - timeNextLevel >= 3000)
+		        		{
+		        			isNextLevel = false;
+		        			isPause = false;
+		        		}
+		        	}
+		            
+		            if (btnResumeSelected)
+		        	{
+		        		btnResumeSelected = false;
+		        		handlerDrawing.postDelayed(this, 500);
+		        		isPause = false;
+		        	}
+		        	if (btnOptionSelected)
+		        	{
+		        		btnOptionSelected = false;
+		        		handlerDrawing.postDelayed(this, 500);
+		        		isOption = !isOption;
+		        	}
+		        	if (btnExitSelected)
+		        	{
+		        		btnExitSelected = false;
+		        		handlerDrawing.postDelayed(this, 500);
+		        		exit();
+		        	}
 		        }
 //		        long tempTime = System.currentTimeMillis();
 //		        if ((tempTime - timeControlFPS) < (1000/FPS))
@@ -803,8 +873,10 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 		};	  
 		handlerDrawing.postDelayed(runnableDrawing, 100);
     }
-    	
-    public void update()
+   
+    /* ------------------------------------------------------------------------------- Update Areas */
+    
+    private void update()
     {
     	if (onLoad)
 		{
@@ -814,11 +886,34 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 		}
     	else
     	{
-    		// TODO Update Button
-    		updateButton();
-    		
     		if (!isPause)
     		{
+    			if (level > 9)
+    			{
+    				handlerDrawing.removeCallbacks(runnableDrawing);
+    				loaded = false;
+    				intentEndGame.putExtra("ENDGAME", "ENDG"+pointGot);
+    				startActivity(intentEndGame);
+    				mediaPlayer_background.stop();
+    				finish();
+    			}
+    			
+    			if (remainingTime == timeCount)
+    			{
+    				handlerDrawing.removeCallbacks(runnableDrawing);
+    				loaded = false;
+    				intentEndGame.putExtra("ENDGAME", "OVER"+pointGot);
+    				startActivity(intentEndGame);
+    				mediaPlayer_background.stop();
+    				finish();
+    			}
+    			
+    			if (pointGot >= pointToNextLevel)
+    				nextLevel();
+    			
+    			// TODO Update Button
+        		updateButton();
+        		
 	    		// TODO Update Cannon
 	    		updateCannon();
 	    		
@@ -831,8 +926,11 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 	    		// TODO Update number black
 	    		updateNumBlack();
 	    		
-	    		//TODO update Web
+	    		// TODO update Web
 	    		updateWeb();
+	    		
+	    		// TODO update time bar
+	    		updateTimeBar();
     		}
     		else
     		{
@@ -841,7 +939,7 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
     	}
     }
     
-    public void updateBullet()
+    private void updateBullet()
     {
 		for (int i = 0; i < 5; i++)
 		{
@@ -883,7 +981,7 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 		}
     }
    
-    public void updateFish()
+    private void updateFish()
     {
     	// TODO Calculate time to show fish
     	if (timeFishMove == 0)
@@ -981,21 +1079,7 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
     			}
     			else if (fish[i][j].status == 0)
     			{
-    				// TODO Fish death, reset
-    				if (fish[i][j].direction == 1)
-    				{
-    					fish[i][j].Position.X = -fish[i][j].animation.FrameWidth-fishLeftReset;    	// Reset left
-    				}
-    				else if (fish[i][j].direction == 0)
-    				{
-    					fish[i][j].Position.X = fishRightReset;										// Reset right
-    				}
-    				fish[i][j].status = 1;             // Alive
-    				fish[i][j].health = health[i];
-    				degreeFish[i][j] = 0;
-    				randomGetRoute(i, j);
-    				// TODO Set fish wait to reset move
-    				fish[i][j].onMove = 2;
+    				resetFish(i,j);
     			}
     			else if (fish[i][j].status == 2)
     			{
@@ -1055,9 +1139,10 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
     	    				fish[i][j].Initialize(animation, texture, position, direct, health[i], 0, 2, 0,fish[i][j].posRoute,fish[i][j].leftRight,false);
     	    				
     	    				// TODO Increase money
-    	    				money += coinPoint[i];
-    	    				if (money>999999)
-    	    					money = 999999;
+    	    				pointGot += coinPoint[i];
+    	    				//money += coinPoint[i];
+    	    				//if (money>999999)
+    	    				//	money = 999999;
     					}
     				}
     			}
@@ -1082,7 +1167,7 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
     	printLog = false;
     }    
 
-    public void updateCannon()
+    private void updateCannon()
     {
     	// TODO If shoot, rotate cannon to point direction
     	if (cannon[currentCannon].isShoot)
@@ -1127,7 +1212,7 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
     	}
     }
 
-    public void updateButton()
+    private void updateButton()
     {
     	long tempTime = System.currentTimeMillis();
     	if (tempTime - timeReleaseBtn > 200)
@@ -1139,7 +1224,7 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
     	}
     }
     
-    public void updateNumBlack()
+    private void updateNumBlack()
     {
     	strMoney = ""+money;
 		int num = 6 - strMoney.length();
@@ -1185,8 +1270,27 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 	    	
     	}
 	}
+   
+    private void updateTimeBar()
+    {
+    	// update time
+    	if (timeResetTimeCount == 0)
+    		timeResetTimeCount = System.currentTimeMillis();
+    	long timeTemp = System.currentTimeMillis();
+    	int temp = 0;
+    	if (timeTemp - timeResetTimeCount >= 1000)
+    	{
+    		timeCount++;
+    		temp = (int)(timeTemp - timeResetTimeCount - 1000);
+    		timeResetTimeCount = timeTemp - temp;
+    		srcRectTimeBar.right = (int)((float)timeCount*(float)srcRightTimeBarMax/(float)remainingTime);
+        	desRectTimeBar.right = desRectTimeBar.left + (int)((float)timeCount*(float)desRightTimeBarMax/(float)remainingTime);
+    	}
+    }
     
-    public void drawLoading(Canvas canvas)
+    /* ------------------------------------------------------------------------------- Draw Areas */
+    
+    private void drawLoading(Canvas canvas)
     {
         // TODO Draw loading
         
@@ -1196,7 +1300,7 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
     	canvas.restore();
     }
     
-    public void drawBackground(Canvas canvas)
+    private void drawBackground(Canvas canvas)
     {
     	// TODO Draw main menu background
 		canvas.save();
@@ -1240,14 +1344,14 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
     	canvas.restore();
     }
     
-	public void drawPauseButton(Canvas canvas)
+	private void drawPauseButton(Canvas canvas)
 	{
 		canvas.save();
 		canvas.drawBitmap(pauseBMP, srcRectPause, desRectPause, null);
 		canvas.restore();
 	}
     
-    public void drawSoundButton(Canvas canvas)
+    private void drawSoundButton(Canvas canvas)
 	{
 		// TODO Draw sound on/off button
 		canvas.save();
@@ -1258,7 +1362,7 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 		canvas.restore();
 	}
 	
-	public void drawFish(Canvas canvas)
+	private void drawFish(Canvas canvas)
 	{
 		for (int i = 0; i < 11; i++)
 			for (int j = 0; j < maxnumFish[i]; j++)
@@ -1274,13 +1378,13 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 			}
 	}
 	
-	public void drawCannon(Canvas canvas)
+	private void drawCannon(Canvas canvas)
 	{
 		// TODO Draw Cannon
 		cannon[currentCannon].Draw(canvas);
 	}
 	
-	public void drawBullet(Canvas canvas)
+	private void drawBullet(Canvas canvas)
 	{
 	   	//TODO Draw bulletBMP
 		for (int i = 0; i < 5; i++)
@@ -1290,7 +1394,7 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 		}
 	}
 	
-	public void drawNumBlack(Canvas canvas)
+	private void drawNumBlack(Canvas canvas)
 	{
 		// TODO Draw Number Score
 		canvas.save();
@@ -1299,14 +1403,14 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 		canvas.restore();
 	}
 	
-	public void drawPauseBackground(Canvas canvas)
+	private void drawPauseBackground(Canvas canvas)
 	{
 		canvas.save();
 		canvas.drawBitmap(pauseBgBMP, srcRectPauseBg, desRectPauseBg, null);
 		canvas.restore();
 	}
 	
-	public void drawResumeButton(Canvas canvas)
+	private void drawResumeButton(Canvas canvas)
 	{
 		canvas.save();
 		if (btnResumeSelected)
@@ -1316,7 +1420,7 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 		canvas.restore();
 	}
 
-	public void drawOptionButton(Canvas canvas)
+	private void drawOptionButton(Canvas canvas)
 	{
 		canvas.save();
 		if (btnOptionSelected)
@@ -1326,7 +1430,7 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 		canvas.restore();
 	}
 	
-	public void drawExitButton(Canvas canvas)
+	private void drawExitButton(Canvas canvas)
 	{
 		if (isOption)
 			desRectExit = new Rect((int)(2*SplashScreen.scrWidth/5),(int)(4*SplashScreen.scrHeight/6),(int)(3*SplashScreen.scrWidth/5),(int)(5*SplashScreen.scrHeight/6));
@@ -1341,7 +1445,41 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 		canvas.restore();
 	}
 	
-	public void randomGetRoute(int i, int j)
+	private void drawNextLevel(Canvas canvas)
+	{
+		BitmapFactory.Options opts = new BitmapFactory.Options(); 
+        opts.inPurgeable = true;
+		Bitmap levelBMP = BitmapFactory.decodeResource(getResources(), levelBitmap[level-1],opts);
+		
+		Rect srcRectNextLevel = new Rect(0, 0, levelBMP.getWidth(), levelBMP.getHeight());
+		
+		canvas.save();
+		canvas.drawBitmap(levelBMP, srcRectNextLevel, desRectBackground, null);
+		canvas.restore();
+	}
+	
+	/* ------------------------------------------------------------------------------- Functions */
+	
+	private void resetFish(int i, int j)
+	{
+		// TODO Fish death, reset
+		if (fish[i][j].direction == 1)
+		{
+			fish[i][j].Position.X = -fish[i][j].animation.FrameWidth-fishLeftReset;    	// Reset left
+		}
+		else if (fish[i][j].direction == 0)
+		{
+			fish[i][j].Position.X = fishRightReset;										// Reset right
+		}
+		fish[i][j].status = 1;             // Alive
+		fish[i][j].health = health[i];
+		degreeFish[i][j] = 0;
+		randomGetRoute(i, j);
+		// TODO Set fish wait to reset move
+		fish[i][j].onMove = 2;
+	}
+	
+	private void randomGetRoute(int i, int j)
 	{
 		// TODO Random position to start go route
 		int tempRandPos = 0;
@@ -1372,7 +1510,7 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 		fish[i][j].radius = 0;
 	}
 	
-	public boolean getRoute(int i, int j)
+	private boolean getRoute(int i, int j)
 	{
 		boolean result = true;
 		Position centerO = new Position();
@@ -1464,7 +1602,7 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 		return result;
 	}
 	
-	public float getYfromX(float x, Position centerO, float r)
+	private float getYfromX(float x, Position centerO, float r)
 	{
 		float y = 0;
 		int a = 1;
@@ -1474,7 +1612,7 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 		return y;
 	}
 	
-	public float equation2(int a, int b, int c)
+	private float equation2(int a, int b, int c)
 	{
 		float x1 = 0;
 		float x2 = 0;
@@ -1506,7 +1644,7 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 		return x;
 	}
 	
-	public void resetBullet(int cbullet)
+	private void resetBullet(int cbullet)
 	{
 		bulletweb[currentCannon][cbullet].aFactor = 0;
 		bulletweb[currentCannon][cbullet].bFactor = 0;
@@ -1519,16 +1657,179 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 					 (int)(cannon[currentCannon].animation.destinationRect.centerY()+cannonScale*(2*(bulletweb[currentCannon][cbullet].sourceRect.bottom - bulletweb[currentCannon][cbullet].sourceRect.top)/3)));
 	}
 	
-	public void clearLoadingBitmap()
+	private void clearLoadingBitmap()
     {
     	loadingBar.recycle();
     	loadingImg.recycle();
     }
+		
+	private int calculateDegree(Position pos, Position pos2, boolean fish)
+	{
+		int result = 0;
+		float temp = 0f;
+		float temp2 = 0f;
+		double radian = 0;
+		int degree = 0;
+		double x = 0;
+		double y = 0;
+		if (fish)
+		{
+			// TODO Calculate degree to rotate cannon
+			temp = pos.Y - pos2.Y;
+			temp2 = pos.X - pos2.X;
+			y = Math.abs(temp);
+			x = Math.abs(temp2);
+			// TODO Radian angle
+			radian = Math.atan(y/x);
+		}
+		else
+		{
+			// TODO Calculate degree to rotate cannon
+			temp = pos.X - pos2.X; 
+			x = Math.abs(temp);
+			y = Math.abs(pos.Y - pos2.Y);
+			// TODO Radian angle
+			radian = Math.atan(x/y);
+		}
+		// TODO Degree angle
+		degree = (int)(radian*180/Pi);
+		// TODO Return -degree to rotate to the left, degree to rotate to the right
+		if (fish)
+		{
+			if (((temp > 0) && (temp2 > 0)) || ((temp < 0) && (temp2 < 0)))
+				result = degree;
+			else if (((temp > 0) && (temp2 < 0)) || ((temp < 0) && (temp2 > 0)))
+				result = -degree;
+		}
+		else
+		{
+			if (temp > 0)
+				result = degree;
+			else
+				result = -degree;
+		}
+		return result;
+	}
+	
+	private float tangentialEquation(Position pos, Position centerO, float y, float r)
+	{
+		float x = 0;
+		x = (centerO.X*pos.X - centerO.X*centerO.X - (y - centerO.Y)*(pos.Y - centerO.Y) + r*r)/(pos.X - centerO.X);
+		return x;
+	}
+
+	private void equations(float posX, float posY, int cbullet)
+	{
+		bulletweb[currentCannon][cbullet].aFactor = ((float)bulletweb[currentCannon][cbullet].destinationRect.exactCenterY() - posY) / ((float)bulletweb[currentCannon][cbullet].destinationRect.exactCenterX() - posX);
+		bulletweb[currentCannon][cbullet].bFactor = posY - bulletweb[currentCannon][cbullet].aFactor*posX;
+	}
+
+	private boolean checkCollision(Position pos, int cbullet)
+	{
+		boolean coll = false; 
+		for (int i = 0; i < 11; i++)
+		{
+			for (int j = 0; j < maxnumFish[i]; j++)
+			{
+				if ((fish[i][j].animation.destinationRect.left <= pos.X) && (fish[i][j].animation.destinationRect.right >= pos.X)
+						&& (fish[i][j].animation.destinationRect.top <= pos.Y) && (fish[i][j].animation.destinationRect.bottom >= pos.Y))
+				{
+					if (bulletweb[currentCannon][cbullet].power >= fish[i][j].health)
+					{
+						bulletweb[currentCannon][cbullet].power = bulletweb[currentCannon][cbullet].power - fish[i][j].health;
+						fish[i][j].health = 0;
+					}
+					else 
+					{
+						fish[i][j].health -= bulletweb[currentCannon][cbullet].power;
+						bulletweb[currentCannon][cbullet].power = 0;
+					}
+					
+					// TODO Mark fish prepare to death 
+					if (fish[i][j].health == 0)
+					{
+						fish[i][j].status = 2;
+						if(MainMenuScreen.soundOn)
+							mediaPlayer_fishdie.start();
+					}
+					bulletweb[currentCannon][cbullet].webPosition = pos;
+					coll = true;
+				}
+			}
+		}
+		
+		// TODO Reset bullet
+		if (coll)
+			resetBullet(cbullet);
+		return coll;
+	}
+		
+	private void nextLevel()
+	{
+		isNextLevel = true;
+		isPause = true;
+		pointGot = 0;
+		level++;
+		readLevel(level);
+		if (level != 1)
+			for (int i = 0; i < 11; i++)
+				for (int j = 0; j < maxnumFish[i]; j++)
+					resetFish(i, j);
+		timeNextLevel = System.currentTimeMillis();
+		timeCount = 0;
+		timeResetTimeCount = 0;
+	}
+	
+	private void readLevel(int level)
+	{
+		String lineData = null;
+		BufferedReader br;
+		try
+	    {
+	    	InputStream is = getApplicationContext().getResources().openRawResource(levelFilename[level-1]);
+			br = new BufferedReader(new InputStreamReader(is), 8192);
+			
+			// remaining time
+			lineData = br.readLine();
+			StringTokenizer lineToken = new StringTokenizer(lineData," ");
+			remainingTime = Integer.parseInt(lineToken.nextToken().toString());
+			
+			// coin
+			lineData = br.readLine();
+			lineToken = new StringTokenizer(lineData," ");
+			money = Integer.parseInt(lineToken.nextToken().toString());
+			
+			// point to next level
+			lineData = br.readLine();
+			lineToken = new StringTokenizer(lineData," ");
+			pointToNextLevel = Integer.parseInt(lineToken.nextToken().toString());
+			
+			// num of fish
+			lineData = br.readLine();
+			lineToken = new StringTokenizer(lineData," ");
+			numFish = Integer.parseInt(lineToken.nextToken().toString());
+			
+			// num of each fish
+			lineData = br.readLine();
+			lineToken = new StringTokenizer(lineData," ");
+			for (int i = 0; i < 11; i++)
+			{
+				maxnumFish[i] = Integer.parseInt(lineToken.nextToken().toString());
+			}
+			
+	    }
+	    catch (Exception e) 
+	    {       
+	        e.printStackTrace();          
+	    }
+	}
+		
+	/* ------------------------------------------------------------------------------- Input */
 	
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		// TODO Get touch event
-		if (event.getAction() == MotionEvent.ACTION_DOWN)
+		if (event.getAction() == MotionEvent.ACTION_DOWN && !isNextLevel)
 		{
 			Log.d(TAG,"posX "+event.getX()+" "+"posY "+event.getY());
 			int touchOnID = checkPosition(event);
@@ -1608,69 +1909,8 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 		}
 		return super.onTouchEvent(event);
 	}
-		
-	public int calculateDegree(Position pos, Position pos2, boolean fish)
-	{
-		int result = 0;
-		float temp = 0f;
-		float temp2 = 0f;
-		double radian = 0;
-		int degree = 0;
-		double x = 0;
-		double y = 0;
-		if (fish)
-		{
-			// TODO Calculate degree to rotate cannon
-			temp = pos.Y - pos2.Y;
-			temp2 = pos.X - pos2.X;
-			y = Math.abs(temp);
-			x = Math.abs(temp2);
-			// TODO Radian angle
-			radian = Math.atan(y/x);
-		}
-		else
-		{
-			// TODO Calculate degree to rotate cannon
-			temp = pos.X - pos2.X; 
-			x = Math.abs(temp);
-			y = Math.abs(pos.Y - pos2.Y);
-			// TODO Radian angle
-			radian = Math.atan(x/y);
-		}
-		// TODO Degree angle
-		degree = (int)(radian*180/Pi);
-		// TODO Return -degree to rotate to the left, degree to rotate to the right
-		if (fish)
-		{
-			if (((temp > 0) && (temp2 > 0)) || ((temp < 0) && (temp2 < 0)))
-				result = degree;
-			else if (((temp > 0) && (temp2 < 0)) || ((temp < 0) && (temp2 > 0)))
-				result = -degree;
-		}
-		else
-		{
-			if (temp > 0)
-				result = degree;
-			else
-				result = -degree;
-		}
-		return result;
-	}
 	
-	public float tangentialEquation(Position pos, Position centerO, float y, float r)
-	{
-		float x = 0;
-		x = (centerO.X*pos.X - centerO.X*centerO.X - (y - centerO.Y)*(pos.Y - centerO.Y) + r*r)/(pos.X - centerO.X);
-		return x;
-	}
-
-	public void equations(float posX, float posY, int cbullet)
-	{
-		bulletweb[currentCannon][cbullet].aFactor = ((float)bulletweb[currentCannon][cbullet].destinationRect.exactCenterY() - posY) / ((float)bulletweb[currentCannon][cbullet].destinationRect.exactCenterX() - posX);
-		bulletweb[currentCannon][cbullet].bFactor = posY - bulletweb[currentCannon][cbullet].aFactor*posX;
-	}
-	
-	public int checkPosition(MotionEvent event)
+	private int checkPosition(MotionEvent event)
 	{
 		int result = 0;
 		// TODO check touch position for action
@@ -1727,47 +1967,7 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 		return result;
 	}
 	
-	public boolean checkCollision(Position pos, int cbullet)
-	{
-		boolean coll = false; 
-		for (int i = 0; i < 11; i++)
-		{
-			for (int j = 0; j < maxnumFish[i]; j++)
-			{
-				if ((fish[i][j].animation.destinationRect.left <= pos.X) && (fish[i][j].animation.destinationRect.right >= pos.X)
-						&& (fish[i][j].animation.destinationRect.top <= pos.Y) && (fish[i][j].animation.destinationRect.bottom >= pos.Y))
-				{
-					if (bulletweb[currentCannon][cbullet].power >= fish[i][j].health)
-					{
-						bulletweb[currentCannon][cbullet].power = bulletweb[currentCannon][cbullet].power - fish[i][j].health;
-						fish[i][j].health = 0;
-					}
-					else 
-					{
-						fish[i][j].health -= bulletweb[currentCannon][cbullet].power;
-						bulletweb[currentCannon][cbullet].power = 0;
-					}
-					
-					// TODO Mark fish prepare to death 
-					if (fish[i][j].health == 0)
-					{
-						fish[i][j].status = 2;
-						if(MainMenuScreen.soundOn)
-							mediaPlayer_fishdie.start();
-					}
-					bulletweb[currentCannon][cbullet].webPosition = pos;
-					coll = true;
-				}
-			}
-		}
-		
-		// TODO Reset bullet
-		if (coll)
-			resetBullet(cbullet);
-		return coll;
-	}
-	
-	public void exit()
+	private void exit()
 	{
 		handlerDrawing.removeCallbacks(runnableDrawing);
 		loaded = false;

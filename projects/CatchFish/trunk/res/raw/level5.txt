@@ -1,0 +1,5 @@
+30                      // remaining time (s)
+50                      // coin
+90                      // coin to next level
+7                       // fish
+15 10 8 6 4 4 4 0 0 0 0 // num of 11 fish

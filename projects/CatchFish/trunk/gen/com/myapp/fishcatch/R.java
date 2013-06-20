@@ -54,18 +54,27 @@ public final class R {
         public static final int ic_play1=0x7f020028;
         public static final int ic_resume=0x7f020029;
         public static final int ic_resume1=0x7f02002a;
-        public static final int loading0=0x7f02002b;
-        public static final int loading1=0x7f02002c;
-        public static final int logo=0x7f02002d;
-        public static final int number_black=0x7f02002e;
-        public static final int pausebg=0x7f02002f;
-        public static final int shark1=0x7f020030;
-        public static final int shark1d=0x7f020031;
-        public static final int shark2=0x7f020032;
-        public static final int shark2d=0x7f020033;
-        public static final int soundoff=0x7f020034;
-        public static final int soundon=0x7f020035;
-        public static final int web=0x7f020036;
+        public static final int level1=0x7f02002b;
+        public static final int level2=0x7f02002c;
+        public static final int level3=0x7f02002d;
+        public static final int level4=0x7f02002e;
+        public static final int level5=0x7f02002f;
+        public static final int level6=0x7f020030;
+        public static final int level7=0x7f020031;
+        public static final int level8=0x7f020032;
+        public static final int level9=0x7f020033;
+        public static final int loading0=0x7f020034;
+        public static final int loading1=0x7f020035;
+        public static final int logo=0x7f020036;
+        public static final int number_black=0x7f020037;
+        public static final int pausebg=0x7f020038;
+        public static final int shark1=0x7f020039;
+        public static final int shark1d=0x7f02003a;
+        public static final int shark2=0x7f02003b;
+        public static final int shark2d=0x7f02003c;
+        public static final int soundoff=0x7f02003d;
+        public static final int soundon=0x7f02003e;
+        public static final int web=0x7f02003f;
     }
     public static final class id {
         public static final int imgSplash=0x7f080000;
@@ -79,11 +88,21 @@ public final class R {
     }
     public static final class raw {
         public static final int change_sound=0x7f040000;
-        public static final int sound_background=0x7f040001;
-        public static final int sound_cannon=0x7f040002;
-        public static final int sound_fishdie=0x7f040003;
-        public static final int sound_help=0x7f040004;
-        public static final int sound_play=0x7f040005;
+        public static final int highscore=0x7f040001;
+        public static final int level1=0x7f040002;
+        public static final int level2=0x7f040003;
+        public static final int level3=0x7f040004;
+        public static final int level4=0x7f040005;
+        public static final int level5=0x7f040006;
+        public static final int level6=0x7f040007;
+        public static final int level7=0x7f040008;
+        public static final int level8=0x7f040009;
+        public static final int level9=0x7f04000a;
+        public static final int sound_background=0x7f04000b;
+        public static final int sound_cannon=0x7f04000c;
+        public static final int sound_fishdie=0x7f04000d;
+        public static final int sound_help=0x7f04000e;
+        public static final int sound_play=0x7f04000f;
     }
     public static final class string {
         public static final int app_name=0x7f050000;

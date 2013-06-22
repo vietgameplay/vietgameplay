@@ -336,11 +336,6 @@ public class MainMenuScreen extends Activity implements SurfaceHolder.Callback {
 		finish();
 	}
 	
-	private void readScore()
-	{
-		
-	}
-	
 	public void clearBitmap()
 	{
 		mainMenuBackground.recycle();

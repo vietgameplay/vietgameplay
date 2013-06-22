@@ -1,5 +1,10 @@
 package com.myapp.fishcatch;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -91,8 +96,31 @@ public class HighScoreScreen extends Activity implements SurfaceHolder.Callback 
 	
 	private void getHighScore()
 	{
+		String lineData = null;
+		BufferedReader br;
+		try
+	    {
+	    	InputStream is = openFileInput("highscore.txt");
+			br = new BufferedReader(new InputStreamReader(is), 8192);
+			int i = 0;
+			while((lineData = br.readLine()) != null)
+			{
+				highScore[i] = "" + lineData + "\n";
+				i++;
+			}
+	    }
+	    catch (Exception e) 
+	    {       
+	    	for (int i = 0; i < 5; i++)
+				highScore[i] = "No Data";
+	        e.printStackTrace();          
+	    }
+		
 		for (int i = 0; i < 5; i++)
-			highScore[i] = "No Data";
+		{
+			if (highScore[i] == "" || highScore[i] == null)
+				highScore[i] = "No Data";
+		}
 	}
 	
 	private void tryDrawing(final SurfaceHolder holder) {
@@ -141,7 +169,7 @@ public class HighScoreScreen extends Activity implements SurfaceHolder.Callback 
 		
 		canvas.save();
 		for (int i = 0; i < 5; i++)
-			canvas.drawText(highScore[i], view.getWidth()/3,  view.getHeight()/3 + i*view.getHeight()/16 , painttext);
+			canvas.drawText(highScore[i], 2*view.getWidth()/5,  view.getHeight()/3 + i*view.getHeight()/16 , painttext);
 		canvas.restore();
 	}
 	

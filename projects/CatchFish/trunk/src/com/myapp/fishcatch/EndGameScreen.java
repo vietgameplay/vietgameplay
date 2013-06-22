@@ -1,46 +1,48 @@
 package com.myapp.fishcatch;
 
 import java.io.BufferedReader;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.PorterDuff.Mode;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.ViewGroup.LayoutParams;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
-public class EndGameScreen extends Activity implements SurfaceHolder.Callback {
+public class EndGameScreen extends Activity {
 
 	// TODO Declare variable
 	private static final String TAG = "DEBUG";
-	SurfaceView view;
-	
-	Handler handlerDrawing;
-	Runnable runnableDrawing;
-	
-	Bitmap background;
-	Bitmap endGameBMP;
-	Bitmap gameOverBMP;
-	Bitmap labelBML;
-	Bitmap virtualKeyboardBMP;
-	
-	Rect srcRectBackground;
-	Rect desRectBackground;
-	
+		
 	Intent intentMainMenu;
 	
 	String data[];
@@ -48,7 +50,7 @@ public class EndGameScreen extends Activity implements SurfaceHolder.Callback {
 	int pos = -1;
 	boolean getName;
 	boolean gameOver;
-	boolean isVirtualKeyboard;
+	int score;
 	
 	/* ------------------------------------------------------------------------------- Create Instance */
 	
@@ -73,121 +75,80 @@ public class EndGameScreen extends Activity implements SurfaceHolder.Callback {
 		else
 			gameOver = false;
 		
-		int score = Integer.parseInt(data.substring(4, data.length()));
+		score = Integer.parseInt(data.substring(4, data.length()));
 		
 		getName = readScore(score);
-		
-		isVirtualKeyboard = false;
-		
-		// TODO Initialize bitmap
-		BitmapFactory.Options opts = new BitmapFactory.Options(); 
-        opts.inPurgeable = true;
-        background = BitmapFactory.decodeResource(getResources(), R.drawable.aboutbg, opts);
-		
-        // TODO Initialize source and destination rectangle
-  		srcRectBackground = new Rect(0, 0, background.getWidth(), background.getHeight());
-  		desRectBackground = new Rect(0, 0, SplashScreen.scrWidth, SplashScreen.scrHeight);
         
-		// TODO Initialize surfaceview
-		view = new SurfaceView(this);
-		view.setLayoutParams(new LayoutParams(SplashScreen.scrHeight,SplashScreen.scrWidth));
-        setContentView(view);
-        view.getHolder().addCallback(this);
-	}
-	
-	public void surfaceChanged(SurfaceHolder holder, int format, int width,
-			int height) {
-		// TODO Auto-generated method stub
+		//this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+			
+		// TODO Initialize
+		LinearLayout endgameLayout = new LinearLayout(this);
+		ImageView imgEndGame = new ImageView(this);
 		
-	}
-
-	public void surfaceCreated(SurfaceHolder holder) {
-		// TODO Auto-generated method stub
-		tryDrawing(holder);
-	}
-
-	public void surfaceDestroyed(SurfaceHolder holder) {
-		// TODO Auto-generated method stub
+		// TODO Setting
+		imgEndGame.setLayoutParams(new LayoutParams(SplashScreen.scrWidth,3*SplashScreen.scrHeight/10));
+		if (gameOver)
+			imgEndGame.setImageResource(R.drawable.game_over);
+		else
+			imgEndGame.setImageResource(R.drawable.end_game);
 		
-	}
+		endgameLayout.setBackgroundResource(R.drawable.endgamebg);
+		endgameLayout.setLayoutParams(new LayoutParams(SplashScreen.scrWidth, SplashScreen.scrHeight));
+		endgameLayout.setOrientation(LinearLayout.VERTICAL);
+		endgameLayout.setGravity(Gravity.CENTER);
+		endgameLayout.addView(imgEndGame,0);
+		
+		if (getName)
+		{
+			LinearLayout nameInputLayout = new LinearLayout(this);
+			TextView lblName = new TextView(this);
+			final EditText txtName = new EditText(this);
+			Button btnOK = new Button(this);
+		
+			lblName.setText("Your name : ");
+			lblName.setTextSize(SplashScreen.scrHeight/30);
+			lblName.setTextColor(Color.BLUE);
+			lblName.setLayoutParams(new LayoutParams(SplashScreen.scrWidth/6,SplashScreen.scrHeight/10));
+			
+			txtName.setLayoutParams(new LayoutParams(2*SplashScreen.scrWidth/6,SplashScreen.scrHeight/10));
+			txtName.setFocusable(true);
+			
+			btnOK.setText("OK");
+			btnOK.setTextSize(SplashScreen.scrHeight/30);
+			btnOK.setTextColor(Color.BLUE);
+			btnOK.setLayoutParams(new LayoutParams(SplashScreen.scrWidth/6,SplashScreen.scrHeight/10));
+			btnOK.setOnClickListener(new OnClickListener() {
+				
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					if (txtName.getText().toString().length() > 6 && txtName.getText().toString().length() < 30)
+						writeScore(txtName.getText().toString());
+					else
+						Toast.makeText(getApplicationContext(), "You need to enter your name at least 6 character before leave.", Toast.LENGTH_LONG).show();
+				}
+			});
+			
+			nameInputLayout.setLayoutParams(new LayoutParams(SplashScreen.scrWidth, SplashScreen.scrHeight/10));
+			nameInputLayout.setOrientation(LinearLayout.HORIZONTAL);
+			nameInputLayout.setGravity(Gravity.CENTER);
+			nameInputLayout.addView(lblName, 0);
+			nameInputLayout.addView(txtName, 1);
+			nameInputLayout.addView(btnOK, 2);
+			
+			endgameLayout.setGravity(Gravity.TOP);
+			endgameLayout.addView(nameInputLayout, 1);
+			
+			InputMethodManager imm = (InputMethodManager)this.getSystemService(Context.INPUT_METHOD_SERVICE);
 
-	/* ------------------------------------------------------------------------------- Running Areas */
-	
-	private void tryDrawing(final SurfaceHolder holder) {
-		handlerDrawing = new Handler();
-    	runnableDrawing = new Runnable() {
-			public void run() {
-				// TODO Auto-generated method stub
-				handlerDrawing.postDelayed(this, 100);
-
-				Canvas canvas = holder.lockCanvas();
-		        if (canvas == null) {
-		            Log.e(TAG, "Cannot draw onto the canvas as it's null");
-		        } 
-		        else 
-		        {
-		        	// TODO Clear screen
-		        	canvas.drawColor(0, Mode.CLEAR);
-		        	
-		        	// TODO Draw background
-		        	drawBackground(canvas);
-		        	
-		        	if (gameOver)
-		        		drawGameOver(canvas);
-		        	else
-		        		drawEndGame(canvas);
-		        	
-		        	if (getName)
-		        	{
-		        		drawLabel(canvas);
-		        		drawVirtualKeyboard(canvas);
-		        	}
-		        	
-		        	holder.unlockCanvasAndPost(canvas);
-		        }
+			if (imm != null){
+			    imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
+			    imm.showSoftInput(getCurrentFocus(), 0);
 			}
-    	};
-    	handlerDrawing.postDelayed(runnableDrawing, 100);
+		}
+		
+        setContentView(endgameLayout);
 	}
 
-	/* ------------------------------------------------------------------------------- Draw Areas */
-	
-	private void drawBackground(Canvas canvas)
-	{
-		// TODO Draw background
-		canvas.save();
-		canvas.drawBitmap(background, srcRectBackground, desRectBackground, null);
-		canvas.restore();
-	}
-
-	private void drawGameOver(Canvas canvas)
-	{
-		canvas.save();
-		canvas.drawBitmap(background, srcRectBackground, desRectBackground, null);
-		canvas.restore();
-	}
-	
-	private void drawEndGame(Canvas canvas)
-	{
-		canvas.save();
-		canvas.drawBitmap(background, srcRectBackground, desRectBackground, null);
-		canvas.restore();
-	}
-	
-	private void drawLabel(Canvas canvas)
-	{
-		canvas.save();
-		canvas.drawBitmap(background, srcRectBackground, desRectBackground, null);
-		canvas.restore();
-	}
-	
-	private void drawVirtualKeyboard(Canvas canvas)
-	{
-		canvas.save();
-		canvas.drawBitmap(background, srcRectBackground, desRectBackground, null);
-		canvas.restore();
-	}
-	
 	/* ------------------------------------------------------------------------------- Functions */
 	
 	private boolean readScore(int score)
@@ -198,7 +159,7 @@ public class EndGameScreen extends Activity implements SurfaceHolder.Callback {
 		boolean result = false;
 		try
 	    {
-	    	InputStream is = getApplicationContext().getResources().openRawResource(R.raw.highscore);
+	    	InputStream is = openFileInput("highscore.txt");
 			br = new BufferedReader(new InputStreamReader(is), 8192);
 			int i = 0;
 			while((lineData = br.readLine()) != null)
@@ -206,13 +167,20 @@ public class EndGameScreen extends Activity implements SurfaceHolder.Callback {
 				data[i] = "" + lineData + "\n";
 				if (pos == -1)
 				{
-					StringTokenizer lineToken = new StringTokenizer(lineData," ");
-					lineToken.nextToken();
-					String scoreStr = lineToken.nextToken();
-					if (score > Integer.parseInt(scoreStr))
+					try
 					{
-						pos = i;
-						result = true;
+						StringTokenizer lineToken = new StringTokenizer(lineData," ");
+						lineToken.nextToken();
+						String scoreStr = lineToken.nextToken();
+						if (score > Integer.parseInt(scoreStr))
+						{
+							pos = i;
+							result = true;
+						}
+					}
+					catch (Exception e) {
+						// TODO: handle exception
+						e.printStackTrace();
 					}
 				}
 				i++;
@@ -220,6 +188,9 @@ public class EndGameScreen extends Activity implements SurfaceHolder.Callback {
 	    }
 	    catch (Exception e) 
 	    {       
+	    	for (int i = 0; i < 5; i++)
+	    		data[i] = "";
+	    	result = true;
 	        e.printStackTrace();          
 	    }
 		if (result)
@@ -228,9 +199,42 @@ public class EndGameScreen extends Activity implements SurfaceHolder.Callback {
 			return false;
 	}
 	
+
 	private void writeScore(String name)
 	{
+		String dataSave = "";
 		
+		if (pos != -1)
+		{
+			for (int i = 4; i > pos; i--)
+			{
+				data[i] = data[i-1];
+			}
+			data[pos] = "" + name + " " + score + "\r\n";
+		
+			for (int i = 0; i < 5; i++)
+			{
+				if (data[i] != null && data[i] != "")
+					dataSave += data[i];
+			}
+		}
+		else
+		{
+			dataSave = "" + name + " " + score + "\r\n";
+		}
+		
+		try
+		{
+			FileOutputStream fos = openFileOutput("highscore.txt", Context.MODE_WORLD_WRITEABLE);
+			fos.write(dataSave.getBytes());
+			fos.close();
+		}
+		catch (IOException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		startActivity(intentMainMenu);
+		finish();
 	}
 	
 	/* ------------------------------------------------------------------------------- Input */
@@ -247,7 +251,6 @@ public class EndGameScreen extends Activity implements SurfaceHolder.Callback {
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		Log.e(TAG, "on pause");
-		handlerDrawing.removeCallbacks(runnableDrawing);
 		finish();
 		super.onPause();
 	}
@@ -256,7 +259,6 @@ public class EndGameScreen extends Activity implements SurfaceHolder.Callback {
 	public void onBackPressed() 
 	{
 		// TODO When press back button
-		handlerDrawing.removeCallbacks(runnableDrawing);
 		startActivity(intentMainMenu);
 		finish();
 		super.onBackPressed();

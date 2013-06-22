@@ -52,7 +52,8 @@
         <activity 
             android:name="com.myapp.fishcatch.EndGameScreen"
             android:configChanges="keyboardHidden|orientation"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:windowSoftInputMode="stateAlwaysVisible">
         </activity>
     </application>
 

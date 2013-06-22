@@ -232,8 +232,6 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 	int money;
 	String strMoney;														
 	
-	MediaPlayer mediaPlayer_cannon;
-	MediaPlayer mediaPlayer_fishdie;
 	MediaPlayer mediaPlayer_background;										/* End of Thinh's variable define */
 	
 	/* ------------------------------------------------------------------------------- Create Instance */
@@ -251,8 +249,6 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
 		
-		mediaPlayer_cannon = MediaPlayer.create(this, R.raw.sound_cannon);
-		mediaPlayer_fishdie = MediaPlayer.create(this, R.raw.sound_fishdie);
 		mediaPlayer_background = MediaPlayer.create(this, R.raw.sound_background);
 		
 		widthWebIcr=0;
@@ -789,9 +785,6 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 			        	//TODO draw button Cannon down
 			        	drawDownCannon(canvas);
 			        	
-			        	// TODO Draw Cannon
-			        	drawCannon(canvas);
-			        	
 			        	// TODO Draw Time Bar
 			        	drawTimeBar(canvas);
 			        	
@@ -832,6 +825,10 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 			        	{
 			        		drawSoundButton(canvas);
 			        	}
+			        	
+			        	// TODO Draw Cannon
+			        	drawCannon(canvas);
+			        	
 		        	}
 		            holder.unlockCanvasAndPost(canvas);
 		            
@@ -1207,7 +1204,10 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 	    		
 	    		//TODO start music
 	    		if(MainMenuScreen.soundOn)
+	    		{
+	    			MediaPlayer mediaPlayer_cannon = MediaPlayer.create(this, R.raw.sound_cannon);
 	    			mediaPlayer_cannon.start();
+	    		}
     		}
     	}
     }
@@ -1750,7 +1750,10 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 					{
 						fish[i][j].status = 2;
 						if(MainMenuScreen.soundOn)
+						{
+							MediaPlayer mediaPlayer_fishdie = MediaPlayer.create(this, R.raw.sound_fishdie);
 							mediaPlayer_fishdie.start();
+						}
 					}
 					bulletweb[currentCannon][cbullet].webPosition = pos;
 					coll = true;

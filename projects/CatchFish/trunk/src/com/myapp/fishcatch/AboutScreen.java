@@ -1,5 +1,8 @@
 package com.myapp.fishcatch;
 
+import com.myapp.fishcatch.R;
+import com.myapp.fishcatch.R.drawable;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;

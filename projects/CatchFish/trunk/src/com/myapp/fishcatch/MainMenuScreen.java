@@ -2,6 +2,10 @@ package com.myapp.fishcatch;
 
 import java.io.IOException;
 
+import com.myapp.fishcatch.R;
+import com.myapp.fishcatch.R.drawable;
+import com.myapp.fishcatch.R.raw;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;

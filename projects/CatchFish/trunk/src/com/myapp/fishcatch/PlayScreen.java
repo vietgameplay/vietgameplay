@@ -7,6 +7,10 @@ import java.io.InputStreamReader;
 import java.util.Random;
 import java.util.StringTokenizer;
 
+import com.myapp.fishcatch.R;
+import com.myapp.fishcatch.R.drawable;
+import com.myapp.fishcatch.R.raw;
+
 
 import android.app.Activity;
 import android.content.Intent;

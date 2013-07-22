@@ -1,4 +1,4 @@
-package com.myapp.fishcatch;
+package com.vietgameplay.fishcatch;
 
 public class Position
 {	

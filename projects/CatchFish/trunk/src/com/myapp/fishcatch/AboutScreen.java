@@ -1,7 +1,6 @@
-package com.myapp.fishcatch;
+package com.vietgameplay.fishcatch;
 
-import com.myapp.fishcatch.R;
-import com.myapp.fishcatch.R.drawable;
+import com.vietgameplay.fishcatch.R;
 
 import android.app.Activity;
 import android.content.Intent;

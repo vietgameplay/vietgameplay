@@ -1,4 +1,4 @@
-package com.myapp.fishcatch;
+package com.vietgameplay.fishcatch;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -10,7 +10,7 @@ public class Animation {
 	float Pi = 3.1415f;
 		
 	// Texture
-	Bitmap spriteStrip;
+	//Bitmap spriteStrip;
 	
 	// The scale used to display the sprite strip
     float scale;
@@ -57,11 +57,12 @@ public class Animation {
     // Go forward
     public boolean Forward;
     
-    public void Initialize(Bitmap texture, Position position, int frameWidth, int frameHeight,int startFrame, int frameCount, int frametime, float scale, boolean looping)
+    public Animation( Position position, int frameWidth, int frameHeight,int startFrame, int frameCount, int frametime, float scale, boolean looping)
     {
-        // Keep a local copy of the values passed in
+    	 // Keep a local copy of the values passed in
     	this.Position = position;
-        this.spriteStrip = texture;
+        //this.spriteStrip = Bitmap.createBitmap(texture);
+    	//this.spriteStrip = texture;
         this.FrameWidth = frameWidth;
         this.FrameHeight = frameHeight;
         this.frameCount = frameCount;
@@ -81,6 +82,32 @@ public class Animation {
         // Set way to go
         Forward = true;
     }
+    
+//    public void Initialize( Position position, int frameWidth, int frameHeight,int startFrame, int frameCount, int frametime, float scale, boolean looping)
+//    {
+//        // Keep a local copy of the values passed in
+//    	this.Position = position;
+//        //this.spriteStrip = Bitmap.createBitmap(texture);
+//    	//this.spriteStrip = texture;
+//        this.FrameWidth = frameWidth;
+//        this.FrameHeight = frameHeight;
+//        this.frameCount = frameCount;
+//        this.frameTime = frametime;
+//        this.scale = scale;
+//        
+//        Looping = looping;
+//
+//        // Set the time to zero
+//        elapsedTime = 0;
+//        oldTime = 0;
+//        currentFrame = startFrame;
+//
+//        // Set the Animation to active by default
+//        Active = true;
+//
+//        // Set way to go
+//        Forward = true;
+//    }
     
     public void Update(boolean shark)
     {
@@ -131,18 +158,19 @@ public class Animation {
         destinationRect = new Rect((int)Pos.X, (int)Pos.Y,(int)Pos.X + (int)(FrameWidth * scale), (int)Pos.Y + (int)(FrameHeight * scale));
     }
     
-    public void Draw(Canvas canvas)
+    public void Draw(Canvas canvas, Bitmap spriteStrip)
     {
     	canvas.save();
     	canvas.drawBitmap(spriteStrip, sourceRect, destinationRect, null);
     	canvas.restore();
     }
     
-    public void Draw(Canvas canvas, int degree)
+    public void Draw(Canvas canvas, int degree, Bitmap spriteStrip)
     {
-		canvas.save();
+    	canvas.save();
 		canvas.rotate(degree, destinationRect.exactCenterX(), destinationRect.exactCenterY());
 		canvas.drawBitmap(spriteStrip, sourceRect, destinationRect, null);
 		canvas.restore();
     }
+    
 }

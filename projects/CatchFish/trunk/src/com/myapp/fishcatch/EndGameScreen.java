@@ -1,4 +1,4 @@
-package com.myapp.fishcatch;
+package com.vietgameplay.fishcatch;
 
 import java.io.BufferedReader;
 import java.io.FileOutputStream;
@@ -7,32 +7,23 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-import com.myapp.fishcatch.R;
-import com.myapp.fishcatch.R.drawable;
+import com.vietgameplay.fishcatch.R;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Rect;
-import android.graphics.PorterDuff.Mode;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
-import android.view.SurfaceHolder;
-import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.ViewGroup.LayoutParams;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -196,6 +187,17 @@ public class EndGameScreen extends Activity {
 	    	result = true;
 	        e.printStackTrace();          
 	    }
+		
+		if (pos == -1)
+		{
+			for (int i = 0; i < 5; i++)
+				if (data[i] == null || data[i] == "")
+				{
+					result = true;
+					pos = i;
+				}
+		}
+		
 		if (result)
 			return true;
 		else
@@ -203,6 +205,7 @@ public class EndGameScreen extends Activity {
 	}
 	
 
+	@SuppressLint("WorldWriteableFiles")
 	private void writeScore(String name)
 	{
 		String dataSave = "";

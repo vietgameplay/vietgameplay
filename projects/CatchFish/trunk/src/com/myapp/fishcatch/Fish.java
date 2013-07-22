@@ -1,4 +1,4 @@
-package com.myapp.fishcatch;
+package com.vietgameplay.fishcatch;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -10,7 +10,7 @@ public class Fish {
 	Animation animation;
 	
 	// The image of Fish
-	Bitmap spriteStrip;
+	//Bitmap spriteStrip;
 
     // Position
     public Position Position;
@@ -51,10 +51,15 @@ public class Fish {
     // Turn left -1 or turn right 1.
     public int leftRight;
     
-    public void Initialize(Animation animation, Bitmap texture, Position position, int direct, int health, long timeoutFish,int onMove, int status, int posRoute, int leftRight, boolean enableRoute)
+    public void InitializeAnimation( Position position, int frameWidth, int frameHeight,int startFrame, int frameCount, int frametime, float scale, boolean looping)
     {
-    	this.animation = animation;
-    	this.spriteStrip = texture;
+    	this.animation = new Animation(position, frameWidth, frameHeight, startFrame, frameCount, frametime, scale, looping);
+    }
+    
+    public void Initialize( Position position, int direct, int health, long timeoutFish,int onMove, int status, int posRoute, int leftRight, boolean enableRoute)
+    {
+    	//this.spriteStrip = texture;
+    	//this.spriteStrip = Bitmap.createBitmap(texture);
     	this.Position = position;
     	this.status = status;
     	this.direction = direct;
@@ -77,8 +82,8 @@ public class Fish {
     	this.animation.Update(shark);
     }
     
-    public void Draw(Canvas canvas)
+    public void Draw(Canvas canvas, Bitmap spriteStrip)
     {
-    	this.animation.Draw(canvas,degree);
+    	this.animation.Draw(canvas, degree, spriteStrip);
     }
 }

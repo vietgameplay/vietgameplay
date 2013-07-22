@@ -1,10 +1,8 @@
-package com.myapp.fishcatch;
+package com.vietgameplay.fishcatch;
 
 import java.io.IOException;
 
-import com.myapp.fishcatch.R;
-import com.myapp.fishcatch.R.drawable;
-import com.myapp.fishcatch.R.raw;
+import com.vietgameplay.fishcatch.R;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -240,25 +238,25 @@ public class MainMenuScreen extends Activity implements SurfaceHolder.Callback {
 		        	if (btnPlaySelect)
 		        	{
 		        		btnPlaySelect = false;
-		        		handlerDrawingMain.postDelayed(this, 1000);
+		        		handlerDrawingMain.postDelayed(this, 100);
 		        		nextState(intentPlayScreen);
 		        	}
 		        	else if (btnHighScoreSelect)
 		        	{
 		        		btnHighScoreSelect = false;
-		        		handlerDrawingMain.postDelayed(this, 1000);
+		        		handlerDrawingMain.postDelayed(this, 100);
 		        		nextState(intentHighScoreScreen);
 		        	}
 		        	else if (btnHelpSelect)
 		        	{
 		        		btnHelpSelect = false;
-		        		handlerDrawingMain.postDelayed(this, 1000);
+		        		handlerDrawingMain.postDelayed(this, 100);
 		        		nextState(intentHelpScreen);
 		        	}
 		        	else if (btnAboutSelect)
 		        	{
 		        		btnAboutSelect = false;
-		        		handlerDrawingMain.postDelayed(this, 1000);
+		        		handlerDrawingMain.postDelayed(this, 100);
 		        		nextState(intentAboutScreen);
 		        	}
 		        	

@@ -1,4 +1,4 @@
-package com.myapp.fishcatch;
+package com.vietgameplay.fishcatch;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,9 +7,7 @@ import java.io.InputStreamReader;
 import java.util.Random;
 import java.util.StringTokenizer;
 
-import com.myapp.fishcatch.R;
-import com.myapp.fishcatch.R.drawable;
-import com.myapp.fishcatch.R.raw;
+import com.vietgameplay.fishcatch.R;
 
 
 import android.app.Activity;
@@ -17,7 +15,6 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
-import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
@@ -43,6 +40,8 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 	Handler handlerDrawing;
 	Runnable runnableDrawing;
 	
+	Bitmap fishBMP[][];
+	Bitmap cannonBMP[];
 	Bitmap sharkBMP[];
 	Bitmap PlayBackground;
 	Bitmap loadingImg;
@@ -340,17 +339,20 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 		desRectBackground = new Rect(0, 0, SplashScreen.scrWidth, SplashScreen.scrHeight);
 		
 		// TODO Initialize fish and fish's animation
-		fish = new Fish[11][15];
-		coin = new Coin[11][15];
-		posYFish = new float[11][15];
-		degreeFish = new int [11][15];
-		inRoute = new boolean[11][15];
-		cannon = new Cannon[7];
-		sharkBMP = new Bitmap[2];
-		bulletweb = new BulletWeb[7][5];
-		cannonCenterPosition = new Position((int)(10.5f*SplashScreen.scrWidth/20f), SplashScreen.scrHeight);
-		srcRectCoin = new Rect[6];
-		desRectCoin = new Rect[6];
+		fish 					= new Fish[11][15];
+		fishBMP 				= new Bitmap[11][2];
+		coin 					= new Coin[11][15];
+		posYFish 				= new float[11][15];
+		degreeFish 				= new int [11][15];
+		inRoute 				= new boolean[11][15];
+		cannon 					= new Cannon[7];
+		cannonBMP 				= new Bitmap[7];
+		sharkBMP				= new Bitmap[4];
+		bulletweb 				= new BulletWeb[7][5];
+		cannonCenterPosition	= new Position((int)(10.5f*SplashScreen.scrWidth/20f), SplashScreen.scrHeight);
+		srcRectCoin 			= new Rect[6];
+		desRectCoin 			= new Rect[6];
+		
 		percent = 10;
     }
         
@@ -460,8 +462,15 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 		}
     	coinSilverBMP = BitmapFactory.decodeResource(getResources(), R.drawable.coinani1, opts);
 		coinGoldBMP = BitmapFactory.decodeResource(getResources(), R.drawable.coinani2, opts);
+		
+		Matrix matrix = new Matrix();
+		matrix.preScale(-1.0f, 1.0f);
+		
     	sharkBMP[0] = BitmapFactory.decodeResource(getResources(), fishID[10], opts);
-    	sharkBMP[1] = BitmapFactory.decodeResource(getResources(), fishID[11], opts);
+    	sharkBMP[1] = Bitmap.createBitmap(sharkBMP[0], 0, 0, sharkBMP[0].getWidth(), sharkBMP[0].getHeight(), matrix, true);
+    	sharkBMP[2] = BitmapFactory.decodeResource(getResources(), fishID[11], opts);
+    	sharkBMP[3] = Bitmap.createBitmap(sharkBMP[2], 0, 0, sharkBMP[2].getWidth(), sharkBMP[2].getHeight(), matrix, true);
+    	
     	percent = 30;
     }   
 
@@ -510,8 +519,17 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
    								(int)(100*webBMP.getWidth()/100),88*webBMP.getHeight()/100);
     	
     	// TODO Initialize animation of fish 0 - 4
+   		
+   		fishBMP = new Bitmap[11][2];
+   		cannonBMP = new Bitmap[7];
     	for (int i = 0; i < 5; i++)
     	{
+    		//Bitmap fishBMP = BitmapFactory.decodeResource(getResources(), fishID[i], opts);
+    		Matrix matrix = new Matrix();
+			matrix.preScale(-1.0f, 1.0f);
+    		fishBMP[i][0] = BitmapFactory.decodeResource(getResources(), fishID[i], opts);
+    		fishBMP[i][1] = Bitmap.createBitmap(fishBMP[i][0], 0, 0, fishBMP[i][0].getWidth(), fishBMP[i][0].getHeight(), matrix, true);
+
     		for (int j = 0; j < maxnumFish[i]; j++)
     		{
     			// TODO Initialize mark variable of route of fish
@@ -520,8 +538,7 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
     			
     			// TODO Initialize fish: animation and position
 	    		int temp = random.nextInt(2);
-				Bitmap fishBMP = BitmapFactory.decodeResource(getResources(), fishID[i], opts);
-				Bitmap newB = Bitmap.createBitmap(1, 1, Config.ARGB_8888);
+	    		
 				Position fishPosition = new Position();	
 				int tempRandPos = 0;
 				
@@ -529,21 +546,13 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 				{
 					tempRandPos = random.nextInt(2*SplashScreen.scrWidth/3) + SplashScreen.scrWidth/3;
 					fishPosition = new Position(-frameWidth[i]-fishLeftReset-(random.nextInt(100)+100),random.nextInt(SplashScreen.scrHeight));
-					if (i < 10)
-						newB = fishBMP;
-					else
-						newB = sharkBMP[0];
+
 				}
 				else if (temp == 0)
 				{
 					tempRandPos = random.nextInt(2*SplashScreen.scrWidth/3);
 					fishPosition = new Position(fishRightReset+(random.nextInt(100)+100),random.nextInt(SplashScreen.scrHeight));
-					Matrix matrix = new Matrix();
-					matrix.preScale(-1.0f, 1.0f);
-					if (i < 10)
-						newB = Bitmap.createBitmap(fishBMP, 0, 0, fishBMP.getWidth(), fishBMP.getHeight(), matrix, true);
-					else
-						newB = Bitmap.createBitmap(sharkBMP[0], 0, 0, sharkBMP[0].getWidth(), sharkBMP[0].getHeight(), matrix, true);
+
 				}
 				
 				// TODO Random turn left or turn right
@@ -555,30 +564,37 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 					leftRight = 1;
 				
 				// TODO Init
-				Animation fishAnimation = new Animation();
-				fishAnimation.Initialize(newB, new Position(0, 0), frameWidth[i], frameHeight[i], 0, frameCount[i], 110, fishScale, true);
-				fish[i][j].Initialize(fishAnimation, newB, fishPosition,temp,health[i],0,2,1,tempRandPos,leftRight,false);
+				//Animation fishAnimation = new Animation();
+				fish[i][j].InitializeAnimation( new Position(0, 0), frameWidth[i], frameHeight[i], 0, frameCount[i], 110, fishScale, true);
+				fish[i][j].Initialize(fishPosition,temp,health[i],0,2,1,tempRandPos,leftRight,false);
 				posYFish[i][j] = fishPosition.Y;
 				
 				// TODO Initialize coin animation
-    			Animation coinAnimation = new Animation();
-				coinAnimation.Initialize(coinSilverBMP, new Position(0, 0), 60,60, 0, 10, 80, 0.5f, true);
-				coin[i][j].Initialize(coinAnimation, coinSilverBMP, new Position(-99,-99),false);
+				coin[i][j].InitializeAnimation( new Position(0, 0), 60,60, 0, 10, 80, 0.5f, true);
+				coin[i][j].Initialize(new Position(-99,-99),false);
+				
     		}
     		
+    		//fishBMP.recycle();
+    		System.gc();
+    		
     		// TODO Initialize 5 first cannon from 0 to 4
-    		Bitmap cannonBMP = BitmapFactory.decodeResource(getResources(), cannonID[i], opts);
-    		Animation cannonAnimation = new Animation();
-    		cannonAnimation.Initialize(cannonBMP, new Position(0, 0), 74, cframeHeight[i], 0, 5, 80, cannonScale, false);
-    		cannon[i].Initialize(cannonAnimation, cannonBMP, new Position(cannonCenterPosition.X-cannonScale*(cannonBMP.getWidth()/2), cannonCenterPosition.Y-cannonScale*((cannonBMP.getHeight()/5))), false, false, power[i]);
+    		cannonBMP[i] = BitmapFactory.decodeResource(getResources(), cannonID[i], opts);
+    		cannon[i].InitializeAnimation( new Position(0, 0), 74, cframeHeight[i], 0, 5, 80, cannonScale, false);
+    		cannon[i].Initialize(new Position(cannonCenterPosition.X-cannonScale*(cannonBMP[i].getWidth()/2), cannonCenterPosition.Y-cannonScale*((cannonBMP[i].getHeight()/5))), false, false, power[i]);
     		
     		// TODO Initialize 5 first bullet
     		desRectBullet = new Rect((int)(cannonCenterPosition.X-cannonScale*((srcRectBullet[i].right - srcRectBullet[i].left)/2)), 
-    								 (int)(cannonCenterPosition.Y-cannonScale*(cannonBMP.getHeight()/10)-cannonScale*(srcRectBullet[i].bottom - srcRectBullet[i].top)/3), 
+    								 (int)(cannonCenterPosition.Y-cannonScale*(cannonBMP[i].getHeight()/10)-cannonScale*(srcRectBullet[i].bottom - srcRectBullet[i].top)/3), 
     								 (int)(cannonCenterPosition.X+cannonScale*((srcRectBullet[i].right - srcRectBullet[i].left)/2)), 
-    								 (int)(cannonCenterPosition.Y-cannonScale*(cannonBMP.getHeight()/10)+cannonScale*(2*(srcRectBullet[i].bottom - srcRectBullet[i].top)/3)));
+    								 (int)(cannonCenterPosition.Y-cannonScale*(cannonBMP[i].getHeight()/10)+cannonScale*(2*(srcRectBullet[i].bottom - srcRectBullet[i].top)/3)));
     		for (int j = 0; j < 5; j++)
     			bulletweb[i][j].Initialize(bulletBMP,webBMP, srcRectBullet[i], desRectBullet,srcWebImg[i]);
+    		
+    		//cannonBMP.recycle();
+    		System.gc();
+    		
+    		Log.e(TAG,"loading......70..........fish "+(i+1));
     	}
     	
     	percent = 30;
@@ -612,6 +628,10 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
     	// TODO Initialize animation of fish 5 - 11
     	for (int i = 5; i < 11; i++)
     	{
+    		Matrix matrix = new Matrix();
+			matrix.preScale(-1.0f, 1.0f);
+    		fishBMP[i][0] = BitmapFactory.decodeResource(getResources(), fishID[i], opts);
+    		fishBMP[i][1] = Bitmap.createBitmap(fishBMP[i][0], 0, 0, fishBMP[i][0].getWidth(), fishBMP[i][0].getHeight(), matrix, true);
 			for (int j = 0; j < maxnumFish[i]; j++)
 			{
 				// TODO Initialize mark variable of route of fish
@@ -619,14 +639,13 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
     			degreeFish[i][j] = 0;
     			
 				// TODO Initialize coin animation
-				Animation coinAnimation = new Animation();
-				coinAnimation.Initialize(coinGoldBMP, new Position(0, 0), 60,60, 0, 10, 80, 0.5f, true);
-				coin[i][j].Initialize(coinAnimation, coinGoldBMP, new Position(-99,-99),false);
+    			
+    			coin[i][j].InitializeAnimation( new Position(0, 0), 60,60, 0, 10, 80, 0.5f, true);
+				coin[i][j].Initialize(new Position(-99,-99),false);
 				
 				// TODO Initialize fish: animation and position
 				int temp = random.nextInt(2);
-				Bitmap fishBMP = BitmapFactory.decodeResource(getResources(), fishID[i], opts);
-				Bitmap newB = Bitmap.createBitmap(1, 1, Config.ARGB_8888);
+				
 				Position fishPosition = new Position();
 				int tempRandPos = 0;
 				
@@ -634,22 +653,15 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 				{
 					tempRandPos = random.nextInt(2*SplashScreen.scrWidth/3) + SplashScreen.scrWidth/3;
 					fishPosition = new Position(-frameWidth[i]-fishLeftReset-(random.nextInt(300)+200),random.nextInt(SplashScreen.scrHeight));
-					if (i < 10)
-						newB = fishBMP;
-					else
-						newB = sharkBMP[0];
+
 				}
 				else if (temp == 0)
 				{
 					tempRandPos = random.nextInt(2*SplashScreen.scrWidth/3);
 					fishPosition = new Position(fishRightReset+(random.nextInt(300)+200),random.nextInt(SplashScreen.scrHeight));
-					Matrix matrix = new Matrix();
-					matrix.preScale(-1.0f, 1.0f);
-					if (i < 10)
-						newB = Bitmap.createBitmap(fishBMP, 0, 0, fishBMP.getWidth(), fishBMP.getHeight(), matrix, true);
-					else
-						newB = Bitmap.createBitmap(sharkBMP[0], 0, 0, sharkBMP[0].getWidth(), sharkBMP[0].getHeight(), matrix, true);
+				
 				}
+				
 				// TODO Random turn left or turn right
 				int tempRand = random.nextInt(3);
 				int leftRight = 0;
@@ -658,36 +670,43 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 				else if (tempRand == 1)
 					leftRight = 1;
 				
-				Animation fishAnimation = new Animation();
-				fishAnimation.Initialize(newB, new Position(0, 0), frameWidth[i], frameHeight[i], 0, frameCount[i], (i!=9?110:150), fishScale, true);
-				fish[i][j].Initialize(fishAnimation, newB, fishPosition,temp,health[i],0,2,1,tempRandPos,leftRight,false);
+				fish[i][j].InitializeAnimation( new Position(0, 0), frameWidth[i], frameHeight[i], 0, frameCount[i], (i!=9?110:150), fishScale, true);
+				fish[i][j].Initialize(fishPosition,temp,health[i],0,2,1,tempRandPos,leftRight,false);
 				posYFish[i][j] = fishPosition.Y;
+				
 			}
+			//fishBMP.recycle();
+			System.gc();
 			
 			if (i < 7)
 			{
 				// TODO Initialize 2 last cannon 5, 6
-	    		Bitmap cannonBMP = BitmapFactory.decodeResource(getResources(), cannonID[i], opts);
-	    		Animation cannonAnimation = new Animation();
-	    		cannonAnimation.Initialize(cannonBMP, new Position(0, 0), 74, cframeHeight[i], 0, 5, 80, cannonScale, false);
-	    		cannon[i].Initialize(cannonAnimation, cannonBMP, new Position(cannonCenterPosition.X-cannonScale*(cannonBMP.getWidth()/2), cannonCenterPosition.Y-cannonScale*(cannonBMP.getHeight()/5)), false, false, power[i]);
+	    		cannonBMP[i] = BitmapFactory.decodeResource(getResources(), cannonID[i], opts);
+	    		cannon[i].InitializeAnimation(new Position(0, 0), 74, cframeHeight[i], 0, 5, 80, cannonScale, false);
+	    		cannon[i].Initialize(new Position(cannonCenterPosition.X-cannonScale*(cannonBMP[i].getWidth()/2), cannonCenterPosition.Y-cannonScale*(cannonBMP[i].getHeight()/5)), false, false, power[i]);
 	    		
 	    		desRectBullet = new Rect((int)(cannonCenterPosition.X-cannonScale*((srcRectBullet[i-5].right - srcRectBullet[i-5].left)/2)), 
-						 (int)(cannonCenterPosition.Y-cannonScale*(cannonBMP.getHeight()/10)-cannonScale*((srcRectBullet[i-5].bottom - srcRectBullet[i-5].top)/3)), 
+						 (int)(cannonCenterPosition.Y-cannonScale*(cannonBMP[i].getHeight()/10)-cannonScale*((srcRectBullet[i-5].bottom - srcRectBullet[i-5].top)/3)), 
 						 (int)(cannonCenterPosition.X+cannonScale*((srcRectBullet[i-5].right - srcRectBullet[i-5].left)/2)), 
-						 (int)(cannonCenterPosition.Y-cannonScale*(cannonBMP.getHeight()/10)+cannonScale*(2*(srcRectBullet[i-5].bottom - srcRectBullet[i-5].top)/3)));
+						 (int)(cannonCenterPosition.Y-cannonScale*(cannonBMP[i].getHeight()/10)+cannonScale*(2*(srcRectBullet[i-5].bottom - srcRectBullet[i-5].top)/3)));
 	    		
 	    		// TODO Initialize 2 last bullet
 	    		for (int j = 0; j < 5; j++)
 	    			bulletweb[i][j].Initialize(bulletBMP,webBMP, srcRectBullet[i-5], desRectBullet,srcWebImg[i-5]);
+	    		
+	    		//cannonBMP.recycle();
+	    		System.gc();
 			}
+			
+			Log.e(TAG,"loading......100..........fish "+(i+1));
     	}
     	percent = 30;
     	
     	if(MainMenuScreen.soundOn){
-    		mediaPlayer_background.isLooping();
+    		mediaPlayer_background.setLooping(true);
     		mediaPlayer_background.start();
     	}
+    	
     	return true;
     }
     
@@ -803,7 +822,11 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 				        	// TODO Draw Pause button
 				        	drawPauseButton(canvas);
 			        	}
-			        	else
+			        	
+			        	// TODO Draw Cannon
+			        	drawCannon(canvas);
+			        	
+			        	if (isPause)
 			        	{
 			        		if (isNextLevel)
 				        	{
@@ -830,9 +853,6 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 			        		drawSoundButton(canvas);
 			        	}
 			        	
-			        	// TODO Draw Cannon
-			        	drawCannon(canvas);
-			        	
 		        	}
 		            holder.unlockCanvasAndPost(canvas);
 		            
@@ -851,6 +871,7 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 		        		btnResumeSelected = false;
 		        		handlerDrawing.postDelayed(this, 500);
 		        		isPause = false;
+		        		isOption = false;
 		        	}
 		        	if (btnOptionSelected)
 		        	{
@@ -887,6 +908,9 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 		}
     	else
     	{
+    		// TODO update time bar
+    		updateTimeBar();
+    		
     		if (!isPause)
     		{
     			if (level > 9)
@@ -930,8 +954,6 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 	    		// TODO update Web
 	    		updateWeb();
 	    		
-	    		// TODO update time bar
-	    		updateTimeBar();
     		}
     		else
     		{
@@ -1087,36 +1109,34 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
     				if (fish[i][j].timeOutFish == 0)
     				{
     					// TODO Set time to begin show coin and fish death animation		
-	    				Animation animation = new Animation();
-	    				Animation coinanimation = new Animation();
 	    				
-	    				coinanimation.Initialize(coin[i][j].spriteStrip, new Position(0, 0),60, 60, 0, 10, 80, 0.5f, true);
-	    				Bitmap coinTexture = coin[i][j].spriteStrip;
+    					coin[i][j].InitializeAnimation(new Position(0, 0),60, 60, 0, 10, 80, 0.5f, true);
+	    				
 	    				Position coinPos =  new Position(fish[i][j].animation.destinationRect.right,fish[i][j].animation.destinationRect.top);
-	    				coin[i][j].Initialize(coinanimation, coinTexture, coinPos, true);
+	    				coin[i][j].Initialize(coinPos, true);
 	    				
-	    				Bitmap texture = fish[i][j].spriteStrip;
+	    				
 	    				if (i < 10)
 	    				{
-	    					animation.Initialize(fish[i][j].spriteStrip, new Position(0, 0), frameWidth[i], frameHeight[i], frameCount[i], frameCount[i]+4, 140, fishScale, true);
+	    					fish[i][j].InitializeAnimation( new Position(0, 0), frameWidth[i], frameHeight[i], frameCount[i], frameCount[i]+4, 140, fishScale, true);
 	    				}	
 	    				else
 	    				{
-	    					if (fish[i][j].direction == 0)
-	    					{	
-		    					Matrix matrix = new Matrix();
-		    					matrix.preScale(-1.0f, 1.0f);
-		    					texture = Bitmap.createBitmap(sharkBMP[1], 0, 0, sharkBMP[1].getWidth(), sharkBMP[1].getHeight(), matrix, true);
-	    					}
-	    					else
-	    						texture = sharkBMP[1];
-	    					animation.Initialize(texture, new  Position(0, 0), frameWidth[i], frameHeight[i], 0, 4, 140, fishScale, true);
+//	    					if (fish[i][j].direction == 0)
+//	    					{	
+//		    					Matrix matrix = new Matrix();
+//		    					matrix.preScale(-1.0f, 1.0f);
+//		    					texture = Bitmap.createBitmap(sharkBMP[1], 0, 0, sharkBMP[1].getWidth(), sharkBMP[1].getHeight(), matrix, true);
+//	    					}
+//	    					else
+//	    						texture = sharkBMP[1];
+	    					fish[i][j].InitializeAnimation(new  Position(0, 0), frameWidth[i], frameHeight[i], 0, 4, 140, fishScale, true);
 	    				}
 	    				
 	    				Position position = fish[i][j].Position;
 	    				int direct = fish[i][j].direction;
 	    				long timeOutFish = System.currentTimeMillis();
-	    				fish[i][j].Initialize(animation, fish[i][j].spriteStrip, position, direct, health[i], timeOutFish, 0, 2,fish[i][j].posRoute,fish[i][j].leftRight,false);
+	    				fish[i][j].Initialize(position, direct, health[i], timeOutFish, 0, 2,fish[i][j].posRoute,fish[i][j].leftRight,false);
     				}
     				else
     				{
@@ -1124,20 +1144,18 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
     					long tempTime = System.currentTimeMillis();
     					if ((tempTime - fish[i][j].timeOutFish) > 1000)
     					{
-    						Animation animation = new Animation();
-    	    				Animation coinanimation = new Animation();
     	    				
-    	    				coinanimation.Initialize(coin[i][j].spriteStrip, new Position(0, 0), 60, 60, 0, 10, 80, 0.5f, true);
-    	    				Bitmap coinTexture = coin[i][j].spriteStrip;
+    						coin[i][j].InitializeAnimation(new Position(0, 0), 60, 60, 0, 10, 80, 0.5f, true);
+    	    				//Bitmap coinTexture = coin[i][j].spriteStrip;
     	    				Position coinPos =  new Position(fish[i][j].animation.destinationRect.right,fish[i][j].animation.destinationRect.top);
-    	    				coin[i][j].Initialize(coinanimation, coinTexture, coinPos, false);
+    	    				coin[i][j].Initialize(coinPos, false);
     	    				
-    	    				Bitmap texture = fish[i][j].spriteStrip;
-    						animation.Initialize(texture, new Position(0, 0), frameWidth[i], frameHeight[i], 0, frameCount[i], 110, fishScale, true);
+    	    				//Bitmap texture = fish[i][j].spriteStrip;
+    	    				fish[i][j].InitializeAnimation(new Position(0, 0), frameWidth[i], frameHeight[i], 0, frameCount[i], 110, fishScale, true);
     						
     	    				Position position = fish[i][j].Position;
     	    				int direct = fish[i][j].direction;
-    	    				fish[i][j].Initialize(animation, texture, position, direct, health[i], 0, 2, 0,fish[i][j].posRoute,fish[i][j].leftRight,false);
+    	    				fish[i][j].Initialize(position, direct, health[i], 0, 2, 0,fish[i][j].posRoute,fish[i][j].leftRight,false);
     	    				
     	    				// TODO Increase money
     	    				pointGot += coinPoint[i];
@@ -1284,11 +1302,14 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
     	int temp = 0;
     	if (timeTemp - timeResetTimeCount >= 1000)
     	{
-    		timeCount++;
     		temp = (int)(timeTemp - timeResetTimeCount - 1000);
     		timeResetTimeCount = timeTemp - temp;
-    		srcRectTimeBar.right = (int)((float)timeCount*(float)srcRightTimeBarMax/(float)remainingTime);
-        	desRectTimeBar.right = desRectTimeBar.left + (int)((float)timeCount*(float)desRightTimeBarMax/(float)remainingTime);
+    		if (!isPause)
+        	{
+    			timeCount++;
+    			srcRectTimeBar.right = (int)((float)timeCount*(float)srcRightTimeBarMax/(float)remainingTime);
+    			desRectTimeBar.right = desRectTimeBar.left + (int)((float)timeCount*(float)desRightTimeBarMax/(float)remainingTime);
+        	}
     	}
     }
     
@@ -1371,21 +1392,37 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 		for (int i = 0; i < 11; i++)
 			for (int j = 0; j < maxnumFish[i]; j++)
 			{
-				if (fish[i][j].status > 0)
+				if (i < 10)
 				{
-					fish[i][j].Draw(canvas);
+					if (fish[i][j].status > 0)
+					{
+						fish[i][j].Draw(canvas,((fish[i][j].direction==1)?fishBMP[i][0]:fishBMP[i][1]));
+					}
+				}
+				else
+				{
+					if (fish[i][j].status == 1)
+					{
+						fish[i][j].Draw(canvas,((fish[i][j].direction==1)?sharkBMP[0]:sharkBMP[1]));
+					}
+					else if (fish[i][j].status == 2)
+					{
+						fish[i][j].Draw(canvas,((fish[i][j].direction==1)?sharkBMP[2]:sharkBMP[3]));
+					}
 				}
 				
 				// TODO Draw coin animation
 				if (coin[i][j].isShow)
-					coin[i][j].Draw(canvas);
+				{
+					coin[i][j].Draw(canvas,(i<5?coinSilverBMP:coinGoldBMP));
+				}
 			}
 	}
 	
 	private void drawCannon(Canvas canvas)
 	{
 		// TODO Draw Cannon
-		cannon[currentCannon].Draw(canvas);
+		cannon[currentCannon].Draw(canvas,cannonBMP[currentCannon]);
 	}
 	
 	private void drawBullet(Canvas canvas)
@@ -1894,19 +1931,20 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 					// TODO Touch on sound button
 					MainMenuScreen.soundOn = !MainMenuScreen.soundOn;
 					
-					if(mediaPlayer_background.isPlaying()){
-						mediaPlayer_background.stop();
-					}
-					else
+					if(mediaPlayer_background.isPlaying())
 					{
+						mediaPlayer_background.stop();
 						try {
 							mediaPlayer_background.prepare();
-							mediaPlayer_background.start();
-							mediaPlayer_background.setLooping(true);
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
+					}
+					else
+					{
+						mediaPlayer_background.start();
+						mediaPlayer_background.setLooping(true);
 					}
 					break;
 				}
@@ -1919,7 +1957,7 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 	
 	private int checkPosition(MotionEvent event)
 	{
-		int result = 0;
+
 		// TODO check touch position for action
 		int posX = (int)event.getX();
 		int posY = (int)event.getY();
@@ -1934,44 +1972,50 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 				{
 					// TODO Touch on + button
 					Log.i(TAG,"Return 1");
-					result = 1;	
+					return 1;	
 				}
 				else if (((posX>=desRectDownBtn.left)&&(posX<=desRectDownBtn.right))&&((posY>=desRectDownBtn.top)&& posY<=desRectDownBtn.bottom)) 
 				{
 					// TODO Touch on - button
 					Log.i(TAG,"Return 2");
-					result = 2;
+					return 2;
 				}
 				else if (((posX >= desRectPause.left) && (posX <= desRectPause.right)) && ((posY >= desRectPause.top)&&(posY <= desRectPause.bottom)))
 				{
-					result = 3;
+					return 3;
 				}
+				
+				return 8;
 			}
 		}
 		else
 		{
 			if (((posX>=desRectResume.left)&&(posX<=desRectResume.right))&&((posY>=desRectResume.top)&&(posY<=desRectResume.bottom))) 
 			{
-				// TODO Touch on + button
+				// TODO Touch on resume button
 				Log.i(TAG,"Return 4");
-				result = 4;	
+				return 4;	
 			}
 			else if (((posX>=desRectOption.left)&&(posX<=desRectOption.right))&&((posY>=desRectOption.top)&& posY<=desRectOption.bottom)) 
 			{
-				// TODO Touch on - button
+				// TODO Touch on option button
 				Log.i(TAG,"Return 5");
-				result = 5;
+				return 5;
 			}
 			else if (((posX >= desRectExit.left) && (posX <= desRectExit.right)) && ((posY >= desRectExit.top)&&(posY <= desRectExit.bottom)))
 			{
-				result = 6;
+				// Button exit
+				return 6;
 			}
 			else if (((posX >= desRectSoundBtn.left) && (posX <= desRectSoundBtn.right)) && ((posY >= desRectSoundBtn.top)&&(posY <= desRectSoundBtn.bottom)))
 			{
-				result = 7;
+				// Button sound
+				return 7;
 			}
+			
+			return 9;
 		}
-		return result;
+		return 0;
 	}
 	
 	private void exit()
@@ -1980,6 +2024,8 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 		loaded = false;
 		mediaPlayer_background.stop();
 		finish();
+		startActivity(intentMainMenu);
+		
 	}
 	
 	@Override

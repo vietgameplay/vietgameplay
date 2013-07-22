@@ -1,12 +1,10 @@
-package com.myapp.fishcatch;
+package com.vietgameplay.fishcatch;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.StringTokenizer;
 
-import com.myapp.fishcatch.R;
-import com.myapp.fishcatch.R.drawable;
+import com.vietgameplay.fishcatch.R;
 
 import android.app.Activity;
 import android.content.Intent;

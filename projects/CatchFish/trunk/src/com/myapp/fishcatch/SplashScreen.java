@@ -1,9 +1,6 @@
-package com.myapp.fishcatch;
+package com.vietgameplay.fishcatch;
 
-import com.myapp.fishcatch.R;
-import com.myapp.fishcatch.R.drawable;
-import com.myapp.fishcatch.R.id;
-import com.myapp.fishcatch.R.layout;
+import com.vietgameplay.fishcatch.R;
 
 import android.app.Activity;
 import android.content.Context;
@@ -76,6 +73,7 @@ public class SplashScreen extends Activity {
 			}
 		};
 		handler.postDelayed(runnable, 1);
+		
 	}
 
 	@Override

@@ -1,4 +1,4 @@
-package com.myapp.fishcatch;
+package com.vietgameplay.fishcatch;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -10,7 +10,7 @@ public class Coin {
 	Animation animation;
 	
 	// The image of coin
-	Bitmap spriteStrip;
+	//Bitmap spriteStrip;
 	
 	// The image of coin number
 	Bitmap spriteStripText;
@@ -51,13 +51,18 @@ public class Coin {
     	this.numCoin1 = numcoin1;
     }
     
-    public void Initialize(Animation coinAnimation, Bitmap texture, Position position, boolean show)
+    public void Initialize(Position position, boolean show)
     {
-    	this.animation = coinAnimation;
-    	this.spriteStrip = texture;
+    	
+    	//this.spriteStrip = texture;
     	this.Position = position;
     	this.isShow = show;
     	this.initialized = false;
+    }
+    
+    public void InitializeAnimation( Position position, int frameWidth, int frameHeight,int startFrame, int frameCount, int frametime, float scale, boolean looping)
+    {
+    	this.animation = new Animation(position, frameWidth, frameHeight, startFrame, frameCount, frametime, scale, looping);
     }
     
     public void Update()
@@ -67,9 +72,9 @@ public class Coin {
     	this.positionCT = new Position(this.animation.destinationRect.right,this.animation.destinationRect.top);
     }
     
-    public void Draw(Canvas canvas)
+    public void Draw(Canvas canvas, Bitmap spriteStrip)
     {
-    	this.animation.Draw(canvas);
+    	this.animation.Draw(canvas,spriteStrip);
     	canvas.save();
     	canvas.drawBitmap(spriteStripText, new Rect(91*spriteStripText.getWidth()/100,0,spriteStripText.getWidth(),spriteStripText.getHeight()), new Rect((int)positionCT.X,(int)positionCT.Y+spriteStripText.getHeight()/6,(int)positionCT.X+2*spriteStripText.getWidth()/33,(int)positionCT.Y+spriteStripText.getHeight()/2), null);
     	canvas.drawBitmap(spriteStripText, new Rect((int)(numCoin0*9.1*spriteStripText.getWidth()/100),0,(int)((numCoin0+1)*9.1*spriteStripText.getWidth()/100),spriteStripText.getHeight()), new Rect((int)positionCT.X+2*spriteStripText.getWidth()/33,(int)positionCT.Y,(int)positionCT.X+7*spriteStripText.getWidth()/66,(int)positionCT.Y+spriteStripText.getHeight()/2), null);

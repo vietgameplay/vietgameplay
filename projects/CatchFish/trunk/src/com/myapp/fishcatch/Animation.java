@@ -146,7 +146,10 @@ public class Animation {
         if (shark && currentFrame >= frameCount/2)
         	sourceRect = new Rect(FrameWidth, (currentFrame-frameCount/2) * FrameHeight, 2*FrameWidth, ((currentFrame-frameCount/2) * FrameHeight)+ FrameHeight);
         // Grap the correct frame in the image strip by multiflyig the current Frame index by te frame width
-        destinationRect = new Rect((int)Position.X, (int)Position.Y,(int)Position.X + (int)(FrameWidth * scale), (int)Position.Y + (int)(FrameHeight * scale));
+        if (shark)
+        	destinationRect = new Rect((int)Position.X, (int)Position.Y,(int)Position.X + FrameWidth, (int)Position.Y + FrameHeight);
+        else
+        	destinationRect = new Rect((int)Position.X, (int)Position.Y,(int)Position.X + (int)(FrameWidth * scale), (int)Position.Y + (int)(FrameHeight * scale));
         
     }
     
@@ -158,6 +161,7 @@ public class Animation {
         destinationRect = new Rect((int)Pos.X, (int)Pos.Y,(int)Pos.X + (int)(FrameWidth * scale), (int)Pos.Y + (int)(FrameHeight * scale));
     }
     
+    // TODO Draw function for coin,...
     public void Draw(Canvas canvas, Bitmap spriteStrip)
     {
     	canvas.save();
@@ -165,10 +169,21 @@ public class Animation {
     	canvas.restore();
     }
     
+    // TODO Draw function for cannon
     public void Draw(Canvas canvas, int degree, Bitmap spriteStrip)
     {
     	canvas.save();
 		canvas.rotate(degree, destinationRect.exactCenterX(), destinationRect.exactCenterY());
+		canvas.drawBitmap(spriteStrip, sourceRect, destinationRect, null);
+		canvas.restore();
+    }
+    
+    // TODO Draw function for fish
+    public void Draw(Canvas canvas, int degree, Bitmap spriteStrip, float scaleX)
+    {
+    	canvas.save();
+		canvas.rotate(degree, destinationRect.exactCenterX(), destinationRect.exactCenterY());
+		canvas.scale(scaleX, 1.0f, destinationRect.exactCenterX(), destinationRect.exactCenterY());
 		canvas.drawBitmap(spriteStrip, sourceRect, destinationRect, null);
 		canvas.restore();
     }

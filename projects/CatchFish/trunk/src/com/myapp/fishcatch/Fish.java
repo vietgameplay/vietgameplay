@@ -82,8 +82,8 @@ public class Fish {
     	this.animation.Update(shark);
     }
     
-    public void Draw(Canvas canvas, Bitmap spriteStrip)
+    public void Draw(Canvas canvas, Bitmap spriteStrip, float scaleX)
     {
-    	this.animation.Draw(canvas, degree, spriteStrip);
+    	this.animation.Draw(canvas, degree, spriteStrip, scaleX);
     }
 }

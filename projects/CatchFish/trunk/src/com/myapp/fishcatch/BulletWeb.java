@@ -9,10 +9,10 @@ import android.graphics.Rect;
 public class BulletWeb {
 	
 	// The image of Bullet
-	Bitmap spriteStripBullet;
+	//Bitmap spriteStripBullet;
 	
 	// The image of Bullet
-	Bitmap spriteStripWeb;
+	//Bitmap spriteStripWeb;
 
 	// Mark web open
 	boolean isBang;
@@ -46,10 +46,10 @@ public class BulletWeb {
 	Position webPosition;
     
     
-    public void Initialize(Bitmap texture, Bitmap texture2, Rect sourceRect, Rect destinationRect, Rect srcRectWeb)
+    public void Initialize( Rect sourceRect, Rect destinationRect, Rect srcRectWeb)
     {
-    	this.spriteStripBullet = texture;
-    	this.spriteStripWeb = texture2;
+    	//this.spriteStripBullet = texture;
+    	//this.spriteStripWeb = texture2;
     	this.isBang = false;
     	this.sourceRect = sourceRect;
     	this.destinationRect = destinationRect;
@@ -66,7 +66,7 @@ public class BulletWeb {
     	this.destinationRect = desRect;
     }
     
-    public void Draw(Canvas canvas)
+    public void Draw(Canvas canvas, Bitmap spriteStripBullet, Bitmap spriteStripWeb)
     {
     	if (isBang)
     	{

@@ -14,6 +14,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -22,6 +23,7 @@ import android.graphics.PorterDuff.Mode;
 import android.graphics.Rect;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Debug;
 import android.os.Handler;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -40,7 +42,7 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 	Handler handlerDrawing;
 	Runnable runnableDrawing;
 	
-	Bitmap fishBMP[][];
+	Bitmap fishBMP[];
 	Bitmap cannonBMP[];
 	Bitmap sharkBMP[];
 	Bitmap PlayBackground;
@@ -57,6 +59,8 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 	Bitmap exitBMP;
 	Bitmap exitSelectedBMP;
 	Bitmap pauseBgBMP;
+	Bitmap bulletBMP;
+	Bitmap webBMP;
 	
 	Rect srcRectBackground;
 	Rect desRectBackground;
@@ -237,6 +241,8 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 	
 	MediaPlayer mediaPlayer_background;										/* End of Thinh's variable define */
 	
+
+	
 	/* ------------------------------------------------------------------------------- Create Instance */
 	
 	// TODO Set screen to landscape when rotate screen
@@ -317,9 +323,12 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 		intentMainMenu = new Intent(getApplicationContext(),MainMenuScreen.class);
 		intentEndGame = new Intent(getApplicationContext(),EndGameScreen.class);
 		desBulletPosition = new Position();
+		
 		BitmapFactory.Options opts = new BitmapFactory.Options(); 
         opts.inPurgeable = true;
-		PlayBackground = BitmapFactory.decodeResource(getResources(), R.drawable.game_bg_2_hd, opts);
+        
+		//PlayBackground = BitmapFactory.decodeResource(getResources(), R.drawable.game_bg_2_hd, opts);
+		PlayBackground= decodeSampledBitmapFromResource(getResources(), R.drawable.game_bg_2_hd, SplashScreen.scrWidth, SplashScreen.scrHeight);
 		bottomSRC = BitmapFactory.decodeResource(getResources(), R.drawable.bottom);
 	    soundOnBMP = BitmapFactory.decodeResource(getResources(), R.drawable.soundon);
 		soundOffBMP = BitmapFactory.decodeResource(getResources(), R.drawable.soundoff);
@@ -332,7 +341,8 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 		optionSelectedBMP = BitmapFactory.decodeResource(getResources(), R.drawable.ic_option2);
 		exitBMP = BitmapFactory.decodeResource(getResources(), R.drawable.ic_exit);
 		exitSelectedBMP = BitmapFactory.decodeResource(getResources(), R.drawable.ic_exit1);
-		pauseBgBMP = BitmapFactory.decodeResource(getResources(), R.drawable.pausebg);
+		//pauseBgBMP = BitmapFactory.decodeResource(getResources(), R.drawable.pausebg);
+		pauseBgBMP = decodeSampledBitmapFromResource(getResources(), R.drawable.pausebg, SplashScreen.scrWidth, SplashScreen.scrHeight);
 		
 		// TODO Initialize source and destination rectangle
 		srcRectBackground = new Rect(0, 0, PlayBackground.getWidth(), PlayBackground.getHeight());
@@ -340,14 +350,14 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 		
 		// TODO Initialize fish and fish's animation
 		fish 					= new Fish[11][15];
-		fishBMP 				= new Bitmap[11][2];
+		fishBMP 				= new Bitmap[10];
 		coin 					= new Coin[11][15];
 		posYFish 				= new float[11][15];
 		degreeFish 				= new int [11][15];
 		inRoute 				= new boolean[11][15];
 		cannon 					= new Cannon[7];
 		cannonBMP 				= new Bitmap[7];
-		sharkBMP				= new Bitmap[4];
+		sharkBMP				= new Bitmap[2];
 		bulletweb 				= new BulletWeb[7][5];
 		cannonCenterPosition	= new Position((int)(10.5f*SplashScreen.scrWidth/20f), SplashScreen.scrHeight);
 		srcRectCoin 			= new Rect[6];
@@ -462,14 +472,36 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 		}
     	coinSilverBMP = BitmapFactory.decodeResource(getResources(), R.drawable.coinani1, opts);
 		coinGoldBMP = BitmapFactory.decodeResource(getResources(), R.drawable.coinani2, opts);
+
+		long mMaxVmHeap     = Runtime.getRuntime().maxMemory()/1024;
+		long mMaxNativeHeap = 16*1024;
+		if (mMaxVmHeap == 16*1024)
+		     mMaxNativeHeap = 16*1024;
+		else if (mMaxVmHeap == 24*1024)
+		     mMaxNativeHeap = 24*1024;
+		else
+		    Log.w(TAG, "Unrecognized VM heap size = " + mMaxVmHeap);
 		
-		Matrix matrix = new Matrix();
-		matrix.preScale(-1.0f, 1.0f);
 		
-    	sharkBMP[0] = BitmapFactory.decodeResource(getResources(), fishID[10], opts);
-    	sharkBMP[1] = Bitmap.createBitmap(sharkBMP[0], 0, 0, sharkBMP[0].getWidth(), sharkBMP[0].getHeight(), matrix, true);
-    	sharkBMP[2] = BitmapFactory.decodeResource(getResources(), fishID[11], opts);
-    	sharkBMP[3] = Bitmap.createBitmap(sharkBMP[2], 0, 0, sharkBMP[2].getWidth(), sharkBMP[2].getHeight(), matrix, true);
+    	//sharkBMP[0] = BitmapFactory.decodeResource(getResources(), fishID[10], opts);
+		frameWidth[10] = round(frameWidth[10]*fishScale);
+		frameHeight[10] = round(frameHeight[10]*fishScale);
+		
+		float scaleTemp = fishScale;
+		long sizeReqd        = 2*frameWidth[10] * 4*frameHeight[10] * 4  / 8;
+		long allocNativeHeap = Debug.getNativeHeapAllocatedSize();
+		if ((sizeReqd + allocNativeHeap ) >= mMaxNativeHeap)
+		{
+		    fishScale -= 0.2;
+		}
+		
+		sharkBMP[0] = decodeSampledBitmapFromResource(getResources(), fishID[10] ,2*frameWidth[10], 4*frameHeight[10]);
+    	//sharkBMP[2] = BitmapFactory.decodeResource(getResources(), fishID[11], opts);
+    	sharkBMP[1] = decodeSampledBitmapFromResource(getResources(), fishID[11] ,frameWidth[10], 4*frameHeight[10]);
+    	frameWidth[10] = sharkBMP[1].getWidth();
+    	frameHeight[10] = sharkBMP[0].getHeight()/4;
+    	
+    	fishScale = scaleTemp;
     	
     	percent = 30;
     }   
@@ -485,8 +517,8 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 		opts.inTargetDensity = 1;
         opts.inPurgeable = true;
         
-        Bitmap bulletBMP = BitmapFactory.decodeResource(getResources(), R.drawable.bullet);
-        Bitmap webBMP = BitmapFactory.decodeResource(getResources(), R.drawable.web);
+        bulletBMP = BitmapFactory.decodeResource(getResources(), R.drawable.bullet);
+        webBMP = BitmapFactory.decodeResource(getResources(), R.drawable.web);
         
         Rect srcRectBullet[] = new Rect[5];
         srcRectBullet[0]= new Rect((int)(77.5f*bulletBMP.getWidth()/100),(int)(0f*bulletBMP.getHeight()/100),
@@ -520,15 +552,11 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
     	
     	// TODO Initialize animation of fish 0 - 4
    		
-   		fishBMP = new Bitmap[11][2];
-   		cannonBMP = new Bitmap[7];
     	for (int i = 0; i < 5; i++)
     	{
     		//Bitmap fishBMP = BitmapFactory.decodeResource(getResources(), fishID[i], opts);
-    		Matrix matrix = new Matrix();
-			matrix.preScale(-1.0f, 1.0f);
-    		fishBMP[i][0] = BitmapFactory.decodeResource(getResources(), fishID[i], opts);
-    		fishBMP[i][1] = Bitmap.createBitmap(fishBMP[i][0], 0, 0, fishBMP[i][0].getWidth(), fishBMP[i][0].getHeight(), matrix, true);
+
+    		fishBMP[i] = BitmapFactory.decodeResource(getResources(), fishID[i], opts);
 
     		for (int j = 0; j < maxnumFish[i]; j++)
     		{
@@ -589,13 +617,15 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
     								 (int)(cannonCenterPosition.X+cannonScale*((srcRectBullet[i].right - srcRectBullet[i].left)/2)), 
     								 (int)(cannonCenterPosition.Y-cannonScale*(cannonBMP[i].getHeight()/10)+cannonScale*(2*(srcRectBullet[i].bottom - srcRectBullet[i].top)/3)));
     		for (int j = 0; j < 5; j++)
-    			bulletweb[i][j].Initialize(bulletBMP,webBMP, srcRectBullet[i], desRectBullet,srcWebImg[i]);
+    			bulletweb[i][j].Initialize( srcRectBullet[i], desRectBullet,srcWebImg[i]);
     		
     		//cannonBMP.recycle();
     		System.gc();
     		
     		Log.e(TAG,"loading......70..........fish "+(i+1));
     	}
+
+    	System.gc();
     	
     	percent = 30;
     }
@@ -608,9 +638,6 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 		opts.inDensity = 1;
 		opts.inTargetDensity = 1;
         opts.inPurgeable = true;
-        
-        Bitmap bulletBMP = BitmapFactory.decodeResource(getResources(), R.drawable.bullet);
-        Bitmap webBMP = BitmapFactory.decodeResource(getResources(), R.drawable.web);
         
         Rect srcRectBullet[] = new Rect[2];
         Rect desRectBullet;
@@ -628,10 +655,9 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
     	// TODO Initialize animation of fish 5 - 11
     	for (int i = 5; i < 11; i++)
     	{
-    		Matrix matrix = new Matrix();
-			matrix.preScale(-1.0f, 1.0f);
-    		fishBMP[i][0] = BitmapFactory.decodeResource(getResources(), fishID[i], opts);
-    		fishBMP[i][1] = Bitmap.createBitmap(fishBMP[i][0], 0, 0, fishBMP[i][0].getWidth(), fishBMP[i][0].getHeight(), matrix, true);
+			if(i < 10)
+				fishBMP[i] = BitmapFactory.decodeResource(getResources(), fishID[i], opts);
+    		
 			for (int j = 0; j < maxnumFish[i]; j++)
 			{
 				// TODO Initialize mark variable of route of fish
@@ -675,8 +701,6 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 				posYFish[i][j] = fishPosition.Y;
 				
 			}
-			//fishBMP.recycle();
-			System.gc();
 			
 			if (i < 7)
 			{
@@ -692,9 +716,8 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 	    		
 	    		// TODO Initialize 2 last bullet
 	    		for (int j = 0; j < 5; j++)
-	    			bulletweb[i][j].Initialize(bulletBMP,webBMP, srcRectBullet[i-5], desRectBullet,srcWebImg[i-5]);
+	    			bulletweb[i][j].Initialize( srcRectBullet[i-5], desRectBullet,srcWebImg[i-5]);
 	    		
-	    		//cannonBMP.recycle();
 	    		System.gc();
 			}
 			
@@ -709,6 +732,7 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
     	
     	return true;
     }
+     
     
     /* ------------------------------------------------------------------------------- Running Areas */
     
@@ -1396,18 +1420,18 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 				{
 					if (fish[i][j].status > 0)
 					{
-						fish[i][j].Draw(canvas,((fish[i][j].direction==1)?fishBMP[i][0]:fishBMP[i][1]));
+						fish[i][j].Draw(canvas,fishBMP[i],(fish[i][j].direction==1)?1.0f:-1.0f);
 					}
 				}
 				else
 				{
 					if (fish[i][j].status == 1)
 					{
-						fish[i][j].Draw(canvas,((fish[i][j].direction==1)?sharkBMP[0]:sharkBMP[1]));
+						fish[i][j].Draw(canvas,sharkBMP[0],((fish[i][j].direction==1)?1.0f:-1.0f));
 					}
 					else if (fish[i][j].status == 2)
 					{
-						fish[i][j].Draw(canvas,((fish[i][j].direction==1)?sharkBMP[2]:sharkBMP[3]));
+						fish[i][j].Draw(canvas,sharkBMP[1],((fish[i][j].direction==1)?1.0f:-1.0f));
 					}
 				}
 				
@@ -1431,7 +1455,7 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 		for (int i = 0; i < 5; i++)
 		{
 			if (bulletweb[currentCannon][i].acceptDraw)
-				bulletweb[currentCannon][i].Draw(canvas);
+				bulletweb[currentCannon][i].Draw(canvas,bulletBMP,webBMP);
 		}
 	}
 	
@@ -1500,6 +1524,50 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 	}
 	
 	/* ------------------------------------------------------------------------------- Functions */
+	
+	public int round(float input)
+	{
+		int output = (int)(input+0.5f);
+		return output;
+	}
+	
+	public static Bitmap decodeSampledBitmapFromResource(Resources res, int resId,
+            int reqWidth, int reqHeight) {
+
+        // First decode with inJustDecodeBounds=true to check dimensions
+        final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeResource(res, resId, options);
+
+        // Calculate inSampleSize
+        options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
+
+        // Decode bitmap with inSampleSize set
+        options.inJustDecodeBounds = false;
+        return BitmapFactory.decodeResource(res, resId, options);
+    }
+    
+    public static int calculateInSampleSize( BitmapFactory.Options options, int reqWidth, int reqHeight) 
+    {
+	    // Raw height and width of image
+	    final int height = options.outHeight;
+	    final int width = options.outWidth;
+	    int inSampleSize = 1;
+	
+	    if (height > reqHeight || width > reqWidth) {
+	
+	        // Calculate ratios of height and width to requested height and width
+	        final int heightRatio = Math.round((float) height / (float) reqHeight);
+	        final int widthRatio = Math.round((float) width / (float) reqWidth);
+	
+	        // Choose the smallest ratio as inSampleSize value, this will guarantee
+	        // a final image with both dimensions larger than or equal to the
+	        // requested height and width.
+	        inSampleSize = heightRatio < widthRatio ? heightRatio : widthRatio;
+	    }
+	
+	    return inSampleSize;
+	}
 	
 	private void resetFish(int i, int j)
 	{

@@ -146,10 +146,10 @@ public class Animation {
         if (shark && currentFrame >= frameCount/2)
         	sourceRect = new Rect(FrameWidth, (currentFrame-frameCount/2) * FrameHeight, 2*FrameWidth, ((currentFrame-frameCount/2) * FrameHeight)+ FrameHeight);
         // Grap the correct frame in the image strip by multiflyig the current Frame index by te frame width
-        if (shark)
+        //if (shark)
         	destinationRect = new Rect((int)Position.X, (int)Position.Y,(int)Position.X + FrameWidth, (int)Position.Y + FrameHeight);
-        else
-        	destinationRect = new Rect((int)Position.X, (int)Position.Y,(int)Position.X + (int)(FrameWidth * scale), (int)Position.Y + (int)(FrameHeight * scale));
+        //else
+        	//destinationRect = new Rect((int)Position.X, (int)Position.Y,(int)Position.X + (int)(FrameWidth * scale), (int)Position.Y + (int)(FrameHeight * scale));
         
     }
     

@@ -38,32 +38,35 @@ public class MainMenuScreen extends Activity implements SurfaceHolder.Callback {
 	Bitmap mainMenuBackground;
 	Bitmap playGameBMP;
 	Bitmap playGameSelectedBMP;
-	Bitmap soundOnBMP;
-	Bitmap soundOffBMP;
-	Bitmap highScoreBMP;
-	Bitmap highScoreSelectedBMP;
-	Bitmap helpBMP;
-	Bitmap helpSelectedBMP;
-	Bitmap aboutBMP;
-	Bitmap aboutSelectedBMP;
+	Bitmap uiButtonBMP;
 	
 	Rect srcRectBackground;
 	Rect desRectBackground;
 	Rect srcRectPlay;
+	//Rect srcRectPlaySelected;
 	Rect desRectPlay;
-	Rect srcRectSound;
+	Rect srcRectSoundOn;
+	Rect srcRectSoundOff;
 	Rect desRectSound;
 	Rect srcRectAbout;
+	Rect srcRectAboutSelected;
 	Rect desRectAbout;
 	Rect srcRectHelp;
+	Rect srcRectHelpSelected;
 	Rect desRectHelp;
 	Rect srcRectHighScore;
+	Rect srcRectHighScoreSelected;
 	Rect desRectHighScore;
+	Rect srcRectSetting;
+	Rect srcRectSettingSelected;
+	Rect desRectSetting;
+	
 	
 	boolean btnPlaySelect;
 	boolean btnHighScoreSelect;
 	boolean btnHelpSelect;
 	boolean btnAboutSelect;
+	boolean btnSettingSelect;
 	static boolean soundOn;
 	int playRectLeft;
 	int playRectRight;
@@ -85,6 +88,10 @@ public class MainMenuScreen extends Activity implements SurfaceHolder.Callback {
 	int highScoreRectRight;
 	int highScoreRectTop;
 	int highScoreRectBottom;
+	int settingRectLeft;
+	int settingRectRight;
+	int settingRectTop;
+	int settingRectBottom;
 	int count = 0;
 	
 	Intent intentPlayScreen;
@@ -120,6 +127,7 @@ public class MainMenuScreen extends Activity implements SurfaceHolder.Callback {
 		btnHighScoreSelect = false;
 		btnHelpSelect = false;
 		btnAboutSelect = false;
+		btnSettingSelect = false;
 		soundOn = true;
 		
 		// TODO Initialize bitmap
@@ -129,14 +137,7 @@ public class MainMenuScreen extends Activity implements SurfaceHolder.Callback {
 		//mainMenuBackground = BitmapFactory.decodeResource(getResources(), R.drawable.background);
 		playGameBMP = BitmapFactory.decodeResource(getResources(), R.drawable.ic_play);
 		playGameSelectedBMP = BitmapFactory.decodeResource(getResources(), R.drawable.ic_play1);
-		soundOnBMP = BitmapFactory.decodeResource(getResources(), R.drawable.soundon);
-		soundOffBMP = BitmapFactory.decodeResource(getResources(), R.drawable.soundoff);
-		helpBMP = BitmapFactory.decodeResource(getResources(), R.drawable.ic_help);
-		helpSelectedBMP = BitmapFactory.decodeResource(getResources(), R.drawable.ic_help1);
-		highScoreBMP = BitmapFactory.decodeResource(getResources(), R.drawable.ic_highscore);
-		highScoreSelectedBMP = BitmapFactory.decodeResource(getResources(), R.drawable.ic_highscore1);
-		aboutBMP = BitmapFactory.decodeResource(getResources(), R.drawable.ic_about);
-		aboutSelectedBMP = BitmapFactory.decodeResource(getResources(), R.drawable.ic_about1);
+		uiButtonBMP = BitmapFactory.decodeResource(getResources(), R.drawable.icon,opts);
 				
 		// TODO Declare rectangle dimension
 		playRectLeft = (int)(2*SplashScreen.scrWidth/5);
@@ -144,39 +145,60 @@ public class MainMenuScreen extends Activity implements SurfaceHolder.Callback {
 		playRectRight = (int)(3*SplashScreen.scrWidth/5);
 		playRectBottom = (int)(2*SplashScreen.scrHeight/6);
 		
-		soundRectLeft = (int)(13.5*SplashScreen.scrWidth/15);
-		soundRectTop = (int)(SplashScreen.scrHeight/20);
-		soundRectRight = (int)(14.5*SplashScreen.scrWidth/15);
-		soundRectBottom = (int)(3*SplashScreen.scrHeight/20);
+		soundRectLeft = (int)(11.5*SplashScreen.scrWidth/15);
+		soundRectTop = (int)(17*SplashScreen.scrHeight/20);
+		soundRectRight = (int)(12.5*SplashScreen.scrWidth/15);
+		soundRectBottom = (int)(19*SplashScreen.scrHeight/20);
 		
-		highScoreRectLeft = (int)(SplashScreen.scrWidth/4);
-		highScoreRectTop = (int)(2*SplashScreen.scrHeight/6);
-		highScoreRectRight = (int)(3*SplashScreen.scrWidth/4);
-		highScoreRectBottom = (int)(SplashScreen.scrHeight/2);
+		highScoreRectLeft = (int)(10*SplashScreen.scrWidth/15);
+		highScoreRectTop = (int)(17*SplashScreen.scrHeight/20);
+		highScoreRectRight = (int)(11*SplashScreen.scrWidth/15);
+		highScoreRectBottom = (int)(19*SplashScreen.scrHeight/20);
 		
-		helpRectLeft = (int)(2*SplashScreen.scrWidth/5);
-		helpRectTop = (int)(SplashScreen.scrHeight/2);
-		helpRectRight = (int)(3*SplashScreen.scrWidth/5);
-		helpRectBottom = (int)(4*SplashScreen.scrHeight/6);
+		helpRectLeft = (int)(8.5*SplashScreen.scrWidth/15);
+		helpRectTop = (int)(17*SplashScreen.scrHeight/20);
+		helpRectRight = (int)(9.5*SplashScreen.scrWidth/15);
+		helpRectBottom = (int)(19*SplashScreen.scrHeight/20);
 		
-		aboutRectLeft = (int)(2*SplashScreen.scrWidth/5);
-		aboutRectTop = (int)(4*SplashScreen.scrHeight/6);
-		aboutRectRight = (int)(3*SplashScreen.scrWidth/5);
-		aboutRectBottom = (int)(5*SplashScreen.scrHeight/6);
+		aboutRectLeft = (int)(7*SplashScreen.scrWidth/15);
+		aboutRectTop = (int)(17*SplashScreen.scrHeight/20);
+		aboutRectRight = (int)(8*SplashScreen.scrWidth/15);
+		aboutRectBottom = (int)(19*SplashScreen.scrHeight/20);
 		
+		settingRectLeft = (int)(13*SplashScreen.scrWidth/15);
+		settingRectTop = (int)(17*SplashScreen.scrHeight/20);
+		settingRectRight = (int)(14*SplashScreen.scrWidth/15);
+		settingRectBottom = (int)(19*SplashScreen.scrHeight/20);
+		
+		Log.d("DEV","width : "+uiButtonBMP.getWidth()+" height: "+uiButtonBMP.getHeight());
 		// TODO Initialize source and destination rectangle
+		int uiButtonWidth = uiButtonBMP.getWidth();
+		int uiButtonHeight = uiButtonBMP.getHeight();
+		
 		srcRectBackground = new Rect(0, 0, mainMenuBackground.getWidth(), mainMenuBackground.getHeight());
 		desRectBackground = new Rect(0, 0, SplashScreen.scrWidth, SplashScreen.scrHeight);
 		srcRectPlay = new Rect(0, 0, playGameBMP.getWidth(), playGameBMP.getHeight());
 		desRectPlay = new Rect(playRectLeft, playRectTop, playRectRight, playRectBottom);
-		srcRectSound = new Rect(0, 0, soundOnBMP.getWidth(), soundOnBMP.getHeight());
+		
+		srcRectSoundOn = new Rect(0, (int)(0.1875f*uiButtonHeight), (int)(0.1875f*uiButtonWidth), (int)(0.375f*uiButtonHeight));
+		srcRectSoundOff = new Rect(0, (int)(0.375f*uiButtonHeight), (int)(0.1875f*uiButtonWidth), (int)(0.5625f*uiButtonHeight));
 		desRectSound = new Rect(soundRectLeft, soundRectTop, soundRectRight, soundRectBottom);
-		srcRectHelp = new Rect(0, 0, helpBMP.getWidth(), helpBMP.getHeight());
+		
+		srcRectHelp = new Rect((int)(0.1875f*uiButtonWidth), (int)(0.375f*uiButtonHeight), (int)(0.375f*uiButtonWidth), (int)(0.5625f*uiButtonHeight));
+		srcRectHelpSelected = new Rect((int)(0.375f*uiButtonWidth), (int)(0.375f*uiButtonHeight), (int)(0.5625f*uiButtonWidth), (int)(0.5625f*uiButtonHeight));
 		desRectHelp = new Rect(helpRectLeft, helpRectTop, helpRectRight, helpRectBottom);
-		srcRectHighScore = new Rect(0, 0, highScoreBMP.getWidth(), highScoreBMP.getHeight());
+		
+		srcRectHighScore = new Rect((int)(0.1875f*uiButtonWidth), (int)(0.1875f*uiButtonHeight), (int)(0.375f*uiButtonWidth), (int)(0.375f*uiButtonHeight));
+		srcRectHighScoreSelected = new Rect((int)(0.375f*uiButtonWidth), (int)(0.1875f*uiButtonHeight), (int)(0.5625f*uiButtonWidth), (int)(0.375f*uiButtonHeight));
 		desRectHighScore = new Rect(highScoreRectLeft, highScoreRectTop, highScoreRectRight, highScoreRectBottom);
-		srcRectAbout = new Rect(0, 0, aboutBMP.getWidth(), aboutBMP.getHeight());
+		
+		srcRectAbout = new Rect((int)(0.5625f*uiButtonWidth), 0, (int)(0.75f*uiButtonWidth), (int)(0.1875f*uiButtonHeight));
+		srcRectAboutSelected = new Rect((int)(0.5625f*uiButtonWidth), 0, (int)(0.75f*uiButtonWidth), (int)(0.1875f*uiButtonHeight));
 		desRectAbout = new Rect(aboutRectLeft, aboutRectTop, aboutRectRight, aboutRectBottom);
+		
+		srcRectSetting = new Rect((int)(0.1875f*uiButtonWidth), 0, (int)(0.375f*uiButtonWidth), (int)(0.1875f*uiButtonHeight));
+		srcRectSettingSelected = new Rect((int)(0.375f*uiButtonWidth), 0, (int)(0.5625f*uiButtonWidth), (int)(0.1875f*uiButtonHeight));
+		desRectSetting = new Rect(settingRectLeft, settingRectTop, settingRectRight, settingRectBottom);
 
 		intentPlayScreen= new Intent(this, PlayScreen.class);
 		intentHighScoreScreen= new Intent(this, HighScoreScreen.class);
@@ -230,7 +252,7 @@ public class MainMenuScreen extends Activity implements SurfaceHolder.Callback {
 		        	drawButton(canvas);
 		        	
 		        	// TODO Draw sound on/off button
-		        	drawSoundButton(canvas);
+		        	drawPlayButton(canvas);
 		        	
 		        	// TODO Draw version of game		        	
 		        	drawVersion(canvas);
@@ -283,34 +305,50 @@ public class MainMenuScreen extends Activity implements SurfaceHolder.Callback {
 	public void drawButton(Canvas canvas)
 	{
 		// TODO Draw play game button
+		if(btnSettingSelect)
+		{
+			canvas.save();
+			if (soundOn)
+				canvas.drawBitmap(uiButtonBMP, srcRectSoundOn, desRectSound, null);
+			else
+				canvas.drawBitmap(uiButtonBMP, srcRectSoundOff, desRectSound, null);
+			canvas.restore();
+			canvas.save();
+			if (!btnHighScoreSelect)
+				canvas.drawBitmap(uiButtonBMP, srcRectHighScore, desRectHighScore, null);
+			else
+				canvas.drawBitmap(uiButtonBMP, srcRectHighScoreSelected, desRectHighScore, null);
+			canvas.restore();
+			canvas.save();
+			if (!btnHelpSelect)
+				canvas.drawBitmap(uiButtonBMP, srcRectHelp, desRectHelp, null);
+			else
+				canvas.drawBitmap(uiButtonBMP, srcRectHelpSelected, desRectHelp, null);
+			canvas.restore();
+			canvas.save();
+			if (!btnAboutSelect)
+				canvas.drawBitmap(uiButtonBMP, srcRectAbout, desRectAbout, null);
+			else
+				canvas.drawBitmap(uiButtonBMP, srcRectAboutSelected, desRectAbout, null);
+			canvas.restore();
+		}
+		
+		canvas.save();
+		if (!btnSettingSelect)
+			canvas.drawBitmap(uiButtonBMP, srcRectSetting, desRectSetting, null);
+		else
+			canvas.drawBitmap(uiButtonBMP, srcRectSettingSelected, desRectSetting, null);
+		canvas.restore();
+	}
+	
+	public void drawPlayButton(Canvas canvas)
+	{
+		// TODO Draw sound on/off button
 		canvas.save();
 		if (!btnPlaySelect)
 			canvas.drawBitmap(playGameBMP, srcRectPlay, desRectPlay, null);
 		else
 			canvas.drawBitmap(playGameSelectedBMP, srcRectPlay, desRectPlay, null);
-		if (!btnHighScoreSelect)
-			canvas.drawBitmap(highScoreBMP, srcRectHighScore, desRectHighScore, null);
-		else
-			canvas.drawBitmap(highScoreSelectedBMP, srcRectHighScore, desRectHighScore, null);
-		if (!btnHelpSelect)
-			canvas.drawBitmap(helpBMP, srcRectHelp, desRectHelp, null);
-		else
-			canvas.drawBitmap(helpSelectedBMP, srcRectHelp, desRectHelp, null);
-		if (!btnAboutSelect)
-			canvas.drawBitmap(aboutBMP, srcRectAbout, desRectAbout, null);
-		else
-			canvas.drawBitmap(aboutSelectedBMP, srcRectAbout, desRectAbout, null);
-		canvas.restore();
-	}
-	
-	public void drawSoundButton(Canvas canvas)
-	{
-		// TODO Draw sound on/off button
-		canvas.save();
-		if (soundOn)
-			canvas.drawBitmap(soundOnBMP, srcRectSound, desRectSound, null);
-		else
-			canvas.drawBitmap(soundOffBMP, srcRectSound, desRectSound, null);
 		canvas.restore();
 	}
 			
@@ -343,11 +381,8 @@ public class MainMenuScreen extends Activity implements SurfaceHolder.Callback {
 		mainMenuBackground.recycle();
 		playGameBMP.recycle();
 		playGameSelectedBMP.recycle();
-		soundOnBMP.recycle();
-		soundOffBMP.recycle();
-		helpBMP.recycle();
-		helpSelectedBMP.recycle();
-		
+		uiButtonBMP.recycle();
+		System.gc();
 	}
 	
 	/* ------------------------------------------------------------------------------- Input */
@@ -410,6 +445,13 @@ public class MainMenuScreen extends Activity implements SurfaceHolder.Callback {
 						mediaPlayer_soundbutton.start();
 					break;
 				}
+				case 5 : {
+					// TODO Selected button setting
+					btnSettingSelect = !btnSettingSelect;
+					if(soundOn)
+						mediaPlayer_soundbutton.start();
+					break;
+				}
 			}
 		}
 		return super.onTouchEvent(event);
@@ -425,31 +467,48 @@ public class MainMenuScreen extends Activity implements SurfaceHolder.Callback {
 				&& ((posY >= playRectTop)&&(posY <= playRectBottom)))
 		{
 			Log.d(TAG,"in return 0");
+			// btn play
 			return 0;
 		}
-		else if (((posX >= soundRectLeft) && (posX <= soundRectRight))
-				&& ((posY >= soundRectTop)&&(posY <= soundRectBottom)))
+		else if (((posX >= settingRectLeft) && (posX <= settingRectRight))
+				&& ((posY >= settingRectTop)&&(posY <= settingRectBottom)))
 		{
-			Log.d(TAG,"in return 1");
-			return 1;
+			Log.d(TAG,"in return 5");
+			// btn setting
+			return 5;
 		}
-		else if (((posX >= highScoreRectLeft) && (posX <= highScoreRectRight))
-				&& ((posY >= highScoreRectTop)&&(posY <= highScoreRectBottom)))
+		else if (btnSettingSelect)
 		{
-			Log.d(TAG,"in return 2");
-			return 2;
-		}
-		else if (((posX >= helpRectLeft) && (posX <= helpRectRight))
-				&& ((posY >= helpRectTop)&&(posY <= helpRectBottom)))
-		{
-			Log.d(TAG,"in return 3");
-			return 3;
-		}
-		else if (((posX >= aboutRectLeft) && (posX <= aboutRectRight))
-				&& ((posY >= aboutRectTop)&&(posY <= aboutRectBottom)))
-		{
-			Log.d(TAG,"in return 4");
-			return 4;
+			if (((posX >= soundRectLeft) && (posX <= soundRectRight))
+					&& ((posY >= soundRectTop)&&(posY <= soundRectBottom)))
+			{
+				Log.d(TAG,"in return 1");
+				// btn sound
+				return 1;
+			}
+			else if (((posX >= highScoreRectLeft) && (posX <= highScoreRectRight))
+					&& ((posY >= highScoreRectTop)&&(posY <= highScoreRectBottom)))
+			{
+				Log.d(TAG,"in return 2");
+				// btn high score
+				return 2;
+			}
+			else if (((posX >= helpRectLeft) && (posX <= helpRectRight))
+					&& ((posY >= helpRectTop)&&(posY <= helpRectBottom)))
+			{
+				Log.d(TAG,"in return 3");
+				// btn help
+				return 3;
+			}
+			else if (((posX >= aboutRectLeft) && (posX <= aboutRectRight))
+					&& ((posY >= aboutRectTop)&&(posY <= aboutRectBottom)))
+			{
+				Log.d(TAG,"in return 4");
+				// btn about
+				return 4;
+			}
+			else
+				return -1;
 		}
 		else
 			return -1;

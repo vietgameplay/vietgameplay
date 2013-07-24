@@ -18,7 +18,6 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Matrix;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.Rect;
 import android.media.MediaPlayer;
@@ -173,6 +172,7 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 			
 	static float fishScale;
 	static float cannonScale;
+	boolean isLowMemoryDevice = false;
 	boolean isPause = false;
 	boolean isNextLevel = false;
 	boolean isOption = false;
@@ -451,10 +451,6 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
     							  );
     	
     	// TODO Create new
-        BitmapFactory.Options opts = new BitmapFactory.Options();
-		opts.inDensity = 1;
-		opts.inTargetDensity = 1;
-        opts.inPurgeable = true;
         
     	for (int i = 0; i < 11; i++)
 		{
@@ -470,6 +466,12 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 					bulletweb[i][j] = new BulletWeb();
 			}
 		}
+    	
+        BitmapFactory.Options opts = new BitmapFactory.Options();
+		opts.inDensity = 1;
+		opts.inTargetDensity = 1;
+        opts.inPurgeable = true;
+        
     	coinSilverBMP = BitmapFactory.decodeResource(getResources(), R.drawable.coinani1, opts);
 		coinGoldBMP = BitmapFactory.decodeResource(getResources(), R.drawable.coinani2, opts);
 
@@ -482,26 +484,42 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 		else
 		    Log.w(TAG, "Unrecognized VM heap size = " + mMaxVmHeap);
 		
-		
+		System.gc();
     	//sharkBMP[0] = BitmapFactory.decodeResource(getResources(), fishID[10], opts);
-		frameWidth[10] = round(frameWidth[10]*fishScale);
-		frameHeight[10] = round(frameHeight[10]*fishScale);
+		int widthTemp = round(frameWidth[10]*fishScale);
+		int heightTemp = round(frameHeight[10]*fishScale);
 		
 		float scaleTemp = fishScale;
-		long sizeReqd        = 2*frameWidth[10] * 4*frameHeight[10] * 4  / 8;
+		long sizeReqd        = 2*widthTemp * 4*heightTemp * 4  / 8;
 		long allocNativeHeap = Debug.getNativeHeapAllocatedSize();
-		if ((sizeReqd + allocNativeHeap ) >= mMaxNativeHeap)
+		
+		if ((sizeReqd*1024 + allocNativeHeap ) >= mMaxNativeHeap*1024 && fishScale >= 1.0f)
 		{
-		    fishScale -= 0.2;
+			float percentSize = (sizeReqd*1024 + allocNativeHeap - mMaxNativeHeap*1024)/(mMaxNativeHeap*1024);
+			Log.d("DEV","percent"+percentSize);
+		    fishScale -= 1.5f*percentSize/100;
+		    Log.d("DEV","scale"+fishScale);
+		    frameWidth[10] = round(frameWidth[10]*fishScale);
+			frameHeight[10] = round(frameHeight[10]*fishScale);
+			Log.d("DEV","width :"+frameWidth[10]+" height :"+frameHeight[10]);
+			isLowMemoryDevice = true;
+		}
+		else
+		{
+			frameWidth[10] = widthTemp;
+			frameHeight[10] = heightTemp;
 		}
 		
 		sharkBMP[0] = decodeSampledBitmapFromResource(getResources(), fishID[10] ,2*frameWidth[10], 4*frameHeight[10]);
-    	//sharkBMP[2] = BitmapFactory.decodeResource(getResources(), fishID[11], opts);
+		System.gc();
     	sharkBMP[1] = decodeSampledBitmapFromResource(getResources(), fishID[11] ,frameWidth[10], 4*frameHeight[10]);
+    	System.gc();
+    	
     	frameWidth[10] = sharkBMP[1].getWidth();
     	frameHeight[10] = sharkBMP[0].getHeight()/4;
     	
     	fishScale = scaleTemp;
+    	
     	
     	percent = 30;
     }   
@@ -556,7 +574,16 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
     	{
     		//Bitmap fishBMP = BitmapFactory.decodeResource(getResources(), fishID[i], opts);
 
-    		fishBMP[i] = BitmapFactory.decodeResource(getResources(), fishID[i], opts);
+
+			frameWidth[i] = round(frameWidth[10]*fishScale);
+			frameHeight[i] = round(frameHeight[10]*fishScale);
+			
+			fishBMP[i] = decodeSampledBitmapFromResource(getResources(), fishID[i] ,frameWidth[i], (4+frameCount[i])*frameHeight[i]);
+			
+			frameWidth[i] = fishBMP[i].getWidth();
+			frameHeight[i] = fishBMP[i].getHeight()/(4+frameCount[i]);
+
+    			//fishBMP[i] = BitmapFactory.decodeResource(getResources(), fishID[i], opts);
 
     		for (int j = 0; j < maxnumFish[i]; j++)
     		{
@@ -656,7 +683,17 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
     	for (int i = 5; i < 11; i++)
     	{
 			if(i < 10)
+			{
+				frameWidth[i] = round(frameWidth[10]*fishScale);
+				frameHeight[i] = round(frameHeight[10]*fishScale);
+				
+				fishBMP[i] = decodeSampledBitmapFromResource(getResources(), fishID[i] ,frameWidth[i], (4+frameCount[i])*frameHeight[i]);
+				
+				frameWidth[i] = fishBMP[i].getWidth();
+				frameHeight[i] = fishBMP[i].getHeight()/(4+frameCount[i]);
+				
 				fishBMP[i] = BitmapFactory.decodeResource(getResources(), fishID[i], opts);
+			}
     		
 			for (int j = 0; j < maxnumFish[i]; j++)
 			{

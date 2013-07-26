@@ -45,39 +45,39 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 	Bitmap cannonBMP[];
 	Bitmap sharkBMP[];
 	Bitmap PlayBackground;
-	Bitmap loadingImg;
-	Bitmap loadingBar;
 	Bitmap coinSilverBMP;
 	Bitmap coinGoldBMP;
 	Bitmap coinTextBMP;
-	Bitmap pauseBMP;
-	Bitmap resumeBMP;
-	Bitmap resumeSelectedBMP;
-	Bitmap optionBMP;
-	Bitmap optionSelectedBMP;
-	Bitmap exitBMP;
-	Bitmap exitSelectedBMP;
-	Bitmap pauseBgBMP;
 	Bitmap bulletBMP;
 	Bitmap webBMP;
+	Bitmap uiButtonBMP;
 	
 	Rect srcRectBackground;
 	Rect desRectBackground;
 	Rect srcRectLoading;
 	Rect desRectLoading;
+	Rect srcRectLoadingBar;
 	Rect desRectLoadingBar;
 	Rect srcRectPause;
 	Rect desRectPause;
 	Rect srcRectResume;
+	Rect srcRectResumeSelected;
 	Rect desRectResume;
-	Rect srcRectOption;
-	Rect desRectOption;
+	Rect srcRectRetry;
+	Rect srcRectRetrySelected;
+	Rect desRectRetry;
 	Rect srcRectExit;
+	Rect srcRectExitSelected;
 	Rect desRectExit;
 	Rect srcRectPauseBg;
 	Rect desRectPauseBg;
 	Rect srcRectTimeBar;
 	Rect desRectTimeBar;
+	Rect srcRectLevelBackGround;
+	Rect srcRectLevel[];
+	Rect desRectLevelText;
+	Rect desRectLevelFirstNum;
+	Rect desRectLevelSecondNum;
 	
 	Fish fish[][];
 	Coin coin[][];
@@ -92,6 +92,8 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 	Intent intentMainMenu;
 	Intent intentEndGame;
 	
+	int uiButtonWidth;
+	int uiButtonHeight;
 	int level;
 	int timeCount;
 	int remainingTime;
@@ -105,8 +107,8 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 	int desRightTimeBarMax;
 	int nextMove;
 	int delay;
-	int left;
-	int right;
+	int rightDestLoadingBar;
+	int rightSrcLoadingBar;
 	int percent;
 	int degreeCannon;
 	int currentCannon;
@@ -158,24 +160,12 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 			R.raw.level8,
 			R.raw.level9
 			};
-	int levelBitmap[] = {
-		R.drawable.level1,
-		R.drawable.level2,
-		R.drawable.level3,
-		R.drawable.level4,
-		R.drawable.level5,
-		R.drawable.level6,
-		R.drawable.level7,
-		R.drawable.level8,
-		R.drawable.level9
-	};
 			
 	static float fishScale;
 	static float cannonScale;
 	boolean isLowMemoryDevice = false;
 	boolean isPause = false;
 	boolean isNextLevel = false;
-	boolean isOption = false;
 	boolean getDegree = false;
 	boolean printLog = true;
 	boolean printLogDraw = true;
@@ -183,7 +173,8 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 	boolean firstMove = true;
 	boolean inRoute[][];
 	boolean btnResumeSelected = false;
-	boolean btnOptionSelected = false;
+	boolean btnRetrySelected = false;
+	boolean btnMusicSelected = false;
 	boolean btnExitSelected = false;
 	static boolean loaded = false;
 	long timeFishMove;
@@ -202,8 +193,8 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 	float widthWebIcr;
 	float heightWebIcr;
 	Bitmap bottomSRC;
-	Bitmap soundOnBMP;
-	Bitmap soundOffBMP;
+//	Bitmap soundOnBMP;
+//	Bitmap soundOffBMP;
 	
 	//bottom Image
 	Rect srcRectBtm;
@@ -227,8 +218,11 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 	int resDownCannonRight_L;
 	
 	// Sound Rectangle
-	Rect srcRectSoundBtn;
-	Rect desRectSoundBtn;																	/* End of Loc's variable define */
+	Rect srcRectSoundOn;
+	Rect srcRectSoundOnSelected;
+	Rect srcRectSoundOff;
+	Rect desRectSoundOn;
+	Rect desRectSoundOff;																	/* End of Loc's variable define */
 	
 																			/* TODO Thinh's variable define */
 	Bitmap numberBlack;
@@ -277,8 +271,6 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 		timeControlFPS = 0;
 		nextMove = 0;
 		delay = 0;
-		left = -2*SplashScreen.scrWidth/5;
-		right = 3*SplashScreen.scrWidth/5;
 		money = 1000;
 		strMoney = "";
 		fishScale = (float)SplashScreen.scrHeight/600f;
@@ -287,12 +279,22 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 		// TODO Initialize loading
 		BitmapFactory.Options opts = new BitmapFactory.Options(); 
         opts.inPurgeable = true;
-		loadingImg = BitmapFactory.decodeResource(getResources(), R.drawable.loading0, opts);
-		loadingBar = BitmapFactory.decodeResource(getResources(), R.drawable.loading1, opts);
-
-		srcRectLoading = new Rect(0, 0, loadingImg.getWidth(), loadingImg.getHeight());
-		desRectLoading = new Rect(0, 0, SplashScreen.scrWidth, SplashScreen.scrHeight);
-		desRectLoadingBar = new Rect(left, 0, right, SplashScreen.scrHeight);
+        
+        uiButtonBMP = BitmapFactory.decodeResource(getResources(), R.drawable.icon_ingame, opts);
+        uiButtonWidth = uiButtonBMP.getWidth();
+        uiButtonHeight = uiButtonBMP.getHeight();
+        
+        rightDestLoadingBar = (int)(0.892f*(SplashScreen.scrWidth/3.0f)) - (int)(0.09745f*(SplashScreen.scrWidth/3.0f));
+        rightSrcLoadingBar = (int)(0.5248*uiButtonWidth);
+        
+		srcRectLoading = new Rect(0, (int)(0.6787*uiButtonHeight), (int)(0.6514*uiButtonWidth), (int)(0.8555*uiButtonHeight));
+		srcRectLoadingBar = new Rect(0, (int)(0.6426*uiButtonHeight), 0, (int)(0.6748*uiButtonHeight));
+		
+		desRectLoading = new Rect(SplashScreen.scrWidth/3, SplashScreen.scrHeight/3, 2*SplashScreen.scrWidth/3, 2*SplashScreen.scrHeight/3);
+		desRectLoadingBar = new Rect((int)(SplashScreen.scrWidth/3.0f)+(int)(0.09745f*(SplashScreen.scrWidth/3.0f)),
+				(int)(SplashScreen.scrHeight/3.0f)+(int)(0.5556f*(SplashScreen.scrHeight/3.0f)),
+				(int)(SplashScreen.scrWidth/3.0f)+(int)(0.09745f*(SplashScreen.scrWidth/3.0f)),
+				(int)(SplashScreen.scrHeight/3.0f)+(int)(0.7222f*(SplashScreen.scrHeight/3.0f)));
 		
 		// TODO Initialize view 
 		view = new SurfaceView(this);
@@ -330,19 +332,8 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 		//PlayBackground = BitmapFactory.decodeResource(getResources(), R.drawable.game_bg_2_hd, opts);
 		PlayBackground= decodeSampledBitmapFromResource(getResources(), R.drawable.game_bg_2_hd, SplashScreen.scrWidth, SplashScreen.scrHeight);
 		bottomSRC = BitmapFactory.decodeResource(getResources(), R.drawable.bottom);
-	    soundOnBMP = BitmapFactory.decodeResource(getResources(), R.drawable.soundon);
-		soundOffBMP = BitmapFactory.decodeResource(getResources(), R.drawable.soundoff);
 		numberBlack = BitmapFactory.decodeResource(getResources(), R.drawable.number_black);
 		coinTextBMP = BitmapFactory.decodeResource(getResources(), R.drawable.cointext);
-		pauseBMP = BitmapFactory.decodeResource(getResources(), R.drawable.ic_pause);
-		resumeBMP = BitmapFactory.decodeResource(getResources(), R.drawable.ic_resume);
-		resumeSelectedBMP = BitmapFactory.decodeResource(getResources(), R.drawable.ic_resume1);
-		optionBMP = BitmapFactory.decodeResource(getResources(), R.drawable.ic_option);
-		optionSelectedBMP = BitmapFactory.decodeResource(getResources(), R.drawable.ic_option2);
-		exitBMP = BitmapFactory.decodeResource(getResources(), R.drawable.ic_exit);
-		exitSelectedBMP = BitmapFactory.decodeResource(getResources(), R.drawable.ic_exit1);
-		//pauseBgBMP = BitmapFactory.decodeResource(getResources(), R.drawable.pausebg);
-		pauseBgBMP = decodeSampledBitmapFromResource(getResources(), R.drawable.pausebg, SplashScreen.scrWidth, SplashScreen.scrHeight);
 		
 		// TODO Initialize source and destination rectangle
 		srcRectBackground = new Rect(0, 0, PlayBackground.getWidth(), PlayBackground.getHeight());
@@ -362,7 +353,7 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 		cannonCenterPosition	= new Position((int)(10.5f*SplashScreen.scrWidth/20f), SplashScreen.scrHeight);
 		srcRectCoin 			= new Rect[6];
 		desRectCoin 			= new Rect[6];
-		
+		srcRectLevel			= new Rect[11];
 		percent = 10;
     }
         
@@ -376,20 +367,36 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
     		desRectCoin[i] = new Rect();
     	}
     	
+    	for (int i = 0; i < 11; i++)
+    	{
+    		srcRectLevel[i] = new Rect();
+    	}
+    	srcRectLevelBackGround = new Rect(uiButtonWidth/2,0,uiButtonWidth,(int)(0.375f*uiButtonHeight));
+    	
+    	desRectLevelText = new Rect();
+    	desRectLevelFirstNum = new Rect();
+    	desRectLevelSecondNum = new Rect();
+    	
     	// NEW
-    	srcRectPause = new Rect(0,0,pauseBMP.getWidth(),pauseBMP.getHeight());
+    	srcRectPause = new Rect((int)(0.8828f*uiButtonWidth),(int)(0.3828f*uiButtonHeight),uiButtonWidth,(int)(0.5f*uiButtonHeight));
     	desRectPause = new Rect(14*SplashScreen.scrWidth/15,(int)(13.5f*SplashScreen.scrHeight/15f),(int)(19.8f*SplashScreen.scrWidth/20f),(int)(19.8f*SplashScreen.scrHeight/20f));
     	
-    	srcRectResume = new Rect(0,0,resumeBMP.getWidth(),resumeBMP.getHeight());
+    	srcRectResume = new Rect(0,(int)(0.5469f*uiButtonHeight),(int)(0.1992f*uiButtonWidth),(int)(0.5889f*uiButtonHeight));
+    	srcRectResumeSelected = new Rect(0,(int)(0.5889f*uiButtonHeight),(int)(0.1992f*uiButtonWidth),(int)(0.6348f*uiButtonHeight));
     	desRectResume = new Rect((int)(2*SplashScreen.scrWidth/5),(int)(SplashScreen.scrHeight/6),(int)(3*SplashScreen.scrWidth/5),(int)(2*SplashScreen.scrHeight/6));
     	
-    	srcRectOption = new Rect(0,0,optionBMP.getWidth(),optionBMP.getHeight());
-    	desRectOption = new Rect((int)(2*SplashScreen.scrWidth/5),(int)(2*SplashScreen.scrHeight/6),(int)(3*SplashScreen.scrWidth/5),(int)(3*SplashScreen.scrHeight/6));
+//    	srcRectOption = new Rect(0,0,optionBMP.getWidth(),optionBMP.getHeight());
+//    	desRectOption = new Rect((int)(2*SplashScreen.scrWidth/5),(int)(2*SplashScreen.scrHeight/6),(int)(3*SplashScreen.scrWidth/5),(int)(3*SplashScreen.scrHeight/6));
     	
-    	srcRectExit = new Rect(0,0,exitBMP.getWidth(),exitBMP.getHeight());
+    	srcRectRetry = new Rect((int)(0.32715f*uiButtonWidth),(int)(0.5469f*uiButtonHeight),(int)(0.4941f*uiButtonWidth),(int)(0.5889f*uiButtonHeight));
+    	srcRectRetrySelected = new Rect((int)(0.32715f*uiButtonWidth),(int)(0.5889f*uiButtonHeight),(int)(0.4941f*uiButtonWidth),(int)(0.6348f*uiButtonHeight));
+    	desRectRetry = new Rect((int)(2*SplashScreen.scrWidth/5),(int)(3*SplashScreen.scrHeight/6),(int)(3*SplashScreen.scrWidth/5),(int)(4*SplashScreen.scrHeight/6));
+    	
+    	srcRectExit = new Rect((int)(0.1992f*uiButtonWidth),(int)(0.5469f*uiButtonHeight),(int)(0.32715f*uiButtonWidth),(int)(0.5889f*uiButtonHeight));
+    	srcRectExitSelected = new Rect((int)(0.1992f*uiButtonWidth),(int)(0.5889f*uiButtonHeight),(int)(0.32715f*uiButtonWidth),(int)(0.6348f*uiButtonHeight));
     	desRectExit = new Rect((int)(2*SplashScreen.scrWidth/5),(int)(3*SplashScreen.scrHeight/6),(int)(3*SplashScreen.scrWidth/5),(int)(4*SplashScreen.scrHeight/6));
     	
-    	srcRectPauseBg = new Rect(0,0,pauseBgBMP.getWidth(),pauseBgBMP.getHeight());
+    	srcRectPauseBg = new Rect(0,0,uiButtonWidth/2,(int)(0.375*uiButtonHeight));
     	desRectPauseBg = new Rect(0,0,SplashScreen.scrWidth,SplashScreen.scrHeight);
     	
     	// bottom image
@@ -397,8 +404,11 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
         desRectBtm = new Rect((int)(0.5f*SplashScreen.scrWidth/10f) ,(int)(7*SplashScreen.scrHeight/10),(int)(9*SplashScreen.scrWidth/10),SplashScreen.scrHeight+2);
 
         // Sound button
-        srcRectSoundBtn = new Rect(0, 0, soundOnBMP.getWidth(), soundOnBMP.getHeight());
-        desRectSoundBtn = new Rect((int)(7*SplashScreen.scrWidth/15),(int)(3.25f*SplashScreen.scrHeight/6f),(int)(8*SplashScreen.scrWidth/15f),(int)(3.75f*SplashScreen.scrHeight/6f));
+        srcRectSoundOn = new Rect((int)(0.4941f*uiButtonWidth), (int)(0.5469f*uiButtonHeight), (int)(0.65625f*uiButtonWidth), (int)(0.5889f*uiButtonHeight));
+        srcRectSoundOnSelected = new Rect((int)(0.4941f*uiButtonWidth), (int)(0.5889f*uiButtonHeight), (int)(0.65625f*uiButtonWidth), (int)(0.6348f*uiButtonHeight));
+        srcRectSoundOff = new Rect((int)(0.4941f*uiButtonWidth), (int)(0.5469f*uiButtonHeight), (int)(0.703125f*uiButtonWidth), (int)(0.5889f*uiButtonHeight));
+        desRectSoundOn = new Rect((int)(7*SplashScreen.scrWidth/15),(int)(3.25f*SplashScreen.scrHeight/6f),(int)(8*SplashScreen.scrWidth/15f),(int)(3.75f*SplashScreen.scrHeight/6f));
+        desRectSoundOff = new Rect((int)(7*SplashScreen.scrWidth/15),(int)(3.25f*SplashScreen.scrHeight/6f),(int)(8*SplashScreen.scrWidth/15f),(int)(3.75f*SplashScreen.scrHeight/6f));
 		
         // time bar
         int leftTimeBar = (int)(71.1f*(8.5f*SplashScreen.scrWidth/10f)/100f) + (int)(0.5f*SplashScreen.scrWidth/10f);
@@ -845,7 +855,6 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 			        	if (loaded && (count == 4))
 			        	{
 			        		onLoad = false;
-			        		clearLoadingBitmap();
 			        		level = 0;
 							nextLevel();
 			        	}
@@ -902,18 +911,15 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 				        		drawResumeButton(canvas);
 				        		
 				        		// TODO Draw Option button
-				        		drawOptionButton(canvas);
+				        		drawRetryButton(canvas);
+				        		
+				        		// TODO Draw music button
+				        		drawSoundButton(canvas);
 				        		
 				        		// TODO Draw Exit button
 				        		drawExitButton(canvas);
 			        		}
-			        	}	
-			        	
-			        	if (isOption)
-			        	{
-			        		drawSoundButton(canvas);
-			        	}
-			        	
+			        	}	      	
 		        	}
 		            holder.unlockCanvasAndPost(canvas);
 		            
@@ -932,13 +938,17 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 		        		btnResumeSelected = false;
 		        		handlerDrawing.postDelayed(this, 500);
 		        		isPause = false;
-		        		isOption = false;
 		        	}
-		        	if (btnOptionSelected)
+		        	if (btnRetrySelected)
 		        	{
-		        		btnOptionSelected = false;
+		        		btnRetrySelected = false;
 		        		handlerDrawing.postDelayed(this, 500);
-		        		isOption = !isOption;
+		        		//resetLevel();
+		        	}
+		        	if (btnMusicSelected)
+		        	{
+		        		btnMusicSelected = false;
+		        		handlerDrawing.postDelayed(this, 500);
 		        	}
 		        	if (btnExitSelected)
 		        	{
@@ -964,8 +974,8 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
     	if (onLoad)
 		{
 	    	// TODO Update loading bar
-	        desRectLoadingBar.left += percent*2*SplashScreen.scrWidth/500;
-	        desRectLoadingBar.right += percent*2*SplashScreen.scrWidth/500;
+	        srcRectLoadingBar.right += percent*rightSrcLoadingBar;
+	        desRectLoadingBar.right += percent*rightDestLoadingBar;
 		}
     	else
     	{
@@ -1381,8 +1391,8 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
         // TODO Draw loading
         
     	canvas.save();
-    	canvas.drawBitmap(loadingBar, srcRectLoading, desRectLoadingBar, null);
-    	canvas.drawBitmap(loadingImg, srcRectLoading, desRectLoading, null);
+    	canvas.drawBitmap(uiButtonBMP, srcRectLoading, desRectLoadingBar, null);
+    	canvas.drawBitmap(uiButtonBMP, srcRectLoading, desRectLoading, null);
     	canvas.restore();
     }
     
@@ -1433,7 +1443,7 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 	private void drawPauseButton(Canvas canvas)
 	{
 		canvas.save();
-		canvas.drawBitmap(pauseBMP, srcRectPause, desRectPause, null);
+		canvas.drawBitmap(uiButtonBMP, srcRectPause, desRectPause, null);
 		canvas.restore();
 	}
     
@@ -1441,10 +1451,17 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 	{
 		// TODO Draw sound on/off button
 		canvas.save();
-		if (MainMenuScreen.soundOn)
-			canvas.drawBitmap(soundOnBMP, srcRectSoundBtn, desRectSoundBtn, null);
+		if (btnMusicSelected)
+		{
+			canvas.drawBitmap(uiButtonBMP, srcRectSoundOnSelected, desRectSoundOn, null);
+		}
 		else
-			canvas.drawBitmap(soundOffBMP, srcRectSoundBtn, desRectSoundBtn, null);
+		{
+			if (MainMenuScreen.soundOn)
+				canvas.drawBitmap(uiButtonBMP, srcRectSoundOn, desRectSoundOn, null);
+			else
+				canvas.drawBitmap(uiButtonBMP, srcRectSoundOff, desRectSoundOff, null);
+		}
 		canvas.restore();
 	}
 	
@@ -1508,7 +1525,7 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 	private void drawPauseBackground(Canvas canvas)
 	{
 		canvas.save();
-		canvas.drawBitmap(pauseBgBMP, srcRectPauseBg, desRectPauseBg, null);
+		canvas.drawBitmap(uiButtonBMP, srcRectPauseBg, desRectPauseBg, null);
 		canvas.restore();
 	}
 	
@@ -1516,34 +1533,31 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 	{
 		canvas.save();
 		if (btnResumeSelected)
-			canvas.drawBitmap(resumeSelectedBMP, srcRectResume, desRectResume, null);
+			canvas.drawBitmap(uiButtonBMP, srcRectResumeSelected, desRectResume, null);
 		else
-			canvas.drawBitmap(resumeBMP, srcRectResume, desRectResume, null);
+			canvas.drawBitmap(uiButtonBMP, srcRectResume, desRectResume, null);
 		canvas.restore();
 	}
 
-	private void drawOptionButton(Canvas canvas)
+	private void drawRetryButton(Canvas canvas)
 	{
 		canvas.save();
-		if (btnOptionSelected)
-			canvas.drawBitmap(optionSelectedBMP, srcRectOption, desRectOption, null);
+		if (btnRetrySelected)
+			canvas.drawBitmap(uiButtonBMP, srcRectRetrySelected, desRectRetry, null);
 		else
-			canvas.drawBitmap(optionBMP, srcRectOption, desRectOption, null);
+			canvas.drawBitmap(uiButtonBMP, srcRectRetry, desRectRetry, null);
 		canvas.restore();
 	}
 	
 	private void drawExitButton(Canvas canvas)
 	{
-		if (isOption)
-			desRectExit = new Rect((int)(2*SplashScreen.scrWidth/5),(int)(4*SplashScreen.scrHeight/6),(int)(3*SplashScreen.scrWidth/5),(int)(5*SplashScreen.scrHeight/6));
-		else
-			desRectExit = new Rect((int)(2*SplashScreen.scrWidth/5),(int)(3*SplashScreen.scrHeight/6),(int)(3*SplashScreen.scrWidth/5),(int)(4*SplashScreen.scrHeight/6));
+		desRectExit = new Rect((int)(2*SplashScreen.scrWidth/5),(int)(4*SplashScreen.scrHeight/6),(int)(3*SplashScreen.scrWidth/5),(int)(5*SplashScreen.scrHeight/6));	
 		
 		canvas.save();
 		if (btnExitSelected)
-			canvas.drawBitmap(exitSelectedBMP, srcRectExit, desRectExit, null);
+			canvas.drawBitmap(uiButtonBMP, srcRectExitSelected, desRectExit, null);
 		else
-			canvas.drawBitmap(exitBMP, srcRectExit, desRectExit, null);
+			canvas.drawBitmap(uiButtonBMP, srcRectExit, desRectExit, null);
 		canvas.restore();
 	}
 	
@@ -1802,12 +1816,6 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 					 (int)(cannonCenterPosition.X+cannonScale*((bulletweb[currentCannon][cbullet].sourceRect.right - bulletweb[currentCannon][cbullet].sourceRect.left)/2)), 
 					 (int)(cannon[currentCannon].animation.destinationRect.centerY()+cannonScale*(2*(bulletweb[currentCannon][cbullet].sourceRect.bottom - bulletweb[currentCannon][cbullet].sourceRect.top)/3)));
 	}
-	
-	private void clearLoadingBitmap()
-    {
-    	loadingBar.recycle();
-    	loadingImg.recycle();
-    }
 		
 	private int calculateDegree(Position pos, Position pos2, boolean fish)
 	{
@@ -2025,7 +2033,7 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 					break;
 				}
 				case 5 : {
-					btnOptionSelected = true;
+					btnRetrySelected = true;
 					break;
 				}
 				case 6 : {
@@ -2101,7 +2109,7 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 				Log.i(TAG,"Return 4");
 				return 4;	
 			}
-			else if (((posX>=desRectOption.left)&&(posX<=desRectOption.right))&&((posY>=desRectOption.top)&& posY<=desRectOption.bottom)) 
+			else if (((posX>=desRectRetry.left)&&(posX<=desRectRetry.right))&&((posY>=desRectRetry.top)&& posY<=desRectRetry.bottom)) 
 			{
 				// TODO Touch on option button
 				Log.i(TAG,"Return 5");
@@ -2112,7 +2120,7 @@ public class PlayScreen extends Activity implements SurfaceHolder.Callback {
 				// Button exit
 				return 6;
 			}
-			else if (((posX >= desRectSoundBtn.left) && (posX <= desRectSoundBtn.right)) && ((posY >= desRectSoundBtn.top)&&(posY <= desRectSoundBtn.bottom)))
+			else if (((posX >= desRectSoundOn.left) && (posX <= desRectSoundOn.right)) && ((posY >= desRectSoundOn.top)&&(posY <= desRectSoundOn.bottom)))
 			{
 				// Button sound
 				return 7;

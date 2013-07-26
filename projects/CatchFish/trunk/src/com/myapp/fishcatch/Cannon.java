@@ -49,13 +49,13 @@ public class Cannon {
     public void Update()
     {
     	this.animation.Position = this.Position;
-    	this.animation.Update(false);
+    	this.animation.Update(Position,true);
     }
     
     public void Update(int degree)
     {
     	this.sumDegree = degree;
-    	this.animation.Update(Position);
+    	this.animation.Update(Position,false);
     }
     
     public void Draw(Canvas canvas, Bitmap spriteStrip)

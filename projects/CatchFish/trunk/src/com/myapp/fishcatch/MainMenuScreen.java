@@ -36,14 +36,12 @@ public class MainMenuScreen extends Activity implements SurfaceHolder.Callback {
 	Runnable runnableDrawingMain;
 	
 	Bitmap mainMenuBackground;
-	Bitmap playGameBMP;
-	Bitmap playGameSelectedBMP;
 	Bitmap uiButtonBMP;
 	
 	Rect srcRectBackground;
 	Rect desRectBackground;
 	Rect srcRectPlay;
-	//Rect srcRectPlaySelected;
+	Rect srcRectPlaySelected;
 	Rect desRectPlay;
 	Rect srcRectSoundOn;
 	Rect srcRectSoundOff;
@@ -135,9 +133,7 @@ public class MainMenuScreen extends Activity implements SurfaceHolder.Callback {
         opts.inPurgeable = true;
         mainMenuBackground = BitmapFactory.decodeResource(getResources(), R.drawable.background, opts);
 		//mainMenuBackground = BitmapFactory.decodeResource(getResources(), R.drawable.background);
-		playGameBMP = BitmapFactory.decodeResource(getResources(), R.drawable.ic_play);
-		playGameSelectedBMP = BitmapFactory.decodeResource(getResources(), R.drawable.ic_play1);
-		uiButtonBMP = BitmapFactory.decodeResource(getResources(), R.drawable.icon,opts);
+		uiButtonBMP = BitmapFactory.decodeResource(getResources(), R.drawable.icon_mainmenu,opts);
 				
 		// TODO Declare rectangle dimension
 		playRectLeft = (int)(2*SplashScreen.scrWidth/5);
@@ -177,27 +173,28 @@ public class MainMenuScreen extends Activity implements SurfaceHolder.Callback {
 		
 		srcRectBackground = new Rect(0, 0, mainMenuBackground.getWidth(), mainMenuBackground.getHeight());
 		desRectBackground = new Rect(0, 0, SplashScreen.scrWidth, SplashScreen.scrHeight);
-		srcRectPlay = new Rect(0, 0, playGameBMP.getWidth(), playGameBMP.getHeight());
+		srcRectPlay = new Rect((int)(0.7422*uiButtonWidth), 0, uiButtonWidth, (int)(0.08984*uiButtonHeight));
+		srcRectPlaySelected = new Rect((int)(0.7422*uiButtonWidth), (int)(0.08984*uiButtonHeight), uiButtonWidth, (int)(0.1797*uiButtonHeight));
 		desRectPlay = new Rect(playRectLeft, playRectTop, playRectRight, playRectBottom);
 		
-		srcRectSoundOn = new Rect(0, (int)(0.1875f*uiButtonHeight), (int)(0.1875f*uiButtonWidth), (int)(0.375f*uiButtonHeight));
-		srcRectSoundOff = new Rect(0, (int)(0.375f*uiButtonHeight), (int)(0.1875f*uiButtonWidth), (int)(0.5625f*uiButtonHeight));
+		srcRectSoundOn = new Rect((int)(0.2344f*uiButtonWidth), 0, (int)(0.459f*uiButtonWidth), (int)(0.2226f*uiButtonHeight));
+		srcRectSoundOff = new Rect((int)(0.459f*uiButtonWidth), 0, (int)(0.6895f*uiButtonWidth), (int)(0.2226f*uiButtonHeight));
 		desRectSound = new Rect(soundRectLeft, soundRectTop, soundRectRight, soundRectBottom);
 		
-		srcRectHelp = new Rect((int)(0.1875f*uiButtonWidth), (int)(0.375f*uiButtonHeight), (int)(0.375f*uiButtonWidth), (int)(0.5625f*uiButtonHeight));
-		srcRectHelpSelected = new Rect((int)(0.375f*uiButtonWidth), (int)(0.375f*uiButtonHeight), (int)(0.5625f*uiButtonWidth), (int)(0.5625f*uiButtonHeight));
+		srcRectHelp = new Rect((int)(0.5566f*uiButtonWidth), (int)(0.2226f*uiButtonHeight), (int)(0.7715f*uiButtonWidth), (int)(0.4395f*uiButtonHeight));
+		srcRectHelpSelected = new Rect((int)(0.5566f*uiButtonWidth), (int)(0.4395f*uiButtonHeight), (int)(0.7715f*uiButtonWidth), (int)(0.65f*uiButtonHeight));
 		desRectHelp = new Rect(helpRectLeft, helpRectTop, helpRectRight, helpRectBottom);
 		
-		srcRectHighScore = new Rect((int)(0.1875f*uiButtonWidth), (int)(0.1875f*uiButtonHeight), (int)(0.375f*uiButtonWidth), (int)(0.375f*uiButtonHeight));
-		srcRectHighScoreSelected = new Rect((int)(0.375f*uiButtonWidth), (int)(0.1875f*uiButtonHeight), (int)(0.5625f*uiButtonWidth), (int)(0.375f*uiButtonHeight));
+		srcRectHighScore = new Rect(0, (int)(0.2226f*uiButtonHeight), (int)(0.2168f*uiButtonWidth), (int)(0.4395f*uiButtonHeight));
+		srcRectHighScoreSelected = new Rect(0, (int)(0.4395f*uiButtonHeight), (int)(0.2168f*uiButtonWidth), (int)(0.65f*uiButtonHeight));
 		desRectHighScore = new Rect(highScoreRectLeft, highScoreRectTop, highScoreRectRight, highScoreRectBottom);
 		
-		srcRectAbout = new Rect((int)(0.5625f*uiButtonWidth), 0, (int)(0.75f*uiButtonWidth), (int)(0.1875f*uiButtonHeight));
-		srcRectAboutSelected = new Rect((int)(0.5625f*uiButtonWidth), 0, (int)(0.75f*uiButtonWidth), (int)(0.1875f*uiButtonHeight));
+		srcRectAbout = new Rect( 0, 0, (int)(0.15625f*uiButtonWidth), (int)(0.17578f*uiButtonHeight));
+		srcRectAboutSelected = new Rect( 0, 0, (int)(0.15625f*uiButtonWidth), (int)(0.17578f*uiButtonHeight));
 		desRectAbout = new Rect(aboutRectLeft, aboutRectTop, aboutRectRight, aboutRectBottom);
 		
-		srcRectSetting = new Rect((int)(0.1875f*uiButtonWidth), 0, (int)(0.375f*uiButtonWidth), (int)(0.1875f*uiButtonHeight));
-		srcRectSettingSelected = new Rect((int)(0.375f*uiButtonWidth), 0, (int)(0.5625f*uiButtonWidth), (int)(0.1875f*uiButtonHeight));
+		srcRectSetting = new Rect((int)(0.2168f*uiButtonWidth), (int)(0.2226f*uiButtonHeight), (int)(0.5566f*uiButtonWidth), (int)(0.4395f*uiButtonHeight));
+		srcRectSettingSelected = new Rect((int)(0.2168f*uiButtonWidth), (int)(0.4395f*uiButtonHeight), (int)(0.5566f*uiButtonWidth), (int)(0.65f*uiButtonHeight));
 		desRectSetting = new Rect(settingRectLeft, settingRectTop, settingRectRight, settingRectBottom);
 
 		intentPlayScreen= new Intent(this, PlayScreen.class);
@@ -255,7 +252,7 @@ public class MainMenuScreen extends Activity implements SurfaceHolder.Callback {
 		        	drawPlayButton(canvas);
 		        	
 		        	// TODO Draw version of game		        	
-		        	drawVersion(canvas);
+		        	//drawVersion(canvas);
 		        	
 		        	if (btnPlaySelect)
 		        	{
@@ -346,9 +343,9 @@ public class MainMenuScreen extends Activity implements SurfaceHolder.Callback {
 		// TODO Draw sound on/off button
 		canvas.save();
 		if (!btnPlaySelect)
-			canvas.drawBitmap(playGameBMP, srcRectPlay, desRectPlay, null);
+			canvas.drawBitmap(uiButtonBMP, srcRectPlay, desRectPlay, null);
 		else
-			canvas.drawBitmap(playGameSelectedBMP, srcRectPlay, desRectPlay, null);
+			canvas.drawBitmap(uiButtonBMP, srcRectPlaySelected, desRectPlay, null);
 		canvas.restore();
 	}
 			
@@ -379,8 +376,6 @@ public class MainMenuScreen extends Activity implements SurfaceHolder.Callback {
 	public void clearBitmap()
 	{
 		mainMenuBackground.recycle();
-		playGameBMP.recycle();
-		playGameSelectedBMP.recycle();
 		uiButtonBMP.recycle();
 		System.gc();
 	}

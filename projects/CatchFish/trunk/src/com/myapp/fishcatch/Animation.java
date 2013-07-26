@@ -108,7 +108,8 @@ public class Animation {
 //        // Set way to go
 //        Forward = true;
 //    }
-    
+
+    // TODO Update for fish
     public void Update(boolean shark)
     {
         // Do not update the game if we are not active
@@ -152,9 +153,38 @@ public class Animation {
         	//destinationRect = new Rect((int)Position.X, (int)Position.Y,(int)Position.X + (int)(FrameWidth * scale), (int)Position.Y + (int)(FrameHeight * scale));
         
     }
-    
-    public void Update(Position Pos)
+    // TODO Update for cannon, coin
+    public void Update(Position Pos, boolean active)
     {
+    	if (active)
+    	{
+    		// Update the elapsed time
+            if (oldTime == 0)
+            	oldTime = System.currentTimeMillis();
+
+            elapsedTime = (int)(System.currentTimeMillis()-oldTime);
+
+            // If the elapsed time is larger than the frame time
+            // We need to switch frames
+            if (elapsedTime > frameTime)
+            {
+                // Move to the next frame
+                currentFrame++;
+
+                // If currentFrame is equal to frameCount reset currentFrame to zero
+                if (currentFrame == frameCount)
+                {
+                    currentFrame = startFrame;
+                    // If we are not looping deactivate the animation
+                    if (Looping == false)
+                        Active = false;
+                }
+
+                // Reset the elapsed time to zero
+                elapsedTime = 0;
+                oldTime = System.currentTimeMillis();
+            }
+    	}
     	// Grap the correct frame in the image strip y multiflying the currentFrame index by the frame width
         sourceRect = new Rect(0, currentFrame * FrameHeight, FrameWidth, (currentFrame * FrameHeight)+ FrameHeight);
         // Grap the correct frame in the image strip by multiflyig the current Frame index by te frame width

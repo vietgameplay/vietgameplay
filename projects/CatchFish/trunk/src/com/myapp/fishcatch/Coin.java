@@ -68,7 +68,7 @@ public class Coin {
     public void Update()
     {
     	this.animation.Position = Position;
-    	this.animation.Update(false);
+    	this.animation.Update(Position,true);
     	this.positionCT = new Position(this.animation.destinationRect.right,this.animation.destinationRect.top);
     }
     

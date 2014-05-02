@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<AnimationProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ProjectDir>C:\Users\banhtieu\Desktop\cocos2dx\samples\Cpp\Game\mater_data\Cocostudio\animation\Character\HeroAnimation</ProjectDir>
+  <Version>1.3.0.1</Version>
+  <Resources>C:\Users\banhtieu\Desktop\cocos2dx\samples\Cpp\Game\mater_data\Cocostudio\animation\Character\HeroAnimation\Resources</Resources>
+  <Name>Character</Name>
+  <JsonFileName>Character.json</JsonFileName>
+  <JsonFolder>C:\Users\banhtieu\Desktop\cocos2dx\samples\Cpp\Game\mater_data\Cocostudio\animation\Character\HeroAnimation\Json</JsonFolder>
+  <JsonList />
+  <CanvasSize>
+    <Width>0</Width>
+    <Height>0</Height>
+  </CanvasSize>
+  <filePath>C:\Users\banhtieu\Desktop\cocos2dx\samples\Cpp\Game\mater_data\Cocostudio\animation\Character\HeroAnimation\Character.animation</filePath>
+  <ProjectType>AnimationProject</ProjectType>
+  <ResRelativePath />
+  <ResourceFileList>
+    <string>blood.plist</string>
+    <string>effect.plist</string>
+    <string>Character0.plist</string>
+  </ResourceFileList>
+  <bBatchImage>true</bBatchImage>
+</AnimationProject>

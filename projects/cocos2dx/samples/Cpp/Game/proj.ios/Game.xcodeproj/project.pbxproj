@@ -233,7 +233,6 @@
 		1AFAF8B716D35DE700DB1158 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AFAF8B316D35DE700DB1158 /* AppDelegate.cpp */; };
 		1AFAF8BC16D35E4900DB1158 /* CloseNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AFAF8B916D35E4900DB1158 /* CloseNormal.png */; };
 		1AFAF8BD16D35E4900DB1158 /* CloseSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AFAF8BA16D35E4900DB1158 /* CloseSelected.png */; };
-		1AFAF8BE16D35E4900DB1158 /* HelloWorld.png in Resources */ = {isa = PBXBuildFile; fileRef = 1AFAF8BB16D35E4900DB1158 /* HelloWorld.png */; };
 		1AFCDA8216D4A25900906EA6 /* RootViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1AFCDA8116D4A25900906EA6 /* RootViewController.mm */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
@@ -242,8 +241,6 @@
 		362BBC0419120E7F00054DB5 /* libcocos2dx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 362BBC011912010D00054DB5 /* libcocos2dx.a */; };
 		3631BBD9191237F90069629F /* backtotopnormal.png in Resources */ = {isa = PBXBuildFile; fileRef = 3631BBD0191237F90069629F /* backtotopnormal.png */; };
 		3631BBDA191237F90069629F /* backtotoppressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 3631BBD1191237F90069629F /* backtotoppressed.png */; };
-		3631BBDB191237F90069629F /* CocoStudio_UIEditor.png in Resources */ = {isa = PBXBuildFile; fileRef = 3631BBD2191237F90069629F /* CocoStudio_UIEditor.png */; };
-		3631BBDC191237F90069629F /* SampleUIAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 3631BBD3191237F90069629F /* SampleUIAnimation.json */; };
 		36A6877D190E88CD0058CA43 /* EndGameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36A68775190E88CD0058CA43 /* EndGameScene.cpp */; };
 		36A6877E190E88CD0058CA43 /* InGameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36A68777190E88CD0058CA43 /* InGameScene.cpp */; };
 		36A6877F190E88CD0058CA43 /* LogoScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36A68779190E88CD0058CA43 /* LogoScene.cpp */; };
@@ -257,9 +254,16 @@
 		36A687A1190F436B0058CA43 /* Character.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36A68799190F436B0058CA43 /* Character.cpp */; };
 		36A687A2190F436B0058CA43 /* CommonObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36A6879B190F436B0058CA43 /* CommonObject.cpp */; };
 		36A687A8190F4B9A0058CA43 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36A687A7190F4B9A0058CA43 /* Game.cpp */; };
-		36A687AE190F5F1E0058CA43 /* tauren.ExportJson in Resources */ = {isa = PBXBuildFile; fileRef = 36A687AB190F5F1D0058CA43 /* tauren.ExportJson */; };
-		36A687AF190F5F1E0058CA43 /* tauren0.plist in Resources */ = {isa = PBXBuildFile; fileRef = 36A687AC190F5F1E0058CA43 /* tauren0.plist */; };
-		36A687B0190F5F1E0058CA43 /* tauren0.png in Resources */ = {isa = PBXBuildFile; fileRef = 36A687AD190F5F1E0058CA43 /* tauren0.png */; };
+		36AEAA3B19148377004799DF /* Enemy.ExportJson in Resources */ = {isa = PBXBuildFile; fileRef = 36AEAA3819148377004799DF /* Enemy.ExportJson */; };
+		36AEAA3C19148377004799DF /* Enemy0.plist in Resources */ = {isa = PBXBuildFile; fileRef = 36AEAA3919148377004799DF /* Enemy0.plist */; };
+		36AEAA3D19148377004799DF /* Enemy0.png in Resources */ = {isa = PBXBuildFile; fileRef = 36AEAA3A19148377004799DF /* Enemy0.png */; };
+		36AEAA4119148383004799DF /* Character.ExportJson in Resources */ = {isa = PBXBuildFile; fileRef = 36AEAA3E19148383004799DF /* Character.ExportJson */; };
+		36AEAA4219148383004799DF /* Character0.plist in Resources */ = {isa = PBXBuildFile; fileRef = 36AEAA3F19148383004799DF /* Character0.plist */; };
+		36AEAA4319148383004799DF /* Character0.png in Resources */ = {isa = PBXBuildFile; fileRef = 36AEAA4019148383004799DF /* Character0.png */; };
+		36AEAA47191483BF004799DF /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 36AEAA45191483BF004799DF /* background.jpg */; };
+		36AEAA48191483BF004799DF /* MainMenu.json in Resources */ = {isa = PBXBuildFile; fileRef = 36AEAA46191483BF004799DF /* MainMenu.json */; };
+		36AEAA4B191483E3004799DF /* blood.plist in Resources */ = {isa = PBXBuildFile; fileRef = 36AEAA49191483E3004799DF /* blood.plist */; };
+		36AEAA4C191483E3004799DF /* effect.plist in Resources */ = {isa = PBXBuildFile; fileRef = 36AEAA4A191483E3004799DF /* effect.plist */; };
 		7855E0E1153FEF240059DD9A /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 7855E0DF153FEF240059DD9A /* Default.png */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712461292920000B8313A /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB212928DE900B8313A /* libxml2.dylib */; };
@@ -275,9 +279,6 @@
 		D4EF949E15BD2D9600D803EB /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = D4EF949D15BD2D9600D803EB /* Icon-72.png */; };
 		D4EF94A015BD2D9800D803EB /* Icon-144.png in Resources */ = {isa = PBXBuildFile; fileRef = D4EF949F15BD2D9800D803EB /* Icon-144.png */; };
 		F860A61117C712FE005BF4C9 /* libcurl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F860A61017C712FE005BF4C9 /* libcurl.a */; };
-		F8DFE3FB17CEE1CB00E6EF1D /* 10.ExportJson in Resources */ = {isa = PBXBuildFile; fileRef = F8DFE3F817CEE1CB00E6EF1D /* 10.ExportJson */; };
-		F8DFE3FC17CEE1CB00E6EF1D /* 100.plist in Resources */ = {isa = PBXBuildFile; fileRef = F8DFE3F917CEE1CB00E6EF1D /* 100.plist */; };
-		F8DFE3FD17CEE1CB00E6EF1D /* 100.png in Resources */ = {isa = PBXBuildFile; fileRef = F8DFE3FA17CEE1CB00E6EF1D /* 100.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -767,7 +768,6 @@
 		1AFAF8B416D35DE700DB1158 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../Classes/AppDelegate.h; sourceTree = "<group>"; };
 		1AFAF8B916D35E4900DB1158 /* CloseNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CloseNormal.png; sourceTree = "<group>"; };
 		1AFAF8BA16D35E4900DB1158 /* CloseSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CloseSelected.png; sourceTree = "<group>"; };
-		1AFAF8BB16D35E4900DB1158 /* HelloWorld.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelloWorld.png; sourceTree = "<group>"; };
 		1AFCDA8016D4A25900906EA6 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = SOURCE_ROOT; };
 		1AFCDA8116D4A25900906EA6 /* RootViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RootViewController.mm; sourceTree = SOURCE_ROOT; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -779,8 +779,6 @@
 		362BBBFC1912010D00054DB5 /* cocos2dx.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2dx.xcodeproj; path = ../../../../cocos2dx/proj.ios/cocos2dx.xcodeproj; sourceTree = "<group>"; };
 		3631BBD0191237F90069629F /* backtotopnormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backtotopnormal.png; sourceTree = "<group>"; };
 		3631BBD1191237F90069629F /* backtotoppressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backtotoppressed.png; sourceTree = "<group>"; };
-		3631BBD2191237F90069629F /* CocoStudio_UIEditor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CocoStudio_UIEditor.png; sourceTree = "<group>"; };
-		3631BBD3191237F90069629F /* SampleUIAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SampleUIAnimation.json; sourceTree = "<group>"; };
 		36A68775190E88CD0058CA43 /* EndGameScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EndGameScene.cpp; path = ../Classes/EndGameScene.cpp; sourceTree = "<group>"; };
 		36A68776190E88CD0058CA43 /* EndGameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EndGameScene.h; path = ../Classes/EndGameScene.h; sourceTree = "<group>"; };
 		36A68777190E88CD0058CA43 /* InGameScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = InGameScene.cpp; path = ../Classes/InGameScene.cpp; sourceTree = "<group>"; };
@@ -807,9 +805,16 @@
 		36A687A6190F4B830058CA43 /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Game.h; path = ../Classes/Game.h; sourceTree = "<group>"; };
 		36A687A7190F4B9A0058CA43 /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Game.cpp; path = ../Classes/Game.cpp; sourceTree = "<group>"; };
 		36A687A9190F4D6E0058CA43 /* GameDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameDefine.h; path = ../Classes/GameDefine.h; sourceTree = "<group>"; };
-		36A687AB190F5F1D0058CA43 /* tauren.ExportJson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tauren.ExportJson; sourceTree = "<group>"; };
-		36A687AC190F5F1E0058CA43 /* tauren0.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = tauren0.plist; sourceTree = "<group>"; };
-		36A687AD190F5F1E0058CA43 /* tauren0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tauren0.png; sourceTree = "<group>"; };
+		36AEAA3819148377004799DF /* Enemy.ExportJson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Enemy.ExportJson; sourceTree = "<group>"; };
+		36AEAA3919148377004799DF /* Enemy0.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Enemy0.plist; sourceTree = "<group>"; };
+		36AEAA3A19148377004799DF /* Enemy0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Enemy0.png; sourceTree = "<group>"; };
+		36AEAA3E19148383004799DF /* Character.ExportJson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Character.ExportJson; sourceTree = "<group>"; };
+		36AEAA3F19148383004799DF /* Character0.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Character0.plist; sourceTree = "<group>"; };
+		36AEAA4019148383004799DF /* Character0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Character0.png; sourceTree = "<group>"; };
+		36AEAA45191483BF004799DF /* background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background.jpg; sourceTree = "<group>"; };
+		36AEAA46191483BF004799DF /* MainMenu.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MainMenu.json; sourceTree = "<group>"; };
+		36AEAA49191483E3004799DF /* blood.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = blood.plist; sourceTree = "<group>"; };
+		36AEAA4A191483E3004799DF /* effect.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = effect.plist; sourceTree = "<group>"; };
 		7855E0DF153FEF240059DD9A /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = SOURCE_ROOT; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB212928DE900B8313A /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
@@ -826,9 +831,6 @@
 		D4EF949F15BD2D9800D803EB /* Icon-144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-144.png"; path = "../proj.ios/Icon-144.png"; sourceTree = "<group>"; };
 		D4F9F37B12E54555005CA6D2 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = SOURCE_ROOT; };
 		F860A61017C712FE005BF4C9 /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = "../../cocos2d-x/cocos2dx/platform/third_party/ios/libraries/libcurl.a"; sourceTree = "<group>"; };
-		F8DFE3F817CEE1CB00E6EF1D /* 10.ExportJson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 10.ExportJson; sourceTree = "<group>"; };
-		F8DFE3F917CEE1CB00E6EF1D /* 100.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = 100.plist; sourceTree = "<group>"; };
-		F8DFE3FA17CEE1CB00E6EF1D /* 100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 100.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1977,9 +1979,11 @@
 		36A6878A190E99CD0058CA43 /* Character */ = {
 			isa = PBXGroup;
 			children = (
-				F8DFE3F817CEE1CB00E6EF1D /* 10.ExportJson */,
-				F8DFE3F917CEE1CB00E6EF1D /* 100.plist */,
-				F8DFE3FA17CEE1CB00E6EF1D /* 100.png */,
+				36AEAA49191483E3004799DF /* blood.plist */,
+				36AEAA4A191483E3004799DF /* effect.plist */,
+				36AEAA3E19148383004799DF /* Character.ExportJson */,
+				36AEAA3F19148383004799DF /* Character0.plist */,
+				36AEAA4019148383004799DF /* Character0.png */,
 			);
 			name = Character;
 			sourceTree = "<group>";
@@ -1987,20 +1991,28 @@
 		36A687AA190F5F040058CA43 /* Enemy */ = {
 			isa = PBXGroup;
 			children = (
-				36A687AB190F5F1D0058CA43 /* tauren.ExportJson */,
-				36A687AC190F5F1E0058CA43 /* tauren0.plist */,
-				36A687AD190F5F1E0058CA43 /* tauren0.png */,
+				36AEAA3819148377004799DF /* Enemy.ExportJson */,
+				36AEAA3919148377004799DF /* Enemy0.plist */,
+				36AEAA3A19148377004799DF /* Enemy0.png */,
 			);
 			name = Enemy;
+			sourceTree = "<group>";
+		};
+		36AEAA441914838F004799DF /* UIMainMenu */ = {
+			isa = PBXGroup;
+			children = (
+				3631BBD0191237F90069629F /* backtotopnormal.png */,
+				3631BBD1191237F90069629F /* backtotoppressed.png */,
+				36AEAA45191483BF004799DF /* background.jpg */,
+				36AEAA46191483BF004799DF /* MainMenu.json */,
+			);
+			name = UIMainMenu;
 			sourceTree = "<group>";
 		};
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				3631BBD0191237F90069629F /* backtotopnormal.png */,
-				3631BBD1191237F90069629F /* backtotoppressed.png */,
-				3631BBD2191237F90069629F /* CocoStudio_UIEditor.png */,
-				3631BBD3191237F90069629F /* SampleUIAnimation.json */,
+				36AEAA441914838F004799DF /* UIMainMenu */,
 				36A687AA190F5F040058CA43 /* Enemy */,
 				36A6878B190E9CF70058CA43 /* Icon.png */,
 				36A6878C190E9CF70058CA43 /* Icon-76.png */,
@@ -2011,7 +2023,6 @@
 				36A68788190E956E0058CA43 /* VietGamePlay.png */,
 				1AFAF8B916D35E4900DB1158 /* CloseNormal.png */,
 				1AFAF8BA16D35E4900DB1158 /* CloseSelected.png */,
-				1AFAF8BB16D35E4900DB1158 /* HelloWorld.png */,
 				D41A0AD0160F154A004552AE /* Default-568h@2x.png */,
 				7855E0DF153FEF240059DD9A /* Default.png */,
 				D446FD6D16102124000ADA7B /* Default@2x.png */,
@@ -2098,32 +2109,33 @@
 			buildActionMask = 2147483647;
 			files = (
 				7855E0E1153FEF240059DD9A /* Default.png in Resources */,
-				36A687AE190F5F1E0058CA43 /* tauren.ExportJson in Resources */,
 				D4EF949A15BD2D8B00D803EB /* Icon-57.png in Resources */,
 				D4EF949C15BD2D8E00D803EB /* Icon-114.png in Resources */,
 				D4EF949E15BD2D9600D803EB /* Icon-72.png in Resources */,
 				36A68790190E9CF70058CA43 /* Icon.png in Resources */,
+				36AEAA4119148383004799DF /* Character.ExportJson in Resources */,
+				36AEAA47191483BF004799DF /* background.jpg in Resources */,
 				3631BBDA191237F90069629F /* backtotoppressed.png in Resources */,
+				36AEAA4B191483E3004799DF /* blood.plist in Resources */,
 				3631BBD9191237F90069629F /* backtotopnormal.png in Resources */,
 				D4EF94A015BD2D9800D803EB /* Icon-144.png in Resources */,
+				36AEAA3C19148377004799DF /* Enemy0.plist in Resources */,
 				D41A0AD1160F154A004552AE /* Default-568h@2x.png in Resources */,
-				36A687AF190F5F1E0058CA43 /* tauren0.plist in Resources */,
 				D446FD6E16102124000ADA7B /* Default@2x.png in Resources */,
+				36AEAA48191483BF004799DF /* MainMenu.json in Resources */,
 				36A68789190E956E0058CA43 /* VietGamePlay.png in Resources */,
+				36AEAA4219148383004799DF /* Character0.plist in Resources */,
 				36A68794190E9CF70058CA43 /* Icon@2x.png in Resources */,
 				15A3D9961682F7F9002FB0C5 /* CMakeLists.txt in Resources */,
+				36AEAA4C191483E3004799DF /* effect.plist in Resources */,
+				36AEAA3D19148377004799DF /* Enemy0.png in Resources */,
 				1AFAF8BC16D35E4900DB1158 /* CloseNormal.png in Resources */,
 				36A68793190E9CF70058CA43 /* Icon-152.png in Resources */,
-				36A687B0190F5F1E0058CA43 /* tauren0.png in Resources */,
-				3631BBDB191237F90069629F /* CocoStudio_UIEditor.png in Resources */,
 				1AFAF8BD16D35E4900DB1158 /* CloseSelected.png in Resources */,
+				36AEAA3B19148377004799DF /* Enemy.ExportJson in Resources */,
 				36A68791190E9CF70058CA43 /* Icon-76.png in Resources */,
-				3631BBDC191237F90069629F /* SampleUIAnimation.json in Resources */,
-				1AFAF8BE16D35E4900DB1158 /* HelloWorld.png in Resources */,
-				F8DFE3FB17CEE1CB00E6EF1D /* 10.ExportJson in Resources */,
-				F8DFE3FC17CEE1CB00E6EF1D /* 100.plist in Resources */,
+				36AEAA4319148383004799DF /* Character0.png in Resources */,
 				36A68792190E9CF70058CA43 /* Icon-120.png in Resources */,
-				F8DFE3FD17CEE1CB00E6EF1D /* 100.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

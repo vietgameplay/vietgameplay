@@ -2178,7 +2178,7 @@
         },
         {
           "name": "attack",
-          "dr": 19,
+          "dr": 20,
           "lp": true,
           "to": 0,
           "drTW": 0,

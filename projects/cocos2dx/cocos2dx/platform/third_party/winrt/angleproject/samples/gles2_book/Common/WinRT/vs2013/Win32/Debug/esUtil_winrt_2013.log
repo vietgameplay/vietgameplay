@@ -1,0 +1,25 @@
+﻿Build started 5/9/2014 1:09:38 PM.
+Project "C:\Users\banhtieu\Desktop\trunk\cocos2dx\platform\third_party\winrt\angleproject\samples\gles2_book\Common\esUtil_winrt_2013.vcxproj" on node 2 (Build target(s)).
+ClCompile:
+  C:\Program Files\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I../../../include /IC:\Users\banhtieu\Desktop\trunk\cocos2dx\platform\third_party\winrt\angleproject\samples\gles2_book\Common\ /I"Generated Files\\" /IWinRT\vs2013\Win32\Debug\ /IC:\Users\banhtieu\Desktop\trunk\cocos2dx\platform\third_party\winrt\angleproject\samples\gles2_book\Common\ /I"Generated Files\\" /IWinRT\vs2013\Win32\Debug\ /ZI /ZW /ZW:nostdlib /nologo /W4 /WX- /sdl /MP /Od /Oy- /D _UNICODE /D UNICODE /D _DEBUG /D WINAPI_FAMILY=WINAPI_FAMILY_APP /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"WinRT\vs2013\Win32\Debug\\" /Fd"WinRT\vs2013\Win32\Debug\vc120.pdb" /Gd /TP /wd4451 /FU"C:\Program Files\Microsoft SDKs\Windows\v8.1\ExtensionSDKs\Microsoft.VCLibs\12.0\References\CommonConfiguration\neutral\platform.winmd" /FU"C:\Program Files\Windows Kits\8.1\References\CommonConfiguration\Neutral\Windows.winmd" /FU"C:\Program Files\Windows Kits\8.1\References\CommonConfiguration\Neutral\Windows.winmd" /analyze- /errorReport:prompt esShader_winrt.cpp esShapes_winrt.cpp esTransform_winrt.cpp esUtil_winrt.cpp Win32\esUtil_win32_winrt.cpp
+  esShader_winrt.cpp
+  esShapes_winrt.cpp
+  esTransform_winrt.cpp
+  esUtil_winrt.cpp
+  esLoadTGA not implmented on WinRT
+  esUtil_win32_winrt.cpp
+  Generating Code...
+Lib:
+  C:\Program Files\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"C:\Users\banhtieu\Desktop\trunk\WinRT\redist\vs2013\Win32\Debug\esUtil_winrt_2013\esUtil.lib" /NOLOGO /IGNORE:4264 WinRT\vs2013\Win32\Debug\esShader_winrt.obj
+  WinRT\vs2013\Win32\Debug\esShapes_winrt.obj
+  WinRT\vs2013\Win32\Debug\esTransform_winrt.obj
+  WinRT\vs2013\Win32\Debug\esUtil_winrt.obj
+  WinRT\vs2013\Win32\Debug\esUtil_win32_winrt.obj
+  esUtil_winrt_2013.vcxproj -> C:\Users\banhtieu\Desktop\trunk\WinRT\redist\vs2013\Win32\Debug\esUtil_winrt_2013\esUtil.lib
+_GenerateProjectPriFileCore:
+  C:\Program Files\Windows Kits\8.1\bin\x86\MakePri.exe New -ProjectRoot C:\Users\banhtieu\Desktop\trunk\cocos2dx\platform\third_party\winrt\angleproject\samples\gles2_book\Common\ -ConfigXml WinRT\vs2013\Win32\Debug\priconfig.xml -OutputFile C:\Users\banhtieu\Desktop\trunk\WinRT\redist\vs2013\Win32\Debug\esUtil_winrt_2013\esUtil_winrt.pri -IndexName esUtil_winrt -Verbose -Overwrite  
+Done Building Project "C:\Users\banhtieu\Desktop\trunk\cocos2dx\platform\third_party\winrt\angleproject\samples\gles2_book\Common\esUtil_winrt_2013.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:04.25

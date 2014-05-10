@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<UIProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ProjectDir>C:\Users\banhtieu\Desktop\trunk\samples\Cpp\WordRush\mater_data\Cocostudio\ui\EndGame</ProjectDir>
+  <Version>1.3.0.1</Version>
+  <Resources>C:\Users\banhtieu\Desktop\trunk\samples\Cpp\WordRush\mater_data\Cocostudio\ui\EndGame\Resources</Resources>
+  <Name>EndGame</Name>
+  <JsonFileName>EndGame.json</JsonFileName>
+  <JsonFolder>C:\Users\banhtieu\Desktop\trunk\samples\Cpp\WordRush\mater_data\Cocostudio\ui\EndGame\Json</JsonFolder>
+  <JsonList>
+    <string>EndGame_1.json</string>
+  </JsonList>
+  <CanvasSize>
+    <Width>640</Width>
+    <Height>1136</Height>
+  </CanvasSize>
+  <filePath>C:\Users\banhtieu\Desktop\trunk\samples\Cpp\WordRush\mater_data\Cocostudio\ui\EndGame\EndGame.xml.ui</filePath>
+  <ProjectType>UIProject</ProjectType>
+  <ResRelativePath />
+  <imageFileList />
+  <JsonSuffix>.json</JsonSuffix>
+  <CurrentUIJson>EndGame_1.json</CurrentUIJson>
+</UIProject>

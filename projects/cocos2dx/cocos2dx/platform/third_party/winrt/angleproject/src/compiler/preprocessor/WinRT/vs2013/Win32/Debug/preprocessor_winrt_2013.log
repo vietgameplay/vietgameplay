@@ -1,0 +1,36 @@
+﻿Build started 5/9/2014 1:09:03 PM.
+Project "C:\Users\banhtieu\Desktop\trunk\cocos2dx\platform\third_party\winrt\angleproject\src\compiler\preprocessor\preprocessor_winrt_2013.vcxproj" on node 2 (Build target(s)).
+ClCompile:
+  C:\Program Files\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IC:\Users\banhtieu\Desktop\trunk\cocos2dx\platform\third_party\winrt\angleproject\src\compiler\preprocessor\ /I"Generated Files\\" /IWinRT\vs2013\Win32\Debug\ /ZI /nologo /W4 /WX- /sdl /MP /Od /Oy- /D _UNICODE /D UNICODE /D _WINDOWS /D _USRDLL /D _CRT_SECURE_NO_DEPRECATE /D NOMINMAX /D _UNICODE /D UNICODE /D _DEBUG /D WINAPI_FAMILY=WINAPI_FAMILY_APP /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"WinRT\vs2013\Win32\Debug\\" /Fd"WinRT\vs2013\Win32\Debug\vc120.pdb" /Gd /TP /wd4100 /wd4127 /wd4189 /wd4239 /wd4244 /wd4245 /wd4512 /wd4702 /wd4718 /wd4267 /analyze- /errorReport:prompt DiagnosticsBase.cpp DirectiveHandlerBase.cpp DirectiveParser.cpp ExpressionParser.cpp Input.cpp Lexer.cpp Macro.cpp MacroExpander.cpp Preprocessor.cpp Token.cpp Tokenizer.cpp
+  DiagnosticsBase.cpp
+  DirectiveHandlerBase.cpp
+  DirectiveParser.cpp
+  ExpressionParser.cpp
+  Input.cpp
+  Lexer.cpp
+  Macro.cpp
+  MacroExpander.cpp
+  Preprocessor.cpp
+  Token.cpp
+  Tokenizer.cpp
+  Generating Code...
+Lib:
+  C:\Program Files\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"C:\Users\banhtieu\Desktop\trunk\WinRT\redist\vs2013\Win32\Debug\preprocessor_winrt_2013\preprocessor.lib" /NOLOGO WinRT\vs2013\Win32\Debug\DiagnosticsBase.obj
+  WinRT\vs2013\Win32\Debug\DirectiveHandlerBase.obj
+  WinRT\vs2013\Win32\Debug\DirectiveParser.obj
+  WinRT\vs2013\Win32\Debug\ExpressionParser.obj
+  WinRT\vs2013\Win32\Debug\Input.obj
+  WinRT\vs2013\Win32\Debug\Lexer.obj
+  WinRT\vs2013\Win32\Debug\Macro.obj
+  WinRT\vs2013\Win32\Debug\MacroExpander.obj
+  WinRT\vs2013\Win32\Debug\Preprocessor.obj
+  WinRT\vs2013\Win32\Debug\Token.obj
+  WinRT\vs2013\Win32\Debug\Tokenizer.obj
+  preprocessor_winrt_2013.vcxproj -> C:\Users\banhtieu\Desktop\trunk\WinRT\redist\vs2013\Win32\Debug\preprocessor_winrt_2013\preprocessor.lib
+_GenerateProjectPriFileCore:
+  C:\Program Files\Windows Kits\8.1\bin\x86\MakePri.exe New -ProjectRoot C:\Users\banhtieu\Desktop\trunk\cocos2dx\platform\third_party\winrt\angleproject\src\compiler\preprocessor\ -ConfigXml WinRT\vs2013\Win32\Debug\priconfig.xml -OutputFile C:\Users\banhtieu\Desktop\trunk\WinRT\redist\vs2013\Win32\Debug\preprocessor_winrt_2013\preprocessor_winrt.pri -IndexName preprocessor_winrt -Verbose -Overwrite  
+Done Building Project "C:\Users\banhtieu\Desktop\trunk\cocos2dx\platform\third_party\winrt\angleproject\src\compiler\preprocessor\preprocessor_winrt_2013.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:06.34

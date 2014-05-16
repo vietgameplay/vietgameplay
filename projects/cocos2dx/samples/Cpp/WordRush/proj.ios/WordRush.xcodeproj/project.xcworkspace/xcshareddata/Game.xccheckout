@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>FAFB14AD-5893-47F1-99BA-869409B7C843</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Game</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>463F1DCC-6228-4BB9-94DF-5D9EC7ECD72B</key>
+		<string>https://vietgameplay.googlecode.com/svn/projects/cocos2dx</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>samples/Cpp/Game/proj.ios/Game.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>463F1DCC-6228-4BB9-94DF-5D9EC7ECD72B</key>
+		<string>../../../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectRepositoryRootDictionary</key>
+	<dict>
+		<key>463F1DCC-6228-4BB9-94DF-5D9EC7ECD72B</key>
+		<string>https://vietgameplay.googlecode.com/svn</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://vietgameplay.googlecode.com/svn/projects/cocos2dx/samples/Cpp/Game/proj.ios/Game.xcodeproj</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>463F1DCC-6228-4BB9-94DF-5D9EC7ECD72B</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.subversion</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>463F1DCC-6228-4BB9-94DF-5D9EC7ECD72B</string>
+			<key>IDESourceControlWCCName</key>
+			<string>cocos2dx</string>
+		</dict>
+	</array>
+</dict>
+</plist>

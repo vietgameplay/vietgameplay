@@ -1,0 +1,25 @@
+﻿Build started 5/16/2014 6:12:57 PM.
+Project "C:\Users\banhtieu\Desktop\trunk\samples\Cpp\WordRush\proj.win32\WordRush.vcxproj" on node 2 (Build target(s)).
+C:\Program Files\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(381,5): warning MSB8028: The intermediate directory (Debug.win32\) contains files shared from another project (Game.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+ClCompile:
+  C:\Program Files\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IC:\Users\banhtieu\Desktop\trunk\samples\Cpp\WordRush\proj.win32\..\..\..\..\cocos2dx /IC:\Users\banhtieu\Desktop\trunk\samples\Cpp\WordRush\proj.win32\..\..\..\..\cocos2dx\include /IC:\Users\banhtieu\Desktop\trunk\samples\Cpp\WordRush\proj.win32\..\..\..\..\cocos2dx\kazmath\include /IC:\Users\banhtieu\Desktop\trunk\samples\Cpp\WordRush\proj.win32\..\..\..\..\cocos2dx\platform\win32 /IC:\Users\banhtieu\Desktop\trunk\samples\Cpp\WordRush\proj.win32\..\..\..\..\cocos2dx\platform\third_party\win32 /IC:\Users\banhtieu\Desktop\trunk\samples\Cpp\WordRush\proj.win32\..\..\..\..\cocos2dx\platform\third_party\win32\OGLES /IC:\Users\banhtieu\Desktop\trunk\samples\Cpp\WordRush\proj.win32\..\..\..\..\external /IC:\Users\banhtieu\Desktop\trunk\samples\Cpp\WordRush\proj.win32\..\..\..\..\external\chipmunk\include\chipmunk /IC:\Users\banhtieu\Desktop\trunk\samples\Cpp\WordRush\proj.win32\..\..\..\..\CocosDenshion\include /IC:\Users\banhtieu\Desktop\trunk\samples\Cpp\WordRush\proj.win32\..\..\..\..\extensions /I..\Classes /I"C:\Users\banhtieu\Desktop\trunk\samples\Cpp\WordRush\proj.win32\..\..\..\..\plugin\App42_Cocos2DX_SDK-master\V_1.2.1\App42_Cocos2dX_2.2.2_SDK\cJSON" /I"C:\Users\banhtieu\Desktop\trunk\samples\Cpp\WordRush\proj.win32\..\..\..\..\plugin\App42_Cocos2DX_SDK-master\V_1.2.1\App42_Cocos2dX_2.2.2_SDK\Util" /I"C:\Users\banhtieu\Desktop\trunk\samples\Cpp\WordRush\proj.win32\..\..\..\..\plugin\App42_Cocos2DX_SDK-master\V_1.2.1\App42_Cocos2dX_2.2.2_SDK\StorageService" /I"C:\Users\banhtieu\Desktop\trunk\samples\Cpp\WordRush\proj.win32\..\..\..\..\plugin\App42_Cocos2DX_SDK-master\V_1.2.1\App42_Cocos2dX_2.2.2_SDK\UserService" /I"C:\Users\banhtieu\Desktop\trunk\samples\Cpp\WordRush\proj.win32\..\..\..\..\plugin\App42_Cocos2DX_SDK-master\V_1.2.1\App42_Cocos2dX_2.2.2_SDK\PushNotificationService" /I"C:\Users\banhtieu\Desktop\trunk\samples\Cpp\WordRush\proj.win32\..\..\..\..\plugin\App42_Cocos2DX_SDK-master\V_1.2.1\App42_Cocos2dX_2.2.2_SDK\GameService" /I"C:\Users\banhtieu\Desktop\trunk\samples\Cpp\WordRush\proj.win32\..\..\..\..\plugin\App42_Cocos2DX_SDK-master\V_1.2.1\App42_Cocos2dX_2.2.2_SDK\Crypto" /I"C:\Users\banhtieu\Desktop\trunk\samples\Cpp\WordRush\proj.win32\..\..\..\..\plugin\App42_Cocos2DX_SDK-master\V_1.2.1\App42_Cocos2dX_2.2.2_SDK\Common\Exception" /I"C:\Users\banhtieu\Desktop\trunk\samples\Cpp\WordRush\proj.win32\..\..\..\..\plugin\App42_Cocos2DX_SDK-master\V_1.2.1\App42_Cocos2dX_2.2.2_SDK\Common" /I.. /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _USE_MATH_DEFINES /D GL_GLEXT_PROTOTYPES /D CC_ENABLE_CHIPMUNK_INTEGRATION=1 /D _CRT_SECURE_NO_WARNINGS /D _SCL_SECURE_NO_WARNINGS /D COCOS2D_DEBUG=1 /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug.win32\\" /Fd"Debug.win32\vc120.pdb" /Gd /TP /wd4267 /wd4251 /wd4244 /analyze- /errorReport:prompt ..\Classes\EndGameScene.cpp
+  EndGameScene.cpp
+Link:
+  C:\Program Files\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\banhtieu\Desktop\trunk\Debug.win32\WordRush.exe" /INCREMENTAL /NOLOGO /LIBPATH:C:\Users\banhtieu\Desktop\trunk\Debug.win32\ libExtensions.lib libcocos2d.lib libCocosDenshion.lib opengl32.lib glew32.lib libBox2d.lib libchipmunk.lib libcurl_imp.lib pthreadVCE2.lib websockets.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\banhtieu\Desktop\trunk\Debug.win32\WordRush.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\banhtieu\Desktop\trunk\Debug.win32\WordRush.lib" /MACHINE:X86 /SAFESEH Debug.win32\AppDelegate.obj
+  Debug.win32\Character.obj
+  Debug.win32\CommonObject.obj
+  Debug.win32\Config.obj
+  Debug.win32\Effect.obj
+  Debug.win32\EndGameScene.obj
+  Debug.win32\Game.obj
+  Debug.win32\InGameScene.obj
+  Debug.win32\LogoScene.obj
+  Debug.win32\MainMenuScene.obj
+  Debug.win32\Particles.obj
+  Debug.win32\main.obj
+  WordRush.vcxproj -> C:\Users\banhtieu\Desktop\trunk\Debug.win32\WordRush.exe
+Done Building Project "C:\Users\banhtieu\Desktop\trunk\samples\Cpp\WordRush\proj.win32\WordRush.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:08.94

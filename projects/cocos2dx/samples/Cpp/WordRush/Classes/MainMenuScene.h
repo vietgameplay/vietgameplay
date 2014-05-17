@@ -12,7 +12,6 @@
 
 #include "cocos2d.h"
 #include "cocos-ext.h"
-//#include "../../testBasic.h"
 
 class MainMenuScene : public cocos2d::CCScene
 {
@@ -24,11 +23,13 @@ public:
     virtual void onExit();
 
 protected:
-    void UIAnimationInit();
+	void initUI();
     void play(cocos2d::CCObject* pSender, cocos2d::ui::TouchEventType type);
 	void close(cocos2d::CCObject* pSender, cocos2d::ui::TouchEventType type);
-
-protected:
+	void no(cocos2d::CCObject* pSender, cocos2d::ui::TouchEventType type);
+	void yes(cocos2d::CCObject* pSender, cocos2d::ui::TouchEventType type);
+    void rate(cocos2d::CCObject* pSender, cocos2d::ui::TouchEventType type);
+    void show(cocos2d::CCObject* pSender, cocos2d::ui::TouchEventType type);
     cocos2d::ui::TouchGroup* m_pUILayer;
 };
 

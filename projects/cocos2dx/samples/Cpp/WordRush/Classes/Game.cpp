@@ -7,20 +7,31 @@
 //
 
 #include "Game.h"
+#include "AppMacros.h"
 
-extern CCSize screenSize;
 Game* Game::Instance = NULL;
 char* GameDat[MAX_QUESTION][MAX_CHOICE] = {
-	{ "umbrella", "umbralla", "umbralle", "umbrrela", "umbrela" },
-	{ "elephant", "elepphant", "elaphent", "elephent", "elephantt" },
-	{ "pillow", "pilow", "pellow", "billow", "pilot" },
-	{ "tiger", "tigar", "riger", "tiged", "tigger" },
-	{ "table", "tabble", "tebla", "tablle", "tabla" },
-	{ "banana", "banena", "banane", "banama", "bamana" },
-	{ "apple", "aple", "applle", "aplle", "apaple" },
-	{ "earth", "earch", "eatth", "eartk", "eacth" },
-	{ "building", "builling", "bulding", "buelding", "builddng" },
-	{ "duck", "duckk", "ducck", "dock", "dick" }
+	{ "umbrella", "umbralla", "umbrella", "umbrrela"},
+	{ "elephant", "elepphant", "elephant", "elephent"},
+	{ "pillow", "pilow", "pillow", "pilot"},
+	{ "tiger", "tigar", "tiger", "tigger"},
+	{ "table", "tabble", "table", "tablle"},
+	{ "banana", "banena", "banana", "banama" },
+	{ "apple", "aple", "apple", "aplle" },
+	{ "earth", "earch", "earth", "eartk" },
+	{ "building", "builling", "building", "buildding" },
+	{ "duck", "duckk", "duck", "ducck" },
+
+	{ "zebra", "zebbra", "zebra", "zebrra"},
+	{ "book", "boock", "book", "bock" },
+	{ "lion", "rion", "lion", "jion" },
+	{ "chicken", "chickken", "chicken", "chiccken" },
+	{ "house", "housre", "house", "housse" },
+	{ "cat", "bat", "cat", "pat" },
+	{ "dog", "dogg", "dog", "bog" },
+	{ "giraffe", "girraffe", "giraffe", "girafe" },
+	{ "chair", "hair", "chair", "cheir" },
+	{ "monkey", "monney", "monkey", "donkey" }
 };
 Game* Game::getInstance()
 {
@@ -39,11 +50,14 @@ Game::Game()
 {
     iScore = 0;
 	iBest = 0;
+	iHeart = 0;
 	iCurrentQuestion = 0;
 	iQuestion = 0;
 	iChoice = 0;
-    fTimeLeft = 0.0f;
+	iTimeSave = 0.0f;
 	iTimeLeft = 0;
+	bGameOver = false;
+	bSave = false;
 }
 
 Game::~Game()
@@ -53,19 +67,36 @@ Game::~Game()
 
 void Game::init()
 {
-	iScore    = 0;
-	iTimeLeft = 100;
+	iScore  = 0;
+	iHeart = 0;
+	bSave = false;
+	iTimeSave = TIME_SAVE;
+	iTimeLeft = TIME_LEFT;
 	iQuestion = rand() % MAX_QUESTION;
 	iChoice   = rand() % MAX_CHOICE;
 };
 
 void Game::next()
 {
-	iTimeLeft = 100;
+	iTimeLeft = TIME_LEFT;
+	iTimeSave = TIME_SAVE;
 	iQuestion = rand() % MAX_QUESTION;
 	iChoice = rand() % MAX_CHOICE;
 	iCurrentQuestion++;
+	if (iScore == SCORE_LEVEL_1)
+	{
+		iHeart++;
+	}
+	if (iScore == SCORE_LEVEL_2)
+	{
+		iHeart++;
+	}
+	if (iScore == SCORE_LEVEL_3)
+	{
+		iHeart++;
+	}
 	iScore++;
+
 };
 
 void Game::input(int input)
@@ -75,11 +106,7 @@ void Game::input(int input)
 
 void Game::update()
 {
-
-};
-
-void Game::checkBest()
-{
+	iTimeLeft--;
 	if (iScore > iBest)
 	{
 		iBest = iScore;

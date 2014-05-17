@@ -10,8 +10,8 @@
     <string>InGame_1.json</string>
   </JsonList>
   <CanvasSize>
-    <Width>480</Width>
-    <Height>800</Height>
+    <Width>640</Width>
+    <Height>1136</Height>
   </CanvasSize>
   <filePath>C:\Users\banhtieu\Desktop\trunk\samples\Cpp\WordRush\mater_data\Cocostudio\ui\InGame\InGame.xml.ui</filePath>
   <ProjectType>UIProject</ProjectType>

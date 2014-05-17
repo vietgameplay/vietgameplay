@@ -759,7 +759,7 @@
               "x": 320,
               "y": 524,
               "fileNameData": {
-                "path": "GUI/missing-font.fnt",
+                "path": "missing-font.fnt",
                 "plistFile": "",
                 "resourceType": 0
               },
@@ -806,7 +806,7 @@
               "x": 320,
               "y": 467,
               "fileNameData": {
-                "path": "GUI/missing-font.fnt",
+                "path": "missing-font.fnt",
                 "plistFile": "",
                 "resourceType": 0
               },

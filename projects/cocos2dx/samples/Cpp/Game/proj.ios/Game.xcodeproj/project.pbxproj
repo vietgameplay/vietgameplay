@@ -241,6 +241,34 @@
 		362BBC0419120E7F00054DB5 /* libcocos2dx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 362BBC011912010D00054DB5 /* libcocos2dx.a */; };
 		3631BBD9191237F90069629F /* backtotopnormal.png in Resources */ = {isa = PBXBuildFile; fileRef = 3631BBD0191237F90069629F /* backtotopnormal.png */; };
 		3631BBDA191237F90069629F /* backtotoppressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 3631BBD1191237F90069629F /* backtotoppressed.png */; };
+		36881D071914DB4A0012F8C6 /* cJSON.c in Sources */ = {isa = PBXBuildFile; fileRef = 36881CC31914DB4A0012F8C6 /* cJSON.c */; };
+		36881D081914DB4A0012F8C6 /* App42API.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36881CC61914DB4A0012F8C6 /* App42API.cpp */; };
+		36881D091914DB4A0012F8C6 /* App42Response.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36881CC91914DB4A0012F8C6 /* App42Response.cpp */; };
+		36881D0A1914DB4A0012F8C6 /* App42Service.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36881CCB1914DB4A0012F8C6 /* App42Service.cpp */; };
+		36881D0B1914DB4A0012F8C6 /* App42Exception.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36881CCE1914DB4A0012F8C6 /* App42Exception.cpp */; };
+		36881D0C1914DB4A0012F8C6 /* JSONDocument.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36881CD01914DB4A0012F8C6 /* JSONDocument.cpp */; };
+		36881D0D1914DB4A0012F8C6 /* MetaResponse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36881CD21914DB4A0012F8C6 /* MetaResponse.cpp */; };
+		36881D0E1914DB4A0012F8C6 /* Utilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36881CD41914DB4A0012F8C6 /* Utilities.cpp */; };
+		36881D0F1914DB4A0012F8C6 /* app42base64.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36881CD71914DB4A0012F8C6 /* app42base64.cpp */; };
+		36881D101914DB4A0012F8C6 /* HMAC_SHA1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36881CD91914DB4A0012F8C6 /* HMAC_SHA1.cpp */; };
+		36881D111914DB4A0012F8C6 /* SHA1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36881CDB1914DB4A0012F8C6 /* SHA1.cpp */; };
+		36881D121914DB4A0012F8C6 /* urlencode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36881CDD1914DB4A0012F8C6 /* urlencode.cpp */; };
+		36881D131914DB4A0012F8C6 /* App42GameResponse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36881CE01914DB4A0012F8C6 /* App42GameResponse.cpp */; };
+		36881D141914DB4A0012F8C6 /* App42RewardResponse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36881CE21914DB4A0012F8C6 /* App42RewardResponse.cpp */; };
+		36881D151914DB4A0012F8C6 /* App42Score.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36881CE41914DB4A0012F8C6 /* App42Score.cpp */; };
+		36881D161914DB4A0012F8C6 /* GameService.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36881CE61914DB4A0012F8C6 /* GameService.cpp */; };
+		36881D171914DB4A0012F8C6 /* RewardService.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36881CE81914DB4A0012F8C6 /* RewardService.cpp */; };
+		36881D181914DB4A0012F8C6 /* ScoreBoardService.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36881CEA1914DB4A0012F8C6 /* ScoreBoardService.cpp */; };
+		36881D191914DB4A0012F8C6 /* ScoreService.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36881CEC1914DB4A0012F8C6 /* ScoreService.cpp */; };
+		36881D1A1914DB4A0012F8C6 /* App42PushNotificationResponse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36881CEF1914DB4A0012F8C6 /* App42PushNotificationResponse.cpp */; };
+		36881D1B1914DB4A0012F8C6 /* PushNotificationService.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36881CF11914DB4A0012F8C6 /* PushNotificationService.cpp */; };
+		36881D1C1914DB4A0012F8C6 /* App42StorageResponse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36881CF41914DB4A0012F8C6 /* App42StorageResponse.cpp */; };
+		36881D1D1914DB4A0012F8C6 /* Query.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36881CF61914DB4A0012F8C6 /* Query.cpp */; };
+		36881D1E1914DB4A0012F8C6 /* QueryBuilder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36881CF81914DB4A0012F8C6 /* QueryBuilder.cpp */; };
+		36881D1F1914DB4A0012F8C6 /* StorageService.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36881CFA1914DB4A0012F8C6 /* StorageService.cpp */; };
+		36881D201914DB4A0012F8C6 /* App42UserResponse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36881CFD1914DB4A0012F8C6 /* App42UserResponse.cpp */; };
+		36881D211914DB4A0012F8C6 /* UserService.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36881CFF1914DB4A0012F8C6 /* UserService.cpp */; };
+		36881D2B1914F1590012F8C6 /* SocialManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36881D291914F1590012F8C6 /* SocialManager.cpp */; };
 		36A6877D190E88CD0058CA43 /* EndGameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36A68775190E88CD0058CA43 /* EndGameScene.cpp */; };
 		36A6877E190E88CD0058CA43 /* InGameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36A68777190E88CD0058CA43 /* InGameScene.cpp */; };
 		36A6877F190E88CD0058CA43 /* LogoScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36A68779190E88CD0058CA43 /* LogoScene.cpp */; };
@@ -779,6 +807,68 @@
 		362BBBFC1912010D00054DB5 /* cocos2dx.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cocos2dx.xcodeproj; path = ../../../../cocos2dx/proj.ios/cocos2dx.xcodeproj; sourceTree = "<group>"; };
 		3631BBD0191237F90069629F /* backtotopnormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backtotopnormal.png; sourceTree = "<group>"; };
 		3631BBD1191237F90069629F /* backtotoppressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backtotoppressed.png; sourceTree = "<group>"; };
+		36881CC31914DB4A0012F8C6 /* cJSON.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = cJSON.c; sourceTree = "<group>"; };
+		36881CC41914DB4A0012F8C6 /* cJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cJSON.h; sourceTree = "<group>"; };
+		36881CC61914DB4A0012F8C6 /* App42API.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = App42API.cpp; sourceTree = "<group>"; };
+		36881CC71914DB4A0012F8C6 /* App42API.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = App42API.h; sourceTree = "<group>"; };
+		36881CC81914DB4A0012F8C6 /* App42Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = App42Constants.h; sourceTree = "<group>"; };
+		36881CC91914DB4A0012F8C6 /* App42Response.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = App42Response.cpp; sourceTree = "<group>"; };
+		36881CCA1914DB4A0012F8C6 /* App42Response.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = App42Response.h; sourceTree = "<group>"; };
+		36881CCB1914DB4A0012F8C6 /* App42Service.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = App42Service.cpp; sourceTree = "<group>"; };
+		36881CCC1914DB4A0012F8C6 /* App42Service.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = App42Service.h; sourceTree = "<group>"; };
+		36881CCE1914DB4A0012F8C6 /* App42Exception.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = App42Exception.cpp; sourceTree = "<group>"; };
+		36881CCF1914DB4A0012F8C6 /* App42Exception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = App42Exception.h; sourceTree = "<group>"; };
+		36881CD01914DB4A0012F8C6 /* JSONDocument.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JSONDocument.cpp; sourceTree = "<group>"; };
+		36881CD11914DB4A0012F8C6 /* JSONDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONDocument.h; sourceTree = "<group>"; };
+		36881CD21914DB4A0012F8C6 /* MetaResponse.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MetaResponse.cpp; sourceTree = "<group>"; };
+		36881CD31914DB4A0012F8C6 /* MetaResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MetaResponse.h; sourceTree = "<group>"; };
+		36881CD41914DB4A0012F8C6 /* Utilities.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utilities.cpp; sourceTree = "<group>"; };
+		36881CD51914DB4A0012F8C6 /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
+		36881CD71914DB4A0012F8C6 /* app42base64.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = app42base64.cpp; sourceTree = "<group>"; };
+		36881CD81914DB4A0012F8C6 /* app42base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = app42base64.h; sourceTree = "<group>"; };
+		36881CD91914DB4A0012F8C6 /* HMAC_SHA1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HMAC_SHA1.cpp; sourceTree = "<group>"; };
+		36881CDA1914DB4A0012F8C6 /* HMAC_SHA1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMAC_SHA1.h; sourceTree = "<group>"; };
+		36881CDB1914DB4A0012F8C6 /* SHA1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SHA1.cpp; sourceTree = "<group>"; };
+		36881CDC1914DB4A0012F8C6 /* SHA1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHA1.h; sourceTree = "<group>"; };
+		36881CDD1914DB4A0012F8C6 /* urlencode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = urlencode.cpp; sourceTree = "<group>"; };
+		36881CDE1914DB4A0012F8C6 /* urlencode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = urlencode.h; sourceTree = "<group>"; };
+		36881CE01914DB4A0012F8C6 /* App42GameResponse.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = App42GameResponse.cpp; sourceTree = "<group>"; };
+		36881CE11914DB4A0012F8C6 /* App42GameResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = App42GameResponse.h; sourceTree = "<group>"; };
+		36881CE21914DB4A0012F8C6 /* App42RewardResponse.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = App42RewardResponse.cpp; sourceTree = "<group>"; };
+		36881CE31914DB4A0012F8C6 /* App42RewardResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = App42RewardResponse.h; sourceTree = "<group>"; };
+		36881CE41914DB4A0012F8C6 /* App42Score.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = App42Score.cpp; sourceTree = "<group>"; };
+		36881CE51914DB4A0012F8C6 /* App42Score.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = App42Score.h; sourceTree = "<group>"; };
+		36881CE61914DB4A0012F8C6 /* GameService.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameService.cpp; sourceTree = "<group>"; };
+		36881CE71914DB4A0012F8C6 /* GameService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameService.h; sourceTree = "<group>"; };
+		36881CE81914DB4A0012F8C6 /* RewardService.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RewardService.cpp; sourceTree = "<group>"; };
+		36881CE91914DB4A0012F8C6 /* RewardService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RewardService.h; sourceTree = "<group>"; };
+		36881CEA1914DB4A0012F8C6 /* ScoreBoardService.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ScoreBoardService.cpp; sourceTree = "<group>"; };
+		36881CEB1914DB4A0012F8C6 /* ScoreBoardService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreBoardService.h; sourceTree = "<group>"; };
+		36881CEC1914DB4A0012F8C6 /* ScoreService.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ScoreService.cpp; sourceTree = "<group>"; };
+		36881CED1914DB4A0012F8C6 /* ScoreService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreService.h; sourceTree = "<group>"; };
+		36881CEF1914DB4A0012F8C6 /* App42PushNotificationResponse.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = App42PushNotificationResponse.cpp; sourceTree = "<group>"; };
+		36881CF01914DB4A0012F8C6 /* App42PushNotificationResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = App42PushNotificationResponse.h; sourceTree = "<group>"; };
+		36881CF11914DB4A0012F8C6 /* PushNotificationService.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PushNotificationService.cpp; sourceTree = "<group>"; };
+		36881CF21914DB4A0012F8C6 /* PushNotificationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushNotificationService.h; sourceTree = "<group>"; };
+		36881CF41914DB4A0012F8C6 /* App42StorageResponse.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = App42StorageResponse.cpp; sourceTree = "<group>"; };
+		36881CF51914DB4A0012F8C6 /* App42StorageResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = App42StorageResponse.h; sourceTree = "<group>"; };
+		36881CF61914DB4A0012F8C6 /* Query.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Query.cpp; sourceTree = "<group>"; };
+		36881CF71914DB4A0012F8C6 /* Query.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Query.h; sourceTree = "<group>"; };
+		36881CF81914DB4A0012F8C6 /* QueryBuilder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = QueryBuilder.cpp; sourceTree = "<group>"; };
+		36881CF91914DB4A0012F8C6 /* QueryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryBuilder.h; sourceTree = "<group>"; };
+		36881CFA1914DB4A0012F8C6 /* StorageService.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StorageService.cpp; sourceTree = "<group>"; };
+		36881CFB1914DB4A0012F8C6 /* StorageService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StorageService.h; sourceTree = "<group>"; };
+		36881CFD1914DB4A0012F8C6 /* App42UserResponse.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = App42UserResponse.cpp; sourceTree = "<group>"; };
+		36881CFE1914DB4A0012F8C6 /* App42UserResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = App42UserResponse.h; sourceTree = "<group>"; };
+		36881CFF1914DB4A0012F8C6 /* UserService.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UserService.cpp; sourceTree = "<group>"; };
+		36881D001914DB4A0012F8C6 /* UserService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserService.h; sourceTree = "<group>"; };
+		36881D021914DB4A0012F8C6 /* BodyBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BodyBuilder.h; sourceTree = "<group>"; };
+		36881D031914DB4A0012F8C6 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
+		36881D041914DB4A0012F8C6 /* Connector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Connector.h; sourceTree = "<group>"; };
+		36881D051914DB4A0012F8C6 /* Exceptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Exceptions.h; sourceTree = "<group>"; };
+		36881D061914DB4A0012F8C6 /* Signing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Signing.h; sourceTree = "<group>"; };
+		36881D291914F1590012F8C6 /* SocialManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SocialManager.cpp; path = ../Classes/SocialManager.cpp; sourceTree = "<group>"; };
+		36881D2A1914F1590012F8C6 /* SocialManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SocialManager.h; path = ../Classes/SocialManager.h; sourceTree = "<group>"; };
 		36A68775190E88CD0058CA43 /* EndGameScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EndGameScene.cpp; path = ../Classes/EndGameScene.cpp; sourceTree = "<group>"; };
 		36A68776190E88CD0058CA43 /* EndGameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EndGameScene.h; path = ../Classes/EndGameScene.h; sourceTree = "<group>"; };
 		36A68777190E88CD0058CA43 /* InGameScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = InGameScene.cpp; path = ../Classes/InGameScene.cpp; sourceTree = "<group>"; };
@@ -1786,6 +1876,7 @@
 		15AA9C4015B7EC450033D6C2 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				36881D261914E5F50012F8C6 /* Social */,
 				36A68782190E8CFE0058CA43 /* Object */,
 				36A68781190E8CE80058CA43 /* Scene */,
 				1AFAF8B316D35DE700DB1158 /* AppDelegate.cpp */,
@@ -1905,6 +1996,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				36881CC11914DB4A0012F8C6 /* App42_Cocos2dX_2.2.2_SDK */,
 				362BBBFC1912010D00054DB5 /* cocos2dx.xcodeproj */,
 				15A3D8871682F7D5002FB0C5 /* Box2D */,
 				15A3D93A1682F7F9002FB0C5 /* chipmunk */,
@@ -1944,6 +2036,155 @@
 				362BBC011912010D00054DB5 /* libcocos2dx.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		36881CC11914DB4A0012F8C6 /* App42_Cocos2dX_2.2.2_SDK */ = {
+			isa = PBXGroup;
+			children = (
+				36881CC21914DB4A0012F8C6 /* cJSON */,
+				36881CC51914DB4A0012F8C6 /* Common */,
+				36881CD61914DB4A0012F8C6 /* Crypto */,
+				36881CDF1914DB4A0012F8C6 /* GameService */,
+				36881CEE1914DB4A0012F8C6 /* PushNotificationService */,
+				36881CF31914DB4A0012F8C6 /* StorageService */,
+				36881CFC1914DB4A0012F8C6 /* UserService */,
+				36881D011914DB4A0012F8C6 /* Util */,
+			);
+			name = App42_Cocos2dX_2.2.2_SDK;
+			path = "../../../../plugin/App42_Cocos2DX_SDK-master/V_1.2.1/App42_Cocos2dX_2.2.2_SDK";
+			sourceTree = "<group>";
+		};
+		36881CC21914DB4A0012F8C6 /* cJSON */ = {
+			isa = PBXGroup;
+			children = (
+				36881CC31914DB4A0012F8C6 /* cJSON.c */,
+				36881CC41914DB4A0012F8C6 /* cJSON.h */,
+			);
+			path = cJSON;
+			sourceTree = "<group>";
+		};
+		36881CC51914DB4A0012F8C6 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				36881CC61914DB4A0012F8C6 /* App42API.cpp */,
+				36881CC71914DB4A0012F8C6 /* App42API.h */,
+				36881CC81914DB4A0012F8C6 /* App42Constants.h */,
+				36881CC91914DB4A0012F8C6 /* App42Response.cpp */,
+				36881CCA1914DB4A0012F8C6 /* App42Response.h */,
+				36881CCB1914DB4A0012F8C6 /* App42Service.cpp */,
+				36881CCC1914DB4A0012F8C6 /* App42Service.h */,
+				36881CCD1914DB4A0012F8C6 /* Exception */,
+				36881CD01914DB4A0012F8C6 /* JSONDocument.cpp */,
+				36881CD11914DB4A0012F8C6 /* JSONDocument.h */,
+				36881CD21914DB4A0012F8C6 /* MetaResponse.cpp */,
+				36881CD31914DB4A0012F8C6 /* MetaResponse.h */,
+				36881CD41914DB4A0012F8C6 /* Utilities.cpp */,
+				36881CD51914DB4A0012F8C6 /* Utilities.h */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		36881CCD1914DB4A0012F8C6 /* Exception */ = {
+			isa = PBXGroup;
+			children = (
+				36881CCE1914DB4A0012F8C6 /* App42Exception.cpp */,
+				36881CCF1914DB4A0012F8C6 /* App42Exception.h */,
+			);
+			path = Exception;
+			sourceTree = "<group>";
+		};
+		36881CD61914DB4A0012F8C6 /* Crypto */ = {
+			isa = PBXGroup;
+			children = (
+				36881CD71914DB4A0012F8C6 /* app42base64.cpp */,
+				36881CD81914DB4A0012F8C6 /* app42base64.h */,
+				36881CD91914DB4A0012F8C6 /* HMAC_SHA1.cpp */,
+				36881CDA1914DB4A0012F8C6 /* HMAC_SHA1.h */,
+				36881CDB1914DB4A0012F8C6 /* SHA1.cpp */,
+				36881CDC1914DB4A0012F8C6 /* SHA1.h */,
+				36881CDD1914DB4A0012F8C6 /* urlencode.cpp */,
+				36881CDE1914DB4A0012F8C6 /* urlencode.h */,
+			);
+			path = Crypto;
+			sourceTree = "<group>";
+		};
+		36881CDF1914DB4A0012F8C6 /* GameService */ = {
+			isa = PBXGroup;
+			children = (
+				36881CE01914DB4A0012F8C6 /* App42GameResponse.cpp */,
+				36881CE11914DB4A0012F8C6 /* App42GameResponse.h */,
+				36881CE21914DB4A0012F8C6 /* App42RewardResponse.cpp */,
+				36881CE31914DB4A0012F8C6 /* App42RewardResponse.h */,
+				36881CE41914DB4A0012F8C6 /* App42Score.cpp */,
+				36881CE51914DB4A0012F8C6 /* App42Score.h */,
+				36881CE61914DB4A0012F8C6 /* GameService.cpp */,
+				36881CE71914DB4A0012F8C6 /* GameService.h */,
+				36881CE81914DB4A0012F8C6 /* RewardService.cpp */,
+				36881CE91914DB4A0012F8C6 /* RewardService.h */,
+				36881CEA1914DB4A0012F8C6 /* ScoreBoardService.cpp */,
+				36881CEB1914DB4A0012F8C6 /* ScoreBoardService.h */,
+				36881CEC1914DB4A0012F8C6 /* ScoreService.cpp */,
+				36881CED1914DB4A0012F8C6 /* ScoreService.h */,
+			);
+			path = GameService;
+			sourceTree = "<group>";
+		};
+		36881CEE1914DB4A0012F8C6 /* PushNotificationService */ = {
+			isa = PBXGroup;
+			children = (
+				36881CEF1914DB4A0012F8C6 /* App42PushNotificationResponse.cpp */,
+				36881CF01914DB4A0012F8C6 /* App42PushNotificationResponse.h */,
+				36881CF11914DB4A0012F8C6 /* PushNotificationService.cpp */,
+				36881CF21914DB4A0012F8C6 /* PushNotificationService.h */,
+			);
+			path = PushNotificationService;
+			sourceTree = "<group>";
+		};
+		36881CF31914DB4A0012F8C6 /* StorageService */ = {
+			isa = PBXGroup;
+			children = (
+				36881CF41914DB4A0012F8C6 /* App42StorageResponse.cpp */,
+				36881CF51914DB4A0012F8C6 /* App42StorageResponse.h */,
+				36881CF61914DB4A0012F8C6 /* Query.cpp */,
+				36881CF71914DB4A0012F8C6 /* Query.h */,
+				36881CF81914DB4A0012F8C6 /* QueryBuilder.cpp */,
+				36881CF91914DB4A0012F8C6 /* QueryBuilder.h */,
+				36881CFA1914DB4A0012F8C6 /* StorageService.cpp */,
+				36881CFB1914DB4A0012F8C6 /* StorageService.h */,
+			);
+			path = StorageService;
+			sourceTree = "<group>";
+		};
+		36881CFC1914DB4A0012F8C6 /* UserService */ = {
+			isa = PBXGroup;
+			children = (
+				36881CFD1914DB4A0012F8C6 /* App42UserResponse.cpp */,
+				36881CFE1914DB4A0012F8C6 /* App42UserResponse.h */,
+				36881CFF1914DB4A0012F8C6 /* UserService.cpp */,
+				36881D001914DB4A0012F8C6 /* UserService.h */,
+			);
+			path = UserService;
+			sourceTree = "<group>";
+		};
+		36881D011914DB4A0012F8C6 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				36881D021914DB4A0012F8C6 /* BodyBuilder.h */,
+				36881D031914DB4A0012F8C6 /* Common.h */,
+				36881D041914DB4A0012F8C6 /* Connector.h */,
+				36881D051914DB4A0012F8C6 /* Exceptions.h */,
+				36881D061914DB4A0012F8C6 /* Signing.h */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		36881D261914E5F50012F8C6 /* Social */ = {
+			isa = PBXGroup;
+			children = (
+				36881D291914F1590012F8C6 /* SocialManager.cpp */,
+				36881D2A1914F1590012F8C6 /* SocialManager.h */,
+			);
+			name = Social;
 			sourceTree = "<group>";
 		};
 		36A68781190E8CE80058CA43 /* Scene */ = {
@@ -2154,6 +2395,7 @@
 				15A3D9041682F7D5002FB0C5 /* b2Distance.cpp in Sources */,
 				15A3D9051682F7D5002FB0C5 /* b2DynamicTree.cpp in Sources */,
 				15A3D9061682F7D5002FB0C5 /* b2TimeOfImpact.cpp in Sources */,
+				36881D111914DB4A0012F8C6 /* SHA1.cpp in Sources */,
 				15A3D9071682F7D5002FB0C5 /* b2ChainShape.cpp in Sources */,
 				15A3D9081682F7D5002FB0C5 /* b2CircleShape.cpp in Sources */,
 				15A3D9091682F7D5002FB0C5 /* b2EdgeShape.cpp in Sources */,
@@ -2161,12 +2403,15 @@
 				152E430318CEF43F00D3B799 /* UIImageView.cpp in Sources */,
 				15A3D90B1682F7D5002FB0C5 /* b2BlockAllocator.cpp in Sources */,
 				15A3D90C1682F7D5002FB0C5 /* b2Draw.cpp in Sources */,
+				36881D191914DB4A0012F8C6 /* ScoreService.cpp in Sources */,
+				36881D171914DB4A0012F8C6 /* RewardService.cpp in Sources */,
 				152E431518CEF43F00D3B799 /* ListViewReader.cpp in Sources */,
 				152E42D918CEF43F00D3B799 /* CCActionEaseEx.cpp in Sources */,
 				152E42FE18CEF43F00D3B799 /* UIListView.cpp in Sources */,
 				15A3D90D1682F7D5002FB0C5 /* b2Math.cpp in Sources */,
 				15A3D90E1682F7D5002FB0C5 /* b2Settings.cpp in Sources */,
 				15A3D90F1682F7D5002FB0C5 /* b2StackAllocator.cpp in Sources */,
+				36881D131914DB4A0012F8C6 /* App42GameResponse.cpp in Sources */,
 				152E430518CEF43F00D3B799 /* UILabelAtlas.cpp in Sources */,
 				152E431718CEF43F00D3B799 /* PageViewReader.cpp in Sources */,
 				15A3D9101682F7D5002FB0C5 /* b2Timer.cpp in Sources */,
@@ -2176,12 +2421,14 @@
 				15A3D9131682F7D5002FB0C5 /* b2Fixture.cpp in Sources */,
 				15A3D9141682F7D5002FB0C5 /* b2Island.cpp in Sources */,
 				15A3D9151682F7D5002FB0C5 /* b2World.cpp in Sources */,
+				36881D181914DB4A0012F8C6 /* ScoreBoardService.cpp in Sources */,
 				15A3D9161682F7D5002FB0C5 /* b2WorldCallbacks.cpp in Sources */,
 				15A3D9171682F7D5002FB0C5 /* b2ChainAndCircleContact.cpp in Sources */,
 				15A3D9181682F7D5002FB0C5 /* b2ChainAndPolygonContact.cpp in Sources */,
 				15A3D9191682F7D5002FB0C5 /* b2CircleContact.cpp in Sources */,
 				15A3D91A1682F7D5002FB0C5 /* b2Contact.cpp in Sources */,
 				15A3D91B1682F7D5002FB0C5 /* b2ContactSolver.cpp in Sources */,
+				36881D1F1914DB4A0012F8C6 /* StorageService.cpp in Sources */,
 				152E42E918CEF43F00D3B799 /* CCSkin.cpp in Sources */,
 				15A3D91C1682F7D5002FB0C5 /* b2EdgeAndCircleContact.cpp in Sources */,
 				15A3D91D1682F7D5002FB0C5 /* b2EdgeAndPolygonContact.cpp in Sources */,
@@ -2197,6 +2444,7 @@
 				15A3D9231682F7D5002FB0C5 /* b2Joint.cpp in Sources */,
 				152E42F918CEF43F00D3B799 /* UILayoutDefine.cpp in Sources */,
 				15A3D9241682F7D5002FB0C5 /* b2MouseJoint.cpp in Sources */,
+				36881D0A1914DB4A0012F8C6 /* App42Service.cpp in Sources */,
 				152E431218CEF43F00D3B799 /* LabelBMFontReader.cpp in Sources */,
 				152E42E218CEF43F00D3B799 /* CCArmature.cpp in Sources */,
 				152E42FA18CEF43F00D3B799 /* UILayoutParameter.cpp in Sources */,
@@ -2210,6 +2458,7 @@
 				152E42FF18CEF43F00D3B799 /* UIPageView.cpp in Sources */,
 				152E42EC18CEF43F00D3B799 /* CCArmatureDefine.cpp in Sources */,
 				15A3D9281682F7D5002FB0C5 /* b2RopeJoint.cpp in Sources */,
+				36881D161914DB4A0012F8C6 /* GameService.cpp in Sources */,
 				15A3D9291682F7D5002FB0C5 /* b2WeldJoint.cpp in Sources */,
 				152E431B18CEF43F00D3B799 /* WidgetReader.cpp in Sources */,
 				15A3D92A1682F7D5002FB0C5 /* b2WheelJoint.cpp in Sources */,
@@ -2218,8 +2467,10 @@
 				362BAA6B1911EF0E00054DB5 /* MainMenuScene.cpp in Sources */,
 				15A3D9971682F7F9002FB0C5 /* cpConstraint.c in Sources */,
 				152E430D18CEF43F00D3B799 /* SceneReader.cpp in Sources */,
+				36881D1C1914DB4A0012F8C6 /* App42StorageResponse.cpp in Sources */,
 				36A687A8190F4B9A0058CA43 /* Game.cpp in Sources */,
 				15A3D9981682F7F9002FB0C5 /* cpDampedRotarySpring.c in Sources */,
+				36881D081914DB4A0012F8C6 /* App42API.cpp in Sources */,
 				15A3D9991682F7F9002FB0C5 /* cpDampedSpring.c in Sources */,
 				152E430B18CEF43F00D3B799 /* DictionaryHelper.cpp in Sources */,
 				152E431C18CEF43F00D3B799 /* ObjectFactory.cpp in Sources */,
@@ -2251,6 +2502,8 @@
 				152E431418CEF43F00D3B799 /* LayoutReader.cpp in Sources */,
 				15A3D9AD1682F7F9002FB0C5 /* cpSpaceHash.c in Sources */,
 				15A3D9AE1682F7F9002FB0C5 /* cpSpaceQuery.c in Sources */,
+				36881D1D1914DB4A0012F8C6 /* Query.cpp in Sources */,
+				36881D091914DB4A0012F8C6 /* App42Response.cpp in Sources */,
 				152E42FD18CEF43F00D3B799 /* UITouchGroup.cpp in Sources */,
 				15A3D9AF1682F7F9002FB0C5 /* cpSpaceStep.c in Sources */,
 				15A3D9B01682F7F9002FB0C5 /* cpSpatialIndex.c in Sources */,
@@ -2261,17 +2514,22 @@
 				15A3DA321682F826002FB0C5 /* CCBFileLoader.cpp in Sources */,
 				152E42F218CEF43F00D3B799 /* CCComAttribute.cpp in Sources */,
 				15A3DA331682F826002FB0C5 /* CCBKeyframe.cpp in Sources */,
+				36881D101914DB4A0012F8C6 /* HMAC_SHA1.cpp in Sources */,
 				152E430A18CEF43F00D3B799 /* UITextField.cpp in Sources */,
 				152E431D18CEF43F00D3B799 /* TriggerBase.cpp in Sources */,
 				152E430E18CEF43F00D3B799 /* ButtonReader.cpp in Sources */,
 				152E42F618CEF43F00D3B799 /* CCInputDelegate.cpp in Sources */,
 				152E42DC18CEF43F00D3B799 /* CCActionManager.cpp in Sources */,
+				36881D0D1914DB4A0012F8C6 /* MetaResponse.cpp in Sources */,
+				36881D0F1914DB4A0012F8C6 /* app42base64.cpp in Sources */,
 				15A3DA341682F826002FB0C5 /* CCBReader.cpp in Sources */,
 				15A3DA351682F826002FB0C5 /* CCBSequence.cpp in Sources */,
 				15A3DA361682F826002FB0C5 /* CCBSequenceProperty.cpp in Sources */,
 				15A3DA371682F826002FB0C5 /* CCBValue.cpp in Sources */,
 				15A3DA381682F826002FB0C5 /* CCControlButtonLoader.cpp in Sources */,
+				36881D071914DB4A0012F8C6 /* cJSON.c in Sources */,
 				15A3DA391682F826002FB0C5 /* CCControlLoader.cpp in Sources */,
+				36881D211914DB4A0012F8C6 /* UserService.cpp in Sources */,
 				152E42E518CEF43F00D3B799 /* CCBatchNode.cpp in Sources */,
 				152E431918CEF43F00D3B799 /* SliderReader.cpp in Sources */,
 				15A3DA3A1682F826002FB0C5 /* CCData.cpp in Sources */,
@@ -2279,7 +2537,9 @@
 				15A3DA3C1682F826002FB0C5 /* CCLabelTTFLoader.cpp in Sources */,
 				15A3DA3D1682F826002FB0C5 /* CCLayerColorLoader.cpp in Sources */,
 				15A3DA3E1682F826002FB0C5 /* CCLayerGradientLoader.cpp in Sources */,
+				36881D0B1914DB4A0012F8C6 /* App42Exception.cpp in Sources */,
 				15A3DA3F1682F826002FB0C5 /* CCLayerLoader.cpp in Sources */,
+				36881D1B1914DB4A0012F8C6 /* PushNotificationService.cpp in Sources */,
 				15A3DA401682F826002FB0C5 /* CCMenuItemImageLoader.cpp in Sources */,
 				15A3DA411682F826002FB0C5 /* CCMenuItemLoader.cpp in Sources */,
 				15A3DA421682F826002FB0C5 /* CCNode+CCBRelativePositioning.cpp in Sources */,
@@ -2290,6 +2550,7 @@
 				152E431318CEF43F00D3B799 /* LabelReader.cpp in Sources */,
 				15A3DA451682F826002FB0C5 /* CCParticleSystemQuadLoader.cpp in Sources */,
 				15A3DA461682F826002FB0C5 /* CCScale9SpriteLoader.cpp in Sources */,
+				36881D121914DB4A0012F8C6 /* urlencode.cpp in Sources */,
 				36A6877D190E88CD0058CA43 /* EndGameScene.cpp in Sources */,
 				152E42E318CEF43F00D3B799 /* CCBone.cpp in Sources */,
 				152E431F18CEF43F00D3B799 /* TriggerObj.cpp in Sources */,
@@ -2304,6 +2565,7 @@
 				15A3DA4D1682F826002FB0C5 /* CCControlPotentiometer.cpp in Sources */,
 				152E430F18CEF43F00D3B799 /* CheckBoxReader.cpp in Sources */,
 				15A3DA4E1682F826002FB0C5 /* CCControlSaturationBrightnessPicker.cpp in Sources */,
+				36881D0E1914DB4A0012F8C6 /* Utilities.cpp in Sources */,
 				15A3DA4F1682F826002FB0C5 /* CCControlSlider.cpp in Sources */,
 				152E430018CEF43F00D3B799 /* UIScrollView.cpp in Sources */,
 				15A3DA501682F826002FB0C5 /* CCControlStepper.cpp in Sources */,
@@ -2311,6 +2573,7 @@
 				15A3DA511682F826002FB0C5 /* CCControlSwitch.cpp in Sources */,
 				152E42DF18CEF43F00D3B799 /* CCArmatureAnimation.cpp in Sources */,
 				15A3DA521682F826002FB0C5 /* CCControlUtils.cpp in Sources */,
+				36881D0C1914DB4A0012F8C6 /* JSONDocument.cpp in Sources */,
 				15A3DA531682F826002FB0C5 /* CCInvocation.cpp in Sources */,
 				152E431E18CEF43F00D3B799 /* TriggerMng.cpp in Sources */,
 				152E42DA18CEF43F00D3B799 /* CCActionFrame.cpp in Sources */,
@@ -2331,6 +2594,7 @@
 				15A3DA5F1682F826002FB0C5 /* CCPhysicsSprite.cpp in Sources */,
 				15A3DAEB1682F8A6002FB0C5 /* CDAudioManager.m in Sources */,
 				15A3DAEC1682F8A6002FB0C5 /* CDOpenALSupport.m in Sources */,
+				36881D151914DB4A0012F8C6 /* App42Score.cpp in Sources */,
 				15A3DAED1682F8A6002FB0C5 /* CocosDenshion.m in Sources */,
 				15A3DAEE1682F8A6002FB0C5 /* SimpleAudioEngine.mm in Sources */,
 				15A3DAEF1682F8A6002FB0C5 /* SimpleAudioEngine_objc.m in Sources */,
@@ -2341,13 +2605,17 @@
 				1AC3624916D4A1E8000847F2 /* AppController.mm in Sources */,
 				1AC3624B16D4A1E8000847F2 /* main.m in Sources */,
 				1AFCDA8216D4A25900906EA6 /* RootViewController.mm in Sources */,
+				36881D201914DB4A0012F8C6 /* App42UserResponse.cpp in Sources */,
 				1A8F3B6E175E05DA00049216 /* Animation.cpp in Sources */,
 				1A8F3B6F175E05DA00049216 /* AnimationState.cpp in Sources */,
 				1A8F3B70175E05DA00049216 /* AnimationStateData.cpp in Sources */,
 				152E42F518CEF43F00D3B799 /* CCComRender.cpp in Sources */,
 				1A8F3B71175E05DA00049216 /* Atlas.cpp in Sources */,
+				36881D141914DB4A0012F8C6 /* App42RewardResponse.cpp in Sources */,
 				1A8F3B72175E05DA00049216 /* AtlasAttachmentLoader.cpp in Sources */,
+				36881D1A1914DB4A0012F8C6 /* App42PushNotificationResponse.cpp in Sources */,
 				152E430918CEF43F00D3B799 /* UISlider.cpp in Sources */,
+				36881D2B1914F1590012F8C6 /* SocialManager.cpp in Sources */,
 				1A8F3B73175E05DA00049216 /* Attachment.cpp in Sources */,
 				1A8F3B74175E05DA00049216 /* AttachmentLoader.cpp in Sources */,
 				36A6877F190E88CD0058CA43 /* LogoScene.cpp in Sources */,
@@ -2366,6 +2634,7 @@
 				152E42DB18CEF43F00D3B799 /* CCActionFrameEasing.cpp in Sources */,
 				1A8F3B7C175E05DA00049216 /* Skeleton.cpp in Sources */,
 				1A8F3B7D175E05DA00049216 /* SkeletonData.cpp in Sources */,
+				36881D1E1914DB4A0012F8C6 /* QueryBuilder.cpp in Sources */,
 				152E42EE18CEF43F00D3B799 /* CCSpriteFrameCacheHelper.cpp in Sources */,
 				1A8F3B7E175E05DA00049216 /* SkeletonJson.cpp in Sources */,
 				1A8F3B7F175E05DA00049216 /* Skin.cpp in Sources */,

@@ -12,7 +12,7 @@
 
 #include "cocos2d.h"
 #include "cocos-ext.h"
-//#include "../../testBasic.h"
+#include "Effect.h"
 
 class InGameScene : public cocos2d::CCScene
 {
@@ -24,15 +24,21 @@ public:
     virtual void onExit();
 	virtual void update(float dt);
 
-
+	VGP::Effect* effect;
 protected:
 
-    void UIAnimationInit();
+	void initUI();
 	void initGame();
+	void checkEndGame();
 	void rightPressed(cocos2d::CCObject* pSender, cocos2d::ui::TouchEventType type);
 	void wrongPressed(cocos2d::CCObject* pSender, cocos2d::ui::TouchEventType type);
-
-protected:
+	void save(cocos2d::CCObject* pSender, cocos2d::ui::TouchEventType type);
+	void setVisibleSavePanel(bool enable);
+	void switchEndGame();
+	void blinkDiamon();
+	void updateProcessBar();
+	void updateDiamonImg();
+	void updateDiamonHave();
     cocos2d::ui::TouchGroup* m_pUILayer;
 };
 

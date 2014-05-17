@@ -455,8 +455,8 @@
               "rotation": 0,
               "scaleX": 1,
               "scaleY": 0.799999952,
-              "sizePercentX": 0.8140625,
-              "sizePercentY": 0.423415482,
+              "sizePercentX": 0.8859375,
+              "sizePercentY": 0.434859157,
               "sizeType": 0,
               "tag": 34,
               "touchAble": false,
@@ -520,7 +520,7 @@
               "x": 217,
               "y": 713,
               "fileNameData": {
-                "path": "GUI/missing-font.fnt",
+                "path": "missing-font.fnt",
                 "plistFile": "",
                 "resourceType": 0
               },
@@ -640,7 +640,7 @@
               "x": 281,
               "y": 617,
               "fileNameData": {
-                "path": "GUI/missing-font.fnt",
+                "path": "missing-font.fnt",
                 "plistFile": "",
                 "resourceType": 0
               },

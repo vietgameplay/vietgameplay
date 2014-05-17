@@ -14,6 +14,7 @@ public:
     
     // implement the "static node()" method manually
     CREATE_FUNC(LogoScene);
+
 };
 
 #endif // __LOGO_SCENE_H__

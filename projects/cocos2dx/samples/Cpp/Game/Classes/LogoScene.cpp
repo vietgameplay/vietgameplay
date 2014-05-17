@@ -1,6 +1,7 @@
 #include "LogoScene.h"
 #include "MainMenuScene.h"
 
+
 USING_NS_CC;
 USING_NS_CC_EXT;
 
@@ -53,6 +54,8 @@ bool LogoScene::init()
 	this->schedule( schedule_selector (LogoScene::update ) );
 	// Enable the touch events
 	setTouchEnabled(true);
+
+
     return true;
 }
 
@@ -70,5 +73,3 @@ void LogoScene::update(float dt)
         CCDirector::sharedDirector()->replaceScene(pMainMenuScene);
     }
 }
-
-

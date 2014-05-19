@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>3C6BC7FB-D5E6-49D8-8EDE-F671A9EC39A5</string>
+	<key>IDESourceControlProjectName</key>
+	<string>OpenKit Sample App</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>463F1DCC-6228-4BB9-94DF-5D9EC7ECD72B</key>
+		<string>https://vietgameplay.googlecode.com/svn/projects/cocos2dx</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>tools/openkit-ios/Samples/OpenKit Sample App/OpenKit Sample App.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>463F1DCC-6228-4BB9-94DF-5D9EC7ECD72B</key>
+		<string>../../../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectRepositoryRootDictionary</key>
+	<dict>
+		<key>463F1DCC-6228-4BB9-94DF-5D9EC7ECD72B</key>
+		<string>https://vietgameplay.googlecode.com/svn</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://vietgameplay.googlecode.com/svn/projects/cocos2dx/tools/openkit-ios/Samples/OpenKit%20Sample%20App/OpenKit%20Sample%20App.xcodeproj</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>463F1DCC-6228-4BB9-94DF-5D9EC7ECD72B</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.subversion</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>463F1DCC-6228-4BB9-94DF-5D9EC7ECD72B</string>
+			<key>IDESourceControlWCCName</key>
+			<string>cocos2dx</string>
+		</dict>
+	</array>
+</dict>
+</plist>

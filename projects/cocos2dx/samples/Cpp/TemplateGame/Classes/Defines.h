@@ -4,6 +4,7 @@
 //include state
 #include "cocos2d.h"
 #include "LogoScene.h"
+#include "MainMenuScene.h"
 
 
 //include object
@@ -27,8 +28,8 @@
 //define state
 #define STATE_LOGO 0
 
-
-
 #define GAMEVIEW_CLASS "com.vietgameplay.dragonmind.GameView"
+
+#define TIME_LOGO 3
 
 #endif

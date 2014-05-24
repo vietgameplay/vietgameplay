@@ -1,9 +1,9 @@
-#ifndef _LOGO_SCENE_H_
-#define _LOGO_SCENE_H_
+#ifndef _MAINMENU_SCENE_H_
+#define _MAINMENU_SCENE_H_
 
 #include "cocos2d.h"
 
-class LogoScene : public cocos2d::CCLayerColor
+class MainMenuScene : public cocos2d::CCLayer
 {
 public:
     // Here's a difference. Method 'init' in cocos2d-x returns bool, instead of returning 'id' in cocos2d-iphone
@@ -14,7 +14,7 @@ public:
 
 	virtual void update ( float dt );    
 
-    CREATE_FUNC( LogoScene );
+    CREATE_FUNC( MainMenuScene );
 };
 
 #endif // __HELLOWORLD_SCENE_H__

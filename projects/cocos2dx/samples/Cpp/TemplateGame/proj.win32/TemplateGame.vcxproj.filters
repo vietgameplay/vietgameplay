@@ -9,6 +9,9 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
+    <Filter Include="Classes\VGPLib">
+      <UniqueIdentifier>{148a663a-95d7-44ce-933e-1cae889554d5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -26,6 +29,12 @@
     <ClCompile Include="..\Classes\MainMenuScene.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\VGPLib\VGPLib.cpp">
+      <Filter>Classes\VGPLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\VGPLib\VGPSprite.cpp">
+      <Filter>Classes\VGPLib</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h">
@@ -42,6 +51,12 @@
     </ClInclude>
     <ClInclude Include="..\Classes\MainMenuScene.h">
       <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\VGPLib\VGPLib.h">
+      <Filter>Classes\VGPLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\VGPLib\VGPSprite.h">
+      <Filter>Classes\VGPLib</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

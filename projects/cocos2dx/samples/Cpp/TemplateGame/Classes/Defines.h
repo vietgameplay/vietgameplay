@@ -19,6 +19,9 @@
 
 //define game
 #define FPS 40
+#define FRAME_TIME FPS/1000.0f
+#define TRANSACTION_TIME 0.5
+
 #define BASE_SCREEN_W 800
 #define BASE_SCREEN_H 480
 

@@ -3,6 +3,7 @@
 
 #include "cocos2d.h"
 #include "VGPSprite.h"
+#include "VGPLabel.h"
 
 using namespace cocos2d;
 

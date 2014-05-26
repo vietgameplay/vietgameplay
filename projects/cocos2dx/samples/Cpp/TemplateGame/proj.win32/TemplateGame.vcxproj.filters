@@ -12,6 +12,9 @@
     <Filter Include="Classes\VGPLib">
       <UniqueIdentifier>{148a663a-95d7-44ce-933e-1cae889554d5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\States">
+      <UniqueIdentifier>{95bd6f39-80cc-4208-8616-0a167108d949}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -23,16 +26,19 @@
     <ClCompile Include="..\Classes\Defines.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\LogoScene.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\MainMenuScene.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\VGPLib\VGPLib.cpp">
       <Filter>Classes\VGPLib</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\VGPLib\VGPSprite.cpp">
+      <Filter>Classes\VGPLib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MainMenuScene.cpp">
+      <Filter>Classes\States</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\LogoScene.cpp">
+      <Filter>Classes\States</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\VGPLib\VGPLabel.cpp">
       <Filter>Classes\VGPLib</Filter>
     </ClCompile>
   </ItemGroup>
@@ -46,16 +52,19 @@
     <ClInclude Include="..\Classes\Defines.h">
       <Filter>Classes</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\LogoScene.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\MainMenuScene.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\VGPLib\VGPLib.h">
       <Filter>Classes\VGPLib</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\VGPLib\VGPSprite.h">
+      <Filter>Classes\VGPLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MainMenuScene.h">
+      <Filter>Classes\States</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\LogoScene.h">
+      <Filter>Classes\States</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\VGPLib\VGPLabel.h">
       <Filter>Classes\VGPLib</Filter>
     </ClInclude>
   </ItemGroup>

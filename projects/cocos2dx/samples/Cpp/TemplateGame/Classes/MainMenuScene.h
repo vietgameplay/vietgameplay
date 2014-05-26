@@ -12,7 +12,7 @@ public:
     // there's no 'id' in cpp, so we recommend returning the class instance pointer
     static cocos2d::CCScene* scene();
 
-	virtual void update ( float dt );    
+	virtual void update ( float dt ); 
 
     CREATE_FUNC( MainMenuScene );
 };

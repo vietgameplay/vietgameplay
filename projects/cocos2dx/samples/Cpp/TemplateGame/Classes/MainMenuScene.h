@@ -14,6 +14,8 @@ public:
 
 	virtual void update ( float dt ); 
 
+	void menuCloseCallback(CCObject* pSender);
+
     CREATE_FUNC( MainMenuScene );
 };
 

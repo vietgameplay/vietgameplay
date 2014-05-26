@@ -1,5 +1,6 @@
 #include "Defines.h"
 #include "actions/CCActionInterval.h"
+#include "VGPLib/VGPLib.h"
 
 USING_NS_CC;
 CCRepeat *actionRepeat;
@@ -49,8 +50,34 @@ void MainMenuScene::onEnter()
 	label1->setPosition( CCPoint( 400, 100 ) );
 	addChild( label1 );
 
+	CCMenuItemImage *pCloseItemImage = CCMenuItemImage::create( "CloseNormal.png", "CloseSelected.png", this, menu_selector(MainMenuScene::menuCloseCallback));
+	pCloseItemImage->setPosition( CCPoint( 800, 480 ) );
+	pCloseItemImage->setAnchorPoint( CCPoint( 1, 1 ) );
+	CCMenu* pMenu = CCMenu::create( pCloseItemImage, NULL );
+    pMenu->setPosition( CCPoint ( 0, 0 ) );
+	addChild( pMenu );
+
+	CCMenuItemFont* pCloseItemText = CCMenuItemFont::create( "Close", this, menu_selector( MainMenuScene::menuCloseCallback ) );
+	pCloseItemText->setPosition( CCPoint( 800, 0 ) );
+	pCloseItemText->setAnchorPoint( CCPoint( 1, 0 ) );
+	CCMenu* pMenu1 = CCMenu::create( pCloseItemText, NULL );
+    pMenu1->setPosition( CCPoint ( 0, 0 ) );
+	addChild( pMenu1 );
+
 }
 
 void MainMenuScene::update ( float dt )
 {
+}
+
+void MainMenuScene::menuCloseCallback(CCObject* pSender)
+{
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT) || (CC_TARGET_PLATFORM == CC_PLATFORM_WP8)
+	CCMessageBox("You pressed the close button. Windows Store Apps do not implement a close button.","Alert");
+#else
+    CCDirector::sharedDirector()->end();
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+    exit(0);
+#endif
+#endif
 }

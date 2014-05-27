@@ -64,6 +64,38 @@ void MainMenuScene::onEnter()
     pMenu1->setPosition( CCPoint ( 0, 0 ) );
 	addChild( pMenu1 );
 
+	//make anim with sheet
+	CCSprite * bee_body  = CCSprite::create(); // NEW - create a sprite here
+	
+	CCAnimation * anim_body = CCAnimation::create();
+	
+    //add frame cached on memory
+	
+	anim_body->addSpriteFrame( CCSpriteFrame::create( "bee_body_1.png", CCRect( 0, 0, 80, 117 ) ) );
+	anim_body->addSpriteFrame( CCSpriteFrame::create( "bee_body_2.png", CCRect( 0, 0, 80, 117 ) ) );
+	anim_body->addSpriteFrame( CCSpriteFrame::create( "bee_body_3.png", CCRect( 0, 0, 80, 117 ) ) );
+	anim_body->addSpriteFrame( CCSpriteFrame::create( "bee_body_2.png", CCRect( 0, 0, 80, 117 ) ) );
+
+	anim_body->setDelayPerUnit( 0.2f );
+    anim_body->setLoops( -1 );
+    bee_body->runAction( CCAnimate::create ( anim_body ) );
+    bee_body->setPosition( CCPoint( 100, 240 ) );
+
+	addChild( bee_body );
+	
+	CCSprite * bee_wing  = CCSprite::create(); // NEW - create a sprite here
+	CCAnimation * anim_wing = CCAnimation::create();
+	anim_wing->addSpriteFrame( CCSpriteFrame::create( "bee_wing_1.png", CCRect( 0, 0, 148, 93 ) ) );
+	anim_wing->addSpriteFrame( CCSpriteFrame::create( "bee_wing_2.png", CCRect( 0, 0, 148, 93 ) ) );
+	anim_wing->addSpriteFrame( CCSpriteFrame::create( "bee_wing_3.png", CCRect( 0, 0, 148, 93 ) ) );
+	anim_wing->addSpriteFrame( CCSpriteFrame::create( "bee_wing_2.png", CCRect( 0, 0, 148, 93 ) ) );
+	
+	anim_wing->setDelayPerUnit( 0.005f );
+    anim_wing->setLoops( -1 );
+    bee_wing->runAction( CCAnimate::create ( anim_wing ) );
+    bee_wing->setPosition( CCPoint( 96, 240 ) );
+
+	addChild( bee_wing );
 }
 
 void MainMenuScene::update ( float dt )

@@ -37,5 +37,17 @@ public:
 
 	void addFrame (  CCLayer* layer, char *pszFileName, CCRect rect, CCPoint position, CCPoint anchor = CCPoint ( 0.5f, 0.5f ) );	
 
+	CCSprite* createAnimation ( CCAnimation *anim, float delay, int loop, CCPoint position, int zOrder, int tag );
+
+	CCSprite* createAnimation ( CCAnimation *anim, float delay, int loop, CCPoint position, int zOrder );
+	
+	CCSprite* createAnimation ( CCAnimation *anim, float delay, int loop, CCPoint position);	
+		
+	void addAnimation ( CCLayer* layer, CCAnimation *anim, float delay, int loop, CCPoint position, int zOrder, int tag );
+	
+	void addAnimation ( CCLayer* layer, CCAnimation *anim, float delay, int loop, CCPoint position, int zOrder );
+	
+	void addAnimation ( CCLayer* layer, CCAnimation *anim, float delay, int loop, CCPoint position);	
+
 };
 #endif

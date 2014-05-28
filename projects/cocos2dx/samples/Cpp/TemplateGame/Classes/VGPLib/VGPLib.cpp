@@ -1,9 +1,9 @@
 #include "VGPLib.h"
 #include "../Defines.h"
 
-using namespace cocos2d;
-
 VGPLib* VGPLib::instance;
+
+CCArmatureDataManager *s_CCArmatureDataManager = CCArmatureDataManager::sharedArmatureDataManager();
 
 VGPLib* VGPLib::getInstance()
 {
@@ -42,4 +42,19 @@ char* VGPLib::convertDecToChar ( int num )
 		str[count - i - 1] = _array[i] + '0';
 	str[count] = '\0';
 	return str;
+}
+
+void VGPLib::loadAnimation( const char* name )
+{
+	int len = strlen( name );
+	char *imageName = new char[ len + 5 ];
+	char *plistName = new char[ len + 7 ];
+	char *exportJsonName = new char[ len + 11 ];
+	strcpy ( imageName, name ); 
+	strcpy ( plistName, name ); 
+	strcpy ( exportJsonName, name ); 
+	strcat ( imageName, "0.png" );
+	strcat ( plistName, "0.plist" );
+	strcat ( exportJsonName, ".ExportJson" );
+	s_CCArmatureDataManager->addArmatureFileInfo( imageName, plistName, exportJsonName );
 }

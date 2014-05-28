@@ -2,7 +2,6 @@
 #include "actions/CCActionInterval.h"
 #include "VGPLib/VGPLib.h"
 
-USING_NS_CC;
 CCRepeat *actionRepeat;
 
 CCScene* MainMenuScene::scene()
@@ -96,6 +95,10 @@ void MainMenuScene::onEnter()
     bee_wing->setPosition( CCPoint( 96, 240 ) );
 
 	addChild( bee_wing );
+
+	//skeletal animation
+	VGPLib::getInstance()->loadAnimation( "Enemy" );
+	VGPArmature::getInstance()->addAnimation( this, "Enemy", 0, CCPoint( 500, 200 ) );
 }
 
 void MainMenuScene::update ( float dt )

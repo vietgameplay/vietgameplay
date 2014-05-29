@@ -44,6 +44,9 @@
     <ClCompile Include="..\Classes\VGPLib\VGPArmature.cpp">
       <Filter>Classes\VGPLib</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\VGPLib\VGPProgressTimer.cpp">
+      <Filter>Classes\VGPLib</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h">
@@ -71,6 +74,9 @@
       <Filter>Classes\VGPLib</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\VGPLib\VGPArmature.h">
+      <Filter>Classes\VGPLib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\VGPLib\VGPProgressTimer.h">
       <Filter>Classes\VGPLib</Filter>
     </ClInclude>
   </ItemGroup>

@@ -130,6 +130,7 @@
     <ClCompile Include="..\Classes\VGPLib\VGPArmature.cpp" />
     <ClCompile Include="..\Classes\VGPLib\VGPLabel.cpp" />
     <ClCompile Include="..\Classes\VGPLib\VGPLib.cpp" />
+    <ClCompile Include="..\Classes\VGPLib\VGPProgressTimer.cpp" />
     <ClCompile Include="..\Classes\VGPLib\VGPSprite.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -141,6 +142,7 @@
     <ClInclude Include="..\Classes\VGPLib\VGPArmature.h" />
     <ClInclude Include="..\Classes\VGPLib\VGPLabel.h" />
     <ClInclude Include="..\Classes\VGPLib\VGPLib.h" />
+    <ClInclude Include="..\Classes\VGPLib\VGPProgressTimer.h" />
     <ClInclude Include="..\Classes\VGPLib\VGPSprite.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>

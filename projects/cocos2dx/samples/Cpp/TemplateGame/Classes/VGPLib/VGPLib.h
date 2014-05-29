@@ -6,6 +6,7 @@
 #include "VGPSprite.h"
 #include "VGPLabel.h"
 #include "VGPArmature.h"
+#include "VGPProgressTimer.h"
 
 USING_NS_CC;
 USING_NS_CC_EXT;

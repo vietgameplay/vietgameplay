@@ -5,6 +5,7 @@
 CCRepeat *actionRepeat;
 int timer_percent = 0;
 CCProgressTimer* progressTimer;
+CCSprite* sprite_move;
 
 CCScene* MainMenuScene::scene()
 {
@@ -116,8 +117,11 @@ void MainMenuScene::onEnter()
 	//progressTimer = VGPProgressTimer::getInstance()->createProgressTimer( sprite_timer, true, true, CCPoint( 400, 50 ) );  
 	addChild( progressTimer );
 
+	sprite_move = VGPSprite::getInstance()->createFrame( "CloseNormal.png", CCPoint( 100, 100 ) );
+	addChild( sprite_move );
 
 	schedule( schedule_selector ( MainMenuScene::update ) );
+	setTouchEnabled(true);	
 }
 
 void MainMenuScene::update ( float dt )
@@ -126,6 +130,24 @@ void MainMenuScene::update ( float dt )
 	if ( timer_percent == 100 )
 		timer_percent = 0;
 	progressTimer->setPercentage( timer_percent );
+}
+
+void MainMenuScene::ccTouchesEnded( CCSet *touches, CCEvent *pEvent )
+{
+
+}
+
+void MainMenuScene::ccTouchesBegan(CCSet *touches, CCEvent *pEvent)
+{
+
+}
+void MainMenuScene::ccTouchesMoved(CCSet *touches, CCEvent *pEvent)
+{
+	//get touch position
+	CCTouch* touch = ( CCTouch* ) ( touches->anyObject() );
+	CCPoint touchPosition = touch->getLocationInView();
+	touchPosition = CCDirector::sharedDirector()->convertToGL( touchPosition );
+	sprite_move->setPosition( touchPosition );
 }
 
 void MainMenuScene::menuCloseCallback(CCObject* pSender)

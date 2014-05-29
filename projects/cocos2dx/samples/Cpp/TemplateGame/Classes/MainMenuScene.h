@@ -3,6 +3,8 @@
 
 #include "cocos2d.h"
 
+using namespace cocos2d;
+
 class MainMenuScene : public cocos2d::CCLayer
 {
 public:
@@ -15,6 +17,10 @@ public:
 	virtual void update ( float dt ); 
 
 	void menuCloseCallback(CCObject* pSender);
+
+	void ccTouchesEnded( CCSet *touches, CCEvent *pEvent );
+	void ccTouchesBegan(CCSet *touches, CCEvent *pEvent);
+	void ccTouchesMoved(CCSet *touches, CCEvent *pEvent);
 
     CREATE_FUNC( MainMenuScene );
 };

@@ -3,6 +3,8 @@
 #include "VGPLib/VGPLib.h"
 
 CCRepeat *actionRepeat;
+int timer_percent = 0;
+CCProgressTimer* progressTimer;
 
 CCScene* MainMenuScene::scene()
 {
@@ -99,10 +101,31 @@ void MainMenuScene::onEnter()
 	//skeletal animation
 	VGPLib::getInstance()->loadAnimation( "Enemy" );
 	VGPArmature::getInstance()->addAnimation( this, "Enemy", 0, CCPoint( 500, 200 ) );
+
+	//ProcessTimer
+	VGPSprite::getInstance()->addFrame( this, "bar.png", CCPoint( 400, 50 ) );
+	
+	CCSprite *sprite_timer =  CCSprite::create( "timer_bar.png" );
+	progressTimer = CCProgressTimer::create( sprite_timer );
+	progressTimer->setType(kCCProgressTimerTypeBar);
+	progressTimer->setBarChangeRate( CCPoint( 1, 0 ) ); //   (1, 0) -> left <-> right  (0, 1) -> up <-> down	
+	progressTimer->setMidpoint( CCPoint( 1, 0 ) ); 		
+	progressTimer->setPercentage(0);
+
+	progressTimer->setPosition( CCPoint( 400, 50 ) );
+	//progressTimer = VGPProgressTimer::getInstance()->createProgressTimer( sprite_timer, true, true, CCPoint( 400, 50 ) );  
+	addChild( progressTimer );
+
+
+	schedule( schedule_selector ( MainMenuScene::update ) );
 }
 
 void MainMenuScene::update ( float dt )
 {
+	timer_percent++;
+	if ( timer_percent == 100 )
+		timer_percent = 0;
+	progressTimer->setPercentage( timer_percent );
 }
 
 void MainMenuScene::menuCloseCallback(CCObject* pSender)

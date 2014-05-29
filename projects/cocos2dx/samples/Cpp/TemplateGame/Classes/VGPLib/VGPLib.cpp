@@ -47,14 +47,14 @@ char* VGPLib::convertDecToChar ( int num )
 void VGPLib::loadAnimation( const char* name )
 {
 	int len = strlen( name );
-	char *imageName = new char[ len + 5 ];
-	char *plistName = new char[ len + 7 ];
+	char *imageName = new char[ len + 4 ];
+	char *plistName = new char[ len + 6 ];
 	char *exportJsonName = new char[ len + 11 ];
 	strcpy ( imageName, name ); 
 	strcpy ( plistName, name ); 
 	strcpy ( exportJsonName, name ); 
-	strcat ( imageName, "0.png" );
-	strcat ( plistName, "0.plist" );
+	strcat ( imageName, ".png" );
+	strcat ( plistName, ".plist" );
 	strcat ( exportJsonName, ".ExportJson" );
 	s_CCArmatureDataManager->addArmatureFileInfo( imageName, plistName, exportJsonName );
 }

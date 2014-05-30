@@ -33,6 +33,9 @@ void LogoScene::onEnter()
 
 	//call update after each frame
 	this->schedule( schedule_selector (LogoScene::update ) );
+
+	//read file
+	FileOperation::readFile();
 }
 
 void LogoScene::update ( float dt )

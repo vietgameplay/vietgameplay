@@ -122,6 +122,8 @@ void MainMenuScene::onEnter()
 
 	schedule( schedule_selector ( MainMenuScene::update ) );
 	setTouchEnabled(true);	
+
+	SimpleAudioEngine::sharedEngine()->playBackgroundMusic( "TITLE_CLOCK.wav", true );
 }
 
 void MainMenuScene::update ( float dt )
@@ -139,7 +141,11 @@ void MainMenuScene::ccTouchesEnded( CCSet *touches, CCEvent *pEvent )
 
 void MainMenuScene::ccTouchesBegan(CCSet *touches, CCEvent *pEvent)
 {
-
+	SimpleAudioEngine::sharedEngine()->playEffect( "SFX_CONFIRM.wav" );
+	CCTouch* touch = ( CCTouch* ) ( touches->anyObject() );
+	CCPoint touchPosition = touch->getLocationInView();
+	touchPosition = CCDirector::sharedDirector()->convertToGL( touchPosition );
+	sprite_move->setPosition( touchPosition );
 }
 void MainMenuScene::ccTouchesMoved(CCSet *touches, CCEvent *pEvent)
 {

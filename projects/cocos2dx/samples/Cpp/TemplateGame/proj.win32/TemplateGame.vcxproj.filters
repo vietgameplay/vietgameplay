@@ -15,6 +15,9 @@
     <Filter Include="Classes\States">
       <UniqueIdentifier>{95bd6f39-80cc-4208-8616-0a167108d949}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Objects">
+      <UniqueIdentifier>{0eeade29-15a7-40ae-acf8-b72cded1690d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -32,9 +35,6 @@
     <ClCompile Include="..\Classes\VGPLib\VGPSprite.cpp">
       <Filter>Classes\VGPLib</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\MainMenuScene.cpp">
-      <Filter>Classes\States</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\LogoScene.cpp">
       <Filter>Classes\States</Filter>
     </ClCompile>
@@ -49,6 +49,24 @@
     </ClCompile>
     <ClCompile Include="..\Classes\FileOperation.cpp">
       <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameState.cpp">
+      <Filter>Classes\States</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\InGameScene.cpp">
+      <Filter>Classes\States</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Bubble.cpp">
+      <Filter>Classes\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\CommonObject.cpp">
+      <Filter>Classes\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Bullet.cpp">
+      <Filter>Classes\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameOverScene.cpp">
+      <Filter>Classes\States</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -67,9 +85,6 @@
     <ClInclude Include="..\Classes\VGPLib\VGPSprite.h">
       <Filter>Classes\VGPLib</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\MainMenuScene.h">
-      <Filter>Classes\States</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\LogoScene.h">
       <Filter>Classes\States</Filter>
     </ClInclude>
@@ -84,6 +99,24 @@
     </ClInclude>
     <ClInclude Include="..\Classes\FileOperation.h">
       <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameState.h">
+      <Filter>Classes\States</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\InGameScene.h">
+      <Filter>Classes\States</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Bubble.h">
+      <Filter>Classes\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\CommonObject.h">
+      <Filter>Classes\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Bullet.h">
+      <Filter>Classes\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameOverScene.h">
+      <Filter>Classes\States</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

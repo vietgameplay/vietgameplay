@@ -6,7 +6,6 @@ extern VGPSprite* s_vgpSprite;
 extern VGPLabel* s_vgpLabel;
 extern VGPLib* s_vgpLib;
 extern GameState* s_gameState;
-extern SimpleAudioEngine* s_SimpleAudioEngine;
 extern int s_frameCount;
 extern int s_currentScore;
 
@@ -100,7 +99,7 @@ void InGameScene::updateBubble()
 					s_currentScore++;
 					bubble->setAlive( false );
 					bullet->setAlive( false );
-					s_SimpleAudioEngine->playEffect( "SFX_COLLISION.wav" );
+					SimpleAudioEngine::sharedEngine()->playEffect( "SFX_COLLISION.wav" );
 				}			
 			}
 
@@ -112,7 +111,7 @@ void InGameScene::updateBubble()
 			//check gameover
 			if ( bubble->getPositionY() < -bubble->getSize().height/2 )
 			{
-				s_SimpleAudioEngine->playEffect( "SFX_OVER.wav" );
+				SimpleAudioEngine::sharedEngine()->playEffect( "SFX_OVER.wav" );
 				s_gameState->switchState( STATE_GAME_OVER );
 			}
 		}
@@ -144,7 +143,7 @@ void InGameScene::ccTouchesBegan(CCSet *touches, CCEvent *pEvent)
 	CCTouch* touch = ( CCTouch* ) ( touches->anyObject() );
 	CCPoint touchPosition = touch->getLocationInView();
 	touchPosition = CCDirector::sharedDirector()->convertToGL( touchPosition );	
-	s_SimpleAudioEngine->playEffect( "SFX_SHOOT.wav" );
+	SimpleAudioEngine::sharedEngine()->playEffect( "SFX_SHOOT.wav" );
 	Bullet* bullet = new Bullet( this, CCSprite::create( IMAGE_BULLET), touchPosition );
 	this->arrayBullet->addObject( bullet );
 }

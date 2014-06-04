@@ -35,5 +35,3 @@ VGPLib* s_vgpLib = VGPLib::getInstance();
 CCDirector*		s_director = CCDirector::sharedDirector();
 
 GameState* s_gameState = GameState::getInstance();
-
-SimpleAudioEngine* s_SimpleAudioEngine = SimpleAudioEngine::sharedEngine();

@@ -3,7 +3,6 @@
 
 extern GameState* s_gameState;
 extern VGPSprite* s_vgpSprite;
-extern SimpleAudioEngine* s_SimpleAudioEngine;
 extern int s_frameCount;
 
 CCScene* LogoScene::scene()
@@ -43,9 +42,9 @@ void LogoScene::update ( float dt )
 	s_frameCount++;
 	if ( s_frameCount == 3 )
 	{
-		s_SimpleAudioEngine->preloadEffect( "SFX_COLLISION.wav" );
-		s_SimpleAudioEngine->preloadEffect( "SFX_OVER.wav" );
-		s_SimpleAudioEngine->preloadEffect( "SFX_SHOOT.wav" );
+		SimpleAudioEngine::sharedEngine()->preloadEffect( "SFX_COLLISION.wav" );
+		SimpleAudioEngine::sharedEngine()->preloadEffect( "SFX_OVER.wav" );
+		SimpleAudioEngine::sharedEngine()->preloadEffect( "SFX_SHOOT.wav" );
 	}
 	if ( s_frameCount != FPS*TIME_LOGO )
 		return;

@@ -43,7 +43,7 @@ then
 fi
 
 # paths
-
+NDK_ROOT="D:/DevTools/android-ndk-r9"
 if [ -z "${NDK_ROOT+aaa}" ];then
 echo "NDK_ROOT not defined. Please define NDK_ROOT in your environment or in local.properties"
 exit 1

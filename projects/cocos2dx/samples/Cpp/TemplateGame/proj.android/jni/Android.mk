@@ -2,11 +2,11 @@ LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 
-LOCAL_MODULE := hellocpp_shared
+LOCAL_MODULE := vietgameplay_shared
 
-LOCAL_MODULE_FILENAME := libhellocpp
+LOCAL_MODULE_FILENAME := libvietgameplay
 
-LOCAL_SRC_FILES := hellocpp/main.cpp \
+LOCAL_SRC_FILES := vietgameplay/main.cpp \
                    ../../Classes/VGPLib/VGPArmature.cpp \
                    ../../Classes/VGPLib/VGPLabel.cpp \
                    ../../Classes/VGPLib/VGPLib.cpp \

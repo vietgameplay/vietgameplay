@@ -1,6 +1,6 @@
 @echo off
 
-SET GAME_NAME=HelloAdmob
+SET GAME_NAME=TemplateGame
 SET OUTPUT_PATH=%PROJ_DIR%\bin
 SET PROJ_DIR=%CD%
 SET ANDROID_HOME=D:\DevTools\android-sdk-windows

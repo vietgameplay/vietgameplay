@@ -134,7 +134,12 @@
     <ClCompile Include="..\Classes\LogoScene.cpp" />
     <ClCompile Include="..\Classes\InGameScene.cpp" />
     <ClCompile Include="..\Classes\VGPLib\VGPArmature.cpp" />
-    <ClCompile Include="..\Classes\VGPLib\VGPLabel.cpp" />
+    <ClCompile Include="..\Classes\VGPLib\VGPJNI.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\Classes\VGPLib\VGPLabel.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\Classes\VGPLib\VGPLib.cpp" />
     <ClCompile Include="..\Classes\VGPLib\VGPProgressTimer.cpp" />
     <ClCompile Include="..\Classes\VGPLib\VGPSprite.cpp" />
@@ -152,6 +157,9 @@
     <ClInclude Include="..\Classes\LogoScene.h" />
     <ClInclude Include="..\Classes\InGameScene.h" />
     <ClInclude Include="..\Classes\VGPLib\VGPArmature.h" />
+    <ClInclude Include="..\Classes\VGPLib\VGPJNI.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="..\Classes\VGPLib\VGPLabel.h" />
     <ClInclude Include="..\Classes\VGPLib\VGPLib.h" />
     <ClInclude Include="..\Classes\VGPLib\VGPProgressTimer.h" />

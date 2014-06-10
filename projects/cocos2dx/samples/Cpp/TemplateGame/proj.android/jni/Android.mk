@@ -12,6 +12,7 @@ LOCAL_SRC_FILES := vietgameplay/main.cpp \
                    ../../Classes/VGPLib/VGPLib.cpp \
                    ../../Classes/VGPLib/VGPProgressTimer.cpp \
                    ../../Classes/VGPLib/VGPSprite.cpp \
+                   ../../Classes/VGPLib/VGPJNI.cpp \
                    ../../Classes/AppDelegate.cpp \
                    ../../Classes/Bubble.cpp \
                    ../../Classes/Bullet.cpp \

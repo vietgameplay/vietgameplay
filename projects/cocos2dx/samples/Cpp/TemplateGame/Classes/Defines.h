@@ -44,7 +44,7 @@
 #define BASE_BUBBLE_JUMP_STEP 2
 #define BASE_BULLET_JUMP_STEP 10
 
-#define GAMEVIEW_CLASS "com.vietgameplay.dragonmind.GameView"
+#define GAMEVIEW_CLASS "com.vietgameplay.templategame.GameView"
 
 #define IMAGE_LOGO "logo.png"
 #define IMAGE_BUBBLE "bubble.png"

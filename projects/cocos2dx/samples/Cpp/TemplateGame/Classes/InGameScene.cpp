@@ -60,6 +60,11 @@ void InGameScene::onEnter()
 	//enable touch
 	setTouchEnabled(true);	
 
+	//show admob
+	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+    showAdmobJNI();
+	#endif
+
 	//update each frame
 	schedule( schedule_selector ( InGameScene::update ) );	
 }

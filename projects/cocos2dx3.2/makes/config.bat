@@ -1,10 +1,12 @@
 @echo off
 
 rem path need change on each PC or Laptop
-set ANT_ROOT=D:\DevTools\apache-ant-1.8.0
-set ANDROID_SDK_ROOT=D:\DevTools\android-sdk-windows
-set NDK_ROOT=D:\DevTools\android-ndk-r10c
-set JAVA_HOME=D:\DevTools\jdk1.6.0
+set ANT_ROOT=C:\DevTools\apache-ant-1.8.2
+set ANDROID_SDK_ROOT=C:\DevTools\android-sdk-windows
+set NDK_ROOT=C:\DevTools\android-ndk-r10c
+set JAVA_HOME=C:\DevTools\jdk1.6.0
+
+set TARGET_API_LEVEL=20
 
 rem path for cocos
 set PRJ_DIR=%~dp0..

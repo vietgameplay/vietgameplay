@@ -1,7 +1,4 @@
-#include "AppDelegate.h"
-#include "HelloWorldScene.h"
-
-USING_NS_CC;
+#include "Defines.h"
 
 AppDelegate::AppDelegate() {
 
@@ -29,10 +26,10 @@ bool AppDelegate::applicationDidFinishLaunching() {
     director->setDisplayStats(true);
 
     // set FPS. the default value is 1.0/60 if you don't call this
-    director->setAnimationInterval(1.0 / 60);
+    director->setAnimationInterval(1.0 / FPS);
 
     // create a scene. it's an autorelease object
-    auto scene = HelloWorld::createScene();
+    auto scene = LogoScene::createScene();
 
     // run
     director->runWithScene(scene);

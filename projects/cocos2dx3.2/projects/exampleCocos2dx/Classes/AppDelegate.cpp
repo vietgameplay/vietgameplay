@@ -16,9 +16,14 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto director = Director::getInstance();
     auto glview = director->getOpenGLView();
     if(!glview) {
-        glview = GLView::create("My Game");
+        glview = GLView::create("My Game");	
         director->setOpenGLView(glview);
     }
+	#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
+	glview->setFrameSize(800, 480);
+	#endif //only set fit on win32		
+
+	glview->setDesignResolutionSize(800, 480, ResolutionPolicy::EXACT_FIT );
 
     // turn on display FPS
     director->setDisplayStats(true);

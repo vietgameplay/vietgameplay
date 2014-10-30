@@ -17,10 +17,10 @@ bool AppDelegate::applicationDidFinishLaunching() {
         director->setOpenGLView(glview);
     }
 	#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
-	glview->setFrameSize(800, 480);
+	glview->setFrameSize(BASE_SCREEN_W, BASE_SCREEN_H);
 	#endif //only set fit on win32		
 
-	glview->setDesignResolutionSize(800, 480, ResolutionPolicy::EXACT_FIT );
+	glview->setDesignResolutionSize(BASE_SCREEN_W, BASE_SCREEN_H, ResolutionPolicy::EXACT_FIT );
 
     // turn on display FPS
     director->setDisplayStats(true);

@@ -5,7 +5,10 @@
 
 class MainMenuScene : public cocos2d::Layer
 {
-
+private:
+	cocos2d::Sprite* bubble ;
+	cocos2d::Label* scoreLabelTTF;
+	cocos2d::Label* scoreLabelBMF;
 public:
     // there's no 'id' in cpp, so we recommend returning the class instance pointer
     static cocos2d::Scene* createScene();

@@ -1,6 +1,8 @@
 #ifndef _DEFINES_H
 #define _DEFINES_H
 
+#include <iostream>
+
 #include "AppDelegate.h"
 #include "cocos2d.h"
 #include "GameState.h"
@@ -19,6 +21,7 @@
 //#include "Bullet.h"
 
 USING_NS_CC;
+using namespace std;
 
 //define for android
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)

@@ -1,6 +1,6 @@
 #include "Defines.h"
 
-Sprite* bubble ;
+extern int s_currentScore;
 
 Scene* MainMenuScene::createScene()
 {
@@ -25,7 +25,9 @@ Scene* MainMenuScene::createScene()
 void MainMenuScene::onEnter()
 {
 	Layer::onEnter();
-    
+
+    s_currentScore = 0;
+
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
@@ -75,6 +77,13 @@ void MainMenuScene::onEnter()
 	bubble->setPosition( Vec2 ( BASE_SCREEN_HALF_W, BASE_SCREEN_H + bubble->getContentSize().height ) );	
 	addChild( bubble ); 
     
+	scoreLabelTTF = Label::createWithTTF("0", "pixel.ttf", 30 );
+	scoreLabelTTF->setPosition( Vec2(  BASE_SCREEN_HALF_W, BASE_SCREEN_HALF_H ) );
+	addChild( scoreLabelTTF );
+
+	scoreLabelBMF= Label::createWithBMFont( "medium.fnt", "0" );
+	scoreLabelBMF->setPosition( Vec2(  BASE_SCREEN_HALF_W, BASE_SCREEN_HALF_H - 30 ) );
+	addChild( scoreLabelBMF );
 
 	//update each frame
 	this->schedule( schedule_selector( MainMenuScene::update ) );   
@@ -85,7 +94,17 @@ void MainMenuScene::update( float dt )
 	float currentPositionY = bubble->getPositionY();
 	bubble->setPositionY( currentPositionY - 3 );
 	if ( bubble->getPositionY() < -bubble->getContentSize().height )
+	{
 		bubble->setPosition( Vec2 ( BASE_SCREEN_HALF_W, BASE_SCREEN_H + bubble->getContentSize().height ) );	
+		
+		s_currentScore++;
+
+		//convert to string
+		stringstream str_score;
+		str_score << s_currentScore;		
+		scoreLabelTTF->setString( str_score.str() );
+		scoreLabelBMF->setString( str_score.str() );
+	}
 }
 
 

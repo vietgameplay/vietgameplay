@@ -44,8 +44,12 @@ void MainMenuScene::onEnter()
 	closeItem->setPosition(Vec2(origin.x + visibleSize.width - closeItem->getContentSize().width/2 ,
                                 origin.y + closeItem->getContentSize().height/2));
 
+	//button string -----------------------
+	MenuItemFont* pCloseItemText = MenuItemFont::create( "Close", this, menu_selector( MainMenuScene::menuCloseCallback ) );
+	pCloseItemText->setPosition( Vec2( 700, 400 ) );
+
     // create menu, it's an autorelease object
-    auto menu = Menu::create(closeItem, NULL);
+    auto menu = Menu::create(closeItem, pCloseItemText, NULL);
     menu->setPosition(Vec2::ZERO);
     this->addChild(menu, 1);
 
@@ -73,10 +77,12 @@ void MainMenuScene::onEnter()
     // add the sprite as a child to this layer
     this->addChild(sprite, 0);
 
+	//sprite ---------------------
 	bubble = Sprite::create("bubble.png", CCRect( 0, 0, 113, 113 ) );
 	bubble->setPosition( Vec2 ( BASE_SCREEN_HALF_W, BASE_SCREEN_H + bubble->getContentSize().height ) );	
 	addChild( bubble ); 
     
+	//font -----------------------
 	scoreLabelTTF = Label::createWithTTF("0", "pixel.ttf", 30 );
 	scoreLabelTTF->setPosition( Vec2(  BASE_SCREEN_HALF_W, BASE_SCREEN_HALF_H ) );
 	addChild( scoreLabelTTF );

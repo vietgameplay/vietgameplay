@@ -3,6 +3,7 @@
 
 #include "AppDelegate.h"
 #include "cocos2d.h"
+#include "GameState.h"
 #include "LogoScene.h"
 #include "MainMenuScene.h"
 //#include "SimpleAudioEngine.h"
@@ -42,8 +43,8 @@ USING_NS_CC;
 
 //define state
 #define STATE_LOGO 0
-#define STATE_INGAME 1
-#define STATE_GAME_OVER 2
+#define STATE_MAIN_MENU 1
+
 
 #define BASE_BUBBLE_JUMP_STEP 2
 #define BASE_BULLET_JUMP_STEP 10

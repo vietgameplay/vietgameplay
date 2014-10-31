@@ -11,9 +11,13 @@ Scene* MainMenuScene::createScene()
 
     // add layer as a child to scene
     scene->addChild(layer);
+	
+
+	Scene* tran_Scene = TransitionFlipX::create(0.5f, scene );
+	return tran_Scene;
 
     // return the scene
-    return scene;
+    //return scene;
 }
 
 // on "init" you need to initialize your instance

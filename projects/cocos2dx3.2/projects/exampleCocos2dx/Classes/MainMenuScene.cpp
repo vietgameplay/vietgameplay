@@ -1,5 +1,6 @@
 #include "Defines.h"
 
+Sprite* bubble ;
 
 Scene* MainMenuScene::createScene()
 {
@@ -69,8 +70,22 @@ void MainMenuScene::onEnter()
 
     // add the sprite as a child to this layer
     this->addChild(sprite, 0);
+
+	bubble = Sprite::create("bubble.png", CCRect( 0, 0, 113, 113 ) );
+	bubble->setPosition( Vec2 ( BASE_SCREEN_HALF_W, BASE_SCREEN_H + bubble->getContentSize().height ) );	
+	addChild( bubble ); 
     
-   
+
+	//update each frame
+	this->schedule( schedule_selector( MainMenuScene::update ) );   
+}
+
+void MainMenuScene::update( float dt )
+{
+	float currentPositionY = bubble->getPositionY();
+	bubble->setPositionY( currentPositionY - 3 );
+	if ( bubble->getPositionY() < -bubble->getContentSize().height )
+		bubble->setPosition( Vec2 ( BASE_SCREEN_HALF_W, BASE_SCREEN_H + bubble->getContentSize().height ) );	
 }
 
 

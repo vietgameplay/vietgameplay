@@ -46,6 +46,6 @@ void LogoScene::update( float dt )
 	s_frameCount++;
 	//switch state
 	if ( s_frameCount == FPS*TIME_LOGO )
-		Director::sharedDirector()->replaceScene( MainMenuScene::createScene() );
+		GameState::getInstance()->switchState( STATE_MAIN_MENU );
 }
 

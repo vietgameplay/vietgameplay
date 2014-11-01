@@ -91,6 +91,20 @@ void MainMenuScene::onEnter()
 	scoreLabelBMF->setPosition( Vec2(  BASE_SCREEN_HALF_W, BASE_SCREEN_HALF_H - 30 ) );
 	addChild( scoreLabelBMF );
 
+	//sheet animation
+	Sprite * bee_body  = Sprite::create(); // NEW - create a sprite here
+
+	Animation * anim_body = Animation::create();
+	anim_body->addSpriteFrame( SpriteFrame::create( "bee_body_1.png", Rect( 0, 0, 80, 117 ) ) );
+	anim_body->addSpriteFrame( SpriteFrame::create( "bee_body_2.png", Rect( 0, 0, 80, 117 ) ) );
+	anim_body->addSpriteFrame( SpriteFrame::create( "bee_body_3.png", Rect( 0, 0, 80, 117 ) ) );
+	anim_body->addSpriteFrame( SpriteFrame::create( "bee_body_2.png", Rect( 0, 0, 80, 117 ) ) );
+	anim_body->setDelayPerUnit( 0.2f );
+    anim_body->setLoops( -1 );
+    bee_body->runAction( Animate::create ( anim_body ) );
+    bee_body->setPosition( Vec2( 100, 240 ) );
+	addChild( bee_body );
+
 	//update each frame
 	this->schedule( schedule_selector( MainMenuScene::update ) );   
 }

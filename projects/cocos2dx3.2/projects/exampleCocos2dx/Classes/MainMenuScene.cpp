@@ -105,11 +105,26 @@ void MainMenuScene::onEnter()
     bee_body->setPosition( Vec2( 100, 240 ) );
 	addChild( bee_body );
 
-	CCArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo( "Enemy0.png", "Enemy0.plist", "Enemy.ExportJson" );
-	CCArmature* armature = CCArmature::create( "Enemy" );
-	armature->setPosition( CCPoint(600, 200 ) );
+	ArmatureDataManager::getInstance()->addArmatureFileInfo( "Enemy0.png", "Enemy0.plist", "Enemy.ExportJson" );
+	Armature* armature = Armature::create( "Enemy" );
+	armature->setPosition( Vec2(600, 200 ) );
 	armature->getAnimation()->playByIndex(0);
 	addChild(armature);
+
+	//progress timer
+	percent = 0;
+	Sprite *sprite_bar = Sprite::create( "bar.png" );
+	sprite_bar->setPosition( Vec2( 400, 50 ) );
+	addChild( sprite_bar );
+
+	Sprite *sprite_timer =  Sprite::create( "timer_bar.png" );
+	progressTimer = ProgressTimer::create( sprite_timer );    
+	progressTimer->setType(ProgressTimer::Type::BAR );
+	progressTimer->setMidpoint( Vec2( 1, 0 ) ); 
+	progressTimer->setBarChangeRate( Vec2( 1, 0 ) ); //   (1, 0) -> left <-> right  (0, 1) -> up <-> down
+	progressTimer->setPercentage(percent);
+	progressTimer->setPosition( Vec2( 400, 50 ) );
+	addChild( progressTimer );
 
 
 	//update each frame
@@ -132,6 +147,12 @@ void MainMenuScene::update( float dt )
 		scoreLabelTTF->setString( str_score.str() );
 		scoreLabelBMF->setString( str_score.str() );
 	}
+
+	//update progress timer
+	if( percent == 100 )
+		percent = 0;
+	percent++;
+	progressTimer->setPercentage( percent );
 }
 
 

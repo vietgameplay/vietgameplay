@@ -105,6 +105,13 @@ void MainMenuScene::onEnter()
     bee_body->setPosition( Vec2( 100, 240 ) );
 	addChild( bee_body );
 
+	CCArmatureDataManager::sharedArmatureDataManager()->addArmatureFileInfo( "Enemy0.png", "Enemy0.plist", "Enemy.ExportJson" );
+	CCArmature* armature = CCArmature::create( "Enemy" );
+	armature->setPosition( CCPoint(600, 200 ) );
+	armature->getAnimation()->playByIndex(0);
+	addChild(armature);
+
+
 	//update each frame
 	this->schedule( schedule_selector( MainMenuScene::update ) );   
 }

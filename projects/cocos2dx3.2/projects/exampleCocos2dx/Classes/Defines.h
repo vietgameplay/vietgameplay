@@ -5,6 +5,9 @@
 
 #include "AppDelegate.h"
 #include "cocos2d.h"
+#include "cocostudio/CocoStudio.h"
+#include "extensions/cocos-ext.h"
+
 #include "GameState.h"
 #include "LogoScene.h"
 #include "MainMenuScene.h"
@@ -21,6 +24,8 @@
 //#include "Bullet.h"
 
 USING_NS_CC;
+using namespace cocos2d::extension;
+using namespace cocostudio;
 using namespace std;
 
 //define for android

@@ -9,6 +9,7 @@ private:
 	cocos2d::Sprite* bubble ;
 	cocos2d::Label* scoreLabelTTF;
 	cocos2d::Label* scoreLabelBMF;
+	cocos2d::Label* touchString;
 	cocos2d::ProgressTimer* progressTimer;
 	int percent;
 public:
@@ -23,8 +24,13 @@ public:
     
     // a selector callback
     void menuCloseCallback( cocos2d::Ref* pSender );
-    
-    // implement the "static create()" method manually
+
+	//touch
+	bool onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event);
+    void onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* event);
+    void onTouchEnded(cocos2d::Touch* touch, cocos2d::Event* event);
+
+	// implement the "static create()" method manually
     CREATE_FUNC( MainMenuScene );
 };
 

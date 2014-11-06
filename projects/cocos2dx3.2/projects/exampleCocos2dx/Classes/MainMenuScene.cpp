@@ -28,6 +28,18 @@ void MainMenuScene::onEnter()
 
     s_currentScore = 0;
 
+	//touch
+	EventListenerTouchOneByOne*  listener = EventListenerTouchOneByOne::create();
+    listener->onTouchBegan = CC_CALLBACK_2(MainMenuScene::onTouchBegan, this);
+    listener->onTouchMoved = CC_CALLBACK_2(MainMenuScene::onTouchMoved, this);
+    listener->onTouchEnded = CC_CALLBACK_2(MainMenuScene::onTouchEnded, this);
+	listener->onTouchCancelled = CC_CALLBACK_2(MainMenuScene::onTouchCancelled, this);
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+	//make a string to show touch
+	touchString = Label::createWithTTF("No touch", "pixel.ttf", 30 );
+	touchString->setPosition( 100, 100 );
+	addChild( touchString, 1 );
+
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
@@ -153,6 +165,32 @@ void MainMenuScene::update( float dt )
 		percent = 0;
 	percent++;
 	progressTimer->setPercentage( percent );
+}
+
+//touch
+bool MainMenuScene::onTouchBegan(Touch* touch, Event* event)
+{
+	touchString->setString( "Touch began" );
+	touchString->setPosition( touch->getLocation() );
+	return true;
+}
+
+void MainMenuScene::onTouchMoved(Touch* touch, Event* event)
+{
+	touchString->setString( "Touch moved" );
+	touchString->setPosition( touch->getLocation() );
+}
+
+void MainMenuScene::onTouchEnded(Touch* touch, Event* event)
+{
+	touchString->setString( "Touch ended" );
+	touchString->setPosition( touch->getLocation() );
+}
+
+void MainMenuScene::onTouchCancelled(Touch* touch, Event* event)
+{
+	touchString->setString( "Touch began" );
+	touchString->setPosition( touch->getLocation() );
 }
 
 

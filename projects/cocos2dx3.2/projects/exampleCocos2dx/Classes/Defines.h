@@ -12,9 +12,7 @@
 #include "LogoScene.h"
 #include "MainMenuScene.h"
 #include "SimpleAudioEngine.h"
-//#include "FileOperation.h"
-//#include "GameState.h"
-//#include "LogoScene.h"
+#include "FileOperation.h"
 //#include "InGameScene.h"
 //#include "GameOverScene.h"
 
@@ -59,6 +57,7 @@ using namespace std;
 #define BASE_BULLET_JUMP_STEP 10
 
 #define GAMEVIEW_CLASS "com.vietgameplay.templategame.GameView"
+#define SAVE_PATH "/data/data/com.vietgameplay.templategame.GameView/tmpfile"
 
 #define IMAGE_LOGO "logo.png"
 #define IMAGE_BUBBLE "bubble.png"

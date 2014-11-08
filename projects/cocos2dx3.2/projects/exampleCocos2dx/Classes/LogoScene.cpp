@@ -21,7 +21,7 @@ Scene* LogoScene::createScene()
 void LogoScene::onEnter()
 {
 	LayerColor::onEnter();
-
+	FileOperation::readFile(); 
 	s_frameCount = 0;
 
 	LayerColor::initWithColor( Color4B(255, 255, 255 , 255) );

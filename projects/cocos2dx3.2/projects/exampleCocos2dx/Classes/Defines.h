@@ -11,7 +11,7 @@
 #include "GameState.h"
 #include "LogoScene.h"
 #include "MainMenuScene.h"
-//#include "SimpleAudioEngine.h"
+#include "SimpleAudioEngine.h"
 //#include "FileOperation.h"
 //#include "GameState.h"
 //#include "LogoScene.h"
@@ -24,6 +24,7 @@
 //#include "Bullet.h"
 
 USING_NS_CC;
+using namespace CocosDenshion;
 using namespace cocos2d::extension;
 using namespace cocostudio;
 using namespace std;

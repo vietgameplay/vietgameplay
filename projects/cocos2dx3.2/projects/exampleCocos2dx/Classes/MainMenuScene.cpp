@@ -171,6 +171,7 @@ bool MainMenuScene::onTouchBegan(Touch* touch, Event* event)
 {
 	touchString->setString( "Touch began" );
 	touchString->setPosition( touch->getLocation() );
+	SimpleAudioEngine::getInstance()->playEffect("SFX_CONFIRM.wav");
 	return true;
 }
 

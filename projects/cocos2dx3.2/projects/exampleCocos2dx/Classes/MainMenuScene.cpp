@@ -32,8 +32,7 @@ void MainMenuScene::onEnter()
 	EventListenerTouchOneByOne*  listener = EventListenerTouchOneByOne::create();
     listener->onTouchBegan = CC_CALLBACK_2(MainMenuScene::onTouchBegan, this);
     listener->onTouchMoved = CC_CALLBACK_2(MainMenuScene::onTouchMoved, this);
-    listener->onTouchEnded = CC_CALLBACK_2(MainMenuScene::onTouchEnded, this);
-	listener->onTouchCancelled = CC_CALLBACK_2(MainMenuScene::onTouchCancelled, this);
+    listener->onTouchEnded = CC_CALLBACK_2(MainMenuScene::onTouchEnded, this);	
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 	//make a string to show touch
 	touchString = Label::createWithTTF("No touch", "pixel.ttf", 30 );
@@ -186,13 +185,6 @@ void MainMenuScene::onTouchEnded(Touch* touch, Event* event)
 	touchString->setString( "Touch ended" );
 	touchString->setPosition( touch->getLocation() );
 }
-
-void MainMenuScene::onTouchCancelled(Touch* touch, Event* event)
-{
-	touchString->setString( "Touch began" );
-	touchString->setPosition( touch->getLocation() );
-}
-
 
 void MainMenuScene::menuCloseCallback(Ref* pSender)
 {

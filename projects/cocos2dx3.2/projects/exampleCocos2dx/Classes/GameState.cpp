@@ -5,7 +5,6 @@ GameState* GameState::instance;
 extern int s_frameCount;
 extern int s_currentState;
 extern int s_previousState;
-Director *s_director = Director::sharedDirector();
 
 
 GameState* GameState::getInstance()
@@ -23,7 +22,7 @@ void GameState::switchState( int currentState )
 	switch ( s_currentState )
 	{		
 	case STATE_MAIN_MENU:
-		s_director->replaceScene ( MainMenuScene::createScene() ); 
+		Director::sharedDirector()->replaceScene ( MainMenuScene::createScene() ); 
 		break;		
 
 	}

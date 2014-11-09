@@ -5,15 +5,15 @@
 
 #include "AppDelegate.h"
 #include "cocos2d.h"
-#include "cocostudio/CocoStudio.h"
-#include "extensions/cocos-ext.h"
+//#include "cocostudio/CocoStudio.h"
+//#include "extensions/cocos-ext.h"
 
 #include "GameState.h"
 #include "LogoScene.h"
 #include "MainMenuScene.h"
 #include "SimpleAudioEngine.h"
 #include "FileOperation.h"
-//#include "InGameScene.h"
+#include "InGameScene.h"
 //#include "GameOverScene.h"
 
 
@@ -23,8 +23,8 @@
 
 USING_NS_CC;
 using namespace CocosDenshion;
-using namespace cocos2d::extension;
-using namespace cocostudio;
+//using namespace cocos2d::extension;
+//using namespace cocostudio;
 using namespace std;
 
 //define for android
@@ -51,6 +51,7 @@ using namespace std;
 //define state
 #define STATE_LOGO 0
 #define STATE_MAIN_MENU 1
+#define STATE_INGAME 2
 
 
 #define BASE_BUBBLE_JUMP_STEP 2

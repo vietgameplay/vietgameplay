@@ -24,6 +24,9 @@ void GameState::switchState( int currentState )
 	case STATE_MAIN_MENU:
 		Director::sharedDirector()->replaceScene ( MainMenuScene::createScene() ); 
 		break;		
+	case STATE_INGAME:
+		Director::sharedDirector()->replaceScene ( InGameScene::createScene() ); 
+		break;		
 
 	}
 }

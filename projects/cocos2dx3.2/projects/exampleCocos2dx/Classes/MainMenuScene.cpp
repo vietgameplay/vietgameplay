@@ -56,7 +56,7 @@ void MainMenuScene::onEnter()
                                 origin.y + closeItem->getContentSize().height/2));
 
 	//button string -----------------------
-	MenuItemFont* pCloseItemText = MenuItemFont::create( "Close", this, menu_selector( MainMenuScene::menuCloseCallback ) );
+	MenuItemFont* pCloseItemText = MenuItemFont::create( "InGame", this, menu_selector( MainMenuScene::inGameCallback ) );
 	pCloseItemText->setPosition( Vec2( 700, 400 ) );
 
     // create menu, it's an autorelease object
@@ -116,11 +116,11 @@ void MainMenuScene::onEnter()
     bee_body->setPosition( Vec2( 100, 240 ) );
 	addChild( bee_body );
 
-	ArmatureDataManager::getInstance()->addArmatureFileInfo( "Enemy0.png", "Enemy0.plist", "Enemy.ExportJson" );
+	/*ArmatureDataManager::getInstance()->addArmatureFileInfo( "Enemy0.png", "Enemy0.plist", "Enemy.ExportJson" );
 	Armature* armature = Armature::create( "Enemy" );
 	armature->setPosition( Vec2(600, 200 ) );
 	armature->getAnimation()->playByIndex(0);
-	addChild(armature);
+	addChild(armature);*/
 
 	//progress timer
 	percent = 0;
@@ -199,4 +199,9 @@ void MainMenuScene::menuCloseCallback(Ref* pSender)
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     exit(0);
 #endif
+}
+
+void MainMenuScene::inGameCallback(Ref* pSender)
+{
+	GameState::getInstance()->switchState( STATE_INGAME );
 }

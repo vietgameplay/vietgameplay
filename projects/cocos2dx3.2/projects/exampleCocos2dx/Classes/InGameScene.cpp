@@ -43,8 +43,16 @@ void InGameScene::onEnter()
 	closeItem->setPosition(Vec2(origin.x + visibleSize.width - closeItem->getContentSize().width/2 ,
                                 origin.y + closeItem->getContentSize().height/2));
 
+	MenuItemFont* showInterstitialAd = MenuItemFont::create( "Show InterstitialAd", this, menu_selector( InGameScene::showInterstitialAd ) );
+	showInterstitialAd->setPosition( Vec2( 200, 200 ) );
+
+	MenuItemFont* showBanner = MenuItemFont::create( "Show Baner", this, menu_selector( InGameScene::showBanner ) );
+	showBanner->setPosition( Vec2( 200, 160 ) );
+
+	MenuItemFont* hideBanner = MenuItemFont::create( "Hide Baner", this, menu_selector( InGameScene::hideBanner ) );
+	hideBanner->setPosition( Vec2( 200, 120 ) );
 	// create menu, it's an autorelease object
-    auto menu = Menu::create(closeItem, NULL);
+    auto menu = Menu::create(closeItem, showInterstitialAd, showBanner, hideBanner, NULL);
     menu->setPosition(Vec2::ZERO);
     this->addChild(menu, 1);
 
@@ -103,5 +111,26 @@ void InGameScene::menuCloseCallback(Ref* pSender)
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     exit(0);
+#endif
+}
+
+void InGameScene::showInterstitialAd( cocos2d::Ref* pSender )
+{
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+	showInterstitialAdStartApp();
+#endif
+}
+
+void InGameScene::showBanner ( cocos2d::Ref* pSender )
+{
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+	showBannerGoogle();
+#endif
+}
+
+void InGameScene::hideBanner ( cocos2d::Ref* pSender )
+{
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+	hideBannerGoogle();
 #endif
 }

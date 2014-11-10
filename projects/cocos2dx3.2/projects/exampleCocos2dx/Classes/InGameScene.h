@@ -19,6 +19,12 @@ public:
     // a selector callback
     void menuCloseCallback( cocos2d::Ref* pSender );
 
+    void showInterstitialAd( cocos2d::Ref* pSender );
+
+    void showBanner ( cocos2d::Ref* pSender );
+
+    void hideBanner ( cocos2d::Ref* pSender );
+
 	// multiple touch
 	void onTouchesBegan(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event  *event);
     void onTouchesMoved(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event  *event);

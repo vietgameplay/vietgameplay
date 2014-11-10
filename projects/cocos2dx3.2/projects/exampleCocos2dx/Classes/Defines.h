@@ -8,6 +8,10 @@
 //#include "cocostudio/CocoStudio.h"
 //#include "extensions/cocos-ext.h"
 
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+#include "Jni_code.h"
+#endif
+
 #include "GameState.h"
 #include "LogoScene.h"
 #include "MainMenuScene.h"
@@ -57,8 +61,8 @@ using namespace std;
 #define BASE_BUBBLE_JUMP_STEP 2
 #define BASE_BULLET_JUMP_STEP 10
 
-#define GAMEVIEW_CLASS "com.vietgameplay.templategame.GameView"
-#define SAVE_PATH "/data/data/com.vietgameplay.templategame.GameView/tmpfile"
+#define GAMEVIEW_CLASS "com.vietgameplay.exampleCocos2dx.AppActivity"
+#define SAVE_PATH "/data/data/com.vietgameplay.exampleCocos2dx.AppActivity/tmpfile"
 
 #define IMAGE_LOGO "logo.png"
 #define IMAGE_BUBBLE "bubble.png"

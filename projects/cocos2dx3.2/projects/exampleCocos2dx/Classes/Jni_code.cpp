@@ -24,6 +24,24 @@ extern "C"
 			t.env->CallStaticVoidMethod(t.classID,t.methodID);
 		}
     }
+
+    //show banner
+        void showBannerStartApp(){
+        	JniMethodInfo t;
+    		if (JniHelper::getStaticMethodInfo(t, GAMEVIEW_CLASS, "showBannerStartApp", "()V"))
+    		{
+    			t.env->CallStaticVoidMethod(t.classID,t.methodID);
+    		}
+        }
+
+        //hide banner
+        void hideBannerStartApp(){
+        	JniMethodInfo t;
+    		if (JniHelper::getStaticMethodInfo(t, GAMEVIEW_CLASS, "hideBannerStartApp", "()V"))
+    		{
+    			t.env->CallStaticVoidMethod(t.classID,t.methodID);
+    		}
+        }
 	
     //show interstitial ad
     void showInterstitialAdStartApp(){

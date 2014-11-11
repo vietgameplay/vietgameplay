@@ -34,6 +34,11 @@ void LogoScene::onEnter()
 
 	////update for each frame ---------------------------------
 	this->schedule( schedule_selector( LogoScene::update ) );
+
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+	hideBannerGoogle();
+	hideBannerStartApp();
+#endif
 }
 
 void LogoScene::update( float dt )

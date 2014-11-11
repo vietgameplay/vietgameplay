@@ -36,6 +36,9 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.LinearLayout;
+
+import android.widget.RelativeLayout;
+
 //google
 import com.google.ads.AdRequest;
 import com.google.ads.AdSize;
@@ -45,6 +48,7 @@ import com.startapp.android.publish.StartAppAd;
 import com.startapp.android.publish.AdDisplayListener;
 import com.startapp.android.publish.AdEventListener;
 import com.startapp.android.publish.Ad;
+import com.startapp.android.publish.banner.Banner;
 public class AppActivity extends Cocos2dxActivity {
 	
 	static Activity m_activity;
@@ -54,6 +58,7 @@ public class AppActivity extends Cocos2dxActivity {
 	
 	//start app
 	static StartAppAd m_startAppAd;
+	static Banner m_startAppBanner;
 	
 	final static String GGP_ADMOB_ID="ca-app-pub-5629660628975902/1330315079";	
 	final static String STARTAPP_DEV_ID="110088576";	
@@ -78,12 +83,20 @@ public class AppActivity extends Cocos2dxActivity {
 			//start app
 			StartAppAd.init(this, STARTAPP_DEV_ID, STARTAPP_APP_ID);
 			m_startAppAd = new StartAppAd(this);	
-			
+			m_startAppBanner = new Banner(this);
+			RelativeLayout.LayoutParams bannerParameters =
+			            new RelativeLayout.LayoutParams(
+			                        RelativeLayout.LayoutParams.WRAP_CONTENT,
+			                        RelativeLayout.LayoutParams.WRAP_CONTENT);
+			bannerParameters.addRule(RelativeLayout.CENTER_HORIZONTAL);
+			bannerParameters.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);    
+			addContentView(m_startAppBanner, bannerParameters);		
 		} catch (Exception e) {
 			Log.d("ndtai", "error: " + e);
 		}			
 	}
 	
+	//google-------------------------------
 	//show banner
 	static void showBannerGoogle(){
 		m_activity.runOnUiThread(new Runnable() {
@@ -104,6 +117,26 @@ public class AppActivity extends Cocos2dxActivity {
 		});
     }
 	
+	//startapp-------------------------------
+	//show banner
+	static void showBannerStartApp(){
+			m_activity.runOnUiThread(new Runnable() {
+				@Override
+				public void run() {
+					m_startAppBanner.showBanner();			
+				}
+			});
+		}
+		
+	//hide banner
+	static void hideBannerStartApp(){
+			m_activity.runOnUiThread(new Runnable() {
+				@Override
+				public void run() {
+					m_startAppBanner.hideBanner();
+				}
+			});
+	    }
 	//show interstitialAd
 	static void showInterstitialAdStartApp(){
 		try{

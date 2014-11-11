@@ -102,16 +102,7 @@ void InGameScene::onTouchesEnded(const std::vector<Touch*>& touches, Event  *eve
 
 void InGameScene::menuCloseCallback(Ref* pSender)
 {
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_WP8) || (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
-	MessageBox("You pressed the close button. Windows Store Apps do not implement a close button.","Alert");
-    return;
-#endif
-
-    Director::getInstance()->end();
-
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    exit(0);
-#endif
+	GameState::getInstance()->switchState(STATE_MAIN_MENU);
 }
 
 void InGameScene::showInterstitialAd( cocos2d::Ref* pSender )
@@ -125,6 +116,7 @@ void InGameScene::showBanner ( cocos2d::Ref* pSender )
 {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 	showBannerGoogle();
+	showBannerStartApp();
 #endif
 }
 
@@ -132,5 +124,6 @@ void InGameScene::hideBanner ( cocos2d::Ref* pSender )
 {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 	hideBannerGoogle();
+	hideBannerStartApp();
 #endif
 }

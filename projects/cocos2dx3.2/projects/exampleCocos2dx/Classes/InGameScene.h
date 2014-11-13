@@ -19,7 +19,9 @@ public:
     // a selector callback
     void menuCloseCallback( cocos2d::Ref* pSender );
 
-    void showInterstitialAd( cocos2d::Ref* pSender );
+    void showInterstitialAdStart( cocos2d::Ref* pSender );
+
+    void showInterstitialAdRev( cocos2d::Ref* pSender );
 
     void showBanner ( cocos2d::Ref* pSender );
 

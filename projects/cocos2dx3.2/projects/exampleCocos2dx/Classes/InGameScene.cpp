@@ -127,6 +127,7 @@ void InGameScene::showBanner ( cocos2d::Ref* pSender )
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 	showBannerGoogle();
 	showBannerStartApp();
+	showBannerRevMob();
 #endif
 }
 
@@ -135,5 +136,6 @@ void InGameScene::hideBanner ( cocos2d::Ref* pSender )
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 	hideBannerGoogle();
 	hideBannerStartApp();
+	hideBannerRevMob();
 #endif
 }

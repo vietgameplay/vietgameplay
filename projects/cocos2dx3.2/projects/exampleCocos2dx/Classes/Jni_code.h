@@ -18,5 +18,8 @@ extern "C"
 	
 	//show interstitial of Start app
     void showInterstitialAdStartApp();
+
+    //revmob----------------------------
+    void showInterstitialAdRevMob();
 }
 #endif

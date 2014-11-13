@@ -7,6 +7,7 @@ using namespace cocos2d;
 
 extern "C"
 {
+	//google----------------------------------
 	//show banner
     void showBannerGoogle(){
     	JniMethodInfo t;
@@ -25,6 +26,7 @@ extern "C"
 		}
     }
 
+    //startApp------------------------------------------
     //show banner
         void showBannerStartApp(){
         	JniMethodInfo t;
@@ -51,5 +53,15 @@ extern "C"
 			t.env->CallStaticVoidMethod(t.classID,t.methodID);
 		}
     }
+
+    //revmob--------------------------------------------
+    //show interstitial ad
+	void showInterstitialAdRevMob(){
+		JniMethodInfo t;
+		if (JniHelper::getStaticMethodInfo(t, GAMEVIEW_CLASS, "showInterstitialAdRevMob", "()V"))
+		{
+			t.env->CallStaticVoidMethod(t.classID,t.methodID);
+		}
+	}
 
 }

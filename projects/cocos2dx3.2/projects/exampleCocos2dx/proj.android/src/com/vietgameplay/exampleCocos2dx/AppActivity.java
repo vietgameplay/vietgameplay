@@ -36,27 +36,33 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.LinearLayout;
-
 import android.widget.RelativeLayout;
 
-//google
-import com.google.ads.AdRequest;
-import com.google.ads.AdSize;
-import com.google.ads.AdView;
+//google----------------------------
+
+
 //start app
 import com.startapp.android.publish.StartAppAd;
 import com.startapp.android.publish.AdDisplayListener;
 import com.startapp.android.publish.AdEventListener;
 import com.startapp.android.publish.Ad;
 import com.startapp.android.publish.banner.Banner;
+
+//Revmob---------------------------
+import com.revmob.RevMob;
+import com.revmob.RevMobAdsListener;
+import com.revmob.ads.fullscreen.RevMobFullscreen;
+import com.revmob.ads.banner.RevMobBanner;
+import com.revmob.internal.RMLog;
+
 public class AppActivity extends Cocos2dxActivity {
 	
 	static Activity m_activity;
 	
-	//google
-	static AdView m_adView;
+	//google--------------------------------
 	
-	//start app
+	
+	//start app---------------------------
 	static StartAppAd m_startAppAd;
 	static Banner m_startAppBanner;
 	
@@ -64,23 +70,24 @@ public class AppActivity extends Cocos2dxActivity {
 	final static String STARTAPP_DEV_ID="110088576";	
 	final static String STARTAPP_APP_ID="210163514";	
 	
+	//revmob---------------------------------------
+	static RevMob m_revmob;
+	static RevMobAdsListener m_revmobListener;
+	static RevMobBanner m_revmobBanner;
+	static RevMobFullscreen m_revmobFullscreen;
+	
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		m_activity=this;
 			
 		try {
-			//google banner
-			LayoutParams adParams = new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT);
-			AdRequest request = new AdRequest();
 			
-			m_adView = new AdView(this, AdSize.SMART_BANNER, GGP_ADMOB_ID);					
-			m_adView.loadAd(request);
-						
-			m_adView.setGravity(Gravity.TOP|Gravity.LEFT);			
-			// Adding full screen container
-			addContentView(m_adView, adParams);		
-
-			//start app
+			LayoutParams adParams = new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT);
+			
+			//google banner----------------------------
+			
+			
+			//start app--------------------------------
 			StartAppAd.init(this, STARTAPP_DEV_ID, STARTAPP_APP_ID);
 			m_startAppAd = new StartAppAd(this);	
 			m_startAppBanner = new Banner(this);
@@ -91,8 +98,66 @@ public class AppActivity extends Cocos2dxActivity {
 			bannerParameters.addRule(RelativeLayout.CENTER_HORIZONTAL);
 			bannerParameters.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);    
 			addContentView(m_startAppBanner, bannerParameters);		
+			
+			//revmob--------------------------
+			m_revmobListener = new RevMobAdsListener() {
+				@Override
+				public void onRevMobSessionIsStarted() {
+					Log.d("Revmob", "RevMob session is started.");
+				}
+		    
+				@Override
+				public void onRevMobSessionNotStarted(String message) {
+					Log.d("Revmob", "RevMob session failed to start.");
+				}
+		    
+		    @Override
+				public void onRevMobAdReceived() {
+		    	Log.d("Revmob", "RevMob ad received.");
+				}
+
+				@Override
+				public void onRevMobAdNotReceived(String message) {
+					Log.d("Revmob", "RevMob ad not received.");
+				}
+
+				@Override
+				public void onRevMobAdDismiss() {
+					Log.d("Revmob", "Ad dismissed.");
+				}
+
+				@Override
+				public void onRevMobAdClicked() {
+					Log.d("Revmob", "Ad clicked.");
+				}
+
+				@Override
+				public void onRevMobAdDisplayed() {
+					Log.d("Revmob", "Ad displayed.");
+				}
+				
+				@Override
+				public void onRevMobEulaIsShown() {
+					Log.d("Revmob", "[RevMob Sample App] Eula is shown.");	
+				}
+
+				@Override
+				public void onRevMobEulaWasAcceptedAndDismissed() {
+					Log.d("Revmob", "[RevMob Sample App] Eula was accepeted and dismissed.");
+				}
+
+				@Override
+				public void onRevMobEulaWasRejected() {
+					Log.d("Revmob", "[RevMob Sample App] Eula was rejected.");
+					
+				}
+			};
+			
+			m_revmob = RevMob.startWithListener(this, m_revmobListener);		
+			
+			
 		} catch (Exception e) {
-			Log.d("ndtai", "error: " + e);
+			Log.d("Ads", "error: " + e);
 		}			
 	}
 	
@@ -102,7 +167,7 @@ public class AppActivity extends Cocos2dxActivity {
 		m_activity.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-				m_adView.setVisibility(View.VISIBLE);				
+				//m_adView.setVisibility(View.VISIBLE);			
 			}
 		});
 	}
@@ -112,7 +177,7 @@ public class AppActivity extends Cocos2dxActivity {
 		m_activity.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-				m_adView.setVisibility(View.INVISIBLE);
+				//m_adView.setVisibility(View.INVISIBLE);				
 			}
 		});
     }
@@ -145,15 +210,15 @@ public class AppActivity extends Cocos2dxActivity {
 			m_startAppAd.showAd(new AdDisplayListener() {
 				@Override
 				public void adHidden(Ad ad) {
-					Log.d("ndtai", "-------------------------adHidden------------------");				
+					Log.d("StartApp", "-------------------------adHidden------------------");				
 				}
 				@Override
 				public void adDisplayed(Ad ad) {
-					Log.d("ndtai", "-------------------------adDisplayed------------------");				
+					Log.d("StartApp", "-------------------------adDisplayed------------------");				
 				}
 				@Override
 				public void adClicked(Ad ad) {
-					Log.d("ndtai", "-------------------------adClicked------------------");				
+					Log.d("StartApp", "-------------------------adClicked------------------");				
 				}
 			}); 
 			
@@ -161,19 +226,33 @@ public class AppActivity extends Cocos2dxActivity {
 			m_startAppAd.loadAd (new AdEventListener() {
 				@Override
 				public void onReceiveAd(Ad ad) {
-					Log.d("ndtai", "-------------------------onReceiveAd------------------");				
+					Log.d("StartApp", "-------------------------onReceiveAd------------------");				
 				}
 				@Override
 				public void onFailedToReceiveAd(Ad ad) {
-					Log.d("ndtai", "-------------------------onFailedToReceiveAd------------------");				
+					Log.d("StartApp", "-------------------------onFailedToReceiveAd------------------");				
 				}
 			}); 
 		}
 		catch(Exception e ){
-			Log.d("ndtai", "error: " + e);
+			Log.d("Ads", "error: " + e);
 		}
 	}
-		
+	
+	
+	//Revmob------------------------------------
+	//show interstitialAd	
+	static void showInterstitialAdRevMob(){
+		m_activity.runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				m_revmobFullscreen = m_revmob.createFullscreen(m_activity, m_revmobListener);
+				m_revmobFullscreen.load();
+				m_revmobFullscreen.show();
+			}
+		});
+    }
+
 	
 	/** Called when leaving the activity */
 	@Override

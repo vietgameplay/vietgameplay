@@ -43,8 +43,11 @@ void InGameScene::onEnter()
 	closeItem->setPosition(Vec2(origin.x + visibleSize.width - closeItem->getContentSize().width/2 ,
                                 origin.y + closeItem->getContentSize().height/2));
 
-	MenuItemFont* showInterstitialAd = MenuItemFont::create( "Show InterstitialAd", this, menu_selector( InGameScene::showInterstitialAd ) );
-	showInterstitialAd->setPosition( Vec2( 200, 200 ) );
+	MenuItemFont* showInterstitialAdRevmob = MenuItemFont::create( "Show InterstitialAd Revmob", this, menu_selector( InGameScene::showInterstitialAdRev ) );
+	showInterstitialAdRevmob->setPosition( Vec2( 200, 240 ) );
+
+	MenuItemFont* showInterstitialAdStartApp = MenuItemFont::create( "Show InterstitialAd StartAPP", this, menu_selector( InGameScene::showInterstitialAdStart ) );
+	showInterstitialAdStartApp->setPosition( Vec2( 200, 200 ) );
 
 	MenuItemFont* showBanner = MenuItemFont::create( "Show Baner", this, menu_selector( InGameScene::showBanner ) );
 	showBanner->setPosition( Vec2( 200, 160 ) );
@@ -52,7 +55,7 @@ void InGameScene::onEnter()
 	MenuItemFont* hideBanner = MenuItemFont::create( "Hide Baner", this, menu_selector( InGameScene::hideBanner ) );
 	hideBanner->setPosition( Vec2( 200, 120 ) );
 	// create menu, it's an autorelease object
-    auto menu = Menu::create(closeItem, showInterstitialAd, showBanner, hideBanner, NULL);
+    auto menu = Menu::create(closeItem, showInterstitialAdRevmob, showInterstitialAdStartApp, showBanner, hideBanner, NULL);
     menu->setPosition(Vec2::ZERO);
     this->addChild(menu, 1);
 
@@ -105,10 +108,17 @@ void InGameScene::menuCloseCallback(Ref* pSender)
 	GameState::getInstance()->switchState(STATE_MAIN_MENU);
 }
 
-void InGameScene::showInterstitialAd( cocos2d::Ref* pSender )
+void InGameScene::showInterstitialAdStart( cocos2d::Ref* pSender )
 {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 	showInterstitialAdStartApp();
+#endif
+}
+
+void InGameScene::showInterstitialAdRev( cocos2d::Ref* pSender )
+{
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+	showInterstitialAdRevMob();
 #endif
 }
 

@@ -20,6 +20,13 @@ extern "C"
     void showInterstitialAdStartApp();
 
     //revmob----------------------------
+    //show banner
+	void showBannerRevMob();
+
+	//hide banner
+	void hideBannerRevMob();
+
+	//show interstitial
     void showInterstitialAdRevMob();
 }
 #endif

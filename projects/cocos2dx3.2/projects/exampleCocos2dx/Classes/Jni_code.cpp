@@ -55,6 +55,24 @@ extern "C"
     }
 
     //revmob--------------------------------------------
+    //show banner
+	void showBannerRevMob(){
+		JniMethodInfo t;
+		if (JniHelper::getStaticMethodInfo(t, GAMEVIEW_CLASS, "showBannerRevMob", "()V"))
+		{
+			t.env->CallStaticVoidMethod(t.classID,t.methodID);
+		}
+	}
+
+	//hide banner
+	void hideBannerRevMob(){
+		JniMethodInfo t;
+		if (JniHelper::getStaticMethodInfo(t, GAMEVIEW_CLASS, "hideBannerRevMob", "()V"))
+		{
+			t.env->CallStaticVoidMethod(t.classID,t.methodID);
+		}
+	}
+
     //show interstitial ad
 	void showInterstitialAdRevMob(){
 		JniMethodInfo t;

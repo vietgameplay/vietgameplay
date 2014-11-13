@@ -34,11 +34,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 //google----------------------------
+
 
 
 //start app
@@ -241,6 +243,32 @@ public class AppActivity extends Cocos2dxActivity {
 	
 	
 	//Revmob------------------------------------
+	static void showBannerRevMob(){		
+		m_activity.runOnUiThread(new Runnable() {
+			@Override
+			public void run() {		
+				m_revmobBanner = m_revmob.createBanner(m_activity, m_revmobListener);
+				ViewGroup viewGroup = (ViewGroup) ((ViewGroup) m_activity.findViewById(android.R.id.content)).getChildAt(0);
+				LinearLayout layout = new LinearLayout(m_activity);
+				layout.setOrientation(LinearLayout.VERTICAL);			    
+			    layout.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+			    layout.addView(m_revmobBanner);			    
+				viewGroup.addView(layout);
+			}
+		});
+	}
+	
+	//hide banner
+	static void hideBannerRevMob(){
+		m_activity.runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				Log.d("Ads", "-----------------hide banner Revmob");
+				if ( m_revmobBanner != null )
+					m_revmobBanner.hide();
+			}
+		});
+    }
 	//show interstitialAd	
 	static void showInterstitialAdRevMob(){
 		m_activity.runOnUiThread(new Runnable() {

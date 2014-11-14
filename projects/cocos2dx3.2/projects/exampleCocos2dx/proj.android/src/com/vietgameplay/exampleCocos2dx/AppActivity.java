@@ -47,14 +47,14 @@ import com.google.android.gms.ads.AdView;
 
 
 
-//start app
+//start app-------------------------------------
 import com.startapp.android.publish.StartAppAd;
 import com.startapp.android.publish.AdDisplayListener;
 import com.startapp.android.publish.AdEventListener;
 import com.startapp.android.publish.Ad;
 import com.startapp.android.publish.banner.Banner;
 
-//Revmob---------------------------
+//Revmob----------------------------------------
 import com.revmob.RevMob;
 import com.revmob.RevMobAdsListener;
 import com.revmob.ads.fullscreen.RevMobFullscreen;
@@ -97,13 +97,13 @@ public class AppActivity extends Cocos2dxActivity {
 		    m_googleBanner.setAdListener(new AdListener() {
 		    	@Override
 		    	public void onAdClosed() {
-		    		Log.d("Google", "Google ---- onAdClosed");		    		
+		    		Log.d("Google", "Google --Banner-- onAdClosed");		    		
 		    	}
 
 		    	/** Called when an ad failed to load. */
 		    	@Override
 		      	public void onAdFailedToLoad(int error) {
-		    	  Log.d("Google", "Google ---- onAdFailedToLoad");		
+		    	  Log.d("Google", "Google --Banner-- onAdFailedToLoad");		
 		      	}
 
 		      /**
@@ -113,7 +113,7 @@ public class AppActivity extends Cocos2dxActivity {
 		       */
 		    	@Override
 		      	public void onAdLeftApplication() {
-		    	  	Log.d("Google", "Google ---- onAdLeftApplication");		
+		    	  	Log.d("Google", "Google --Banner-- onAdLeftApplication");		
 		      	}
 
 		      	/**
@@ -122,13 +122,13 @@ public class AppActivity extends Cocos2dxActivity {
 		       	*/
 		      	@Override
 		      	public void onAdOpened() {
-		      		Log.d("Google", "Google ---- onAdOpened");	
+		      		Log.d("Google", "Google --Banner-- onAdOpened");	
 		      	}
 
 		      	/** Called when an ad is loaded. */
 		      	@Override
 		      	public void onAdLoaded() {
-		      		Log.d("Google", "Google ---- onAdLoaded");	
+		      		Log.d("Google", "Google --Banner-- onAdLoaded");	
 		      	}
 		    }); 
 		    // Start loading the ad in the background.
@@ -158,52 +158,52 @@ public class AppActivity extends Cocos2dxActivity {
 			m_revmobListener = new RevMobAdsListener() {
 				@Override
 				public void onRevMobSessionIsStarted() {
-					Log.d("Revmob", "RevMob session is started.");
+					Log.d("Revmob", "RevMob -----session is started.");
 				}
 		    
 				@Override
 				public void onRevMobSessionNotStarted(String message) {
-					Log.d("Revmob", "RevMob session failed to start.");
+					Log.d("Revmob", "RevMob ------session failed to start.");
 				}
 		    
 		    @Override
 				public void onRevMobAdReceived() {
-		    	Log.d("Revmob", "RevMob ad received.");
+		    	Log.d("Revmob", "RevMob -------ad received.");
 				}
 
 				@Override
 				public void onRevMobAdNotReceived(String message) {
-					Log.d("Revmob", "RevMob ad not received.");
+					Log.d("Revmob", "RevMob --------ad not received.");
 				}
 
 				@Override
 				public void onRevMobAdDismiss() {
-					Log.d("Revmob", "Ad dismissed.");
+					Log.d("Revmob", "Revmob --------Ad dismissed.");
 				}
 
 				@Override
 				public void onRevMobAdClicked() {
-					Log.d("Revmob", "Ad clicked.");
+					Log.d("Revmob", "Revmob -------Ad clicked.");
 				}
 
 				@Override
 				public void onRevMobAdDisplayed() {
-					Log.d("Revmob", "Ad displayed.");
+					Log.d("Revmob", "Revmob -------Ad displayed.");
 				}
 				
 				@Override
 				public void onRevMobEulaIsShown() {
-					Log.d("Revmob", "[RevMob Sample App] Eula is shown.");	
+					Log.d("Revmob", "Revmob ------- Eula is shown.");	
 				}
 
 				@Override
 				public void onRevMobEulaWasAcceptedAndDismissed() {
-					Log.d("Revmob", "[RevMob Sample App] Eula was accepeted and dismissed.");
+					Log.d("Revmob", "Revmob ------- Eula was accepeted and dismissed.");
 				}
 
 				@Override
 				public void onRevMobEulaWasRejected() {
-					Log.d("Revmob", "[RevMob Sample App] Eula was rejected.");
+					Log.d("Revmob", "Revmob -------Eula was rejected.");
 					
 				}
 			};
@@ -212,7 +212,7 @@ public class AppActivity extends Cocos2dxActivity {
 			
 			
 		} catch (Exception e) {
-			Log.d("Ads", "error: " + e);
+			Log.d("Ads", "Revmob -------error: " + e);
 		}			
 	}
 	
@@ -238,6 +238,17 @@ public class AppActivity extends Cocos2dxActivity {
 			}
 		});
     }
+	
+	//show interstitialAd
+	static void showInterstitialAdGoogle(){
+		m_activity.runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+			  
+			}
+		});
+    }
+	
 	
 	//startapp-------------------------------
 	//show banner
@@ -272,15 +283,15 @@ public class AppActivity extends Cocos2dxActivity {
 				m_startAppAd.showAd(new AdDisplayListener() {
 					@Override
 					public void adHidden(Ad ad) {
-						Log.d("StartApp", "-------------------------adHidden------------------");				
+						Log.d("StartApp", "StartApp-------------------------adHidden------------------");				
 					}
 					@Override
 					public void adDisplayed(Ad ad) {
-						Log.d("StartApp", "-------------------------adDisplayed------------------");				
+						Log.d("StartApp", "StartApp-------------------------adDisplayed------------------");				
 					}
 					@Override
 					public void adClicked(Ad ad) {
-						Log.d("StartApp", "-------------------------adClicked------------------");				
+						Log.d("StartApp", "StartApp-------------------------adClicked------------------");				
 					}
 				}); 
 				
@@ -288,11 +299,11 @@ public class AppActivity extends Cocos2dxActivity {
 				m_startAppAd.loadAd (new AdEventListener() {
 					@Override
 					public void onReceiveAd(Ad ad) {
-						Log.d("StartApp", "-------------------------onReceiveAd------------------");				
+						Log.d("StartApp", "StartApp-------------------------onReceiveAd------------------");				
 					}
 					@Override
 					public void onFailedToReceiveAd(Ad ad) {
-						Log.d("StartApp", "-------------------------onFailedToReceiveAd------------------");				
+						Log.d("StartApp", "StartApp-------------------------onFailedToReceiveAd------------------");				
 					}
 				}); 
 			}
@@ -322,8 +333,7 @@ public class AppActivity extends Cocos2dxActivity {
 	static void hideBannerRevMob(){
 		m_activity.runOnUiThread(new Runnable() {
 			@Override
-			public void run() {
-				Log.d("Ads", "-----------------hide banner Revmob");
+			public void run() {				
 				if ( m_revmobBanner != null )
 					m_revmobBanner.hide();
 			}

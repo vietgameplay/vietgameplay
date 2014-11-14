@@ -40,6 +40,10 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 //google----------------------------
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
 
 
 
@@ -59,37 +63,86 @@ import com.revmob.internal.RMLog;
 
 public class AppActivity extends Cocos2dxActivity {
 	
-	static Activity m_activity;
+	static Activity m_activity = null;
 	
 	//google--------------------------------
-	
-	
-	//start app---------------------------
-	static StartAppAd m_startAppAd;
-	static Banner m_startAppBanner;
+	static AdView m_googleBanner = null;
 	
 	final static String GGP_ADMOB_ID="ca-app-pub-5629660628975902/1330315079";	
+	
+	//start app---------------------------
+	static StartAppAd m_startAppAd = null;
+	static Banner m_startAppBanner = null;
+	
+	
 	final static String STARTAPP_DEV_ID="110088576";	
 	final static String STARTAPP_APP_ID="210163514";	
 	
 	//revmob---------------------------------------
-	static RevMob m_revmob;
-	static RevMobAdsListener m_revmobListener;
-	static RevMobBanner m_revmobBanner;
-	static RevMobFullscreen m_revmobFullscreen;
+	static RevMob m_revmob = null;
+	static RevMobAdsListener m_revmobListener = null;
+	static RevMobBanner m_revmobBanner = null;
+	static RevMobFullscreen m_revmobFullscreen = null;
 	
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		m_activity=this;
 			
-		try {
+		try {			
+			//google banner-------------------------------------------------------------------
+			m_googleBanner = new AdView(this);
+			m_googleBanner.setAdSize(AdSize.SMART_BANNER);
+			m_googleBanner.setAdUnitId(GGP_ADMOB_ID);
+			// Set the AdListener.
+		    m_googleBanner.setAdListener(new AdListener() {
+		    	@Override
+		    	public void onAdClosed() {
+		    		Log.d("Google", "Google ---- onAdClosed");		    		
+		    	}
+
+		    	/** Called when an ad failed to load. */
+		    	@Override
+		      	public void onAdFailedToLoad(int error) {
+		    	  Log.d("Google", "Google ---- onAdFailedToLoad");		
+		      	}
+
+		      /**
+		       * Called when an ad is clicked and going to start a new Activity that will
+		       * leave the application (e.g. breaking out to the Browser or Maps
+		       * application).
+		       */
+		    	@Override
+		      	public void onAdLeftApplication() {
+		    	  	Log.d("Google", "Google ---- onAdLeftApplication");		
+		      	}
+
+		      	/**
+		       	* Called when an Activity is created in front of the app (e.g. an
+		       	* interstitial is shown, or an ad is clicked and launches a new Activity).
+		       	*/
+		      	@Override
+		      	public void onAdOpened() {
+		      		Log.d("Google", "Google ---- onAdOpened");	
+		      	}
+
+		      	/** Called when an ad is loaded. */
+		      	@Override
+		      	public void onAdLoaded() {
+		      		Log.d("Google", "Google ---- onAdLoaded");	
+		      	}
+		    }); 
+		    // Start loading the ad in the background.
+		    AdRequest adRequest = new AdRequest.Builder().build();
+		    m_googleBanner.loadAd(adRequest);
+		    ViewGroup viewGroup = (ViewGroup) ((ViewGroup) m_activity.findViewById(android.R.id.content)).getChildAt(0);
+			LinearLayout layout = new LinearLayout(m_activity);
+			layout.setOrientation(LinearLayout.VERTICAL);			    
+		    layout.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+		    layout.addView(m_googleBanner);			    
+			viewGroup.addView(layout);
+		    		    
 			
-			LayoutParams adParams = new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT);
-			
-			//google banner----------------------------
-			
-			
-			//start app--------------------------------
+		    //start app---------------------------------------------------------------------
 			StartAppAd.init(this, STARTAPP_DEV_ID, STARTAPP_APP_ID);
 			m_startAppAd = new StartAppAd(this);	
 			m_startAppBanner = new Banner(this);
@@ -101,7 +154,7 @@ public class AppActivity extends Cocos2dxActivity {
 			bannerParameters.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);    
 			addContentView(m_startAppBanner, bannerParameters);		
 			
-			//revmob--------------------------
+			//revmob-----------------------------------------------------------------------
 			m_revmobListener = new RevMobAdsListener() {
 				@Override
 				public void onRevMobSessionIsStarted() {
@@ -169,7 +222,8 @@ public class AppActivity extends Cocos2dxActivity {
 		m_activity.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-				//m_adView.setVisibility(View.VISIBLE);			
+				if ( m_googleBanner != null )
+					m_googleBanner.setVisibility(View.VISIBLE);			
 			}
 		});
 	}
@@ -179,7 +233,8 @@ public class AppActivity extends Cocos2dxActivity {
 		m_activity.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-				//m_adView.setVisibility(View.INVISIBLE);				
+				if ( m_googleBanner != null )
+					m_googleBanner.setVisibility(View.INVISIBLE);				
 			}
 		});
     }
@@ -187,63 +242,68 @@ public class AppActivity extends Cocos2dxActivity {
 	//startapp-------------------------------
 	//show banner
 	static void showBannerStartApp(){
-			m_activity.runOnUiThread(new Runnable() {
-				@Override
-				public void run() {
+		m_activity.runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				if ( m_startAppBanner != null )
 					m_startAppBanner.showBanner();			
-				}
-			});
-		}
+			}
+		});
+	}
 		
 	//hide banner
 	static void hideBannerStartApp(){
-			m_activity.runOnUiThread(new Runnable() {
-				@Override
-				public void run() {
+		m_activity.runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				if ( m_startAppBanner != null )
 					m_startAppBanner.hideBanner();
-				}
-			});
-	    }
+			}
+		});
+    }
 	//show interstitialAd
 	static void showInterstitialAdStartApp(){
-		try{
+		if ( m_startAppAd == null )
+			return;
+		
+		m_activity.runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				m_startAppAd.showAd(new AdDisplayListener() {
+					@Override
+					public void adHidden(Ad ad) {
+						Log.d("StartApp", "-------------------------adHidden------------------");				
+					}
+					@Override
+					public void adDisplayed(Ad ad) {
+						Log.d("StartApp", "-------------------------adDisplayed------------------");				
+					}
+					@Override
+					public void adClicked(Ad ad) {
+						Log.d("StartApp", "-------------------------adClicked------------------");				
+					}
+				}); 
 				
-			// show the ad
-			m_startAppAd.showAd(new AdDisplayListener() {
-				@Override
-				public void adHidden(Ad ad) {
-					Log.d("StartApp", "-------------------------adHidden------------------");				
-				}
-				@Override
-				public void adDisplayed(Ad ad) {
-					Log.d("StartApp", "-------------------------adDisplayed------------------");				
-				}
-				@Override
-				public void adClicked(Ad ad) {
-					Log.d("StartApp", "-------------------------adClicked------------------");				
-				}
-			}); 
-			
-			//load ad
-			m_startAppAd.loadAd (new AdEventListener() {
-				@Override
-				public void onReceiveAd(Ad ad) {
-					Log.d("StartApp", "-------------------------onReceiveAd------------------");				
-				}
-				@Override
-				public void onFailedToReceiveAd(Ad ad) {
-					Log.d("StartApp", "-------------------------onFailedToReceiveAd------------------");				
-				}
-			}); 
-		}
-		catch(Exception e ){
-			Log.d("Ads", "error: " + e);
-		}
+				//load ad
+				m_startAppAd.loadAd (new AdEventListener() {
+					@Override
+					public void onReceiveAd(Ad ad) {
+						Log.d("StartApp", "-------------------------onReceiveAd------------------");				
+					}
+					@Override
+					public void onFailedToReceiveAd(Ad ad) {
+						Log.d("StartApp", "-------------------------onFailedToReceiveAd------------------");				
+					}
+				}); 
+			}
+		});
 	}
 	
 	
 	//Revmob------------------------------------
 	static void showBannerRevMob(){		
+		if (m_revmob == null)
+			return;
 		m_activity.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {		
@@ -271,6 +331,8 @@ public class AppActivity extends Cocos2dxActivity {
     }
 	//show interstitialAd	
 	static void showInterstitialAdRevMob(){
+		if (m_revmob == null)
+			return;
 		m_activity.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {

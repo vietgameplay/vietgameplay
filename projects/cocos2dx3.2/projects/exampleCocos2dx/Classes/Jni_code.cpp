@@ -26,6 +26,15 @@ extern "C"
 		}
     }
 
+    //show interstitial ad
+	void showInterstitialAdGoogle(){
+		JniMethodInfo t;
+		if (JniHelper::getStaticMethodInfo(t, GAMEVIEW_CLASS, "showInterstitialAdGoogle", "()V"))
+		{
+			t.env->CallStaticVoidMethod(t.classID,t.methodID);
+		}
+	}
+
     //startApp------------------------------------------
     //show banner
         void showBannerStartApp(){

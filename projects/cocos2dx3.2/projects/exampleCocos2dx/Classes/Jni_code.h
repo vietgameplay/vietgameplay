@@ -9,6 +9,9 @@ extern "C"
 	//hide banner
     void hideBannerGoogle();
 
+    //show interstitial
+    void showInterstitialAdGoogle();
+
     //start app----------------------------------
     //show banner
 	void showBannerStartApp();

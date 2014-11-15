@@ -54,12 +54,6 @@ import com.startapp.android.publish.AdEventListener;
 import com.startapp.android.publish.Ad;
 import com.startapp.android.publish.banner.Banner;
 
-//Revmob----------------------------------------
-import com.revmob.RevMob;
-import com.revmob.RevMobAdsListener;
-import com.revmob.ads.fullscreen.RevMobFullscreen;
-import com.revmob.ads.banner.RevMobBanner;
-import com.revmob.internal.RMLog;
 
 public class AppActivity extends Cocos2dxActivity {
 	
@@ -78,11 +72,6 @@ public class AppActivity extends Cocos2dxActivity {
 	final static String STARTAPP_DEV_ID="110088576";	
 	final static String STARTAPP_APP_ID="210163514";	
 	
-	//revmob---------------------------------------
-	static RevMob m_revmob = null;
-	static RevMobAdsListener m_revmobListener = null;
-	static RevMobBanner m_revmobBanner = null;
-	static RevMobFullscreen m_revmobFullscreen = null;
 	
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -155,60 +144,8 @@ public class AppActivity extends Cocos2dxActivity {
 			addContentView(m_startAppBanner, bannerParameters);		
 			
 			//revmob-----------------------------------------------------------------------
-			m_revmobListener = new RevMobAdsListener() {
-				@Override
-				public void onRevMobSessionIsStarted() {
-					Log.d("Revmob", "RevMob -----session is started.");
-				}
-		    
-				@Override
-				public void onRevMobSessionNotStarted(String message) {
-					Log.d("Revmob", "RevMob ------session failed to start.");
-				}
-		    
-		    @Override
-				public void onRevMobAdReceived() {
-		    	Log.d("Revmob", "RevMob -------ad received.");
-				}
-
-				@Override
-				public void onRevMobAdNotReceived(String message) {
-					Log.d("Revmob", "RevMob --------ad not received.");
-				}
-
-				@Override
-				public void onRevMobAdDismiss() {
-					Log.d("Revmob", "Revmob --------Ad dismissed.");
-				}
-
-				@Override
-				public void onRevMobAdClicked() {
-					Log.d("Revmob", "Revmob -------Ad clicked.");
-				}
-
-				@Override
-				public void onRevMobAdDisplayed() {
-					Log.d("Revmob", "Revmob -------Ad displayed.");
-				}
-				
-				@Override
-				public void onRevMobEulaIsShown() {
-					Log.d("Revmob", "Revmob ------- Eula is shown.");	
-				}
-
-				@Override
-				public void onRevMobEulaWasAcceptedAndDismissed() {
-					Log.d("Revmob", "Revmob ------- Eula was accepeted and dismissed.");
-				}
-
-				@Override
-				public void onRevMobEulaWasRejected() {
-					Log.d("Revmob", "Revmob -------Eula was rejected.");
-					
-				}
-			};
-			
-			m_revmob = RevMob.startWithListener(this, m_revmobListener);		
+			RevmobAds.s_activity = this;
+			RevmobAds.sinit();
 			
 			
 		} catch (Exception e) {
@@ -311,47 +248,7 @@ public class AppActivity extends Cocos2dxActivity {
 	}
 	
 	
-	//Revmob------------------------------------
-	static void showBannerRevMob(){		
-		if (m_revmob == null)
-			return;
-		m_activity.runOnUiThread(new Runnable() {
-			@Override
-			public void run() {		
-				m_revmobBanner = m_revmob.createBanner(m_activity, m_revmobListener);
-				ViewGroup viewGroup = (ViewGroup) ((ViewGroup) m_activity.findViewById(android.R.id.content)).getChildAt(0);
-				LinearLayout layout = new LinearLayout(m_activity);
-				layout.setOrientation(LinearLayout.VERTICAL);			    
-			    layout.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-			    layout.addView(m_revmobBanner);			    
-				viewGroup.addView(layout);
-			}
-		});
-	}
 	
-	//hide banner
-	static void hideBannerRevMob(){
-		m_activity.runOnUiThread(new Runnable() {
-			@Override
-			public void run() {				
-				if ( m_revmobBanner != null )
-					m_revmobBanner.hide();
-			}
-		});
-    }
-	//show interstitialAd	
-	static void showInterstitialAdRevMob(){
-		if (m_revmob == null)
-			return;
-		m_activity.runOnUiThread(new Runnable() {
-			@Override
-			public void run() {
-				m_revmobFullscreen = m_revmob.createFullscreen(m_activity, m_revmobListener);
-				m_revmobFullscreen.load();
-				m_revmobFullscreen.show();
-			}
-		});
-    }
 
 	
 	/** Called when leaving the activity */

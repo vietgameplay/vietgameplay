@@ -61,7 +61,8 @@ using namespace std;
 #define BASE_BUBBLE_JUMP_STEP 2
 #define BASE_BULLET_JUMP_STEP 10
 
-#define GAMEVIEW_CLASS "com.vietgameplay.exampleCocos2dx.AppActivity"
+#define APPACTIVITY_CLASS "com.vietgameplay.exampleCocos2dx.AppActivity"
+#define REVMOB_ADS_CLASS "com.vietgameplay.exampleCocos2dx.RevmobAds"
 #define SAVE_PATH "/data/data/com.vietgameplay.exampleCocos2dx.AppActivity/tmpfile"
 
 #define IMAGE_LOGO "logo.png"

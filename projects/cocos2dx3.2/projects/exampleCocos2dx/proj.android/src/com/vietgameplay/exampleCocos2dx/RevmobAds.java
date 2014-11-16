@@ -15,7 +15,7 @@ import com.revmob.internal.RMLog;
 public class RevmobAds {
 	
 	public static Activity s_activity = null;
-	static RevmobAds s_activityRevmobAds = null;
+	static RevmobAds s_instanceRevmobAds = null;
 	
 	private RevMob m_revmob = null;
 	private RevMobAdsListener m_revmobListener = null;
@@ -25,8 +25,8 @@ public class RevmobAds {
 	public static void sinit()
 	{
 		Log.d("Revmob", "Revmob -------sinit");
-		s_activityRevmobAds = new RevmobAds();
-		s_activityRevmobAds.init();
+		s_instanceRevmobAds = new RevmobAds();
+		s_instanceRevmobAds.init();
 	}
 	
 	public void init()
@@ -90,7 +90,7 @@ public class RevmobAds {
 	
 	public static void sshowBannerRevMob(){	
 		Log.d("Revmob", "Revmob -------sshowBannerRevMob");
-		s_activityRevmobAds.showBannerRevMob();
+		s_instanceRevmobAds.showBannerRevMob();
 	}
 	
 	public void showBannerRevMob(){		
@@ -113,7 +113,7 @@ public class RevmobAds {
 	//hide banner
 	public static void shideBannerRevMob(){	
 		Log.d("Revmob", "Revmob -------shideBannerRevMob");
-		s_activityRevmobAds.hideBannerRevMob();
+		s_instanceRevmobAds.hideBannerRevMob();
 	}
 	
 	public void hideBannerRevMob(){
@@ -129,7 +129,7 @@ public class RevmobAds {
 	//show interstitialAd
 	public static void sshowInterstitialAdRevMob(){	
 		Log.d("Revmob", "Revmob -------sshowInterstitialAdRevMob");
-		s_activityRevmobAds.sshowInterstitialAdRevMob();
+		s_instanceRevmobAds.sshowInterstitialAdRevMob();
 	}
 	
 	public void showInterstitialAdRevMob(){

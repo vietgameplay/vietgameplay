@@ -35,6 +35,37 @@ extern "C"
 		}
 	}
 
+	//google plus------------------------------
+	//log in
+	void logInGooglePlus(){
+		JniMethodInfo t;
+		if (JniHelper::getStaticMethodInfo(t, APPACTIVITY_CLASS, "slogInGooglePlus", "()V"))
+		{
+			t.env->CallStaticVoidMethod(t.classID,t.methodID);
+		}
+	}
+
+	//log out
+	void logOutGooglePlus(){
+		JniMethodInfo t;
+		if (JniHelper::getStaticMethodInfo(t, APPACTIVITY_CLASS, "slogOutGooglePlus", "()V"))
+		{
+			t.env->CallStaticVoidMethod(t.classID,t.methodID);
+		}
+	}
+
+	 void postOnWallGooglePlus(const char* content, const char* url){
+		JniMethodInfo t;
+
+		if (JniHelper::getStaticMethodInfo(t, APPACTIVITY_CLASS, "spostOnWallGooglePlus", "(Ljava/lang/String;Ljava/lang/String;)V"))
+		{
+			jstring str_content = JniHelper::getEnv()->NewStringUTF(content);
+			jstring str_url = JniHelper::getEnv()->NewStringUTF(url);
+			t.env->CallStaticVoidMethod(t.classID,t.methodID, str_content, str_url);
+		}
+	}
+
+
     //startApp------------------------------------------
     //show banner
         void showBannerStartApp(){

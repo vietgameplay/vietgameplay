@@ -2,7 +2,7 @@
 #define _JNI_CODE_H_
 extern "C"
 {
-	//google-----------------------
+	//google--------------------------------
 	//show banner
     void showBannerGoogle();
 	
@@ -11,6 +11,16 @@ extern "C"
 
     //show interstitial
     void showInterstitialAdGoogle();
+
+    //google plus------------------------------
+    //log in
+    void logInGooglePlus();
+
+    //log out
+    void logOutGooglePlus();
+
+    //post on wall
+    void postOnWallGooglePlus(const char* title, const char* url);
 
     //start app----------------------------------
     //show banner

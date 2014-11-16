@@ -59,8 +59,17 @@ void MainMenuScene::onEnter()
 	MenuItemFont* pCloseItemText = MenuItemFont::create( "InGame", this, menu_selector( MainMenuScene::inGameCallback ) );
 	pCloseItemText->setPosition( Vec2( 700, 400 ) );
 
+	MenuItemFont* logInGP = MenuItemFont::create( "Log in GP", this, menu_selector( MainMenuScene::logInGPCallback ) );
+	logInGP->setPosition( Vec2( 600, 300 ) );
+
+	MenuItemFont* logOutGP = MenuItemFont::create( "Log out GP", this, menu_selector( MainMenuScene::logOutGPCallback ) );
+	logOutGP->setPosition( Vec2( 600, 260 ) );
+
+	MenuItemFont* postGP = MenuItemFont::create( "Post on wall", this, menu_selector( MainMenuScene::postGPCallback ) );
+	postGP->setPosition( Vec2( 600, 220 ) );
+
     // create menu, it's an autorelease object
-    auto menu = Menu::create(closeItem, pCloseItemText, NULL);
+    auto menu = Menu::create(closeItem, pCloseItemText, logInGP, logOutGP, postGP, NULL);
     menu->setPosition(Vec2::ZERO);
     this->addChild(menu, 1);
 
@@ -204,4 +213,25 @@ void MainMenuScene::menuCloseCallback(Ref* pSender)
 void MainMenuScene::inGameCallback(Ref* pSender)
 {
 	GameState::getInstance()->switchState( STATE_INGAME );
+}
+
+void MainMenuScene::logInGPCallback( Ref* pSender )
+{
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+	logInGooglePlus();
+#endif
+}
+
+void MainMenuScene::logOutGPCallback( Ref* pSender )
+{
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+	logOutGooglePlus();
+#endif
+}
+
+void MainMenuScene::postGPCallback( Ref* pSender )
+{
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+	postOnWallGooglePlus("Welcome to Google plus","https://play.google.com/store/apps/details?id=com.vietgameplay.flyingbee&hl=vi" );
+#endif
 }

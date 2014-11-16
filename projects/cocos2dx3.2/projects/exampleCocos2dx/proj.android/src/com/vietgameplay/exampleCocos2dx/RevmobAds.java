@@ -129,7 +129,7 @@ public class RevmobAds {
 	//show interstitialAd
 	public static void sshowInterstitialAdRevMob(){	
 		Log.d("Revmob", "Revmob -------sshowInterstitialAdRevMob");
-		s_instanceRevmobAds.sshowInterstitialAdRevMob();
+		s_instanceRevmobAds.showInterstitialAdRevMob();
 	}
 	
 	public void showInterstitialAdRevMob(){

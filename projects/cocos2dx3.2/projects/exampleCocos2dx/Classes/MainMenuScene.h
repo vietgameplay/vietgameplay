@@ -27,6 +27,12 @@ public:
 
     void inGameCallback( cocos2d::Ref* pSender );
 
+    void logInGPCallback( cocos2d::Ref* pSender );
+
+    void logOutGPCallback( cocos2d::Ref* pSender );
+
+    void postGPCallback( cocos2d::Ref* pSender );
+
 	//touch
 	bool onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event);
     void onTouchMoved(cocos2d::Touch* touch, cocos2d::Event* event);

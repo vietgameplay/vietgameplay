@@ -11,7 +11,7 @@ extern "C"
 	//show banner
     void showBannerGoogle(){
     	JniMethodInfo t;
-		if (JniHelper::getStaticMethodInfo(t, APPACTIVITY_CLASS, "showBannerGoogle", "()V"))
+		if (JniHelper::getStaticMethodInfo(t, GOOGLE_ADS_CLASS, "sshowBannerGoogle", "()V"))
 		{
 			t.env->CallStaticVoidMethod(t.classID,t.methodID);
 		}
@@ -20,7 +20,7 @@ extern "C"
     //hide banner
     void hideBannerGoogle(){
     	JniMethodInfo t;
-		if (JniHelper::getStaticMethodInfo(t, APPACTIVITY_CLASS, "hideBannerGoogle", "()V"))
+		if (JniHelper::getStaticMethodInfo(t, GOOGLE_ADS_CLASS, "shideBannerGoogle", "()V"))
 		{
 			t.env->CallStaticVoidMethod(t.classID,t.methodID);
 		}
@@ -29,7 +29,7 @@ extern "C"
     //show interstitial ad
 	void showInterstitialAdGoogle(){
 		JniMethodInfo t;
-		if (JniHelper::getStaticMethodInfo(t, APPACTIVITY_CLASS, "showInterstitialAdGoogle", "()V"))
+		if (JniHelper::getStaticMethodInfo(t, GOOGLE_ADS_CLASS, "sshowInterstitialAdGoogle", "()V"))
 		{
 			t.env->CallStaticVoidMethod(t.classID,t.methodID);
 		}
@@ -39,7 +39,7 @@ extern "C"
     //show banner
         void showBannerStartApp(){
         	JniMethodInfo t;
-    		if (JniHelper::getStaticMethodInfo(t, APPACTIVITY_CLASS, "showBannerStartApp", "()V"))
+    		if (JniHelper::getStaticMethodInfo(t, STARTAPP_ADS_CLASS, "sshowBannerStartApp", "()V"))
     		{
     			t.env->CallStaticVoidMethod(t.classID,t.methodID);
     		}
@@ -48,7 +48,7 @@ extern "C"
         //hide banner
         void hideBannerStartApp(){
         	JniMethodInfo t;
-    		if (JniHelper::getStaticMethodInfo(t, APPACTIVITY_CLASS, "hideBannerStartApp", "()V"))
+    		if (JniHelper::getStaticMethodInfo(t, STARTAPP_ADS_CLASS, "shideBannerStartApp", "()V"))
     		{
     			t.env->CallStaticVoidMethod(t.classID,t.methodID);
     		}
@@ -57,7 +57,7 @@ extern "C"
     //show interstitial ad
     void showInterstitialAdStartApp(){
     	JniMethodInfo t;
-		if (JniHelper::getStaticMethodInfo(t, APPACTIVITY_CLASS, "showInterstitialAdStartApp", "()V"))
+		if (JniHelper::getStaticMethodInfo(t, STARTAPP_ADS_CLASS, "sshowInterstitialAdStartApp", "()V"))
 		{
 			t.env->CallStaticVoidMethod(t.classID,t.methodID);
 		}

@@ -63,6 +63,8 @@ using namespace std;
 
 #define APPACTIVITY_CLASS "com.vietgameplay.exampleCocos2dx.AppActivity"
 #define REVMOB_ADS_CLASS "com.vietgameplay.exampleCocos2dx.RevmobAds"
+#define GOOGLE_ADS_CLASS "com.vietgameplay.exampleCocos2dx.GoogleAds"
+#define STARTAPP_ADS_CLASS "com.vietgameplay.exampleCocos2dx.StartAppAds"
 #define SAVE_PATH "/data/data/com.vietgameplay.exampleCocos2dx.AppActivity/tmpfile"
 
 #define IMAGE_LOGO "logo.png"

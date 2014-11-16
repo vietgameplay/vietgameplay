@@ -22,6 +22,15 @@ public class RevmobAds {
 	private RevMobBanner m_revmobBanner = null;
 	private RevMobFullscreen m_revmobFullscreen = null;
 	
+	//status
+	private int m_bannerStatus = 0;
+	
+	public final static int REVMOB_BANNER_NOT_RECEIVED = 0;
+	public final static int REVMOB_BANNER_RECEIVED = 1;	
+	public final static int REVMOB_BANNER_DISMISS = 2;
+	public final static int REVMOB_BANNER_CLICKED = 3;
+	public final static int REVMOB_BANNER_DISPLAYED = 4;
+	
 	public static void sinit()
 	{
 		Log.d("Revmob", "Revmob -------sinit");
@@ -44,26 +53,31 @@ public class RevmobAds {
 	    
 	    @Override
 			public void onRevMobAdReceived() {
-	    	Log.d("Revmob", "RevMob -------ad received.");
+	    		m_bannerStatus = REVMOB_BANNER_RECEIVED;
+	    		Log.d("Revmob", "RevMob -------ad received.");
 			}
 
 			@Override
 			public void onRevMobAdNotReceived(String message) {
+				m_bannerStatus = REVMOB_BANNER_NOT_RECEIVED;
 				Log.d("Revmob", "RevMob --------ad not received.");
 			}
 
 			@Override
 			public void onRevMobAdDismiss() {
+				m_bannerStatus = REVMOB_BANNER_DISMISS;
 				Log.d("Revmob", "Revmob --------Ad dismissed.");
 			}
 
 			@Override
 			public void onRevMobAdClicked() {
+				m_bannerStatus = REVMOB_BANNER_CLICKED;
 				Log.d("Revmob", "Revmob -------Ad clicked.");
 			}
 
 			@Override
 			public void onRevMobAdDisplayed() {
+				m_bannerStatus = REVMOB_BANNER_DISPLAYED;
 				Log.d("Revmob", "Revmob -------Ad displayed.");
 			}
 			
@@ -120,7 +134,7 @@ public class RevmobAds {
 		s_activity.runOnUiThread(new Runnable() {
 			@Override
 			public void run() {				
-				if ( m_revmobBanner != null )
+				if ( m_revmobBanner != null && m_bannerStatus != REVMOB_BANNER_NOT_RECEIVED )
 					m_revmobBanner.hide();
 			}
 		});

@@ -70,7 +70,14 @@ public class AppActivity extends Cocos2dxActivity implements ConnectionCallbacks
 		s_instance = this;
 		try {			
 			//google plus------------------------------------
-			logInGooglePlus();
+			m_googleApiClient = new GoogleApiClient.Builder(m_activity)
+	        .addConnectionCallbacks(this)
+	        .addOnConnectionFailedListener(this)
+	        .addApi(Plus.API)
+	        .addScope(Plus.SCOPE_PLUS_LOGIN)
+	        .build();
+			//auto login
+			slogInGooglePlus();
 			
 			
 			//google banner-------------------------------------------------------------------
@@ -100,12 +107,8 @@ public class AppActivity extends Cocos2dxActivity implements ConnectionCallbacks
 	
 	public void logInGooglePlus()
 	{
-		m_googleApiClient = new GoogleApiClient.Builder(m_activity)
-        .addConnectionCallbacks(this)
-        .addOnConnectionFailedListener(this)
-        .addApi(Plus.API)
-        .addScope(Plus.SCOPE_PLUS_LOGIN)
-        .build();
+		if (m_googleApiClient!= null )
+			m_googleApiClient.connect();		
 	}
 	
 	static void slogOutGooglePlus()
@@ -116,11 +119,9 @@ public class AppActivity extends Cocos2dxActivity implements ConnectionCallbacks
 	
 	public void logOutGooglePlus()
 	{		
-		if (m_googleApiClient.isConnected()) {
+		if (m_googleApiClient!= null && m_googleApiClient.isConnected()) {
 			Plus.AccountApi.clearDefaultAccount(m_googleApiClient);
-			Plus.AccountApi.revokeAccessAndDisconnect(m_googleApiClient);
-			//m_googleApiClient = build_GoogleApiClient();
-			m_googleApiClient.connect();
+			Plus.AccountApi.revokeAccessAndDisconnect(m_googleApiClient);			
 		}		
 	}
 	
@@ -133,28 +134,27 @@ public class AppActivity extends Cocos2dxActivity implements ConnectionCallbacks
 	public void postOnWallGooglePlus(final String content, final String url)
 	{
 		m_activity.runOnUiThread(new Runnable(){
-			public void run(){				
-				Intent shareIntent = new PlusShare.Builder(m_activity)
-		        .setType("text/plain")
-		        .setText(content)
-		        .setContentUrl(Uri.parse(url))
-		        .getIntent();
-		
-				startActivityForResult(shareIntent, 0);
+			public void run(){		
+				if (m_googleApiClient!= null) {
+					Intent shareIntent = new PlusShare.Builder(m_activity)
+			        .setType("text/plain")
+			        .setText(content)
+			        .setContentUrl(Uri.parse(url))
+			        .getIntent();		
+					startActivityForResult(shareIntent, 0);
+				}
 			}
 		});
 			
 	}
 	
+	
 	protected void onStart() {
-		 super.onStart();
-		 if ( m_googleApiClient!= null )
-			 m_googleApiClient.connect();
+		 super.onStart();		 
 	}
 	
 	protected void onStop() {
-		super.onStop();
-		
+		super.onStop();		
 		if (m_googleApiClient != null && m_googleApiClient.isConnected()) {
 			m_googleApiClient.disconnect();
 		}
@@ -189,39 +189,31 @@ public class AppActivity extends Cocos2dxActivity implements ConnectionCallbacks
 	}
 	@Override
 	public void onConnected(Bundle arg0) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub		
 	}
 
 	@Override
 	public void onConnectionSuspended(int arg0) {
 		// TODO Auto-generated method stub
-		m_googleApiClient.connect();
-		
+		m_googleApiClient.connect();		
 	}
 	
 	protected void onActivityResult(int requestCode, int responseCode, Intent intent) {
 		if (requestCode == RC_SIGN_IN) {
-			m_intentInProgress = false;
-	
-			if (!m_googleApiClient.isConnecting()) {
-				m_googleApiClient.connect();
-			}
+			m_intentInProgress = false;	
 		}
 	}
+	
 	@Override
 	public void onConnectionFailed(ConnectionResult arg0) {
 		// TODO Auto-generated method stub
-		if (!m_intentInProgress && arg0.hasResolution()) {
-		    try {
-		    	m_intentInProgress = true;
-		    	startIntentSenderForResult(arg0.getResolution().getIntentSender(), RC_SIGN_IN, null, 0, 0, 0);
-		    } catch (SendIntentException e) {
-		      // The intent was canceled before it was sent.  Return to the default
-		      // state and attempt to connect to get an updated ConnectionResult.
-		    	m_intentInProgress = false;
-		    	m_googleApiClient.connect();
-		    }
+			if (!m_intentInProgress && arg0.hasResolution()) {
+			    try {
+			    	m_intentInProgress = true;
+			    	startIntentSenderForResult(arg0.getResolution().getIntentSender(), RC_SIGN_IN, null, 0, 0, 0);
+			    } catch (SendIntentException e) {		    
+			    	m_intentInProgress = false;		    	
+			    }
 		  }
 	}
 	

@@ -41,5 +41,8 @@ extern "C"
 
 	//show interstitial
     void showInterstitialAdRevMob();
+
+    //check internet
+    bool hasConnectivity();
 }
 #endif

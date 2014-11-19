@@ -28,6 +28,9 @@ package com.vietgameplay.exampleCocos2dx;
 
 import org.cocos2dx.lib.Cocos2dxActivity;
 
+
+
+
 //google plus
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -36,12 +39,14 @@ import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListe
 import com.google.android.gms.games.Games;
 import com.google.android.gms.plus.Plus;
 import com.google.android.gms.plus.PlusShare;
+
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender.SendIntentException;
-
 import android.R;
 import android.app.Activity;
-
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -149,18 +154,33 @@ public class AppActivity extends Cocos2dxActivity implements ConnectionCallbacks
 	}
 	
 	
-	protected void onStart() {
-		 super.onStart();		 
-	}
-	
-	protected void onStop() {
-		super.onStop();		
-		if (m_googleApiClient != null && m_googleApiClient.isConnected()) {
-			m_googleApiClient.disconnect();
-		}
-		
-	}
+	//check connection
+	public static boolean shasConnectivity()
+    {
+        return s_instance.hasConnectivity();
+    }
+    public boolean hasConnectivity()
+    {        
+        try
+        {
+            if(m_activity != null)
+            {                
+                ConnectivityManager mConnectivityManager = (ConnectivityManager) m_activity.getSystemService(Context.CONNECTIVITY_SERVICE);
+                if(mConnectivityManager == null)
+                    return false;
 
+                NetworkInfo mNetInfo = mConnectivityManager.getActiveNetworkInfo(); 
+                
+                if(mNetInfo == null)
+                    return false;
+                return mNetInfo.isConnected();
+            }
+        } catch(Exception ex){}
+        
+        return false;
+    }
+	
+	
 	/** Called when leaving the activity */
 	@Override
 	public void onPause() {

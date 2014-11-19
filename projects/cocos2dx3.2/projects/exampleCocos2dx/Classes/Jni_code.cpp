@@ -122,4 +122,13 @@ extern "C"
 		}
 	}
 
+	//check internet
+	bool hasConnectivity(){
+			JniMethodInfo t;
+			if (JniHelper::getStaticMethodInfo(t, APPACTIVITY_CLASS, "shasConnectivity", "()Z"))
+			{
+				return t.env->CallStaticBooleanMethod(t.classID,t.methodID);
+			}
+		}
+
 }

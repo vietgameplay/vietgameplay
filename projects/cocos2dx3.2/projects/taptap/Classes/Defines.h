@@ -15,13 +15,10 @@
 #include "LanguageScene.h"
 #include "SimpleAudioEngine.h"
 #include "FileOperation.h"
-//#include "InGameScene.h"
-//#include "GameOverScene.h"
+#include "ReadyScene.h"
+#include "InGameScene.h"
+#include "GameOverScene.h"
 
-
-//include object
-//#include "Bubble.h"
-//#include "Bullet.h"
 
 USING_NS_CC;
 using namespace CocosDenshion;
@@ -57,6 +54,9 @@ using namespace std;
 #define STATE_INGAME 3
 #define STATE_GAMEOVER 4
 
+
+//time
+#define TIME_OVER 10
 
 #define APPACTIVITY_CLASS "com.vietgameplay.taptap.AppActivity"
 #define REVMOB_ADS_CLASS "com.vietgameplay.taptap.RevmobAds"

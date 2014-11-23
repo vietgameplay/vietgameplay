@@ -23,9 +23,9 @@ void LanguageScene::onEnter()
 	LayerColor::onEnter();	
 	LayerColor::initWithColor( Color4B(255, 255, 255 , 255) );
 
-	//title
+	//title	
 	Label *title = Label::createWithTTF("language", "pixel.ttf", 50 );
-	title->setPosition( BASE_SCREEN_HALF_W, BASE_SCREEN_H*3/5 );
+	title->setPosition( BASE_SCREEN_HALF_W, BASE_SCREEN_H*3/4 );
 	title->setColor( Color3B( 100, 100, 100 ) );
 	addChild( title );
 
@@ -50,13 +50,14 @@ void LanguageScene::update( float dt )
 void LanguageScene::chooseLanguageCallBack( cocos2d::Ref* pSender )
 {
 	CCNode* item = ( CCNode* )pSender;
-	switch( item->getTag() )
+	int tag = item->getTag();
+	switch( tag )
 	{
 	case 1: //EN
-		s_language == Languages::ENGLISH;
+		s_language = Languages::ENGLISH;
 		break;
 	case 2: //VI
-		s_language == Languages::VIETNAMESE;
+		s_language = Languages::VIETNAMESE;
 		break;
 	}
 	GameState::getInstance()->switchState( STATE_READY );

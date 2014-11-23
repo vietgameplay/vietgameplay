@@ -7,6 +7,7 @@ class InGameScene : public cocos2d::LayerColor
 {
 private:
 	cocos2d::Label *scoreString;
+	cocos2d::ProgressTimer *progressTimer;
 
 public:
     

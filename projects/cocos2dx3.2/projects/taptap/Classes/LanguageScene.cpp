@@ -21,7 +21,7 @@ Scene* LanguageScene::createScene()
 void LanguageScene::onEnter()
 {
 	LayerColor::onEnter();	
-	LayerColor::initWithColor( Color4B(255, 255, 255 , 255) );
+	LayerColor::initWithColor( Color4B(255, 255, 255 , 200) );
 
 	//title	
 	Label *title = Label::createWithTTF("language", "pixel.ttf", 50 );
@@ -60,6 +60,7 @@ void LanguageScene::chooseLanguageCallBack( cocos2d::Ref* pSender )
 		s_language = Languages::VIETNAMESE;
 		break;
 	}
+	SimpleAudioEngine::getInstance()->playEffect( SFX_CONFIRM );
 	GameState::getInstance()->switchState( STATE_READY );
 }
 

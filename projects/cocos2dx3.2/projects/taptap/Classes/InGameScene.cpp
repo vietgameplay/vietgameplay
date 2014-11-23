@@ -37,6 +37,17 @@ void InGameScene::onEnter()
 	scoreString->setPosition( BASE_SCREEN_HALF_W, BASE_SCREEN_H*3/4 );
 	scoreString->setColor( Color3B( 100, 100, 100 ) );
 	addChild( scoreString );
+
+	//time
+	auto *sprite_timer =  Sprite::create( IMAGE_CIRCLE_UNDER );
+	sprite_timer->setPosition( BASE_SCREEN_HALF_W, BASE_SCREEN_H/3 );
+	addChild( sprite_timer );
+	progressTimer = ProgressTimer::create( Sprite::create( IMAGE_CIRCLE ) );    
+	progressTimer->setType(ProgressTimer::Type::RADIAL );	
+	progressTimer->setReverseProgress(true);
+	progressTimer->setPercentage(100);
+	progressTimer->setPosition( sprite_timer->getPosition() );
+	addChild( progressTimer );
 	
 
 	this->schedule( schedule_selector( InGameScene::update ) );
@@ -45,12 +56,20 @@ void InGameScene::onEnter()
 void InGameScene::update( float dt )
 {	
 	if ( s_frameCount == 0 )
+	{
 		GameState::getInstance()->switchState( STATE_GAMEOVER );
+	}
 	s_frameCount--;
+
+	//set percent
+	int percent = 100*s_frameCount/(FPS*TIME_OVER);
+	progressTimer->setPercentage( percent );
+
 }
 
 bool InGameScene::onTouchBegan(Touch* touch, Event* event)
 {
+	SimpleAudioEngine::getInstance()->playEffect( SFX_CONFIRM );
 	s_currentScore++;
 	stringstream ss;
 	ss << s_currentScore;

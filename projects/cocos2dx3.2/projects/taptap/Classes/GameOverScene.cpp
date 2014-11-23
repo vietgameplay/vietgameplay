@@ -78,6 +78,7 @@ void GameOverScene::buttonCallBack( cocos2d::Ref* pSender )
 	switch( tag )
 	{
 	case 1: //play
+		SimpleAudioEngine::getInstance()->playEffect( SFX_CONFIRM );
 		GameState::getInstance()->switchState( STATE_READY );
 		break;
 	case 2: //VI

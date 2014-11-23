@@ -14,4 +14,4 @@ bool s_sfxSound = true;
 bool s_musicSound = true;
 
 int s_bestScore = 0;
-int s_currentScore;
+int s_currentScore = 0;

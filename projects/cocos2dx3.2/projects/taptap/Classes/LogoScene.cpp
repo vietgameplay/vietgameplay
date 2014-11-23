@@ -46,7 +46,10 @@ void LogoScene::update( float dt )
 		if( s_language == Languages::UNKNOW )
 			GameState::getInstance()->switchState( STATE_LANGUAGE );
 		else
-			GameState::getInstance()->switchState( STATE_LANGUAGE );
+			GameState::getInstance()->switchState( STATE_READY );
+
+		//save file
+		FileOperation::saveFile();
 	}
 }
 

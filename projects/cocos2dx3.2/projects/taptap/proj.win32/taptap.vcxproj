@@ -76,7 +76,7 @@
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeader>
       </PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <DisableSpecificWarnings>4267;4251;4244;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -136,24 +136,30 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\Defines.cpp" />
     <ClCompile Include="..\Classes\FileOperation.cpp" />
+    <ClCompile Include="..\Classes\GameOverScene.cpp" />
     <ClCompile Include="..\Classes\GameState.cpp" />
+    <ClCompile Include="..\Classes\InGameScene.cpp" />
     <ClCompile Include="..\Classes\Jni_code.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\Classes\LanguageScene.cpp" />
     <ClCompile Include="..\Classes\LogoScene.cpp" />
+    <ClCompile Include="..\Classes\ReadyScene.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\Defines.h" />
     <ClInclude Include="..\Classes\FileOperation.h" />
+    <ClInclude Include="..\Classes\GameOverScene.h" />
     <ClInclude Include="..\Classes\GameState.h" />
+    <ClInclude Include="..\Classes\InGameScene.h" />
     <ClInclude Include="..\Classes\Jni_code.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="..\Classes\LanguageScene.h" />
     <ClInclude Include="..\Classes\LogoScene.h" />
+    <ClInclude Include="..\Classes\ReadyScene.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>
   <ItemGroup>

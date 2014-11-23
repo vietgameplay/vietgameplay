@@ -25,11 +25,14 @@ void GameState::switchState( int currentState )
 		Director::sharedDirector()->replaceScene ( LanguageScene::createScene() ); 
 		break;	
 	case STATE_READY:
-		//Director::sharedDirector()->replaceScene ( MainMenuScene::createScene() ); 
+		Director::sharedDirector()->replaceScene ( ReadyScene::createScene() ); 
 		break;		
 	case STATE_INGAME:
-		//Director::sharedDirector()->replaceScene ( InGameScene::createScene() ); 
-		break;		
+		Director::sharedDirector()->replaceScene ( InGameScene::createScene() ); 
+		break;			
+	case STATE_GAMEOVER:
+		Director::sharedDirector()->replaceScene ( GameOverScene::createScene() ); 
+		break;
 
 	}
 }

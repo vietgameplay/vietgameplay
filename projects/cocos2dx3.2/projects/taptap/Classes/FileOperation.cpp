@@ -3,7 +3,7 @@
 
 #include "Defines.h"
 
-extern bool s_sfxSound;
+extern Languages s_language;
 extern int s_bestScore;
 
 void FileOperation::saveFile()
@@ -16,7 +16,7 @@ void FileOperation::saveFile()
 		CCLOG("can not create file %s", path.c_str());
 		return;
 	}
-	fprintf( fp, "%d ", s_sfxSound );
+	fprintf( fp, "%d ", (int)s_language );
 	fprintf( fp, "%d ", s_bestScore );
 	//fputs("file example", fp);
 	fclose(fp);
@@ -37,8 +37,9 @@ void FileOperation::readFile()
 
 	fgets(buf, 50, fp);
 	//CCLOG("read content %s", buf);
-	sscanf( buf, "%d" "%d", &s_sfxSound, &s_bestScore );
-
+	int lang;
+	sscanf( buf, "%d" "%d", &lang, &s_bestScore );
+	s_language = (Languages)lang;
 	fclose(fp);
 }
 
@@ -55,7 +56,7 @@ string FileOperation::getFilePath()
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
 	// You can save file in anywhere if you have the permision.
-	path.append("C:/tmpfile");
+	path.append("D:/tmpfile");
 #endif
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WOPHONE)

@@ -40,6 +40,11 @@ void LogoScene::onEnter()
 void LogoScene::update( float dt )
 {
 	s_frameCount++;
+
+	if ( s_frameCount == 2 )//load sound
+	{
+		SimpleAudioEngine::getInstance()->preloadEffect( SFX_CONFIRM );
+	}
 	//switch state
 	if ( s_frameCount == FPS*TIME_LOGO )
 	{

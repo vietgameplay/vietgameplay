@@ -64,6 +64,7 @@ void ReadyScene::update( float dt )
 
 bool ReadyScene::onTouchBegan(Touch* touch, Event* event)
 {
+	SimpleAudioEngine::getInstance()->playEffect( SFX_CONFIRM );
 	GameState::getInstance()->switchState( STATE_INGAME );
 	return true;
 }

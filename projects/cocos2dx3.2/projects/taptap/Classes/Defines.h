@@ -65,6 +65,10 @@ using namespace std;
 #define SAVE_PATH "/data/data/com.vietgameplay.taptap.AppActivity/tmpfile"
 
 #define IMAGE_LOGO "logo.png"
+#define IMAGE_CIRCLE_UNDER "circle_under.png"
+#define IMAGE_CIRCLE "circle.png"
+
+#define SFX_CONFIRM "SFX_CONFIRM.wav"
 
 enum class Languages
 {

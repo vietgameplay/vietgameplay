@@ -15,9 +15,9 @@ bool AppDelegate::applicationDidFinishLaunching() {
     if(!glview) {
         glview = GLView::create("My Game");	
         director->setOpenGLView(glview);
-		glview->setFrameZoomFactor( 0.8f );
     }
 	#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
+    glview->setFrameZoomFactor( 0.8f );
 	glview->setFrameSize(BASE_SCREEN_W, BASE_SCREEN_H);
 	#endif //only set fit on win32		
 

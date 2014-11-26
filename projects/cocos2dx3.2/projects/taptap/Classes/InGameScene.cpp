@@ -39,9 +39,14 @@ void InGameScene::onEnter()
 	addChild( scoreString );
 
 	//time
-	auto *sprite_timer =  Sprite::create( IMAGE_CIRCLE_UNDER );
+	auto sprite_timer = MenuItemImage::create( IMAGE_CIRCLE_UNDER, IMAGE_CIRCLE_UNDER, CC_CALLBACK_1(InGameScene::buttonCallBack, this));
 	sprite_timer->setPosition( BASE_SCREEN_HALF_W, BASE_SCREEN_H/3 );
-	addChild( sprite_timer );
+	sprite_timer->setTag( 1 ); //set tag play = 1
+	
+    auto menu = Menu::create(sprite_timer, NULL);
+    menu->setPosition(Vec2::ZERO);
+    this->addChild(menu, 1);	
+
 	progressTimer = ProgressTimer::create( Sprite::create( IMAGE_CIRCLE ) );    
 	progressTimer->setType(ProgressTimer::Type::RADIAL );	
 	progressTimer->setReverseProgress(true);
@@ -69,11 +74,15 @@ void InGameScene::update( float dt )
 
 bool InGameScene::onTouchBegan(Touch* touch, Event* event)
 {
+	return true;
+}
+
+void InGameScene::buttonCallBack( cocos2d::Ref* pSender )
+{
 	SimpleAudioEngine::getInstance()->playEffect( SFX_CONFIRM );
 	s_currentScore++;
 	stringstream ss;
 	ss << s_currentScore;
 	scoreString->setString( ss.str() );
-	return true;
 }
 

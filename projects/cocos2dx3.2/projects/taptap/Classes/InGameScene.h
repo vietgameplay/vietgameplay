@@ -18,6 +18,8 @@ public:
     virtual void update( float dt );  
 
 	bool onTouchBegan(cocos2d::Touch* touch, cocos2d::Event* event);
+
+	void buttonCallBack( cocos2d::Ref* pSender );	
 	
     CREATE_FUNC(InGameScene);
 };

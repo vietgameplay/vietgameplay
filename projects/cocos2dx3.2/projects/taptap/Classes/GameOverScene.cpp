@@ -42,27 +42,95 @@ void GameOverScene::onEnter()
 
 	//best score
 	string bestScore = "Best: ";
-	bestScore = bestScore + ss.str();
+	if ( s_currentScore > s_bestScore )
+		bestScore = bestScore + ss.str();
+	else
+	{
+		stringstream ss;
+		ss << s_bestScore;
+		bestScore = bestScore + ss.str();
+	}
 	Label *bestScoreLabel = Label::createWithTTF( bestScore, "pixel.ttf", 30 );
-	bestScoreLabel->setPosition( BASE_SCREEN_HALF_W, BASE_SCREEN_HALF_H );
+	bestScoreLabel->setPosition( BASE_SCREEN_HALF_W, BASE_SCREEN_HALF_H + 20 );
 	bestScoreLabel->setColor( Color3B( 100, 100, 100 ) );
 	addChild( bestScoreLabel );
 
 	//play button
 	auto playButton = MenuItemImage::create( "play.png", "play_pressed.png", CC_CALLBACK_1(GameOverScene::buttonCallBack, this));
-	playButton->setPosition( BASE_SCREEN_HALF_W, BASE_SCREEN_H/3 + 20 );
+	playButton->setPosition( BASE_SCREEN_HALF_W, BASE_SCREEN_H/3 + 60 );
 	playButton->setTag( 1 ); //set tag play = 1
 	
     auto menu = Menu::create(playButton, NULL);
     menu->setPosition(Vec2::ZERO);
     this->addChild(menu, 1);	
 
+	////social
+
 
 	//result
-	Label *resultLabel = Label::createWithTTF("vvvvvvvvvvvvv", "pixel.ttf", 30 );
-	resultLabel->setPosition( BASE_SCREEN_HALF_W, BASE_SCREEN_H/4 );	
-	resultLabel->setColor( Color3B( 100, 0, 0 ) );
-	addChild( resultLabel );
+	if ( s_language == Languages::ENGLISH )
+	{		
+		Label *resultLabel = Label::createWithTTF("", "American_Typewriter.ttf", 20, Size( 400, 100), TextHAlignment::CENTER );
+		if ( s_currentScore < POINT_LEVEL_1 )
+		{
+			resultLabel->setString("Too bad! The ability to touch the screen is too slow! Try to pass 50 points");
+		}
+		else if ( s_currentScore < POINT_LEVEL_2 )
+		{
+			resultLabel->setString("Bad! Still slow, Try to pass 60 points");
+		}
+		else if ( s_currentScore < POINT_LEVEL_3 )
+		{
+			resultLabel->setString("Cool! Can you pass 70 points? I don't think so!");
+		}
+		else if ( s_currentScore < POINT_LEVEL_4 )
+		{
+			resultLabel->setString("Great! Pass 80 points, You can challenge others?");
+		}
+		else if ( s_currentScore < POINT_LEVEL_5 )
+		{
+			resultLabel->setString("Good! The ability to win the challenge is very high, Why do not you try?");
+		}
+		else
+		{
+			resultLabel->setString("Perfect!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		}	
+		resultLabel->setPosition( BASE_SCREEN_HALF_W, BASE_SCREEN_H/5 );	
+		resultLabel->setColor( Color3B( 100, 0, 0 ) );
+		addChild( resultLabel );
+	}
+	else
+	{
+		Sprite *result;
+		if ( s_currentScore < POINT_LEVEL_1 )
+		{
+			result = Sprite::create("level1.png");
+		}
+		else if ( s_currentScore < POINT_LEVEL_2 )
+		{	
+			result = Sprite::create("level2.png");
+		}
+		else if ( s_currentScore < POINT_LEVEL_3 )
+		{
+			result = Sprite::create("level3.png");
+		}
+		else if ( s_currentScore < POINT_LEVEL_4 )
+		{
+			result = Sprite::create("level4.png");
+		}
+		else if ( s_currentScore < POINT_LEVEL_5 )
+		{
+			result = Sprite::create("level5.png");
+		}
+		else
+		{
+			result = Sprite::create("level6.png");
+		}
+
+		result->setPosition( BASE_SCREEN_HALF_W, BASE_SCREEN_H/5 );	
+		addChild( result );
+	}
+		
 
 	this->schedule( schedule_selector( ReadyScene::update ) );
 }
@@ -78,6 +146,8 @@ void GameOverScene::buttonCallBack( cocos2d::Ref* pSender )
 	switch( tag )
 	{
 	case 1: //play
+		if ( s_currentScore > s_bestScore )
+			s_bestScore = s_currentScore;
 		SimpleAudioEngine::getInstance()->playEffect( SFX_CONFIRM );
 		GameState::getInstance()->switchState( STATE_READY );
 		break;

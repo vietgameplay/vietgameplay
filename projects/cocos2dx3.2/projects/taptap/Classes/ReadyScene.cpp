@@ -37,23 +37,30 @@ void ReadyScene::onEnter()
 		addChild( title );
 	}
 
+	//circle
+	auto circle = Sprite::create( IMAGE_CIRCLE );
+	circle->setPosition( BASE_SCREEN_HALF_W, BASE_SCREEN_H/3 );
+	addChild( circle );
+
 	//hand
 	Sprite * hand  = Sprite::create(); // NEW - create a sprite here
-
 	Animation * anim_hand = Animation::create();
 	anim_hand->addSpriteFrame( SpriteFrame::create( "hand1.png", Rect( 0, 0, 104, 210 ) ) );
 	anim_hand->addSpriteFrame( SpriteFrame::create( "hand2.png", Rect( 0, 0, 104, 210 ) ) );
 	anim_hand->setDelayPerUnit( 0.2f );
     anim_hand->setLoops( -1 );
     hand->runAction( Animate::create ( anim_hand ) );
-	hand->setPosition( BASE_SCREEN_HALF_W, BASE_SCREEN_HALF_H - 80 );
+	hand->setPosition( BASE_SCREEN_HALF_W, BASE_SCREEN_HALF_H - 180 );
 	addChild( hand );
 
 	//tapap
-	Label *taptapStr = Label::createWithTTF("Tap Tap", "pixel.ttf", 20 );
-	taptapStr->setPosition( BASE_SCREEN_HALF_W, BASE_SCREEN_H/4 );
-	taptapStr->setColor( Color3B( 100, 100, 100 ) );
-	addChild( taptapStr );
+	if ( s_language == Languages::ENGLISH )
+	{
+		Label *taptapStr = Label::createWithTTF("Tap in circle to get point", "pixel.ttf", 20 );
+		taptapStr->setPosition( BASE_SCREEN_HALF_W, BASE_SCREEN_H/3 - 210 );
+		taptapStr->setColor( Color3B( 255, 228, 0 ) );
+		addChild( taptapStr );
+	}
 	
 	this->schedule( schedule_selector( ReadyScene::update ) );
 }

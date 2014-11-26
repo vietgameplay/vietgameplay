@@ -56,7 +56,19 @@ using namespace std;
 
 
 //time
-#define TIME_OVER 10
+#define TIME_OVER 2
+
+//point
+#define POINT_MAX 400
+#define POINT_LEVEL_1 50
+#define POINT_LEVEL_2 60
+#define POINT_LEVEL_3 70
+#define POINT_LEVEL_4 80
+#define POINT_LEVEL_5 90
+#define POINT_LEVEL_6 100
+
+
+
 
 #define APPACTIVITY_CLASS "com.vietgameplay.taptap.AppActivity"
 #define REVMOB_ADS_CLASS "com.vietgameplay.taptap.RevmobAds"

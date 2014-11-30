@@ -3,6 +3,7 @@
 extern Languages s_language;
 extern int s_currentScore;
 extern int s_bestScore;
+extern int s_frameCount;
 
 Scene* GameOverScene::createScene()
 {
@@ -25,19 +26,19 @@ void GameOverScene::onEnter()
 	LayerColor::onEnter();	
 	LayerColor::initWithColor( Color4B(255, 255, 255 , 200) );
 
-	if ( s_language == Languages::ENGLISH )
-	{
-		Label *title = Label::createWithTTF("game over", "pixel.ttf", 50 );
-		title->setPosition( BASE_SCREEN_HALF_W, BASE_SCREEN_H*3/4 );
-		title->setColor( Color3B( 100, 100, 100 ) );
-		addChild( title );
-	}
+	title = Label::createWithTTF("game over", "pixel.ttf", 50 );
+	title->setPosition( BASE_SCREEN_HALF_W, BASE_SCREEN_H*3/4 );
+	title->setColor( Color3B( 100, 100, 100 ) );
+	title->setVisible( false );
+	addChild( title );
+	
 
 	stringstream ss;
 	ss << s_currentScore;
 	//score
-	Label *scoreLabel = Label::createWithTTF(ss.str(), "pixel.ttf", 110 );
+	scoreLabel = Label::createWithTTF(ss.str(), "pixel.ttf", 110 );
 	scoreLabel->setPosition( BASE_SCREEN_HALF_W, BASE_SCREEN_HALF_H + 100 );	
+	scoreLabel->setVisible( false );
 	addChild( scoreLabel );
 
 	//best score
@@ -50,15 +51,17 @@ void GameOverScene::onEnter()
 		ss << s_bestScore;
 		bestScore = bestScore + ss.str();
 	}
-	Label *bestScoreLabel = Label::createWithTTF( bestScore, "pixel.ttf", 30 );
+	bestScoreLabel = Label::createWithTTF( bestScore, "pixel.ttf", 30 );
 	bestScoreLabel->setPosition( BASE_SCREEN_HALF_W, BASE_SCREEN_HALF_H + 20 );
 	bestScoreLabel->setColor( Color3B( 100, 100, 100 ) );
+	bestScoreLabel->setVisible( false );
 	addChild( bestScoreLabel );
 
 	//play button
-	auto playButton = MenuItemImage::create( "play.png", "play_pressed.png", CC_CALLBACK_1(GameOverScene::buttonCallBack, this));
+	playButton = MenuItemImage::create( "play.png", "play_pressed.png", CC_CALLBACK_1(GameOverScene::buttonCallBack, this));
 	playButton->setPosition( BASE_SCREEN_HALF_W, BASE_SCREEN_H/3 + 60 );
 	playButton->setTag( 1 ); //set tag play = 1
+	playButton->setVisible( false );
 	
     auto menu = Menu::create(playButton, NULL);
     menu->setPosition(Vec2::ZERO);
@@ -70,7 +73,7 @@ void GameOverScene::onEnter()
 	//result
 	if ( s_language == Languages::ENGLISH )
 	{		
-		Label *resultLabel = Label::createWithTTF("", "American_Typewriter.ttf", 20, Size( 400, 100), TextHAlignment::CENTER );
+		resultLabel = Label::createWithTTF("", "American_Typewriter.ttf", 20, Size( 400, 100), TextHAlignment::CENTER );
 		if ( s_currentScore < POINT_LEVEL_1 )
 		{
 			resultLabel->setString("Too bad! The ability to touch the screen is too slow! Try to pass 50 points");
@@ -97,11 +100,11 @@ void GameOverScene::onEnter()
 		}	
 		resultLabel->setPosition( BASE_SCREEN_HALF_W, BASE_SCREEN_H/5 );	
 		resultLabel->setColor( Color3B( 100, 0, 0 ) );
+		resultLabel->setVisible( false );
 		addChild( resultLabel );
 	}
 	else
 	{
-		Sprite *result;
 		if ( s_currentScore < POINT_LEVEL_1 )
 		{
 			result = Sprite::create("level1.png");
@@ -128,6 +131,7 @@ void GameOverScene::onEnter()
 		}
 
 		result->setPosition( BASE_SCREEN_HALF_W, BASE_SCREEN_H/5 );	
+		result->setVisible( false );
 		addChild( result );
 	}
 		
@@ -137,6 +141,35 @@ void GameOverScene::onEnter()
 
 void GameOverScene::update( float dt )
 {	
+	if ( s_frameCount == 2 )
+	{
+		title->setVisible( true );
+	}
+	else if ( s_frameCount == 6 )
+	{
+		scoreLabel->setVisible( true );
+	}
+	else if ( s_frameCount == 10 )
+	{
+		bestScoreLabel->setVisible( true );
+	}
+	else if ( s_frameCount == 14 )
+	{
+		playButton->setVisible( true );
+	}
+	else if ( s_frameCount == 18 )
+	{
+		if ( s_language == Languages::ENGLISH )
+			resultLabel->setVisible( true );
+		else
+			result->setVisible( true );
+	}
+	else if ( s_frameCount == 22 )
+	{
+		//new score
+	}
+
+	s_frameCount++;
 }
 
 void GameOverScene::buttonCallBack( cocos2d::Ref* pSender )

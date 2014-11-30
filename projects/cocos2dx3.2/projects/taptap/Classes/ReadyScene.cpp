@@ -29,12 +29,23 @@ void ReadyScene::onEnter()
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
 	//title
+	Label *title = Label::createWithTTF("tap to top", "pixel.ttf", 50 );
+	title->setPosition( BASE_SCREEN_HALF_W, BASE_SCREEN_H*3/4 + 30 );
+	title->setColor( Color3B( 100, 100, 100 ) );
+	addChild( title );
 	if ( s_language == Languages::ENGLISH )
 	{
-		Label *title = Label::createWithTTF("ready", "pixel.ttf", 50 );
-		title->setPosition( BASE_SCREEN_HALF_W, BASE_SCREEN_H*3/4 );
-		title->setColor( Color3B( 100, 100, 100 ) );
-		addChild( title );
+		Label *ready = Label::createWithTTF("Ready", "pixel.ttf", 36 );
+		ready->setPosition( BASE_SCREEN_HALF_W, BASE_SCREEN_H*3/4 - 60 );
+		ready->setColor( Color3B( 0, 36, 253 ) );
+		addChild( ready );
+	}
+	else
+	{
+		auto *ready = Sprite::create("ready.png");
+		ready->setPosition( BASE_SCREEN_HALF_W, BASE_SCREEN_H*3/4 - 60 );
+		ready->setColor( Color3B( 0, 36, 253 ) );
+		addChild( ready );
 	}
 
 	//circle
@@ -56,9 +67,16 @@ void ReadyScene::onEnter()
 	//tapap
 	if ( s_language == Languages::ENGLISH )
 	{
-		Label *taptapStr = Label::createWithTTF("Tap in circle to get point", "pixel.ttf", 20 );
+		Label *taptapStr = Label::createWithTTF("Tap in circle to get point", "American_Typewriter.ttf", 20 );
 		taptapStr->setPosition( BASE_SCREEN_HALF_W, BASE_SCREEN_H/3 - 210 );
-		taptapStr->setColor( Color3B( 255, 228, 0 ) );
+		taptapStr->setColor( Color3B( 0, 36, 253 ) );
+		addChild( taptapStr );
+	}
+	else
+	{
+		auto *taptapStr = Sprite::create( "tapGetPoint.png" );
+		taptapStr->setPosition( BASE_SCREEN_HALF_W, BASE_SCREEN_H/3 - 210 );
+		taptapStr->setColor( Color3B( 0, 36, 253 ) );
 		addChild( taptapStr );
 	}
 	

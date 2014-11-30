@@ -5,6 +5,13 @@
 
 class GameOverScene : public cocos2d::LayerColor
 {
+private:
+	cocos2d::Label *title;
+	cocos2d::Label *scoreLabel;
+	cocos2d::Label *bestScoreLabel;
+	cocos2d::MenuItemImage* playButton;
+	cocos2d::Label *resultLabel; //en
+	cocos2d::Sprite *result; //vi
 public:
     
     static cocos2d::Scene* createScene();

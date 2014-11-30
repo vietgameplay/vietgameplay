@@ -70,11 +70,11 @@ using namespace std;
 
 
 
-#define APPACTIVITY_CLASS "com.vietgameplay.taptap.AppActivity"
-#define REVMOB_ADS_CLASS "com.vietgameplay.taptap.RevmobAds"
-#define GOOGLE_ADS_CLASS "com.vietgameplay.taptap.GoogleAds"
-#define STARTAPP_ADS_CLASS "com.vietgameplay.taptap.StartAppAds"
-#define SAVE_PATH "/data/data/com.vietgameplay.taptap.AppActivity/tmpfile"
+#define APPACTIVITY_CLASS "com.vietgameplay.tap2top.AppActivity"
+#define REVMOB_ADS_CLASS "com.vietgameplay.tap2top.RevmobAds"
+#define GOOGLE_ADS_CLASS "com.vietgameplay.tap2top.GoogleAds"
+#define STARTAPP_ADS_CLASS "com.vietgameplay.tap2top.StartAppAds"
+#define SAVE_PATH "/data/data/com.vietgameplay.tap2top.AppActivity/tmpfile"
 
 #define IMAGE_LOGO "logo.png"
 #define IMAGE_CIRCLE_UNDER "circle_under.png"

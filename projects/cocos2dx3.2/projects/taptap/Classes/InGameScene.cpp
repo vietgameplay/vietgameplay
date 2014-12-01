@@ -60,6 +60,15 @@ void InGameScene::onEnter()
 
 void InGameScene::update( float dt )
 {	
+	//check internet
+	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+	if ( !hasConnectivity() )
+	{
+		showInternetRetry();
+		return;
+	}
+	#endif
+
 	if ( s_frameCount == 0 )
 	{
 		GameState::getInstance()->switchState( STATE_GAMEOVER );

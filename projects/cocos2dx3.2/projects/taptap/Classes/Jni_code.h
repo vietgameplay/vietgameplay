@@ -44,5 +44,8 @@ extern "C"
 
     //check internet
     bool hasConnectivity();
+
+    //show message internet is not available
+    void showInternetRetry();
 }
 #endif

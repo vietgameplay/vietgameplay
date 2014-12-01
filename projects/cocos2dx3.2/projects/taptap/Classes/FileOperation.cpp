@@ -39,8 +39,8 @@ void FileOperation::readFile()
 	//CCLOG("read content %s", buf);
 	int lang;
 	sscanf( buf, "%d" "%d", &lang, &s_bestScore );
-	s_language = (Languages)lang;
-	fclose(fp);
+	//s_language = (Languages)lang;
+	fclose(fp); 
 }
 
 string FileOperation::getFilePath()

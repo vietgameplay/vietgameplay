@@ -85,6 +85,14 @@ void ReadyScene::onEnter()
 
 void ReadyScene::update( float dt )
 {	
+	//check internet
+	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+	if ( !hasConnectivity() )
+	{
+		showInternetRetry();
+		return;
+	}
+	#endif
 }
 
 bool ReadyScene::onTouchBegan(Touch* touch, Event* event)

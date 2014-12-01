@@ -168,6 +168,17 @@ void GameOverScene::update( float dt )
 	{
 		//new score
 	}
+	else
+	{
+		//check internet
+		#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+		if ( !hasConnectivity() )
+		{
+			showInternetRetry();
+			return;
+		}
+		#endif
+	}
 
 	s_frameCount++;
 }

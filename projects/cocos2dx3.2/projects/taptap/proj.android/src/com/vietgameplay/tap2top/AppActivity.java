@@ -31,6 +31,8 @@ import org.cocos2dx.lib.Cocos2dxActivity;
 
 
 
+
+
 //google plus
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -41,10 +43,12 @@ import com.google.android.gms.plus.Plus;
 import com.google.android.gms.plus.PlusShare;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender.SendIntentException;
 import android.R;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -68,6 +72,10 @@ public class AppActivity extends Cocos2dxActivity implements ConnectionCallbacks
 	private final String LEADERBOARD_ID = "leaderboard_taptap";
 	private GoogleApiClient m_googleApiClient;	
 	private boolean m_intentInProgress;
+	
+	//show internet message
+	private boolean isShowInternetMessage = false;
+	
 		
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -97,8 +105,7 @@ public class AppActivity extends Cocos2dxActivity implements ConnectionCallbacks
 			//revmob-----------------------------------------------------------------------
 			RevmobAds.s_activity = this;
 			RevmobAds.sinit();
-			
-			
+						
 		} catch (Exception e) {
 			Log.d("Ads", "Revmob -------error: " + e);
 		}			
@@ -157,6 +164,7 @@ public class AppActivity extends Cocos2dxActivity implements ConnectionCallbacks
 	//check connection
 	public static boolean shasConnectivity()
     {
+		Log.d("GAME", "-------hasConnectivity");
         return s_instance.hasConnectivity();
     }
     public boolean hasConnectivity()
@@ -178,6 +186,46 @@ public class AppActivity extends Cocos2dxActivity implements ConnectionCallbacks
         } catch(Exception ex){}
         
         return false;
+    }
+    
+    
+    //message show internet
+    public static void sshowInternetRetry()
+    {
+    	Log.d("GAME", "----showInternetRetry");    	
+		s_instance.showInternetRetry();
+    }
+    
+    public void showInternetRetry()
+    {
+    	if( isShowInternetMessage )
+    		return;
+    	else
+    		isShowInternetMessage = true;
+    			
+    	m_activity.runOnUiThread(new Runnable(){
+			public void run(){		
+		    	AlertDialog.Builder builder = new AlertDialog.Builder(m_activity);
+		    	builder.setMessage("Internet is not available.");
+		    	builder.setCancelable(true);
+		    	builder.setPositiveButton("Retry", new DialogInterface.OnClickListener() {
+		            public void onClick(DialogInterface dialog, int id) {
+		            	isShowInternetMessage = false;
+		                dialog.cancel();
+		            }
+		        });
+		    	builder.setNegativeButton("Exit", new DialogInterface.OnClickListener() {
+		            public void onClick(DialogInterface dialog, int id) {
+		            	finish();
+		                System.exit(0);
+		            }
+		        });
+		
+		        AlertDialog alert = builder.create();
+		        alert.show();
+			}
+		});
+		    
     }
 	
 	

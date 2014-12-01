@@ -124,11 +124,20 @@ extern "C"
 
 	//check internet
 	bool hasConnectivity(){
-			JniMethodInfo t;
-			if (JniHelper::getStaticMethodInfo(t, APPACTIVITY_CLASS, "shasConnectivity", "()Z"))
-			{
-				return t.env->CallStaticBooleanMethod(t.classID,t.methodID);
-			}
+		JniMethodInfo t;
+		if (JniHelper::getStaticMethodInfo(t, APPACTIVITY_CLASS, "shasConnectivity", "()Z"))
+		{
+			return t.env->CallStaticBooleanMethod(t.classID,t.methodID);
 		}
+	}
+
+	//show message internet is not available
+	void showInternetRetry(){
+		JniMethodInfo t;
+		if (JniHelper::getStaticMethodInfo(t, APPACTIVITY_CLASS, "sshowInternetRetry", "()V"))
+		{
+			t.env->CallStaticVoidMethod(t.classID,t.methodID);
+		}
+	}
 
 }

@@ -60,6 +60,7 @@ void LanguageScene::chooseLanguageCallBack( cocos2d::Ref* pSender )
 		s_language = Languages::VIETNAMESE;
 		break;
 	}
+	FileOperation::saveFile();
 	SimpleAudioEngine::getInstance()->playEffect( SFX_CONFIRM );
 	GameState::getInstance()->switchState( STATE_READY );
 }

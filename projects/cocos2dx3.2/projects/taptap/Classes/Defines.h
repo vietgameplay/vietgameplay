@@ -74,13 +74,14 @@ using namespace std;
 #define REVMOB_ADS_CLASS "com.vietgameplay.tap2top.RevmobAds"
 #define GOOGLE_ADS_CLASS "com.vietgameplay.tap2top.GoogleAds"
 #define STARTAPP_ADS_CLASS "com.vietgameplay.tap2top.StartAppAds"
-#define SAVE_PATH "/data/data/com.vietgameplay.tap2top.AppActivity/tmpfile"
 
 #define IMAGE_LOGO "logo.png"
 #define IMAGE_CIRCLE_UNDER "circle_under.png"
 #define IMAGE_CIRCLE "circle.png"
 
 #define SFX_CONFIRM "SFX_CONFIRM.wav"
+#define SFX_DEAD "SFX_DEAD.wav"
+#define SFX_NEW_RECORED "SFX_NEW_RECORED.wav"
 
 enum class Languages
 {

@@ -8,24 +8,31 @@ extern int s_bestScore;
 
 void FileOperation::saveFile()
 {
-	string path = getFilePath();
-	FILE *fp = fopen(path.c_str(), "w");
+    std::string fullFilePath = FileUtils::getInstance()->getWritablePath() + "rms.json";
 
-	if (! fp)
-	{
-		CCLOG("can not create file %s", path.c_str());
-		return;
-	}
-	fprintf( fp, "%d ", (int)s_language );
-	fprintf( fp, "%d ", s_bestScore );
-	//fputs("file example", fp);
-	fclose(fp);
+    if (!FileUtils::getInstance()->isFileExist(fullFilePath))
+    {
+        ofstream ofile;
+        ofile.open(fullFilePath.c_str());
+        ofile << "0";
+        ofile << "0 ";
+        ofile.close();
+        log("----file is not exist, we have to create new one");
+    }
+    else
+    {
+        FILE *fp = fopen(fullFilePath.c_str(), "w");
+        fprintf( fp, "%d ", (int)s_language );
+        fprintf( fp, "%d ", s_bestScore );
+        fclose( fp );
+    }
+    log("-----------path%s", fullFilePath.c_str());
 }
 
 void FileOperation::readFile()
 {
-	string path = getFilePath();
-	FILE *fp = fopen(path.c_str(), "r");
+    std::string fullFilePath = FileUtils::getInstance()->getWritablePath() + "rms.json";
+	FILE *fp = fopen(fullFilePath.c_str(), "r");
 	char buf[50] = {0};
 
 	if (! fp)
@@ -36,11 +43,12 @@ void FileOperation::readFile()
 	}
 
 	fgets(buf, 50, fp);
-	//CCLOG("read content %s", buf);
+	CCLOG("----read content %s", buf);
 	int lang;
-	sscanf( buf, "%d" "%d", &lang, &s_bestScore );
-	//s_language = (Languages)lang;
-	fclose(fp); 
+	sscanf( buf, "%d %d", &lang, &s_bestScore );
+    CCLOG("---read content %s", buf);
+	s_language = (Languages)lang;
+	fclose(fp);
 }
 
 string FileOperation::getFilePath()
@@ -51,7 +59,7 @@ string FileOperation::getFilePath()
 	// In android, every programe has a director under /data/data.
 	// The path is /data/data/ + start activity package name.
 	// You can save application specific data here.
-	path.append(SAVE_PATH);
+	path.append("D:/tmpfile");
 #endif
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)

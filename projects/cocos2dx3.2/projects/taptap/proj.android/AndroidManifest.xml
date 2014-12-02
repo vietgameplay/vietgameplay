@@ -11,7 +11,7 @@
     <application android:label="@string/app_name"
                  android:icon="@drawable/icon">
          <meta-data android:name="com.google.android.gms.version" android:value="4242000" />
-         <meta-data android:name="com.revmob.app.id" android:value="54622b5e47182e4f08fbe834"/>
+         <meta-data android:name="com.revmob.app.id" android:value="547c826f60db1fc208dab275"/>
          
 		<activity android:name="com.startapp.android.publish.list3d.List3DActivity" />
 		<activity android:name="com.startapp.android.publish.AppWallActivity"         

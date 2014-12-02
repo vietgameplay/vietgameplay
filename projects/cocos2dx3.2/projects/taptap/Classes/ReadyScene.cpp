@@ -81,6 +81,14 @@ void ReadyScene::onEnter()
 	}
 	
 	this->schedule( schedule_selector( ReadyScene::update ) );
+
+	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+	if ( hasConnectivity() )
+	{
+		hideBannerGoogle();
+		showBannerStartApp();
+	}
+	#endif
 }
 
 void ReadyScene::update( float dt )

@@ -24,7 +24,7 @@ public class StartAppAds {
 	
 	
 	final static String STARTAPP_DEV_ID="110088576";	
-	final static String STARTAPP_APP_ID="210163514";	
+	final static String STARTAPP_APP_ID="212708477";	
 	
 	public static void sinit()
 	{

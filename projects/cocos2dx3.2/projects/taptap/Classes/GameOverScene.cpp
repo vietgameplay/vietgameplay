@@ -29,6 +29,12 @@ void GameOverScene::onEnter()
 	s_countPlayTime++;
 	s_frameCount = 0;
 
+	if ( s_currentScore > s_bestScore )
+	{
+		s_bestScore = s_currentScore;
+		FileOperation::saveFile();
+	}
+
 	title = Label::createWithTTF("game over", "pixel.ttf", 50 );
 	title->setPosition( BASE_SCREEN_HALF_W, BASE_SCREEN_H*3/4 );
 	title->setColor( Color3B( 100, 100, 100 ) );
@@ -46,14 +52,9 @@ void GameOverScene::onEnter()
 
 	//best score
 	string bestScore = "Best: ";
-	if ( s_currentScore > s_bestScore )
-		bestScore = bestScore + ss.str();
-	else
-	{
-		stringstream ss;
-		ss << s_bestScore;
-		bestScore = bestScore + ss.str();
-	}
+	stringstream sss;
+	sss << s_bestScore;
+	bestScore = bestScore + sss.str();
 	bestScoreLabel = Label::createWithTTF( bestScore, "pixel.ttf", 30 );
 	bestScoreLabel->setPosition( BASE_SCREEN_HALF_W, BASE_SCREEN_HALF_H + 20 );
 	bestScoreLabel->setColor( Color3B( 100, 100, 100 ) );
@@ -175,9 +176,10 @@ void GameOverScene::update( float dt )
 		else
 			result->setVisible( true );
 	}
-	else if ( s_frameCount == 32 )
+	else if ( s_frameCount == 40 )
 	{
 		//new score
+		SimpleAudioEngine::getInstance()->playEffect( SFX_NEW_RECORED );
 	}
 	else
 	{
@@ -201,8 +203,6 @@ void GameOverScene::buttonCallBack( cocos2d::Ref* pSender )
 	switch( tag )
 	{
 	case 1: //play
-		if ( s_currentScore > s_bestScore )
-			s_bestScore = s_currentScore;
 		SimpleAudioEngine::getInstance()->playEffect( SFX_CONFIRM );
 		GameState::getInstance()->switchState( STATE_READY );
 		//show interstitial ad

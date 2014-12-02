@@ -79,6 +79,7 @@ void InGameScene::update( float dt )
 
 	if ( s_frameCount == 0 )
 	{
+		SimpleAudioEngine::getInstance()->playEffect( SFX_DEAD );
 		GameState::getInstance()->switchState( STATE_GAMEOVER );
 	}
 	s_frameCount--;

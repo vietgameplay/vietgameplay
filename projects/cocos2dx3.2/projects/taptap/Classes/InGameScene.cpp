@@ -56,6 +56,14 @@ void InGameScene::onEnter()
 	
 
 	this->schedule( schedule_selector( InGameScene::update ) );
+
+	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+	if ( hasConnectivity() )
+	{
+		showBannerGoogle();
+		hideBannerStartApp();
+	}
+	#endif
 }
 
 void InGameScene::update( float dt )

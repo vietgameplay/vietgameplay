@@ -163,8 +163,7 @@ public class AppActivity extends Cocos2dxActivity implements ConnectionCallbacks
 	
 	//check connection
 	public static boolean shasConnectivity()
-    {
-		Log.d("GAME", "-------hasConnectivity");
+    {		
         return s_instance.hasConnectivity();
     }
     public boolean hasConnectivity()
@@ -191,8 +190,7 @@ public class AppActivity extends Cocos2dxActivity implements ConnectionCallbacks
     
     //message show internet
     public static void sshowInternetRetry()
-    {
-    	Log.d("GAME", "----showInternetRetry");    	
+    {    		
 		s_instance.showInternetRetry();
     }
     
@@ -202,7 +200,7 @@ public class AppActivity extends Cocos2dxActivity implements ConnectionCallbacks
     		return;
     	else
     		isShowInternetMessage = true;
-    			
+    	Log.d("GAME", "----showInternetRetry");    
     	m_activity.runOnUiThread(new Runnable(){
 			public void run(){		
 		    	AlertDialog.Builder builder = new AlertDialog.Builder(m_activity);

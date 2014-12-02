@@ -56,7 +56,7 @@ using namespace std;
 
 
 //time
-#define TIME_OVER 2
+#define TIME_OVER 10
 
 //point
 #define POINT_MAX 400

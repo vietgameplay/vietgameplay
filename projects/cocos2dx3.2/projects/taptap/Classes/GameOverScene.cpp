@@ -4,6 +4,7 @@ extern Languages s_language;
 extern int s_currentScore;
 extern int s_bestScore;
 extern int s_frameCount;
+extern int s_countPlayTime;
 
 Scene* GameOverScene::createScene()
 {
@@ -25,6 +26,8 @@ void GameOverScene::onEnter()
 {
 	LayerColor::onEnter();	
 	LayerColor::initWithColor( Color4B(255, 255, 255 , 200) );
+	s_countPlayTime++;
+	s_frameCount = 0;
 
 	title = Label::createWithTTF("game over", "pixel.ttf", 50 );
 	title->setPosition( BASE_SCREEN_HALF_W, BASE_SCREEN_H*3/4 );
@@ -137,6 +140,14 @@ void GameOverScene::onEnter()
 		
 
 	this->schedule( schedule_selector( ReadyScene::update ) );
+
+	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+	if ( hasConnectivity() )
+	{
+		hideBannerGoogle();
+		showBannerStartApp();
+	}
+	#endif
 }
 
 void GameOverScene::update( float dt )
@@ -145,26 +156,26 @@ void GameOverScene::update( float dt )
 	{
 		title->setVisible( true );
 	}
-	else if ( s_frameCount == 6 )
+	else if ( s_frameCount == 8 )
 	{
 		scoreLabel->setVisible( true );
 	}
-	else if ( s_frameCount == 10 )
+	else if ( s_frameCount == 14 )
 	{
 		bestScoreLabel->setVisible( true );
 	}
-	else if ( s_frameCount == 14 )
+	else if ( s_frameCount == 20 )
 	{
 		playButton->setVisible( true );
 	}
-	else if ( s_frameCount == 18 )
+	else if ( s_frameCount == 26 )
 	{
 		if ( s_language == Languages::ENGLISH )
 			resultLabel->setVisible( true );
 		else
 			result->setVisible( true );
 	}
-	else if ( s_frameCount == 22 )
+	else if ( s_frameCount == 32 )
 	{
 		//new score
 	}
@@ -194,6 +205,21 @@ void GameOverScene::buttonCallBack( cocos2d::Ref* pSender )
 			s_bestScore = s_currentScore;
 		SimpleAudioEngine::getInstance()->playEffect( SFX_CONFIRM );
 		GameState::getInstance()->switchState( STATE_READY );
+		//show interstitial ad
+		#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+		if ( hasConnectivity() )
+		{
+			if ( s_countPlayTime == 4)
+			{
+				showInterstitialAdStartApp();
+			}
+			else if ( s_countPlayTime == 8 )
+			{
+				showInterstitialAdRevMob();
+				s_countPlayTime = 0;
+			}
+		}
+		#endif
 		break;
 	case 2: //VI
 		s_language = Languages::VIETNAMESE;

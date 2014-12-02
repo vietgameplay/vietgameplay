@@ -19,7 +19,7 @@ public class GoogleAds {
 	
 	private AdView m_googleBanner = null;
 	
-	final static String GGP_ADMOB_ID="ca-app-pub-5629660628975902/1330315079";	
+	final static String GGP_ADMOB_ID="ca-app-pub-2163545683625953/8054505420";	
 	
 	public static void sinit()
 	{
@@ -31,7 +31,7 @@ public class GoogleAds {
 	public void init()
 	{
 		m_googleBanner = new AdView(s_activity);
-		m_googleBanner.setAdSize(AdSize.SMART_BANNER);
+		m_googleBanner.setAdSize(AdSize.BANNER);
 		m_googleBanner.setAdUnitId(GGP_ADMOB_ID);
 		// Set the AdListener.
 	    m_googleBanner.setAdListener(new AdListener() {

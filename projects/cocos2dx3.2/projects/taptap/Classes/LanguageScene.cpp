@@ -24,7 +24,7 @@ void LanguageScene::onEnter()
 	LayerColor::initWithColor( Color4B(255, 255, 255 , 200) );
 
 	//title	
-	Label *title = Label::createWithTTF("language", "pixel.ttf", 50 );
+	Label *title = Label::createWithTTF("language", "pixel.ttf", 70 );
 	title->setPosition( BASE_SCREEN_HALF_W, BASE_SCREEN_H*3/4 );
 	title->setColor( Color3B( 100, 100, 100 ) );
 	addChild( title );

@@ -29,13 +29,7 @@ void GameOverScene::onEnter()
 	s_countPlayTime++;
 	s_frameCount = 0;
 
-	if ( s_currentScore > s_bestScore )
-	{
-		s_bestScore = s_currentScore;
-		FileOperation::saveFile();
-	}
-
-	title = Label::createWithTTF("game over", "pixel.ttf", 50 );
+	title = Label::createWithTTF("game over", "pixel.ttf", 70 );
 	title->setPosition( BASE_SCREEN_HALF_W, BASE_SCREEN_H*3/4 );
 	title->setColor( Color3B( 100, 100, 100 ) );
 	title->setVisible( false );
@@ -45,29 +39,50 @@ void GameOverScene::onEnter()
 	stringstream ss;
 	ss << s_currentScore;
 	//score
-	scoreLabel = Label::createWithTTF(ss.str(), "pixel.ttf", 110 );
-	scoreLabel->setPosition( BASE_SCREEN_HALF_W, BASE_SCREEN_HALF_H + 100 );	
+	scoreLabel = Label::createWithTTF(ss.str(), "pixel.ttf", 130 );
+	scoreLabel->setPosition( BASE_SCREEN_HALF_W, BASE_SCREEN_HALF_H + 50 );
 	scoreLabel->setVisible( false );
 	addChild( scoreLabel );
 
 	//best score
 	string bestScore = "Best: ";
 	stringstream sss;
-	sss << s_bestScore;
+	if ( s_currentScore <= s_bestScore)
+		sss << s_bestScore;
+	else
+		sss << s_currentScore;
 	bestScore = bestScore + sss.str();
 	bestScoreLabel = Label::createWithTTF( bestScore, "pixel.ttf", 30 );
-	bestScoreLabel->setPosition( BASE_SCREEN_HALF_W, BASE_SCREEN_HALF_H + 20 );
+	bestScoreLabel->setPosition( BASE_SCREEN_HALF_W, BASE_SCREEN_HALF_H - 30 );
 	bestScoreLabel->setColor( Color3B( 100, 100, 100 ) );
 	bestScoreLabel->setVisible( false );
 	addChild( bestScoreLabel );
 
+	//best score
+	newScore = Sprite::create("newScore.png");
+	newScore->setPosition(BASE_SCREEN_HALF_W/2 - 20, BASE_SCREEN_HALF_H  );
+	newScore->setVisible(false);
+	addChild( newScore );
+
 	//play button
 	playButton = MenuItemImage::create( "play.png", "play_pressed.png", CC_CALLBACK_1(GameOverScene::buttonCallBack, this));
-	playButton->setPosition( BASE_SCREEN_HALF_W, BASE_SCREEN_H/3 + 60 );
+	playButton->setPosition( BASE_SCREEN_HALF_W, BASE_SCREEN_H/3 + 10 );
 	playButton->setTag( 1 ); //set tag play = 1
 	playButton->setVisible( false );
 	
-    auto menu = Menu::create(playButton, NULL);
+	leaderboard = MenuItemImage::create( "leaderboard.png", "leaderboard_pressed.png", CC_CALLBACK_1(GameOverScene::buttonCallBack, this));
+	leaderboard->setPosition( BASE_SCREEN_W - 60, title->getPositionY() - 60 );
+	leaderboard->setTag( 2 ); //set tag leaderboard = 2
+	leaderboard->setVisible( false );
+
+	googlePlus = MenuItemImage::create( "googlePlus.png", "googlePlus_pressed.png", CC_CALLBACK_1(GameOverScene::buttonCallBack, this));
+	googlePlus->setPosition( leaderboard->getPositionX() - leaderboard->getContentSize().width - 10, leaderboard->getPositionY() );
+	googlePlus->setTag( 3 ); //set tag googlePlus = 3
+	googlePlus->setVisible( false );
+
+
+
+    auto menu = Menu::create(playButton, leaderboard, googlePlus, NULL);
     menu->setPosition(Vec2::ZERO);
     this->addChild(menu, 1);	
 
@@ -102,7 +117,7 @@ void GameOverScene::onEnter()
 		{
 			resultLabel->setString("Perfect!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		}	
-		resultLabel->setPosition( BASE_SCREEN_HALF_W, BASE_SCREEN_H/5 );	
+		resultLabel->setPosition( BASE_SCREEN_HALF_W, BASE_SCREEN_H/5 - 20 );
 		resultLabel->setColor( Color3B( 100, 0, 0 ) );
 		resultLabel->setVisible( false );
 		addChild( resultLabel );
@@ -134,7 +149,7 @@ void GameOverScene::onEnter()
 			result = Sprite::create("level6.png");
 		}
 
-		result->setPosition( BASE_SCREEN_HALF_W, BASE_SCREEN_H/5 );	
+		result->setPosition( BASE_SCREEN_HALF_W, BASE_SCREEN_H/5 - 20 );
 		result->setVisible( false );
 		addChild( result );
 	}
@@ -168,6 +183,8 @@ void GameOverScene::update( float dt )
 	else if ( s_frameCount == 20 )
 	{
 		playButton->setVisible( true );
+		leaderboard->setVisible( true );
+		googlePlus->setVisible( true );
 	}
 	else if ( s_frameCount == 26 )
 	{
@@ -176,12 +193,31 @@ void GameOverScene::update( float dt )
 		else
 			result->setVisible( true );
 	}
-	else if ( s_frameCount == 40 )
+	else if ( s_frameCount >= 30 && s_frameCount <= 40 && s_currentScore > s_bestScore )
 	{
-		//new score
-		SimpleAudioEngine::getInstance()->playEffect( SFX_NEW_RECORED );
+		if ( s_frameCount == 30 )
+		{
+			newScore->setVisible(true);
+			newScore->setScale(2.0f);
+		}
+		else if ( s_frameCount == 34 )
+		{
+			newScore->setScale(1.5f);
+		}
+		else if ( s_frameCount == 38 )
+		{
+			newScore->setScale(1.2f);
+			SimpleAudioEngine::getInstance()->playEffect( SFX_NEW_RECORED );
+		}
+		else if ( s_frameCount == 40 )
+		{
+			newScore->setScale(1.0f);
+			s_currentScore = s_bestScore;
+			FileOperation::saveFile();
+		}
+
 	}
-	else
+	else if ( s_frameCount > 40 )
 	{
 		//check internet
 		#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)

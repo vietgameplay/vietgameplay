@@ -12,6 +12,9 @@ private:
 	cocos2d::MenuItemImage* playButton;
 	cocos2d::Label *resultLabel; //en
 	cocos2d::Sprite *result; //vi
+	cocos2d::MenuItemImage *leaderboard;
+	cocos2d::MenuItemImage *googlePlus;
+	cocos2d::Sprite * newScore;
 public:
     
     static cocos2d::Scene* createScene();

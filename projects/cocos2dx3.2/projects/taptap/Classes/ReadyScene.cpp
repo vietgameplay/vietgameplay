@@ -29,24 +29,10 @@ void ReadyScene::onEnter()
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
 	//title
-	Label *title = Label::createWithTTF("tap to top", "pixel.ttf", 50 );
+	Label *title = Label::createWithTTF("tap to top", "pixel.ttf", 70 );
 	title->setPosition( BASE_SCREEN_HALF_W, BASE_SCREEN_H*3/4 + 30 );
 	title->setColor( Color3B( 100, 100, 100 ) );
 	addChild( title );
-	if ( s_language == Languages::ENGLISH )
-	{
-		Label *ready = Label::createWithTTF("Ready", "pixel.ttf", 36 );
-		ready->setPosition( BASE_SCREEN_HALF_W, BASE_SCREEN_H*3/4 - 60 );
-		ready->setColor( Color3B( 0, 36, 253 ) );
-		addChild( ready );
-	}
-	else
-	{
-		auto *ready = Sprite::create("ready.png");
-		ready->setPosition( BASE_SCREEN_HALF_W, BASE_SCREEN_H*3/4 - 60 );
-		ready->setColor( Color3B( 0, 36, 253 ) );
-		addChild( ready );
-	}
 
 	//circle
 	auto circle = Sprite::create( IMAGE_CIRCLE );

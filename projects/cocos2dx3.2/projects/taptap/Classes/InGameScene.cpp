@@ -33,7 +33,7 @@ void InGameScene::onEnter()
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
 	//score string	
-	scoreString = Label::createWithTTF("0", "pixel.ttf", 70 );
+	scoreString = Label::createWithTTF("0", "pixel.ttf", 90 );
 	scoreString->setPosition( BASE_SCREEN_HALF_W, BASE_SCREEN_H*3/4 );
 	scoreString->setColor( Color3B( 100, 100, 100 ) );
 	addChild( scoreString );

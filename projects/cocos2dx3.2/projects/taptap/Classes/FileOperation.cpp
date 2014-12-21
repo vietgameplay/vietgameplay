@@ -3,6 +3,7 @@
 
 #include "Defines.h"
 
+extern int s_launchGameCount;
 extern Languages s_language;
 extern int s_bestScore;
 
@@ -14,14 +15,16 @@ void FileOperation::saveFile()
     {
         ofstream ofile;
         ofile.open(fullFilePath.c_str());
-        ofile << "0";
-        ofile << "0 ";
+        ofile << "0 "; //launch game
+        ofile << "0 "; //languague
+        ofile << "0"; //best score
         ofile.close();
         log("----file is not exist, we have to create new one");
     }
     else
     {
         FILE *fp = fopen(fullFilePath.c_str(), "w");
+        fprintf( fp, "%d ", (int)s_launchGameCount );
         fprintf( fp, "%d ", (int)s_language );
         fprintf( fp, "%d ", s_bestScore );
         fclose( fp );
@@ -45,7 +48,7 @@ void FileOperation::readFile()
 	fgets(buf, 50, fp);
 	CCLOG("----read content %s", buf);
 	int lang;
-	sscanf( buf, "%d %d", &lang, &s_bestScore );
+	sscanf( buf, "%d" "%d %d",&s_launchGameCount, &lang, &s_bestScore );
     CCLOG("---read content %s", buf);
 	s_language = (Languages)lang;
 	fclose(fp);

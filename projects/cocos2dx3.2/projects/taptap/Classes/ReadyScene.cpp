@@ -1,5 +1,6 @@
 #include "Defines.h"
 
+extern int s_launchGameCount;
 extern Languages s_language;
 
 Scene* ReadyScene::createScene()
@@ -67,14 +68,24 @@ void ReadyScene::onEnter()
 	}
 	
 	this->schedule( schedule_selector( ReadyScene::update ) );
-
 	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 	if ( hasConnectivity() )
 	{
-		hideBannerGoogle();
-		showBannerStartApp();
+		switch( s_launchGameCount % 3 )
+		{
+		case 0:
+			showBannerStartApp();
+			break;
+		case 1:
+			showBannerGoogle();
+			break;
+		case 2:
+			showBannerRevMob();
+			break;
+		}
 	}
 	#endif
+
 }
 
 void ReadyScene::update( float dt )

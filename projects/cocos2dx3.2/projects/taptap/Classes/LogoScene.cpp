@@ -1,5 +1,6 @@
 #include "Defines.h"
 
+extern int s_launchGameCount;
 extern int s_frameCount;
 extern Languages s_language;
 
@@ -22,7 +23,10 @@ Scene* LogoScene::createScene()
 void LogoScene::onEnter()
 {
 	LayerColor::onEnter();
+	//read save file
 	FileOperation::readFile(); 
+	s_launchGameCount++;
+
 	s_frameCount = 0;
 
 	LayerColor::initWithColor( Color4B(255, 255, 255 , 255) );
@@ -40,7 +44,6 @@ void LogoScene::onEnter()
 void LogoScene::update( float dt )
 {
 	s_frameCount++;
-
 	if ( s_frameCount == 2 )//load sound
 	{
 		SimpleAudioEngine::getInstance()->preloadEffect( SFX_CONFIRM );

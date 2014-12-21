@@ -157,13 +157,6 @@ void GameOverScene::onEnter()
 
 	this->schedule( schedule_selector( ReadyScene::update ) );
 
-	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-	if ( hasConnectivity() )
-	{
-		hideBannerGoogle();
-		showBannerStartApp();
-	}
-	#endif
 }
 
 void GameOverScene::update( float dt )
@@ -245,11 +238,11 @@ void GameOverScene::buttonCallBack( cocos2d::Ref* pSender )
 		#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 		if ( hasConnectivity() )
 		{
-			if ( s_countPlayTime == 4)
+			if ( s_countPlayTime == SHOW_INTERSTITIAL)
 			{
 				showInterstitialAdStartApp();
 			}
-			else if ( s_countPlayTime == 8 )
+			else if ( s_countPlayTime == 2*SHOW_INTERSTITIAL )
 			{
 				showInterstitialAdRevMob();
 				s_countPlayTime = 0;

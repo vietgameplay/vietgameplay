@@ -67,6 +67,8 @@ using namespace std;
 #define POINT_LEVEL_5 90
 #define POINT_LEVEL_6 100
 
+#define SHOW_INTERSTITIAL 3
+
 
 
 

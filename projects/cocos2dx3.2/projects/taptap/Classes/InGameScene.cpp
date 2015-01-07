@@ -32,10 +32,15 @@ void InGameScene::onEnter()
     listener->onTouchBegan = CC_CALLBACK_2(InGameScene::onTouchBegan, this);
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
+	//bg
+	Sprite* bg = Sprite::create( IMAGE_BACKGROUND );
+	bg->setPosition( BASE_SCREEN_HALF_W, BASE_SCREEN_HALF_H );
+	addChild( bg );
+
 	//score string	
 	scoreString = Label::createWithTTF("0", "pixel.ttf", 90 );
 	scoreString->setPosition( BASE_SCREEN_HALF_W, BASE_SCREEN_H*3/4 );
-	scoreString->setColor( Color3B( 100, 100, 100 ) );
+	//scoreString->setColor( Color3B( 100, 100, 100 ) );
 	addChild( scoreString );
 
 	//time

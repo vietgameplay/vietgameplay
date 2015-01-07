@@ -29,10 +29,15 @@ void ReadyScene::onEnter()
     listener->onTouchBegan = CC_CALLBACK_2(ReadyScene::onTouchBegan, this);
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
+	//bg
+	Sprite* bg = Sprite::create( IMAGE_BACKGROUND );
+	bg->setPosition( BASE_SCREEN_HALF_W, BASE_SCREEN_HALF_H );
+	addChild( bg );
+
 	//title
-	Label *title = Label::createWithTTF("tap to top", "pixel.ttf", 70 );
+	Label *title = Label::createWithTTF("Tap 2 Top", "pixel.ttf", 60 );
 	title->setPosition( BASE_SCREEN_HALF_W, BASE_SCREEN_H*3/4 + 30 );
-	title->setColor( Color3B( 100, 100, 100 ) );
+	//title->setColor( Color3B( 100, 100, 100 ) );
 	addChild( title );
 
 	//circle

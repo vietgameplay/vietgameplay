@@ -23,10 +23,13 @@ void LanguageScene::onEnter()
 	LayerColor::onEnter();	
 	LayerColor::initWithColor( Color4B(255, 255, 255 , 200) );
 
+	Sprite* bg = Sprite::create( IMAGE_BACKGROUND );
+	bg->setPosition( BASE_SCREEN_HALF_W, BASE_SCREEN_HALF_H );
+	addChild( bg );
 	//title	
-	Label *title = Label::createWithTTF("language", "pixel.ttf", 70 );
+	Label *title = Label::createWithTTF("Language", "pixel.ttf", 60 );
 	title->setPosition( BASE_SCREEN_HALF_W, BASE_SCREEN_H*3/4 );
-	title->setColor( Color3B( 100, 100, 100 ) );
+	//title->setColor( Color3B( 100, 100, 100 ) );
 	addChild( title );
 
 	auto buttonEN = MenuItemImage::create( "flag_en.png", "flag_en_pressed.png", CC_CALLBACK_1(LanguageScene::chooseLanguageCallBack, this));

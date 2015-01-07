@@ -78,12 +78,16 @@ using namespace std;
 #define STARTAPP_ADS_CLASS "com.vietgameplay.tap2top.StartAppAds"
 
 #define IMAGE_LOGO "logo.png"
+#define IMAGE_BACKGROUND "background.png"
 #define IMAGE_CIRCLE_UNDER "circle_under.png"
+#define IMAGE_GAME_TITLE "game_title.png"
+#define IMAGE_GAMEOVER_TITLE "gameover_title.png"
 #define IMAGE_CIRCLE "circle.png"
 
 #define SFX_CONFIRM "SFX_CONFIRM.wav"
 #define SFX_DEAD "SFX_DEAD.wav"
 #define SFX_NEW_RECORED "SFX_NEW_RECORED.wav"
+#define FONT_PIXEL "pixel.TTF"
 
 enum class Languages
 {

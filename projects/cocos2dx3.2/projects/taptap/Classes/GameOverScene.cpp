@@ -28,10 +28,14 @@ void GameOverScene::onEnter()
 	LayerColor::initWithColor( Color4B(255, 255, 255 , 200) );
 	s_countPlayTime++;
 	s_frameCount = 0;
+	//bg
+	Sprite* bg = Sprite::create( IMAGE_BACKGROUND );
+	bg->setPosition( BASE_SCREEN_HALF_W, BASE_SCREEN_HALF_H );
+	addChild( bg );
 
-	title = Label::createWithTTF("game over", "pixel.ttf", 70 );
+	title = Label::createWithTTF("Game Over", "pixel.ttf", 60 );
 	title->setPosition( BASE_SCREEN_HALF_W, BASE_SCREEN_H*3/4 );
-	title->setColor( Color3B( 100, 100, 100 ) );
+	//title->setColor( Color3B( 100, 100, 100 ) );
 	title->setVisible( false );
 	addChild( title );
 	
@@ -39,7 +43,7 @@ void GameOverScene::onEnter()
 	stringstream ss;
 	ss << s_currentScore;
 	//score
-	scoreLabel = Label::createWithTTF(ss.str(), "pixel.ttf", 130 );
+	scoreLabel = Label::createWithTTF(ss.str(), "pixel.ttf", 100 );
 	scoreLabel->setPosition( BASE_SCREEN_HALF_W, BASE_SCREEN_HALF_H + 50 );
 	scoreLabel->setVisible( false );
 	addChild( scoreLabel );
@@ -47,7 +51,7 @@ void GameOverScene::onEnter()
 	//best score
 	string bestScore = "Best: ";
 	stringstream sss;
-	if ( s_currentScore <= s_bestScore)
+	if ( s_currentScore < s_bestScore)
 		sss << s_bestScore;
 	else
 		sss << s_currentScore;
@@ -60,7 +64,7 @@ void GameOverScene::onEnter()
 
 	//best score
 	newScore = Sprite::create("newScore.png");
-	newScore->setPosition(BASE_SCREEN_HALF_W/2 - 20, BASE_SCREEN_HALF_H  );
+	newScore->setPosition(BASE_SCREEN_HALF_W/2 - 40, BASE_SCREEN_HALF_H + 20  );
 	newScore->setVisible(false);
 	addChild( newScore );
 

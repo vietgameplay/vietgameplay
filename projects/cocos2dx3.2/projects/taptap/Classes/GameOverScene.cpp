@@ -251,8 +251,33 @@ void GameOverScene::buttonCallBack( cocos2d::Ref* pSender )
 		}
 		#endif
 		break;
-	case 2: //VI
-		s_language = Languages::VIETNAMESE;
+	case 2: //leaderboard
+		#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+
+		#endif
+		break;
+	case 3: //post g+
+		#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+		if ( s_language == Languages::ENGLISH)
+		{
+			string postStr = "Tap 2 Top, Let play game and who will touch on screen faster! Congratulations, you've gained ";
+			stringstream ss;
+			ss << s_currentScore;
+			if ( s_currentScore == 1 )
+				postStr = postStr + ss.str() + " point";
+			else
+				postStr = postStr + ss.str() + " points";
+			postOnWallGooglePlus(postStr.c_str(), "https://play.google.com/store/apps/details?id=com.vietgameplay.tap2top");
+		}
+		else
+		{
+			string postStr = "Tap 2 Top, Cùng nhau chơi và xem ai chạm màn hình nhanh hơn! Xin chúc mừng, bạn đã đạt được ";
+			stringstream ss;
+			ss << s_currentScore;
+			postStr = postStr + ss.str() + " điểm";
+			postOnWallGooglePlus(postStr.c_str() , "https://play.google.com/store/apps/details?id=com.vietgameplay.tap2top");
+		}
+		#endif
 		break;
 	}
 }

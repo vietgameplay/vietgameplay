@@ -83,14 +83,12 @@ public class AppActivity extends Cocos2dxActivity implements ConnectionCallbacks
 		s_instance = this;
 		try {			
 			//google plus------------------------------------
-			// m_googleApiClient = new GoogleApiClient.Builder(m_activity)
-	        // .addConnectionCallbacks(this)
-	        // .addOnConnectionFailedListener(this)
-	        // .addApi(Plus.API)
-	        // .addScope(Plus.SCOPE_PLUS_LOGIN)
-	        // .build();
-			// auto login
-			// slogInGooglePlus();
+			 m_googleApiClient = new GoogleApiClient.Builder(m_activity)
+	         .addConnectionCallbacks(this)
+	         .addOnConnectionFailedListener(this)
+	         .addApi(Plus.API)
+	         .addScope(Plus.SCOPE_PLUS_LOGIN)
+	         .build();
 			
 			
 			//google banner-------------------------------------------------------------------

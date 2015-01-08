@@ -190,7 +190,7 @@ void GameOverScene::update( float dt )
 		else
 			result->setVisible( true );
 	}
-	else if ( s_frameCount >= 30 && s_frameCount <= 40 && s_currentScore > s_bestScore )
+	else if ( s_frameCount >= 30 && s_frameCount <= 42 && s_currentScore > s_bestScore )
 	{
 		if ( s_frameCount == 30 )
 		{
@@ -201,20 +201,21 @@ void GameOverScene::update( float dt )
 		{
 			newScore->setScale(1.5f);
 		}
-		else if ( s_frameCount == 38 )
-		{
-			newScore->setScale(1.2f);
-			SimpleAudioEngine::getInstance()->playEffect( SFX_NEW_RECORED );
-		}
 		else if ( s_frameCount == 40 )
 		{
+			newScore->setScale(1.2f);
+
+		}
+		else if ( s_frameCount == 42 )
+		{
+			SimpleAudioEngine::getInstance()->playEffect( SFX_NEW_RECORED );
 			newScore->setScale(1.0f);
-			s_currentScore = s_bestScore;
+			s_bestScore = s_currentScore;
 			FileOperation::saveFile();
 		}
 
 	}
-	else if ( s_frameCount > 40 )
+	else if ( s_frameCount > 42 )
 	{
 		//check internet
 		#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
@@ -242,13 +243,9 @@ void GameOverScene::buttonCallBack( cocos2d::Ref* pSender )
 		#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 		if ( hasConnectivity() )
 		{
-			if ( s_countPlayTime == SHOW_INTERSTITIAL)
+			if ( s_countPlayTime == SHOW_INTERSTITIAL )
 			{
 				showInterstitialAdStartApp();
-			}
-			else if ( s_countPlayTime == 2*SHOW_INTERSTITIAL )
-			{
-				showInterstitialAdRevMob();
 				s_countPlayTime = 0;
 			}
 		}

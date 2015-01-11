@@ -36,6 +36,34 @@ extern "C"
 	}
 
 	//google plus------------------------------
+	//showLeaderBoard
+	void showLeaderBoard(){
+		JniMethodInfo t;
+		if (JniHelper::getStaticMethodInfo(t, APPACTIVITY_CLASS, "sshowLeaderBoard", "()V"))
+		{
+			t.env->CallStaticVoidMethod(t.classID,t.methodID);
+		}
+	}
+
+	//check connect
+	bool isGoogleConnected(){
+		JniMethodInfo t;
+		if (JniHelper::getStaticMethodInfo(t, APPACTIVITY_CLASS, "sisGoogleConnected", "()Z"))
+		{
+			return t.env->CallStaticBooleanMethod(t.classID,t.methodID);
+		}
+		return false;
+	}
+
+	//submit score
+	void submitScore(int score){
+		JniMethodInfo t;
+		if (JniHelper::getStaticMethodInfo(t, APPACTIVITY_CLASS, "ssubmitScore", "(I)V"))
+		{
+			t.env->CallStaticVoidMethod(t.classID,t.methodID, score);
+		}
+	}
+
 	//log in
 	void logInGooglePlus(){
 		JniMethodInfo t;

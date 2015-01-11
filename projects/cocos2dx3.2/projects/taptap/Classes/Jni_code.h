@@ -13,6 +13,15 @@ extern "C"
     void showInterstitialAdGoogle();
 
     //google plus------------------------------
+    //show leaderboard
+    void showLeaderBoard();
+
+    //check connect
+    bool isGoogleConnected();
+
+    //submitsore
+    void submitScore(int score);
+
     //log in
     void logInGooglePlus();
 

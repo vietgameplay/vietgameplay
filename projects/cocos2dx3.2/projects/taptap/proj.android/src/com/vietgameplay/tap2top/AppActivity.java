@@ -61,6 +61,8 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import com.google.android.gms.games.leaderboard.*;
+
 
 public class AppActivity extends Cocos2dxActivity implements ConnectionCallbacks, OnConnectionFailedListener  {
 	
@@ -69,7 +71,8 @@ public class AppActivity extends Cocos2dxActivity implements ConnectionCallbacks
 	
 	//google plus
 	private final int RC_SIGN_IN = 0;
-	private final String LEADERBOARD_ID = "leaderboard_taptap";
+	private final String LEADERBOARD_ID = "CgkIovKt98wEEAIQAA";
+	private final int REQUEST_LEADERBOARD = 100;
 	private GoogleApiClient m_googleApiClient;	
 	private boolean m_intentInProgress;
 	
@@ -109,11 +112,54 @@ public class AppActivity extends Cocos2dxActivity implements ConnectionCallbacks
 		}			
 	}
 	
+	static boolean sisGoogleConnected()
+	{
+		Log.d("Google plus", "Google plus ------sisGoogleConnected");
+		return s_instance.isGoogleConnected();
+	}	
+	
+	public boolean isGoogleConnected()
+	{
+		Log.d("Google plus", "Google plus ------isConnected:" + m_googleApiClient.isConnected());
+		return m_googleApiClient.isConnected();
+	}
+	
+	static void ssubmitScore(int score)
+	{
+		Log.d("Google plus", "Google plus ------ssubmitScore");
+		s_instance.submitScore(score);
+	}	
+	
+	public void submitScore(int score)
+	{
+		if (m_googleApiClient != null && m_googleApiClient.isConnected())
+			Games.Leaderboards.submitScore(m_googleApiClient, LEADERBOARD_ID, (long)score);
+		else
+			logInGooglePlus();
+	}
+	
+	static void sshowLeaderBoard()
+	{
+		Log.d("Google plus", "Google plus ------sshowLeaderBoard");
+		s_instance.showLeaderBoard();
+	}	
+	
+	public void showLeaderBoard()
+	{
+		Log.d("Google plus", "Google plus ------isConnected:" + m_googleApiClient.isConnected());
+		if (m_googleApiClient != null && m_googleApiClient.isConnected())
+			startActivityForResult(Games.Leaderboards.getLeaderboardIntent(m_googleApiClient, LEADERBOARD_ID), REQUEST_LEADERBOARD);
+		else
+			logInGooglePlus();
+	}
+	
+	
 	static void slogInGooglePlus()
 	{
 		Log.d("Google plus", "Google plus ------slogInGooglePlus");
 		s_instance.logInGooglePlus();
-	}
+	}	
+	
 	
 	public void logInGooglePlus()
 	{

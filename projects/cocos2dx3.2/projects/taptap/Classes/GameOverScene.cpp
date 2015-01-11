@@ -161,6 +161,10 @@ void GameOverScene::onEnter()
 
 	this->schedule( schedule_selector( ReadyScene::update ) );
 
+	//submit score
+	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+	submitScore(s_currentScore);
+	#endif
 }
 
 void GameOverScene::update( float dt )
@@ -253,7 +257,7 @@ void GameOverScene::buttonCallBack( cocos2d::Ref* pSender )
 		break;
 	case 2: //leaderboard
 		#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-
+		showLeaderBoard();
 		#endif
 		break;
 	case 3: //post g+

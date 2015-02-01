@@ -96,22 +96,21 @@ public class AppActivity extends Cocos2dxActivity implements ConnectionCallbacks
 			
 			//google banner-------------------------------------------------------------------
 			GoogleAds.s_activity = this;
-			GoogleAds.sinit();
-		    		    
+			GoogleAds.sinit();			
 			
 		    //start app---------------------------------------------------------------------
 			StartAppAds.s_activity = this;
-			StartAppAds.sinit();	
+			StartAppAds.sinit();				
 			
 			//revmob-----------------------------------------------------------------------
 			RevmobAds.s_activity = this;
-			RevmobAds.sinit();
+			RevmobAds.sinit();			
 						
 		} catch (Exception e) {
 			Log.d("Ads", "Revmob -------error: " + e);
 		}			
 	}
-	
+
 	static boolean sisGoogleConnected()
 	{
 		Log.d("Google plus", "Google plus ------sisGoogleConnected");
@@ -269,7 +268,39 @@ public class AppActivity extends Cocos2dxActivity implements ConnectionCallbacks
 		});
 		    
     }
-	
+
+	@Override
+	public void onConnectionFailed(ConnectionResult arg0) {
+		// TODO Auto-generated method stub
+			if (!m_intentInProgress && arg0.hasResolution()) {
+			    try {
+			    	m_intentInProgress = true;
+			    	startIntentSenderForResult(arg0.getResolution().getIntentSender(), RC_SIGN_IN, null, 0, 0, 0);
+			    } catch (SendIntentException e) {		    
+			    	m_intentInProgress = false;		    	
+			    }
+		  }
+	}
+
+
+	@Override
+	public void onConnected(Bundle arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void onConnectionSuspended(int arg0) {
+		// TODO Auto-generated method stub
+		m_googleApiClient.connect();		
+		
+	}
+	protected void onActivityResult(int requestCode, int responseCode, Intent intent) {
+		if (requestCode == RC_SIGN_IN) {
+			m_intentInProgress = false;	
+		}
+	}
 	
 	/** Called when leaving the activity */
 	@Override
@@ -294,37 +325,7 @@ public class AppActivity extends Cocos2dxActivity implements ConnectionCallbacks
 	/** Called before the activity is pressed back-key */
 	@Override
 	public void onBackPressed() {
-		StartAppAds.sonBackPressed();
+		//StartAppAds.sonBackPressed();
 		super.onBackPressed();
 	}
-	@Override
-	public void onConnected(Bundle arg0) {
-		// TODO Auto-generated method stub		
-	}
-
-	@Override
-	public void onConnectionSuspended(int arg0) {
-		// TODO Auto-generated method stub
-		m_googleApiClient.connect();		
-	}
-	
-	protected void onActivityResult(int requestCode, int responseCode, Intent intent) {
-		if (requestCode == RC_SIGN_IN) {
-			m_intentInProgress = false;	
-		}
-	}
-	
-	@Override
-	public void onConnectionFailed(ConnectionResult arg0) {
-		// TODO Auto-generated method stub
-			if (!m_intentInProgress && arg0.hasResolution()) {
-			    try {
-			    	m_intentInProgress = true;
-			    	startIntentSenderForResult(arg0.getResolution().getIntentSender(), RC_SIGN_IN, null, 0, 0, 0);
-			    } catch (SendIntentException e) {		    
-			    	m_intentInProgress = false;		    	
-			    }
-		  }
-	}
-	
 }

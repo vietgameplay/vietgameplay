@@ -74,19 +74,21 @@ void GameOverScene::onEnter()
 	playButton->setTag( 1 ); //set tag play = 1
 	playButton->setVisible( false );
 	
+	/*
 	leaderboard = MenuItemImage::create( "leaderboard.png", "leaderboard_pressed.png", CC_CALLBACK_1(GameOverScene::buttonCallBack, this));
 	leaderboard->setPosition( BASE_SCREEN_W - 60, title->getPositionY() - 60 );
 	leaderboard->setTag( 2 ); //set tag leaderboard = 2
 	leaderboard->setVisible( false );
+	*/
 
 	googlePlus = MenuItemImage::create( "googlePlus.png", "googlePlus_pressed.png", CC_CALLBACK_1(GameOverScene::buttonCallBack, this));
-	googlePlus->setPosition( leaderboard->getPositionX() - leaderboard->getContentSize().width - 10, leaderboard->getPositionY() );
+	googlePlus->setPosition( BASE_SCREEN_W - 60, title->getPositionY() - 60 );
 	googlePlus->setTag( 3 ); //set tag googlePlus = 3
 	googlePlus->setVisible( false );
 
 
 
-    auto menu = Menu::create(playButton, leaderboard, googlePlus, NULL);
+    auto menu = Menu::create(playButton, googlePlus, NULL);
     menu->setPosition(Vec2::ZERO);
     this->addChild(menu, 1);	
 
@@ -161,10 +163,6 @@ void GameOverScene::onEnter()
 
 	this->schedule( schedule_selector( ReadyScene::update ) );
 
-	//submit score
-	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-	submitScore(s_currentScore);
-	#endif
 }
 
 void GameOverScene::update( float dt )
@@ -184,7 +182,7 @@ void GameOverScene::update( float dt )
 	else if ( s_frameCount == 20 )
 	{
 		playButton->setVisible( true );
-		leaderboard->setVisible( true );
+		//leaderboard->setVisible( true );
 		googlePlus->setVisible( true );
 	}
 	else if ( s_frameCount == 26 )
@@ -194,7 +192,7 @@ void GameOverScene::update( float dt )
 		else
 			result->setVisible( true );
 	}
-	else if ( s_frameCount >= 30 && s_frameCount <= 42 && s_currentScore > s_bestScore )
+	else if ( s_frameCount >= 30 && s_frameCount <= 60 && s_currentScore > s_bestScore )
 	{
 		if ( s_frameCount == 30 )
 		{
@@ -205,21 +203,23 @@ void GameOverScene::update( float dt )
 		{
 			newScore->setScale(1.5f);
 		}
-		else if ( s_frameCount == 40 )
+		else if ( s_frameCount == 44 )
 		{
 			newScore->setScale(1.2f);
 
 		}
-		else if ( s_frameCount == 42 )
+		else if ( s_frameCount == 48 )
 		{
 			SimpleAudioEngine::getInstance()->playEffect( SFX_NEW_RECORED );
 			newScore->setScale(1.0f);
+		}
+		else if ( s_frameCount == 59 )
+		{
 			s_bestScore = s_currentScore;
 			FileOperation::saveFile();
 		}
-
 	}
-	else if ( s_frameCount > 42 )
+	else if ( s_frameCount > 60 )
 	{
 		//check internet
 		#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
@@ -247,10 +247,9 @@ void GameOverScene::buttonCallBack( cocos2d::Ref* pSender )
 		#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 		if ( hasConnectivity() )
 		{
-			if ( s_countPlayTime == SHOW_INTERSTITIAL )
+			if ( s_countPlayTime % SHOW_INTERSTITIAL == 0 )
 			{
 				showInterstitialAdStartApp();
-				s_countPlayTime = 0;
 			}
 		}
 		#endif

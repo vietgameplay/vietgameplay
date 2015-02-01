@@ -2,6 +2,7 @@
 
 extern int s_launchGameCount;
 extern Languages s_language;
+extern int s_countPlayTime;
 
 Scene* ReadyScene::createScene()
 {
@@ -76,18 +77,44 @@ void ReadyScene::onEnter()
 	#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 	if ( hasConnectivity() )
 	{
-		switch( s_launchGameCount % 3 )
+		//hide
+
+
+		if (s_countPlayTime <= 3)
 		{
-		case 0:
+			//if (s_countPlayTime % SHOW_INTERSTITIAL == 0)
+			{
+				hideBannerGoogle();
+				hideBannerRevMob();
+			}
+			hideBannerStartApp();
 			showBannerStartApp();
-			break;
-		case 1:
-			showBannerGoogle();
-			break;
-		case 2:
-			showBannerRevMob();
-			break;
 		}
+		else if (s_countPlayTime <= 6)
+		{
+			//if (s_countPlayTime % SHOW_INTERSTITIAL == 0)
+			{
+				hideBannerStartApp();
+				hideBannerRevMob();
+			}
+			hideBannerGoogle();
+			showBannerGoogle();
+		}
+		else if (s_countPlayTime <= 9)
+		{
+			//if (s_countPlayTime % SHOW_INTERSTITIAL == 0)
+			{
+				hideBannerGoogle();
+				hideBannerStartApp();
+			}
+			hideBannerRevMob();
+			showBannerRevMob();
+		}
+		else if (s_countPlayTime <= 12)
+		{
+			s_countPlayTime = 0;
+		}
+
 	}
 	#endif
 
